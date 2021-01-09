@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "656728365657",
+    "project_id": "misaccl",
+    "storage_bucket": "misaccl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656728365657:android:42b958adb6640284f4af48",
+        "android_client_info": {
+          "package_name": "vn.com.misa.ccl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656728365657-oi1h5r314gfgqcp645qe86e5vssum5g2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.com.misa.ccl",
+            "certificate_hash": "ec4964608f725e5726ce956079ed8587072119b5"
+          }
+        },
+        {
+          "client_id": "656728365657-nesd7jn18g5q06cho048utgmfe2njaqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD19hhRWqLvxFHtbwGtc6JGYK9CFHG1ugM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656728365657-nesd7jn18g5q06cho048utgmfe2njaqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

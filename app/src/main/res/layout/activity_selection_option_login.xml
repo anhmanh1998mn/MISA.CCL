@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_tab_selection_login"
+    android:orientation="vertical"
+    android:weightSum="17"
+    tools:context=".View.login.ActivitySelectionOptionLogin">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        style="@style/Theme.IconBack"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="14.5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:backgroundTint="@color/dark_blue"
+            android:id="@+id/btnLoginFacebook"
+            style="@style/Theme.LoginByPhone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:text="@string/login_with_facebook" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnLoginGoogle"
+            style="@style/Theme.LoginByPhone"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next" />
+
+        <Button
+            android:id="@+id/btnLoginNext"
+            style="@style/Theme.LoginByPhone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next"
+            android:drawableLeft="@drawable/ic_phone"
+            android:text="@string/login_with_phone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            style="@style/Theme.TextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:gravity="center|right"
+            android:text="@string/confirm_account" />
+
+        <TextView
+            android:id="@+id/tvRegisterAccount"
+            style="@style/Theme.TextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1.2"
+            android:gravity="left|center"
+            android:text="@string/register_account"
+            android:textSize="@dimen/font_shop_type"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

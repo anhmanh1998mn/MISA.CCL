@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:weightSum="17"
+    android:background="@drawable/ic_tab_confirm"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Welcome.ActivityAppConfirm">
+    <ImageView
+        android:layout_weight="1"
+        android:id="@+id/ivBack"
+        style="@style/Theme.IconBack"
+        android:src="@drawable/ic_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_top_cofirm"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="14.5"
+        android:text="@string/confirm_account"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            style="@style/Theme.TextColor"
+            android:id="@+id/tvConfirmAccount"
+            android:text="@string/confirm_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            style="@style/Theme.ConfirmAccount"
+            android:drawableRight="@drawable/ic_next"
+            android:text="@string/confirm_next"
+            android:id="@+id/btnLoginNext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next"/>
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:background="@color/light_blue"
+        android:layout_height="0dp">
+        <TextView
+            style="@style/Theme.AppOverviewClose"
+            android:text="@string/question_account"
+            android:id="@+id/tvCloseAppOverview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tvAppOverViewNext"
+            style="@style/Theme.AppOverviewNext"
+            android:text="@string/login"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tvCloseAppOverview"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

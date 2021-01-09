@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_top_cofirm">260dp</dimen>
+    <dimen name="height_next">63dp</dimen>
+    <dimen name="font_shop_type">20sp</dimen>
+    <dimen name="notification">16dp</dimen>
+    <dimen name="margin_login">24dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+</resources>

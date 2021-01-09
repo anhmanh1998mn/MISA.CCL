@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MISA.CCL</string>
+    <string name="close_app_overview">Bỏ qua</string>
+    <string name="next_app_overview">Tiếp theo</string>
+    <string name="confirm_account">Bạn chưa có tài khoản?</string>
+    <string name="question_account">Bạn đã có tài khoản?</string>
+    <string name="login">Đăng nhập</string>
+    <string name="confirm_next">TIẾP TỤC</string>
+    <string name="selection_shop_type">Chọn loại quán</string>
+    <string name="next_shop_type">Tiếp tục</string>
+    <string name="register_account">Đăng ký</string>
+    <string name="register_confirm">Xong</string>
+    <string name="notification_confirm">Khi bấm nút Đăng ký đồng nghĩa với việc bạn đã đọc, hiểu và đồng ý với <font color="#0072bb">thỏa thuận sử dụng dịch vụ CUKCUK.vn</font></string>
+    <string name="login_with_phone"><font size="15">Đăng nhập bằng</font> \n<font size="18">Số điện thoại hoặc email</font></string>
+    <string name="login_account">Số điện thoại hoặc email</string>
+    <string name="login_password">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="notification_forgot_password">Nhập số điện thoại hoặc email mà bạn đã đăng ký sử dụng, chúng tôi sẽ gửi hướng dẫn lấy lại mật khẩu</string>
+    <string name="facebook_app_id">150550333505424</string>
+    <string name="login_with_facebook"><font size="18">Đăng nhập bằng Facebook</font></string>
+    <string name="menu">Thực đơn</string>
+    <string name="success">XONG</string>
+</resources>

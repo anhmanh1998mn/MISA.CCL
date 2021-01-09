@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:weightSum="15.5"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvShopSetup"
+        android:layout_width="match_parent"
+        android:layout_weight="14.4"
+        android:layout_height="0dp"/>
+    <Button
+        android:id="@+id/btnNext"
+        android:text="@string/next_shop_type"
+        style="@style/Theme.BottomButton"
+        android:layout_margin="8dp"
+        android:layout_weight="1.2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</LinearLayout>

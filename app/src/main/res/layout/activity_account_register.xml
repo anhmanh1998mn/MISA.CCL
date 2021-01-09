@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.login.ActivityAccountRegister">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbShopType"
+        style="@style/Theme.ToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:drawableLeft="@drawable/ic_back"
+                style="@style/Theme.FontTextColor"
+                android:id="@+id/tvBack"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_shop_type"
+                android:text="@string/register_account"
+                android:layout_width="0dp"
+                android:layout_weight="3.5"
+                android:layout_height="match_parent"/>
+            <TextView
+                style="@style/Theme.FontTextColor"
+                android:id="@+id/tvNext"
+                android:text="@string/register_confirm"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        style="@style/Theme.FontText"
+        android:layout_marginTop="10dp"
+        android:text="Số điện thoại hoặc email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        style="@style/Theme.FontText"
+        android:hint="Nhập số điện thoại hoặc email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="16dp"
+        style="@style/Theme.FontText"
+        android:text="Mật khẩu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        style="@style/Theme.FontText"
+        android:hint="Nhập mật khẩu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:textColor="@color/white"
+            style="@style/Theme.FontText"
+            android:text="@string/register_account"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next"/>
+        <TextView
+            android:id="@+id/tvTermOfService"
+            android:layout_marginLeft="@dimen/notification"
+            android:layout_marginRight="@dimen/notification"
+            android:textSize="15sp"
+            android:text="@string/notification_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
