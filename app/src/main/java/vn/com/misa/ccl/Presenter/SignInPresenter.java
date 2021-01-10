@@ -6,12 +6,13 @@ import com.facebook.CallbackManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import vn.com.misa.ccl.Model.SignInModel;
+import vn.com.misa.ccl.View.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.View.login.ISignInView;
 /**
-‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
+‐ Mục đích Class thực hiện việc giao tiếp giữa SignInModel và ActivitySelectionOptionLogin
 *
-‐ {@link Activity#onResume}
-‐ {@link onResume}
+‐ {@link SignInModel}
+‐ {@link ActivitySelectionOptionLogin#setLoginFacebook}
 *
 ‐ @created_by cvmanh on 01/09/2021
 */
