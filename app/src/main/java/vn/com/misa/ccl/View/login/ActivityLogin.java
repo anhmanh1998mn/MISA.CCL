@@ -1,12 +1,5 @@
 package vn.com.misa.ccl.View.login;
-/**
-‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
-*
-‐ {@link android.app.Activity#onResume}
-‐ {@link onResume}
-*
-‐ @created_by cvmanh on 01/07/2021
-*/
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -21,6 +14,12 @@ import android.widget.TextView;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.View.ShopSetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+
+/**
+ ‐ Mục đích Class thực hiện việc đăng nhập bằng tài khoản đã được đăng ký
+ *
+ ‐ @created_by cvmanh on 01/07/2021
+ */
 
 public class ActivityLogin extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,15 +43,29 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         onFocusEditTextListener();
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void initView() {
-        etUserName=findViewById(R.id.etUserName);
-        etPassword=findViewById(R.id.etPassword);
-        ivAppInformation=findViewById(R.id.ivAppInformation);
-        tvForgotPassword=findViewById(R.id.tvForgotPassword);
-        ivTextClearUserName=findViewById(R.id.ivTextClearUserName);
-        ivTextClearPassword=findViewById(R.id.ivTextClearPassword);
+        try {
+            etUserName=findViewById(R.id.etUserName);
+            etPassword=findViewById(R.id.etPassword);
+            ivAppInformation=findViewById(R.id.ivAppInformation);
+            tvForgotPassword=findViewById(R.id.tvForgotPassword);
+            ivTextClearUserName=findViewById(R.id.ivTextClearUserName);
+            ivTextClearPassword=findViewById(R.id.ivTextClearPassword);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Mục đích method thực hiện việc lắng nghe các sự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void onClickViewListener(){
         ivAppInformation.setOnClickListener(this);
         tvForgotPassword.setOnClickListener(this);
@@ -74,35 +87,48 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
 
     /**
-     * Mục đích:
+     * Mục đích method thực hiện việc show, hide icon clear text khi có sự kiện focus vào view
      *
      * @created_by cvmanh on 01/07/2021
      */
     private void onFocusEditTextListener(){
-        etUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                ivTextClearUserName.setVisibility(View.VISIBLE);
-                ivTextClearPassword.setVisibility(View.GONE);
-            }
-        });
-        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                ivTextClearUserName.setVisibility(View.GONE);
-                ivTextClearPassword.setVisibility(View.VISIBLE);
-            }
-        });
+        try {
+            etUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    ivTextClearUserName.setVisibility(View.VISIBLE);
+                    ivTextClearPassword.setVisibility(View.GONE);
+                }
+            });
+            etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    ivTextClearUserName.setVisibility(View.GONE);
+                    ivTextClearPassword.setVisibility(View.VISIBLE);
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Mục đích method thực hiện việc hiển thị dialog quên mật khẩu
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void showDialogForgotPassword() {
-        Dialog dialog=new Dialog(this);
-        dialog.setContentView(R.layout.dialog_forgot_password);
-        dialog.closeOptionsMenu();
-        dialog.setCanceledOnTouchOutside(false);
-        ConstraintLayout clForgotPassword=dialog.findViewById(R.id.clForgotPassword);
-        clForgotPassword.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-80;
-        clForgotPassword.requestLayout();
-        dialog.show();
+        try {
+            Dialog dialog=new Dialog(this);
+            dialog.setContentView(R.layout.dialog_forgot_password);
+            dialog.closeOptionsMenu();
+            dialog.setCanceledOnTouchOutside(false);
+            ConstraintLayout clForgotPassword=dialog.findViewById(R.id.clForgotPassword);
+            clForgotPassword.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-80;
+            clForgotPassword.requestLayout();
+            dialog.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

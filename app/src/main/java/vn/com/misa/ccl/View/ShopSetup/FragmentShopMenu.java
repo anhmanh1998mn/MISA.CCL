@@ -1,5 +1,6 @@
 package vn.com.misa.ccl.View.ShopSetup;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import vn.com.misa.ccl.R;
+
+/**
+‐ Mục đích Class thực hiện việc hiển thị chọn menu cho cửa hàng
+*
+‐ {@link ActivityShopSetup#onClick}
+*
+‐ @created_by cvmanh on 01/11/2021
+*/
 
 public class FragmentShopMenu extends Fragment {
 
@@ -28,8 +37,19 @@ public class FragmentShopMenu extends Fragment {
         return view;
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @param view view của fragment
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void initView(View view) {
-        btnNext=view.findViewById(R.id.btnNext);
-        btnNext.setText(R.string.success);
+        try {
+            btnNext=view.findViewById(R.id.btnNext);
+            btnNext.setText(R.string.success);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

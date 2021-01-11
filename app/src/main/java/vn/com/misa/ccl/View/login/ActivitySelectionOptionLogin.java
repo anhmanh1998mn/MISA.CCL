@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,14 @@ import java.util.Arrays;
 
 import vn.com.misa.ccl.Presenter.SignInPresenter;
 import vn.com.misa.ccl.R;
+
+/**
+‐ Mục đích Class thực hiện show các lựa chọn đăng nhập vào ứng dụng
+*
+‐ {@link SignInPresenter}
+*
+‐ @created_by cvmanh on 01/11/2021
+*/
 
 public class ActivitySelectionOptionLogin extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.OnConnectionFailedListener ,ISignInView.IResultLogin{
@@ -59,19 +68,40 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
 
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void initView() {
-        ivBack = findViewById(R.id.ivBack);
-        tvRegisterAccount = findViewById(R.id.tvRegisterAccount);
-        btnLoginNext = findViewById(R.id.btnLoginNext);
+        try {
+            ivBack = findViewById(R.id.ivBack);
+            tvRegisterAccount = findViewById(R.id.tvRegisterAccount);
+            btnLoginNext = findViewById(R.id.btnLoginNext);
 //        btnLoginFacebook=findViewById(R.id.btnLoginFacebook);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Mục đích method thực hiện việc lắng nghe các sự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void onCLickViewListener() {
         ivBack.setOnClickListener(this);
         tvRegisterAccount.setOnClickListener(this);
         btnLoginNext.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý các công việc khi người dúng click
+     *
+     * @param view View được click
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -89,14 +119,27 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc trả về kết quả callback
+     *
+     * @param requestCode giá trị trả về
+     * @param  resultCode kết quả trả về đúng
+     * @param data dữ liệu
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        try {
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== mSignIn){
-            GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
+            if(requestCode== mSignIn){
+                GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                handleSignInResult(result);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -119,23 +162,27 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
     }
 
     private void setLoginGoogle(){
-        //Yêu cầu người dùng cung cấp thông tin cơ bản: email, tên, hình ảnh
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        //Kết nối với google api client
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions)
-                .build();
-        SignInButton btnLoginGoogle = findViewById(R.id.btnLoginGoogle);
-        btnLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
-        btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        try {
+            //Yêu cầu người dùng cung cấp thông tin cơ bản: email, tên, hình ảnh
+            GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            //Kết nối với google api client
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this,this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions)
+                    .build();
+            SignInButton btnLoginGoogle = findViewById(R.id.btnLoginGoogle);
+            btnLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
+            btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    signIn();
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     private void signIn() {

@@ -7,15 +7,24 @@ import android.view.Display;
 import android.view.WindowManager;
 
 /**
-‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
+‐ Mục đích Class thực hiện việc lấy kích thước màn hình thiết bị
 *
-‐ {@link Activity#onResume}
-‐ {@link onResume}
+‐ {@link vn.com.misa.ccl.View.login.ActivityLogin#showDialogForgotPassword}
 *
 ‐ @created_by cvmanh on 01/07/2021
 */
+
 public class AndroidDeviceHelper {
 
+/**
+ * Mục đích method thực hiện việc lấy kích thước chiều rộng màn hình thiết bị
+ *
+ * @param context instance của activity hiện tại
+ *
+ * @return trả về kích thước chiều rộng màn hình thiết bị
+ *
+ * @created_by cvmanh on 01/11/2021
+ */
     public static int getWitdhScreen(Context context){
         try {
             WindowManager windowManager= (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -29,6 +38,15 @@ public class AndroidDeviceHelper {
         return 0;
     }
 
+    /**
+     * Mục đích method thực hiện việc lấy kích thước chiều dài màn hình thiết bị
+     *
+     * @param context instance của activity hiện tại
+     *
+     * @return trả về kích thước chiều dài màn hình thiết bị
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     public static int getHeightScreen(Context context){
         try {
             WindowManager windowManager= (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

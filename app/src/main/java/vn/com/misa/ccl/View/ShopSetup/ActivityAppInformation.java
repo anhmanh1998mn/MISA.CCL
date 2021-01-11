@@ -1,12 +1,5 @@
 package vn.com.misa.ccl.View.ShopSetup;
-/**
-‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
-*
-‐ {@link android.app.Activity#onResume}
-‐ {@link onResume}
-*
-‐ @created_by cvmanh on 01/07/2021
-*/
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,6 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import vn.com.misa.ccl.R;
+
+/**
+ ‐ Mục đích Class thực hiện việc hiển thị thông tin điều khoản sử dụng ứng dụng
+ *
+ ‐ @created_by cvmanh on 01/07/2021
+ */
 
 public class ActivityAppInformation extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,14 +28,35 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
         onClickViewListener();
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void initView() {
-        tvBack=findViewById(R.id.tvBack);
+        try {
+            tvBack=findViewById(R.id.tvBack);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Mục đích method thực hiện việc lắng nghe các xự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     private void onClickViewListener(){
         tvBack.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý các công việc khi người dùng click
+     *
+     * @param view view được click
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()){

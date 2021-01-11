@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import vn.com.misa.ccl.View.Welcome.FragmentAppOverview;
+
 /**
 ‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
 *
@@ -15,6 +16,7 @@ import vn.com.misa.ccl.View.Welcome.FragmentAppOverview;
 *
 ‐ @created_by cvmanh on 01/10/2021
 */
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     private int mTotalFragment=5;
