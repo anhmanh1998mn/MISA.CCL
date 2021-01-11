@@ -81,10 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvCloseAppOverview.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý các công việc khi người dùng click
+     *
+     * @param view
+     *
+     * @created_by cvmanh on 01/11/2021
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         try {
-            switch (v.getId()){
+            switch (view.getId()){
                 case R.id.tvAppOverViewNext:{
                     if(vpAppOverview.getCurrentItem()== TOTAL_FRAGMENT_OVERVIEW){
                         startActivity(new Intent(this, ActivityAppConfirm.class));
