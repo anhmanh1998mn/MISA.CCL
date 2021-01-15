@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ShopSetup.ActivityShopSetup">
+    tools:context=".view.shopsetup.ActivityShopSetup">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
         style="@style/Theme.ToolBar"
@@ -24,9 +24,7 @@
                 android:layout_height="match_parent"/>
             <TextView
                 android:id="@+id/tvSetupName"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_shop_type"
+                style="@style/Theme.AppOverviewNext"
                 android:text="@string/selection_shop_type"
                 android:layout_width="0dp"
                 android:layout_weight="3.5"

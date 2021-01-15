@@ -1,8 +1,7 @@
-package vn.com.misa.ccl.View.Welcome;
+package vn.com.misa.ccl.view.welcome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import vn.com.misa.ccl.R;
-import vn.com.misa.ccl.View.login.ActivitySelectionOptionLogin;
-import vn.com.misa.ccl.View.ShopSetup.ActivityShopSetup;
+import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
+import vn.com.misa.ccl.view.shopsetup.ActivityShopSetup;
 
 /**
 ‐ Mục đích Class thực hiện việc thông báo đăng nhập hoặc tiếp tục truy cập vào ứng dụng

@@ -7,7 +7,7 @@
     android:background="@drawable/ic_tab_selection_login"
     android:orientation="vertical"
     android:weightSum="17"
-    tools:context=".View.login.ActivitySelectionOptionLogin">
+    tools:context=".view.login.ActivitySelectionOptionLogin">
 
     <ImageView
         android:id="@+id/ivBack"

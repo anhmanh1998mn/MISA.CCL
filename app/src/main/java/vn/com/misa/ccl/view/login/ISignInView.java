@@ -1,9 +1,8 @@
-package vn.com.misa.ccl.View.login;
+package vn.com.misa.ccl.view.login;
 
 import android.app.Activity;
 
 import com.facebook.CallbackManager;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 public interface ISignInView {
 

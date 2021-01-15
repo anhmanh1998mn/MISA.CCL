@@ -1,9 +1,8 @@
-package vn.com.misa.ccl.Model;
+package vn.com.misa.ccl.model;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.facebook.AccessToken;
@@ -14,10 +13,6 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +20,7 @@ import org.json.JSONObject;
 /**
 ‐ Mục đích Class thực hiện việc xử lý đăng nhập với facebook
 *
-‐ {@link vn.com.misa.ccl.Presenter.SignInPresenter#onSelectionListenerWithFacebook}
+‐ {@link vn.com.misa.ccl.presenter.SignInPresenter#onSelectionListenerWithFacebook}
 *
 ‐ @created_by cvmanh on 01/09/2021
 */

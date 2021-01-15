@@ -1,10 +1,9 @@
-package vn.com.misa.ccl.View.login;
+package vn.com.misa.ccl.view.login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +24,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Arrays;
 
-import vn.com.misa.ccl.Presenter.SignInPresenter;
+import vn.com.misa.ccl.presenter.SignInPresenter;
 import vn.com.misa.ccl.R;
 
 /**

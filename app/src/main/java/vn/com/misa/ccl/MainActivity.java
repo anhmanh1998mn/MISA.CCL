@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import vn.com.misa.ccl.View.Welcome.ActivityAppConfirm;
+import vn.com.misa.ccl.view.welcome.ActivityAppConfirm;
 import vn.com.misa.ccl.adapter.PagerAdapter;
 
 /**

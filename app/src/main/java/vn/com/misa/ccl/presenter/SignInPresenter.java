@@ -1,13 +1,12 @@
-package vn.com.misa.ccl.Presenter;
+package vn.com.misa.ccl.presenter;
 
 import android.app.Activity;
 
 import com.facebook.CallbackManager;
-import com.google.android.gms.common.api.GoogleApiClient;
 
-import vn.com.misa.ccl.Model.SignInModel;
-import vn.com.misa.ccl.View.login.ActivitySelectionOptionLogin;
-import vn.com.misa.ccl.View.login.ISignInView;
+import vn.com.misa.ccl.model.SignInModel;
+import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
+import vn.com.misa.ccl.view.login.ISignInView;
 
 /**
 ‐ Mục đích Class thực hiện việc giao tiếp giữa SignInModel và ActivitySelectionOptionLogin

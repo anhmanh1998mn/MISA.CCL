@@ -1,8 +1,7 @@
-package vn.com.misa.ccl.View.Welcome;
+package vn.com.misa.ccl.view.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

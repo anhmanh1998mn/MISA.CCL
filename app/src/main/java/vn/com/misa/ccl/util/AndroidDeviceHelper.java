@@ -1,6 +1,5 @@
 package vn.com.misa.ccl.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
@@ -9,7 +8,7 @@ import android.view.WindowManager;
 /**
 ‐ Mục đích Class thực hiện việc lấy kích thước màn hình thiết bị
 *
-‐ {@link vn.com.misa.ccl.View.login.ActivityLogin#showDialogForgotPassword}
+‐ {@link vn.com.misa.ccl.view.login.ActivityLogin#showDialogForgotPassword}
 *
 ‐ @created_by cvmanh on 01/07/2021
 */

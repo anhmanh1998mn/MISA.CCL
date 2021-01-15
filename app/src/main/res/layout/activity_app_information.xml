@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ShopSetup.ActivityAppInformation">
+    tools:context=".view.shopsetup.ActivityAppInformation">
     <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tbShopType"
@@ -28,7 +28,7 @@
                 android:gravity="center|left"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_shop_type"
-                android:text="Thông tin sản phẩm"
+                android:text="@string/product_infomation"
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:layout_height="match_parent"/>

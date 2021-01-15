@@ -1,13 +1,11 @@
 package vn.com.misa.ccl.adapter;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import vn.com.misa.ccl.View.Welcome.FragmentAppOverview;
+import vn.com.misa.ccl.view.welcome.FragmentAppOverview;
 
 /**
 ‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào

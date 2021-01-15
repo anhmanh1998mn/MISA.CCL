@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MISACCL">
-        <activity android:name=".View.ShopSetup.ActivityAppInformation"></activity>
-        <activity android:name=".View.login.ActivityLogin" />
-        <activity android:name=".View.login.ActivityAccountRegister" />
-        <activity android:name=".View.login.ActivitySelectionOptionLogin" />
-        <activity android:name=".View.ShopSetup.ActivityShopSetup" />
-        <activity android:name=".View.Welcome.ActivityAppConfirm" />
+        <activity android:name=".view.shopsetup.ActivityAppInformation"></activity>
+        <activity android:name=".view.login.ActivityLogin" />
+        <activity android:name=".view.login.ActivityAccountRegister" />
+        <activity android:name=".view.login.ActivitySelectionOptionLogin" />
+        <activity android:name=".view.shopsetup.ActivityShopSetup" />
+        <activity android:name=".view.welcome.ActivityAppConfirm" />
         <activity
-            android:name=".View.Welcome.SplashActivity"
+            android:name=".view.welcome.SplashActivity"
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

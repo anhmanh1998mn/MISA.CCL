@@ -1,6 +1,5 @@
-package vn.com.misa.ccl.View.Welcome;
+package vn.com.misa.ccl.view.welcome;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

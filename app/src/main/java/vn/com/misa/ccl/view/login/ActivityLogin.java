@@ -1,4 +1,4 @@
-package vn.com.misa.ccl.View.login;
+package vn.com.misa.ccl.view.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import vn.com.misa.ccl.R;
-import vn.com.misa.ccl.View.ShopSetup.ActivityAppInformation;
+import vn.com.misa.ccl.view.shopsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**

@@ -1,13 +1,11 @@
-package vn.com.misa.ccl.View.login;
+package vn.com.misa.ccl.view.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import vn.com.misa.ccl.R;

@@ -1,6 +1,5 @@
-package vn.com.misa.ccl.View.ShopSetup;
+package vn.com.misa.ccl.view.shopsetup;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

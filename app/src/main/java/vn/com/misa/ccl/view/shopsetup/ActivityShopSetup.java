@@ -1,11 +1,10 @@
-package vn.com.misa.ccl.View.ShopSetup;
+package vn.com.misa.ccl.view.shopsetup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;

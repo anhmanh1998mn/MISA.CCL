@@ -6,4 +6,11 @@
     <dimen name="notification">16dp</dimen>
     <dimen name="margin_login">24dp</dimen>
     <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_left_large">68dp</dimen>
+    <dimen name="height_lare">55dp</dimen>
+    <dimen name="margin_right_small">10dp</dimen>
+    <dimen name="width_large">110dp</dimen>
+    <dimen name="height_smal">53dp</dimen>
+    <dimen name="height_largee">50dp</dimen>
+    <dimen name="height_line">1px</dimen>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/ic_tab_login"
     android:layout_height="match_parent"
-    tools:context=".View.login.ActivityLogin">
+    tools:context=".view.login.ActivityLogin">
     <ImageView
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,21 +34,21 @@
                 android:id="@+id/etUserName"
                 style="@style/Theme.UserNamePassword"
                 android:drawableLeft="@drawable/ic_user"
-                android:hint="@string/login_account"
+                android:hint="@string/phone_email_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_next"/>
             <ImageView
                 android:id="@+id/ivTextClearUserName"
                 android:visibility="gone"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="@dimen/notification"
                 android:layout_gravity="center|right"
                 app:tint="@color/grey"
                 android:src="@drawable/ic_close"
-                android:layout_width="15dp"
-                android:layout_height="15dp"/>
+                android:layout_width="@dimen/notification"
+                android:layout_height="@dimen/notification"/>
         </FrameLayout>
         <View
-            android:layout_marginLeft="68dp"
+            android:layout_marginLeft="@dimen/margin_left_large"
             android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
@@ -60,18 +60,18 @@
                 android:id="@+id/etPassword"
                 style="@style/Theme.UserNamePassword"
                 android:drawableLeft="@drawable/ic_lock"
-                android:hint="@string/login_password"
+                android:hint="@string/password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_next"/>
             <ImageView
                 android:id="@+id/ivTextClearPassword"
                 android:visibility="gone"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="@dimen/notification"
                 android:layout_gravity="center|right"
                 app:tint="@color/grey"
                 android:src="@drawable/ic_close"
-                android:layout_width="15dp"
-                android:layout_height="15dp"/>
+                android:layout_width="@dimen/notification"
+                android:layout_height="@dimen/notification"/>
         </FrameLayout>
 
     </LinearLayout>
