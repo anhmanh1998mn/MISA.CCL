@@ -160,6 +160,11 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         });
     }
 
+    /**
+     * Mục đích method thực hiện việc đăng nhập với google
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     private void setLoginGoogle(){
         try {
             //Yêu cầu người dùng cung cấp thông tin cơ bản: email, tên, hình ảnh
@@ -184,6 +189,12 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         }
 
     }
+
+    /**
+     * Mục đích method thực hiện việc đăng nhập với google
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, mSignIn);
@@ -206,11 +217,23 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả khi đăng nhập thất bại
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void signInFail() {
         Toast.makeText(this, "Sign-in Failed", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận và xử lý dữ liệu khi đăng nhập thành
+     *
+     * @param mailName Tên gmail đăng nhập thành công
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void signInFacebookSuccessfull(String mailName) {
         Toast.makeText(this, mailName, Toast.LENGTH_SHORT).show();

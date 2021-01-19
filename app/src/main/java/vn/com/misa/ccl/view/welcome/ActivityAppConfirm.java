@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
-import vn.com.misa.ccl.view.shopsetup.ActivityShopSetup;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
 
 /**
 ‐ Mục đích Class thực hiện việc thông báo đăng nhập hoặc tiếp tục truy cập vào ứng dụng
@@ -79,7 +79,7 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 case R.id.btnLoginNext:{
-                    startActivity(new Intent(this, ActivityShopSetup.class));
+                    startActivity(new Intent(this, ActivityRestaurantType.class));
                     break;
                 }
                 case R.id.tvAppOverViewNext:{

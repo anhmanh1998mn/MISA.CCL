@@ -57,6 +57,13 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
         tvBack.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý các yêu cầu khi click
+     *
+     * @param view
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void onClick(View view) {
         try {

@@ -1,6 +1,16 @@
 package vn.com.misa.ccl.entity;
 
-public class Product {
+import java.io.Serializable;
+
+/**
+ * ‐ Mục đích Class thực hiện khai báo đối tượng Product
+ * <p>
+ * ‐ {@link ProductCategory}
+ * <p>
+ * ‐ @created_by cvmanh on 01/13/2021
+ */
+
+public class Product implements Serializable {
 
     private int mProductID;
 
@@ -13,6 +23,8 @@ public class Product {
     private ProductImage mProductImage;
 
     private Unit mUnit;
+
+    private Color mColor;
 
     public int getmProductID() {
         return mProductID;
@@ -62,12 +74,21 @@ public class Product {
         this.mUnit = mUnit;
     }
 
-    public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus, ProductImage mProductImage, Unit mUnit) {
+    public Color getmColor() {
+        return mColor;
+    }
+
+    public void setmColor(Color mColor) {
+        this.mColor = mColor;
+    }
+
+    public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus, ProductImage mProductImage, Unit mUnit, Color mColor) {
         this.mProductID = mProductID;
         this.mProductName = mProductName;
         this.mProductPrice = mProductPrice;
         this.mProductStatus = mProductStatus;
         this.mProductImage = mProductImage;
         this.mUnit = mUnit;
+        this.mColor = mColor;
     }
 }

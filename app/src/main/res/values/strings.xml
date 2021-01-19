@@ -23,4 +23,15 @@
     <string name="phone_mail_enter">Nhập số điện thoại hoặc email</string>
     <string name="password_enter">Nhập mật khẩu</string>
     <string name="product_infomation">Thông tin sản phẩm</string>
+    <string name="update_food">Sửa món</string>
+    <string name="save">CẤT</string>
+    <string name="delete">Xóa</string>
+    <string name="food_name">Tên món <font color="red">*</font></string>
+    <string name="price">Giá bán</string>
+    <string name="unit">Đơn vị tính <font color="red">*</font></string>
+    <string name="color_name">Màu sắc</string>
+    <string name="image_name">Biểu tượng</string>
+    <string name="status">Trạng thái</string>
+    <string name="cancle">Hủy bỏ</string>
+    <string name="error">Có lỗi xảy ra, vui lòng thử lại</string>
 </resources>

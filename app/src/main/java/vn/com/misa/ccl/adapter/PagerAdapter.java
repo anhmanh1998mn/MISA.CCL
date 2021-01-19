@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import vn.com.misa.ccl.view.welcome.FragmentAppOverview;
 
 /**
-‐ Mục đích Class thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
+‐ Mục đích Class thực hiện quy định dữ liệu và cách hiển thị dữ liệu lên view
 *
 ‐ {@link vn.com.misa.ccl.MainActivity#initViewPager}
 *

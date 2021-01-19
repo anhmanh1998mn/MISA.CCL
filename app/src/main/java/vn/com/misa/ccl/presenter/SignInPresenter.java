@@ -40,11 +40,23 @@ public class SignInPresenter implements ISignInView.IViewClickListener, SignInMo
         mSignInModel.signInWithFacebook(mContext,mCallbackManager);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả đăng nhập thành công và gửi tới view
+     *
+     * @param mailName Tên gmail đăng nhập thành công
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void onSignInFacebookSuccess(String mailName) {
         mResulLogin.signInFacebookSuccessfull(mailName);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả thất bại khi đăng nhập và gửi về view
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void onSignInFail() {
         mResulLogin.signInFail();

@@ -1,6 +1,14 @@
 package vn.com.misa.ccl.entity;
 
-public class ProductImage {
+import java.io.Serializable;
+
+/**
+ * ‐ Mục đích Class thực hiện khai báo đối tượng ProductImage
+ * <p>
+ * ‐ @created_by cvmanh on 01/13/2021
+ */
+
+public class ProductImage implements Serializable {
 
     private int mProductImageID;
 

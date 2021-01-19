@@ -9,6 +9,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+‐ Mục đích Class thực hiện việc khởi tạo database
+*
+‐ {@link vn.com.misa.ccl.model.ActivityRestaurantMenuModel}
+‐ {@link vn.com.misa.ccl.model.ActivityRestaurantTypeModel}
+*
+‐ @created_by cvmanh on 01/19/2021
+*/
+
 public class DatabaseHelper {
     public static SQLiteDatabase initDatabase(Activity activity, String databaseName){
         try {

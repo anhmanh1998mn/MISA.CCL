@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import vn.com.misa.ccl.R;
-import vn.com.misa.ccl.view.shopsetup.ActivityAppInformation;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**
@@ -71,6 +71,13 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         tvForgotPassword.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý các yêu cầu khi người dùng click
+     *
+     * @param view
+     *
+     * @created_by cvmanh on 01/19/2021
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()){

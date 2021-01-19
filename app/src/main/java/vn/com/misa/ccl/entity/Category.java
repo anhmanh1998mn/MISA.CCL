@@ -1,6 +1,16 @@
 package vn.com.misa.ccl.entity;
 
-public class Category {
+import java.io.Serializable;
+
+/**
+ * ‐ Mục đích Class thực hiện khai báo đối tượng Category
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.adapter.CategoryAdapter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/13/2021
+ */
+
+public class Category implements Serializable {
 
     private int mCategoryID;
 

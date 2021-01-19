@@ -1,4 +1,4 @@
-package vn.com.misa.ccl.view.shopsetup;
+package vn.com.misa.ccl.view.restaurantsetup;
 
 import androidx.appcompat.app.AppCompatActivity;
 

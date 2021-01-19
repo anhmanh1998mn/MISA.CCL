@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.restaurantsetup.ActivityFoodUpdate">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbFoodUpdate"
+        style="@style/Theme.ToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvBack"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tvSetupName"
+                style="@style/Theme.AppOverviewNext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:text="@string/update_food" />
+
+            <TextView
+                android:id="@+id/tvNext"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:text="@string/save" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/llFoodName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_smal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/tbFoodUpdate">
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/food_name" />
+
+        <EditText
+            android:id="@+id/etFoodName"
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:background="@null"
+            android:gravity="right"
+            android:text="@string/food_name" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vLineFootname"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/llFoodName" />
+
+    <LinearLayout
+        style="@style/Theme.EffectClick"
+        android:id="@+id/llFoodPrice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_smal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/vLineFootname">
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/price" />
+
+        <TextView
+            android:drawablePadding="@dimen/margin_small"
+            android:id="@+id/tvPrice"
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:drawableRight="@drawable/ic_foot_menu"
+            android:gravity="right"
+            android:text="@string/food_name" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vLineFootPrice"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/llFoodPrice" />
+
+    <LinearLayout
+        style="@style/Theme.EffectClick"
+        android:id="@+id/llFoodUnit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_smal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/vLineFootPrice">
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="@string/unit" />
+
+        <TextView
+            android:id="@+id/tvUnit"
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:drawablePadding="@dimen/margin_small"
+            android:drawableRight="@drawable/ic_foot_menu"
+            android:gravity="right"
+            android:text="@string/food_name" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vLineFootUnit"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/llFoodUnit" />
+
+    <LinearLayout
+        android:id="@+id/llFoodColorImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/vLineFootUnit">
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/color_name" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/Theme.EffectClick"
+            android:id="@+id/cvColor"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="100dp"
+            android:layout_width="@dimen/height_smal"
+            android:layout_height="@dimen/height_smal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/ic_select_color"
+                android:id="@+id/ivColor"
+                android:layout_width="@dimen/size_large"
+                android:layout_height="35dp"
+                app:layout_constraintRight_toLeftOf="@id/glMenuOne" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/image_name" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvImage"
+            android:layout_width="@dimen/height_smal"
+            android:layout_height="@dimen/height_smal"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="100dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="@dimen/height_largee"
+                    android:layout_height="@dimen/height_largee"
+                    android:src="@drawable/ic_tick"
+                    app:layout_constraintRight_toLeftOf="@id/glMenuOne" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llFoodStatus"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_smal"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/llFoodColorImage">
+
+        <TextView
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/status" />
+
+        <CheckBox
+            style="@style/Theme.FontText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Ngừng bán" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        style="@style/Theme.BottomButton"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/height_next"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnSave" />
+
+    <Button
+        android:id="@+id/btnSave"
+        style="@style/Theme.BottomButton"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/height_next"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnDelete"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

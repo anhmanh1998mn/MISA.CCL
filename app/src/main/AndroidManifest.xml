@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.com.misa.ccl">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MISACCL">
-        <activity android:name=".view.shopsetup.ActivityAppInformation"></activity>
+        <activity android:name=".view.restaurantsetup.ActivityFoodUpdate"></activity>
+        <activity android:name=".view.restaurantsetup.ActivityRestaurantMenu" />
+        <activity android:name=".view.restaurantsetup.ActivityAppInformation" />
         <activity android:name=".view.login.ActivityLogin" />
         <activity android:name=".view.login.ActivityAccountRegister" />
         <activity android:name=".view.login.ActivitySelectionOptionLogin" />
-        <activity android:name=".view.shopsetup.ActivityShopSetup" />
+        <activity android:name=".view.restaurantsetup.ActivityRestaurantType" />
         <activity android:name=".view.welcome.ActivityAppConfirm" />
         <activity
             android:name=".view.welcome.SplashActivity"
@@ -25,7 +29,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

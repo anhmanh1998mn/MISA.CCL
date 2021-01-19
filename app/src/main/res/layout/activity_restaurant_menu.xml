@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.shopsetup.ActivityShopSetup">
+    tools:context=".view.restaurantsetup.ActivityRestaurantMenu">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
         style="@style/Theme.ToolBar"
@@ -18,40 +18,38 @@
             <TextView
                 android:drawableLeft="@drawable/ic_back"
                 style="@style/Theme.FontTextColor"
-                android:id="@+id/tvBackShop"
+                android:id="@+id/tvBack"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <TextView
                 android:id="@+id/tvSetupName"
                 style="@style/Theme.AppOverviewNext"
-                android:text="@string/selection_shop_type"
+                android:text="@string/menu"
                 android:layout_width="0dp"
                 android:layout_weight="3.5"
                 android:layout_height="match_parent"/>
             <TextView
                 style="@style/Theme.FontTextColor"
                 android:id="@+id/tvNext"
-                android:text="@string/next_shop_type"
-                android:layout_width="0dp"
-                android:layout_weight="1.5"
-                android:layout_height="match_parent"/>
-            <TextView
-                style="@style/Theme.FontTextColor"
-                android:id="@+id/tvSuccess"
-                android:text="Xong"
-                android:visibility="gone"
+                android:text="@string/success"
                 android:layout_width="0dp"
                 android:layout_weight="1.5"
                 android:layout_height="match_parent"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-    <FrameLayout
-        android:id="@+id/frmShopSetup"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvShopType"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
+        android:layout_weight="14.4"
+        android:layout_height="0dp"/>
+    <Button
+        android:id="@+id/btnNext"
+        android:text="@string/next_shop_type"
+        style="@style/Theme.BottomButton"
+        android:layout_margin="8dp"
+        android:layout_weight="1.2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 
 </LinearLayout>
