@@ -9,20 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.adapter.CaculateAdapter;
 import vn.com.misa.ccl.adapter.ColorAdapter;
 import vn.com.misa.ccl.adapter.ProductImageAdapter;
 import vn.com.misa.ccl.entity.ProductCategory;
@@ -37,11 +41,12 @@ import vn.com.misa.ccl.util.AndroidDeviceHelper;
 */
 
 public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClickListener,
-        IActivityFoodUpdate.IActivityFoodUpdateView, ColorAdapter.IColorSelection, ProductImageAdapter.IOnClickItemListener {
+        IActivityFoodUpdate.IActivityFoodUpdateView, ColorAdapter.IColorSelection,
+        ProductImageAdapter.IOnClickItemListener, CaculateAdapter.IResultClickItem {
 
     private EditText etFoodName;
 
-    private TextView tvFoodPrice,tvFoodUnit,tvBack;
+    private TextView tvFoodPrice,tvFoodUnit,tvBack,tvPriceEnter;
 
     private ImageView ivFoodImage,ivColor;
 
@@ -49,7 +54,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private CardView cvImage,cvColor;
 
-    private RecyclerView rcvListColor,rcvListImage;
+    private RecyclerView rcvListColor,rcvListImage,rcvCaculating;
 
     private ActivityFoodUpdatePresenter mActivityFoodUpdatePresenter;
 
@@ -62,6 +67,10 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     private ProductImageAdapter mProductImageAdapter;
 
     private List<ProductImage> mListProductImage;
+
+    private List<String> mListCaculate;
+
+    private CaculateAdapter mCacucateAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -82,7 +91,6 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      *
      * @created_by cvmanh on 01/19/2021
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void receiveProductData() {
         Intent intent=getIntent();
         mProductCategory= (ProductCategory) intent.getSerializableExtra("Object");
@@ -93,6 +101,15 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 0,mProductCategory.getmProduct().getmProductImage().getmImage().length));
         cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
         cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        SharedPreferences sharedPreferences=getSharedPreferences("UnitSelection",MODE_PRIVATE);
+        if(sharedPreferences!=null){
+            tvFoodUnit.setText(sharedPreferences.getString("UNIT_NAME",""));
+        }
     }
 
     /**
@@ -120,6 +137,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         tvBack.setOnClickListener(this);
         ivColor.setOnClickListener(this);
         ivFoodImage.setOnClickListener(this);
+        tvFoodUnit.setOnClickListener(this);
+        tvFoodPrice.setOnClickListener(this);
     }
 
     /**
@@ -144,7 +163,32 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 showDialogImage();
                 break;
             }
+            case R.id.tvUnit:{
+                startActivity(new Intent(this,ActivityUnit.class));
+                break;
+            }
+            case R.id.tvPrice:{
+                showDialogCaculating();
+                break;
+            }
         }
+    }
+
+    private void showDialogCaculating(){
+        Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.dialog_caculating);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        FrameLayout frmPrice=dialog.findViewById(R.id.frmPrice);
+        frmPrice.getLayoutParams().width=AndroidDeviceHelper.getWitdhScreen(this)-10;
+        frmPrice.requestLayout();
+        rcvCaculating=dialog.findViewById(R.id.rcvCaculating);
+        rcvCaculating.getLayoutParams().height=AndroidDeviceHelper.getHeightScreen(this)*10/25;
+        rcvCaculating.getLayoutParams().width=AndroidDeviceHelper.getWitdhScreen(this)-150;
+        rcvCaculating.requestLayout();
+        mActivityFoodUpdatePresenter=new ActivityFoodUpdatePresenter(this);
+        mActivityFoodUpdatePresenter.loadCaculating();
+        tvPriceEnter=dialog.findViewById(R.id.tvPriceEnter);
     }
 
     /**
@@ -199,6 +243,16 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         mProductImageAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void loadCaculatingSuccess(List<String> listCaculate) {
+        mListCaculate=listCaculate;
+        mCacucateAdapter=new CaculateAdapter(this,R.layout.item_caculate,mListCaculate);
+        rcvCaculating.setLayoutManager(new GridLayoutManager(this,4));
+        rcvCaculating.setAdapter(mCacucateAdapter);
+        mCacucateAdapter.notifyDataSetChanged();
+        mCacucateAdapter.setmIResultClickItem(this);
+    }
+
     /**
      * Mục đích method thực hiện việc nhận thông báo khi không lấy được dữ liệu
      *
@@ -214,7 +268,6 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      *
      * @created_by cvmanh on 01/19/2021
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClickListener(String keyColor) {
         mDialogColor.dismiss();
@@ -254,5 +307,121 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         mDialogImage.dismiss();
         ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(productImage,
                 0,productImage.length));
+    }
+
+    @Override
+    public void resultClickItem(String nameClick) {
+        switch (nameClick){
+            case "C":{
+                tvPriceEnter.setText("0");
+                break;
+            }
+            case "Giảm":{
+                if(Float.parseFloat(tvPriceEnter.getText().toString().trim())<1){
+                    tvPriceEnter.setText("0");
+                    return;
+                }
+                tvPriceEnter.setText((Float.parseFloat(tvPriceEnter.getText().toString().trim())-1)+"");
+                break;
+            }
+            case "Tăng":{
+                tvPriceEnter.setText((Float.parseFloat(tvPriceEnter.getText().toString().trim())+1)+"");
+                break;
+            }
+            case "":{
+                break;
+            }
+            case "7":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "8":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "9":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "-":{
+                if(tvPriceEnter.getText().toString().startsWith("0")){
+                    tvPriceEnter.setText("0");
+                    return;
+                }
+                tvPriceEnter.append(nameClick);
+                break;
+            }
+            case "4":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "5":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "6":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "+":{
+                if(tvPriceEnter.getText().toString().startsWith("0")){
+                    tvPriceEnter.setText("0");
+                    return;
+                }
+                tvPriceEnter.append(nameClick);
+                break;
+            }
+            case "1":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "2":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "3":{
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "±":{
+                if(tvPriceEnter.getText().toString().startsWith("-")){
+                    return;
+                }
+                tvPriceEnter.setText("-"+tvPriceEnter.getText());
+                break;
+            }
+            case "0":{
+                if(tvPriceEnter.getText().toString().startsWith("0")||tvPriceEnter.getText().toString().startsWith("-0")){
+                    tvPriceEnter.setText(nameClick);
+                    return;
+                }
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case "000":{
+                if(tvPriceEnter.getText().toString().startsWith("0")||tvPriceEnter.getText().toString().startsWith("-0")){
+                    tvPriceEnter.setText("0");
+                    return;
+                }
+                checkNumberCaculate(nameClick);
+                break;
+            }
+            case ",":{
+                tvPriceEnter.append(nameClick);
+                break;
+            }
+        }
+    }
+    private void checkNumberCaculate(String nameItemClick){
+        if(tvPriceEnter.getText().toString().startsWith("0")){
+            tvPriceEnter.setText(nameItemClick);
+            return;
+        }
+        if(tvPriceEnter.getText().toString().contains("+")||tvPriceEnter.getText().toString().contains("-")){
+            tvPriceEnter.append(nameItemClick);
+        }else if(tvPriceEnter.getText().toString().length()<17){
+            tvPriceEnter.append(nameItemClick);
+            return;
+        }
     }
 }

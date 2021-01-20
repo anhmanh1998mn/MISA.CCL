@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -35,6 +36,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private IItemClickListener mIItemClickListener;
 
+    private boolean checkItem=false;
+
+    private ConstraintLayout clCheck=null;
+
+    private ImageView ivCheck=null;
+
     public IItemClickListener getmIItemClickListener() {
         return mIItemClickListener;
     }
@@ -59,12 +66,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvCategoryName.setText(mListCategory.get(position).getmCategoryName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.clRestaurantType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mIItemClickListener!=null){
                     mIItemClickListener.onClickListener(mListCategory.get(position).getmCategoryID());
                 }
+                if(clCheck!=null && ivCheck!=null){
+                    ivCheck.setVisibility(View.GONE);
+                }
+                holder.ivTick.setVisibility(View.VISIBLE);
+                clCheck= holder.clRestaurantType ;
+                ivCheck=holder.ivTick;
             }
         });
     }
@@ -80,11 +93,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         ImageView ivTick;
 
+        ConstraintLayout clRestaurantType;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCategoryName=itemView.findViewById(R.id.tvCategoryName);
             ivTick=itemView.findViewById(R.id.ivTick);
-
+            clRestaurantType=itemView.findViewById(R.id.clRestaurantType);
         }
     }
 

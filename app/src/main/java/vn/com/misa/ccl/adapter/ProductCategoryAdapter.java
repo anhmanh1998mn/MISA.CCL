@@ -56,7 +56,6 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         return new ViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Bitmap bitmap= BitmapFactory.decodeByteArray(mListProductCategory.get(position).getmProduct().getmProductImage().getmImage(),0,

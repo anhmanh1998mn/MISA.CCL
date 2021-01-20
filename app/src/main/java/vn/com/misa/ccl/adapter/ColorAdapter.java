@@ -58,7 +58,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.cvColor.getBackground().setTint(android.graphics.Color.parseColor(mListColor.get(position).getColorName()));

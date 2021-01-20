@@ -14,4 +14,7 @@
     <dimen name="height_largee">45dp</dimen>
     <dimen name="height_line">1px</dimen>
     <dimen name="size_large">35dp</dimen>
+    <dimen name="size_larg">30dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="margin_smalll">8dp</dimen>
 </resources>

@@ -13,6 +13,8 @@ public interface IActivityFoodUpdate {
         public void loadListColor(Activity activity);
 
         public void loadProductImage(Activity activity);
+
+        public void loadCaculating();
     }
 
     public interface IActivityFoodUpdateView{
@@ -20,6 +22,8 @@ public interface IActivityFoodUpdate {
         public void loadListColorSuccess(List<Color> listColor);
 
         public void loadListProductImageSuccess(List<ProductImage> listProductImage);
+
+        public void loadCaculatingSuccess(List<String> listCaculate);
 
         public void onFailed();
     }

@@ -35,6 +35,8 @@ public class ActivityFoodUpdateModel {
 
     private SQLiteDatabase mSqliteDatabase;
 
+    private List<String> mListCaculate;
+
     /**
      * Mục đích method thực hiện việc xử lý lấy danh sách màu và gửi tới presenter
      *
@@ -81,10 +83,38 @@ public class ActivityFoodUpdateModel {
         mIResultActivityFoodUpdate.onFailed();
     }
 
+    public void loadCaculating(){
+        mListCaculate=new ArrayList<>();
+        mListCaculate.add("C");
+        mListCaculate.add("Giảm");
+        mListCaculate.add("Tăng");
+        mListCaculate.add("");
+        mListCaculate.add("7");
+        mListCaculate.add("8");
+        mListCaculate.add("9");
+        mListCaculate.add("-");
+        mListCaculate.add("4");
+        mListCaculate.add("5");
+        mListCaculate.add("6");
+        mListCaculate.add("+");
+        mListCaculate.add("1");
+        mListCaculate.add("2");
+        mListCaculate.add("3");
+        mListCaculate.add("±");
+        mListCaculate.add("0");
+        mListCaculate.add("000");
+        mListCaculate.add(",");
+        mListCaculate.add("XONG");
+        mIResultActivityFoodUpdate.loadCaculating(mListCaculate);
+
+    }
+
     public interface IResultActivityFoodUpdate{
         public void loadListColorSuccess(List<Color> listColor);
 
         public void loadListImageSuccess(List<ProductImage> listImage);
+
+        public void loadCaculating(List<String> listCaculate);
 
         public void onFailed();
     }

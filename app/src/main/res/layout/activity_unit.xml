@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.restaurantsetup.ActivityUnit">
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tbUnit"
+        style="@style/Theme.ToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:drawableLeft="@drawable/ic_back"
+                style="@style/Theme.FontTextColor"
+                android:id="@+id/tvBack"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+            <TextView
+                style="@style/Theme.FontTextColor"
+                android:textSize="@dimen/font_shop_type"
+                android:text="@string/unit_name"
+                android:layout_width="0dp"
+                android:layout_weight="3.8"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:paddingRight="@dimen/margin_login"
+                android:drawableRight="@drawable/ic_plus"
+                style="@style/Theme.FontTextColor"
+                android:id="@+id/tvNext"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvUnit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbUnit"
+        android:layout_width="match_parent"
+        android:layout_weight="14.4"
+        android:layout_height="0dp"/>
+    <Button
+        android:id="@+id/btnSuccess"
+        android:text="@string/success"
+        style="@style/Theme.BottomButton"
+        android:layout_margin="8dp"
+        android:layout_weight="1.2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</LinearLayout>

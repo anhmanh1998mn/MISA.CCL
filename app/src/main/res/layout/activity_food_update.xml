@@ -116,7 +116,6 @@
         app:layout_constraintTop_toBottomOf="@+id/llFoodPrice" />
 
     <LinearLayout
-        style="@style/Theme.EffectClick"
         android:id="@+id/llFoodUnit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_smal"
@@ -133,6 +132,7 @@
             android:text="@string/unit" />
 
         <TextView
+
             android:id="@+id/tvUnit"
             style="@style/Theme.FontText"
             android:layout_width="0dp"

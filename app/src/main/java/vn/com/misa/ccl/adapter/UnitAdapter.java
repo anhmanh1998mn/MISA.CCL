@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -27,11 +28,25 @@ import vn.com.misa.ccl.entity.Unit;
 
 public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
+    private IItemClickListener mIItemClickListener;
+
+    public IItemClickListener getmIItemClickListener() {
+        return mIItemClickListener;
+    }
+
+    public void setmIItemClickListener(IItemClickListener mIItemClickListener) {
+        this.mIItemClickListener = mIItemClickListener;
+    }
+
     private Activity mContext;
 
     private int mLayout;
 
     private List<Unit> mListUnit;
+
+    private ConstraintLayout clUnit=null;
+
+    private ImageView ivCheck=null;
 
     public UnitAdapter(Activity mContext, int mLayout, List<Unit> mListUnit) {
         this.mContext = mContext;
@@ -49,6 +64,22 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvUnitName.setText(mListUnit.get(position).getmUnitName());
+        holder.clUnit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mIItemClickListener!=null){
+                    mIItemClickListener.getUnitNameItemClick(mListUnit.get(position).getmUnitName(),
+                            mListUnit.get(position).getmUnitID());
+                }
+
+                if(clUnit!=null && ivCheck!=null){
+                    ivCheck.setVisibility(View.GONE);
+                }
+                holder.ivItemUnit.setVisibility(View.VISIBLE);
+                clUnit= holder.clUnit ;
+                ivCheck=holder.ivItemUnit;
+            }
+        });
     }
 
     @Override
@@ -60,12 +91,20 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
         private TextView tvUnitName;
 
-        private ImageView ivUpdateUnitName;
+        private ImageView ivUpdateUnitName,ivItemUnit;
+
+        private ConstraintLayout clUnit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUnitName=itemView.findViewById(R.id.tvUnitName);
             ivUpdateUnitName=itemView.findViewById(R.id.ivUpdateUnitName);
+            ivItemUnit=itemView.findViewById(R.id.ivItemUnit);
+            clUnit=itemView.findViewById(R.id.clUnit);
         }
+    }
+
+    public interface IItemClickListener{
+        public void getUnitNameItemClick(String unitName,int unitID);
     }
 }

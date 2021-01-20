@@ -43,6 +43,10 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
 
     private int mCategoryID;
 
+    private int CATEGORY_ID=1;
+
+    private String CATEGORY_INTENT="ab";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,13 +119,21 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
             }
             case R.id.tvNext: {
                 Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                intent.putExtra("ab",mCategoryID);
+                if(mCategoryID<CATEGORY_ID){
+                    intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
+                }else {
+                    intent.putExtra(CATEGORY_INTENT,mCategoryID);
+                }
                 startActivity(intent);
                 break;
             }
             case R.id.btnNext:{
                 Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                intent.putExtra("ab",mCategoryID);
+                if(mCategoryID<CATEGORY_ID){
+                    intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
+                }else {
+                    intent.putExtra(CATEGORY_INTENT,mCategoryID);
+                }
                 startActivity(intent);
                 break;
             }

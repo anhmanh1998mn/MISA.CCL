@@ -52,6 +52,11 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mActivityFoodUpdateModel.loadListProductImage(activity);
     }
 
+    @Override
+    public void loadCaculating() {
+        mActivityFoodUpdateModel.loadCaculating();
+    }
+
     /**
      * Mục đích method thực hiện việc nhận danh sách màu từ ActivityFoodUpdateModel và gửi danh sách tới view
      *
@@ -74,6 +79,11 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
     @Override
     public void loadListImageSuccess(List<ProductImage> listImage) {
         mIActivityFoodUpdateView.loadListProductImageSuccess(listImage);
+    }
+
+    @Override
+    public void loadCaculating(List<String> listCaculate) {
+        mIActivityFoodUpdateView.loadCaculatingSuccess(listCaculate);
     }
 
     /**
