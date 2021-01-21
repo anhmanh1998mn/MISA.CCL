@@ -58,9 +58,13 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
      * @created_by cvmanh on 01/11/2021
      */
     private void onClickViewListener(){
-        ivBack.setOnClickListener(this);
-        btnLoginNext.setOnClickListener(this);
-        tvAppOverViewNext.setOnClickListener(this);
+        try {
+            ivBack.setOnClickListener(this);
+            btnLoginNext.setOnClickListener(this);
+            tvAppOverViewNext.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

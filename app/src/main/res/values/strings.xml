@@ -35,4 +35,27 @@
     <string name="cancle">Hủy bỏ</string>
     <string name="error">Có lỗi xảy ra, vui lòng thử lại</string>
     <string name="unit_name">Đơn vị tính</string>
+    <string name="caculator_c">C</string>
+    <string name="caculator_decrease">Giảm</string>
+    <string name="caculator_increase">Tăng</string>
+    <string name="caculator"></string>
+    <string name="caculator_7">7</string>
+    <string name="caculator_8">8</string>
+    <string name="caculator_9">9</string>
+    <string name="caculator_sub">-</string>
+    <string name="caculator_4">4</string>
+    <string name="caculator_5">5</string>
+    <string name="caculator_6">6</string>
+    <string name="caculator_add">+</string>
+    <string name="caculator_1">1</string>
+    <string name="caculator_2">2</string>
+    <string name="caculator_3">3</string>
+    <string name="caculator_negative_number">±</string>
+    <string name="caculator_0">0</string>
+    <string name="caculator_000">000</string>
+    <string name="caculator_dot">,</string>
+    <string name="caculator_result">XONG</string>
+    <string name="setup_success">Bạn vừa khởi tạo xong thực đơn và có thể bán hàng được ngay với CUKCUK Lite.</string>
+    <string name="sell">Bán hàng</string>
+    <string name="no_order">Chưa có khách gọi món</string>
 </resources>

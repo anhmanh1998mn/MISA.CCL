@@ -40,18 +40,22 @@ public class ActivityRestaurantTypeModel {
      * @created_by cvmanh on 01/19/2021
      */
     public void loadListRestaurantType(Activity activity){
-        mSqliteDatabase=DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_CATEGORIES+"",null);
-        mListCategory=new ArrayList<>();
-        for (int i=0;i<cursor.getCount();i++){
-            cursor.moveToPosition(i);
-            mListCategory.add(new Category(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_ID)),
-                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_NAME))));
-        }
-        if(cursor!=null){
-            mIActivityRestaurantTypeModel.loadListRestaurantTypeSuccess(mListCategory);
-            return;
-        }
-        mIActivityRestaurantTypeModel.onFailed();
+       try {
+           mSqliteDatabase=DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+           Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_CATEGORIES+"",null);
+           mListCategory=new ArrayList<>();
+           for (int i=0;i<cursor.getCount();i++){
+               cursor.moveToPosition(i);
+               mListCategory.add(new Category(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_ID)),
+                       cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_NAME))));
+           }
+           if(cursor!=null){
+               mIActivityRestaurantTypeModel.loadListRestaurantTypeSuccess(mListCategory);
+               return;
+           }
+           mIActivityRestaurantTypeModel.onFailed();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 }

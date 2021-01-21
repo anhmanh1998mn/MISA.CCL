@@ -67,8 +67,12 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      * @created_by cvmanh on 01/11/2021
      */
     private void onClickViewListener(){
-        ivAppInformation.setOnClickListener(this);
-        tvForgotPassword.setOnClickListener(this);
+        try {
+            ivAppInformation.setOnClickListener(this);
+            tvForgotPassword.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -80,15 +84,19 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.ivAppInformation:{
-                startActivity(new Intent(this, ActivityAppInformation.class));
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.ivAppInformation:{
+                    startActivity(new Intent(this, ActivityAppInformation.class));
+                    break;
+                }
+                case R.id.tvForgotPassword:{
+                    showDialogForgotPassword();
+                    break;
+                }
             }
-            case R.id.tvForgotPassword:{
-                showDialogForgotPassword();
-                break;
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

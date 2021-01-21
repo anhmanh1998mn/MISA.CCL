@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.view.restaurantsetup;
 
 import android.app.Activity;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,7 +15,9 @@ public interface IActivityFoodUpdate {
 
         public void loadProductImage(Activity activity);
 
-        public void loadCaculating();
+        public void loadCaculating(Activity activity);
+
+        public void processCaculator(Activity activity,String tvNumberEnter,String nameClick);
     }
 
     public interface IActivityFoodUpdateView{
@@ -24,6 +27,8 @@ public interface IActivityFoodUpdate {
         public void loadListProductImageSuccess(List<ProductImage> listProductImage);
 
         public void loadCaculatingSuccess(List<String> listCaculate);
+
+        public void processCaculatorSuccess(String resulText);
 
         public void onFailed();
     }

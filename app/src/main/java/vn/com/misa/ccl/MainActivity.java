@@ -77,8 +77,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @created_by cvmanh on 01/10/2021
      */
     private void onClickListenerView(){
-        tvAppOverviewNext.setOnClickListener(this);
-        tvCloseAppOverview.setOnClickListener(this);
+        try {
+            tvAppOverviewNext.setOnClickListener(this);
+            tvCloseAppOverview.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

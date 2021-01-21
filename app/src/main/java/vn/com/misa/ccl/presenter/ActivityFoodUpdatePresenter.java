@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.presenter;
 
 import android.app.Activity;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -52,9 +53,27 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mActivityFoodUpdateModel.loadListProductImage(activity);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi lấy dữ liệu hiển thị trên máy tính từ model
+     *
+     * @created_by cvmanh on 01/21/2021
+     */
     @Override
-    public void loadCaculating() {
-        mActivityFoodUpdateModel.loadCaculating();
+    public void loadCaculating(Activity activity) {
+        mActivityFoodUpdateModel.loadCaculating(activity);
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi hàm xử lý kết quả trong model khi thao tác với máy tính
+     *
+     * @param numberEnter Giá trị có trong textview
+     * @param  nameClick giá trị của phím người dùng thao tác
+     *
+     * @created_by cvmanh on 01/21/2021
+     */
+    @Override
+    public void processCaculator(Activity activity,String numberEnter,String nameClick) {
+        mActivityFoodUpdateModel.processCaculator(activity,numberEnter,nameClick);
     }
 
     /**
@@ -81,9 +100,28 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mIActivityFoodUpdateView.loadListProductImageSuccess(listImage);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận dữ liệu định dang cho máy tình từ model và gửi tới view
+     *
+     * @param listCaculate Danh sách dữ liệu hiển thị lên máy tính
+     *
+     * @created_by cvmanh on 01/21/2021
+     */
     @Override
     public void loadCaculating(List<String> listCaculate) {
         mIActivityFoodUpdateView.loadCaculatingSuccess(listCaculate);
+    }
+
+    /**
+     * Mục đích method thực hiện việc lấy kết quả xử lý phép tính từ model và trả kết quả tới view
+     *
+     * @param resutText Kết quả xử lý
+     *
+     * @created_by cvmanh on 01/21/2021
+     */
+    @Override
+    public void resultTextEnter(String resutText) {
+        mIActivityFoodUpdateView.processCaculatorSuccess(resutText);
     }
 
     /**

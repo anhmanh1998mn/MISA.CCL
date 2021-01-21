@@ -47,7 +47,11 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
      * @created_by cvmanh on 01/11/2021
      */
     private void onClickViewListener(){
-        tvBack.setOnClickListener(this);
+        try {
+            tvBack.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -59,11 +63,15 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvBack:{
-                finish();
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvBack:{
+                    finish();
+                    break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

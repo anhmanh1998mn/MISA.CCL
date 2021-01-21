@@ -89,9 +89,13 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/11/2021
      */
     private void onCLickViewListener() {
-        ivBack.setOnClickListener(this);
-        tvRegisterAccount.setOnClickListener(this);
-        btnLoginNext.setOnClickListener(this);
+        try {
+            ivBack.setOnClickListener(this);
+            tvRegisterAccount.setOnClickListener(this);
+            btnLoginNext.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -103,18 +107,22 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack: {
-                finish();
-                break;
+        try {
+            switch (view.getId()) {
+                case R.id.ivBack: {
+                    finish();
+                    break;
+                }
+                case R.id.tvRegisterAccount: {
+                    startActivity(new Intent(this, ActivityAccountRegister.class));
+                    break;
+                }
+                case R.id.btnLoginNext: {
+                    startActivity(new Intent(this, ActivityLogin.class));
+                }
             }
-            case R.id.tvRegisterAccount: {
-                startActivity(new Intent(this, ActivityAccountRegister.class));
-                break;
-            }
-            case R.id.btnLoginNext: {
-                startActivity(new Intent(this, ActivityLogin.class));
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -148,16 +156,20 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/07/2021
      */
     private void setLoginFacebook() {
-        mSignInPresenter=new SignInPresenter(this);
-        mCallbackManager = CallbackManager.Factory.create();// xử lý các phản hồi đăng nhập
-        mSignInPresenter.onSelectionListenerWithFacebook(this,mCallbackManager);
-        Button btnLoginFacebook =findViewById(R.id.btnLoginFacebook);
-        btnLoginFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(ActivitySelectionOptionLogin.this, Arrays.asList("public_profile", "email")); // xin quyền lấy email
-            }
-        });
+        try {
+            mSignInPresenter=new SignInPresenter(this);
+            mCallbackManager = CallbackManager.Factory.create();// xử lý các phản hồi đăng nhập
+            mSignInPresenter.onSelectionListenerWithFacebook(this,mCallbackManager);
+            Button btnLoginFacebook =findViewById(R.id.btnLoginFacebook);
+            btnLoginFacebook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LoginManager.getInstance().logInWithReadPermissions(ActivitySelectionOptionLogin.this, Arrays.asList("public_profile", "email")); // xin quyền lấy email
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -196,8 +208,12 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/19/2021
      */
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, mSignIn);
+        try {
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+            startActivityForResult(signInIntent, mSignIn);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -211,9 +227,13 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/08/2021
      */
     private void handleSignInResult(GoogleSignInResult result){
-        if(result.isSuccess()){
-            GoogleSignInAccount accountProfile=result.getSignInAccount();
-            Toast.makeText(this, accountProfile.getEmail().toString(), Toast.LENGTH_SHORT).show();
+        try {
+            if(result.isSuccess()){
+                GoogleSignInAccount accountProfile=result.getSignInAccount();
+                Toast.makeText(this, accountProfile.getEmail().toString(), Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

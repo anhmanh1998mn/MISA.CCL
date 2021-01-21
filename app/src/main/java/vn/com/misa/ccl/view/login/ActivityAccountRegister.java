@@ -53,8 +53,12 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      * @created_by cvmanh on 01/07/2021
      */
     private void onClickViewListener(){
-        tvTermOfService.setOnClickListener(this);
-        tvBack.setOnClickListener(this);
+        try {
+            tvTermOfService.setOnClickListener(this);
+            tvBack.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

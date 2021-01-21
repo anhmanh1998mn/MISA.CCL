@@ -21,6 +21,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -62,7 +63,8 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                 mListProductCategory.get(position).getmProduct().getmProductImage().getmImage().length);
         holder.ivItemMenu.setImageBitmap(bitmap);
         holder.tvFootName.setText(mListProductCategory.get(position).getmProduct().getmProductName());
-        holder.tvFootPrice.setText(String.valueOf(mListProductCategory.get(position).getmProduct().getmProductPrice()));
+        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+        holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getmProduct().getmProductPrice())));
         holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getmProduct().getmColor().getColorName()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

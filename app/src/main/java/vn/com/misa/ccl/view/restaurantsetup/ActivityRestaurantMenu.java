@@ -1,12 +1,15 @@
 package vn.com.misa.ccl.view.restaurantsetup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.ProductCategoryAdapter;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.presenter.ActivityRestaurantMenuPresenter;
+import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 /**
 ‐ Mục đích Class thực hiện những công việc của ActivityRestaurantMenu
@@ -37,7 +42,11 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
 
     private int mCategoryID;
 
-    private TextView tvBack;
+    private TextView tvBack,tvSuccess,tvSuccessNext;
+
+    private Button btnSuccess;
+
+    private Dialog dialogSetupSuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,8 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         try {
             rcvRestaurantMenu =findViewById(R.id.rcvShopType);
             tvBack=findViewById(R.id.tvBack);
+            tvSuccess=findViewById(R.id.tvSuccess);
+            btnSuccess=findViewById(R.id.btnSuccess);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -73,8 +84,12 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * @created_by cvmanh on 01/19/2021
      */
     private void receiveCategoryID() {
-        Intent intent=getIntent();
-        mCategoryID=intent.getIntExtra("ab",-1);
+        try {
+            Intent intent=getIntent();
+            mCategoryID=intent.getIntExtra("ab",-1);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -83,8 +98,12 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * @created_by cvmanh on 01/19/2021
      */
     private void loadListProduct() {
-        mRestaurantMenuPresenter =new ActivityRestaurantMenuPresenter(this);
-        mRestaurantMenuPresenter.loadListProduct(this,mCategoryID);
+        try {
+            mRestaurantMenuPresenter =new ActivityRestaurantMenuPresenter(this);
+            mRestaurantMenuPresenter.loadListProduct(this,mCategoryID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -96,11 +115,15 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     @Override
     public void loadListProductSuccess(List<ProductCategory> listProductCategory) {
-        mListProductCategory=listProductCategory;
-        mProductAdapter=new ProductCategoryAdapter(this,R.layout.item_restaurant_menu,mListProductCategory);
-        rcvRestaurantMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvRestaurantMenu.setAdapter(mProductAdapter);
-        mProductAdapter.notifyDataSetChanged();
+       try {
+           mListProductCategory=listProductCategory;
+           mProductAdapter=new ProductCategoryAdapter(this,R.layout.item_restaurant_menu,mListProductCategory);
+           rcvRestaurantMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+           rcvRestaurantMenu.setAdapter(mProductAdapter);
+           mProductAdapter.notifyDataSetChanged();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     /**
@@ -118,7 +141,13 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * @created_by cvmanh on 01/19/2021
      */
     private void clickViewListener() {
-        tvBack.setOnClickListener(this);
+        try {
+            tvBack.setOnClickListener(this);
+            tvSuccess.setOnClickListener(this);
+            btnSuccess.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -130,11 +159,40 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvBack:{
-                finish();
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvBack:{
+                    finish();
+                    break;
+                }
+                case R.id.tvSuccess:{
+                    showDialogSetupSuccess();
+                    break;
+                }
+                case R.id.btnSuccess:{
+                    showDialogSetupSuccess();
+                    break;
+                }
+                case R.id.tvSuccessNext:{
+                    dialogSetupSuccess.dismiss();
+                    startActivity(new Intent(this, ActivityRestaurantManage.class));
+                    break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+    }
+
+    private void showDialogSetupSuccess(){
+         dialogSetupSuccess=new Dialog(this);
+        dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
+        dialogSetupSuccess.setCanceledOnTouchOutside(false);
+        dialogSetupSuccess.show();
+        tvSuccessNext=dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
+        ConstraintLayout clSuccess=dialogSetupSuccess.findViewById(R.id.clSuccess);
+        clSuccess.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
+        clSuccess.requestLayout();
+        tvSuccessNext.setOnClickListener(this);
     }
 }

@@ -56,29 +56,45 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
     }
 
     private void initActionBar() {
-        tbUnit=findViewById(R.id.tbUnit);
-        setSupportActionBar(tbUnit);
+        try {
+            tbUnit=findViewById(R.id.tbUnit);
+            setSupportActionBar(tbUnit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
-        mActivityUnitPresenter=new ActivityUnitPresenter(this);
-        rcvUnit=findViewById(R.id.rcvUnit);
-        tvBack=findViewById(R.id.tvBack);
-        btnSuccess=findViewById(R.id.btnSuccess);
+        try {
+            mActivityUnitPresenter=new ActivityUnitPresenter(this);
+            rcvUnit=findViewById(R.id.rcvUnit);
+            tvBack=findViewById(R.id.tvBack);
+            btnSuccess=findViewById(R.id.btnSuccess);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void loadListUnit(){
-        mActivityUnitPresenter.loadListUnit(this);
+        try {
+            mActivityUnitPresenter.loadListUnit(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void loadListUnitSuccess(List<Unit> listUnit) {
-        mListUnit=listUnit;
-        mUnitAdapter=new UnitAdapter(this,R.layout.item_unit,mListUnit);
-        rcvUnit.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvUnit.setAdapter(mUnitAdapter);
-        mUnitAdapter.notifyDataSetChanged();
-        mUnitAdapter.setmIItemClickListener(this);
+        try {
+            mListUnit=listUnit;
+            mUnitAdapter=new UnitAdapter(this,R.layout.item_unit,mListUnit);
+            rcvUnit.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            rcvUnit.setAdapter(mUnitAdapter);
+            mUnitAdapter.notifyDataSetChanged();
+            mUnitAdapter.setmIItemClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -87,31 +103,43 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
     }
 
     private void clickViewListener(){
-        tvBack.setOnClickListener(this);
-        btnSuccess.setOnClickListener(this);
+        try {
+            tvBack.setOnClickListener(this);
+            btnSuccess.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvBack:{
-                finish();
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvBack:{
+                    finish();
+                    break;
+                }
+                case R.id.btnSuccess:{
+                    SharedPreferences sharedPreferences=getSharedPreferences("UnitSelection",MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("UNIT_NAME",mUnitName);
+                    editor.commit();
+                    finish();
+                    break;
+                }
             }
-            case R.id.btnSuccess:{
-                SharedPreferences sharedPreferences=getSharedPreferences("UnitSelection",MODE_PRIVATE);
-                SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putString("UNIT_NAME",mUnitName);
-                editor.commit();
-                finish();
-                break;
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
     @Override
     public void getUnitNameItemClick(String unitName, int unitID) {
-        mUnitName=unitName;
-        mUnitID=unitID;
+        try {
+            mUnitName=unitName;
+            mUnitID=unitID;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

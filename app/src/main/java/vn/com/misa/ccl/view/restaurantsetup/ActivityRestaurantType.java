@@ -99,9 +99,13 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      * @created_by cvmanh on 01/09/2021
      */
     private void onClickViewListener() {
-        tvBack.setOnClickListener(this);
-        tvNext.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
+        try {
+            tvBack.setOnClickListener(this);
+            tvNext.setOnClickListener(this);
+            btnNext.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -112,31 +116,35 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvBack: {
-                finish();
-                break;
-            }
-            case R.id.tvNext: {
-                Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                if(mCategoryID<CATEGORY_ID){
-                    intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
-                }else {
-                    intent.putExtra(CATEGORY_INTENT,mCategoryID);
+        try {
+            switch (view.getId()) {
+                case R.id.tvBack: {
+                    finish();
+                    break;
                 }
-                startActivity(intent);
-                break;
-            }
-            case R.id.btnNext:{
-                Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                if(mCategoryID<CATEGORY_ID){
-                    intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
-                }else {
-                    intent.putExtra(CATEGORY_INTENT,mCategoryID);
+                case R.id.tvNext: {
+                    Intent intent=new Intent(this,ActivityRestaurantMenu.class);
+                    if(mCategoryID<CATEGORY_ID){
+                        intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
+                    }else {
+                        intent.putExtra(CATEGORY_INTENT,mCategoryID);
+                    }
+                    startActivity(intent);
+                    break;
                 }
-                startActivity(intent);
-                break;
+                case R.id.btnNext:{
+                    Intent intent=new Intent(this,ActivityRestaurantMenu.class);
+                    if(mCategoryID<CATEGORY_ID){
+                        intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
+                    }else {
+                        intent.putExtra(CATEGORY_INTENT,mCategoryID);
+                    }
+                    startActivity(intent);
+                    break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -146,8 +154,12 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      * @created_by cvmanh on 01/18/2021
      */
     private void loadListType() {
-        mActivityRestaurantTypePresenter =new ActivityRestaurantTypePresenter(this);
-        mActivityRestaurantTypePresenter.loadListShopType(this);
+        try {
+            mActivityRestaurantTypePresenter =new ActivityRestaurantTypePresenter(this);
+            mActivityRestaurantTypePresenter.loadListShopType(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -159,12 +171,16 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      */
     @Override
     public void loadListRestaurantTypeSuccess(List<Category> listCategory) {
-        mListCategory=listCategory;
-        mCategoryAdapter=new CategoryAdapter(this,R.layout.item_restaurant_type,mListCategory);
-        rcvRestaurantType.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvRestaurantType.setAdapter(mCategoryAdapter);
-        mCategoryAdapter.notifyDataSetChanged();
-        mCategoryAdapter.setmIItemClickListener(this);
+        try {
+            mListCategory=listCategory;
+            mCategoryAdapter=new CategoryAdapter(this,R.layout.item_restaurant_type,mListCategory);
+            rcvRestaurantType.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            rcvRestaurantType.setAdapter(mCategoryAdapter);
+            mCategoryAdapter.notifyDataSetChanged();
+            mCategoryAdapter.setmIItemClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,6 +203,10 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      */
     @Override
     public void onClickListener(int position) {
-        mCategoryID=position;
+        try {
+            mCategoryID=position;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

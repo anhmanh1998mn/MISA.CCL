@@ -24,19 +24,23 @@ public class ActivityUnitModel {
     private SQLiteDatabase mSqliteDatabase;
 
     public void loadListUnit(Activity activity){
-        mListUnit=new ArrayList<>();
-        mSqliteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-        Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_UNITS+"",null);
-        for(int i=0;i<cursor.getCount();i++){
-            cursor.moveToPosition(i);
-            mListUnit.add(new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
-                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))));
+        try {
+            mListUnit=new ArrayList<>();
+            mSqliteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_UNITS+"",null);
+            for(int i=0;i<cursor.getCount();i++){
+                cursor.moveToPosition(i);
+                mListUnit.add(new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))));
+            }
+            if(cursor!=null){
+                mIResultProcessActivityUnit.loadListUnitSuccess(mListUnit);
+                return;
+            }
+            mIResultProcessActivityUnit.onFailed();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if(cursor!=null){
-            mIResultProcessActivityUnit.loadListUnitSuccess(mListUnit);
-            return;
-        }
-        mIResultProcessActivityUnit.onFailed();
     }
 
     public interface IResultProcessActivityUnit{

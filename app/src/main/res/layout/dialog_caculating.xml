@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"/>
         <ImageView
+            android:id="@+id/ivClose"
             android:layout_marginRight="@dimen/height_largee"
             android:layout_gravity="right|center"
             android:src="@drawable/ic_close"
@@ -28,6 +29,7 @@
             android:layout_height="@dimen/margin"/>
     </FrameLayout>
     <TextView
+        android:text="0"
         android:gravity="center"
         android:maxLines="1"
         android:inputType="text"
