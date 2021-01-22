@@ -39,6 +39,11 @@ public class ActivityRestaurantMenuPresenter implements IActivityRestaurantMenu.
         mActivityRestaurantMenuModel.loadListProduct(activity,categoryID);
     }
 
+    @Override
+    public void initMenu(Activity activity, List<ProductCategory> listMenu) {
+        mActivityRestaurantMenuModel.initMenu(activity,listMenu);
+    }
+
     /**
      * Mục đích method thực hiện việc nhân dữ liệu danh sách Product trả về và gửi danh sách đến view
      *
@@ -49,6 +54,11 @@ public class ActivityRestaurantMenuPresenter implements IActivityRestaurantMenu.
     @Override
     public void loadListProductSuccess(List<ProductCategory> listProductCategory) {
         mIActivityRestaurantMenuView.loadListProductSuccess(listProductCategory);
+    }
+
+    @Override
+    public void initMenuSuccess() {
+        mIActivityRestaurantMenuView.initMenuSuccess();
     }
 
     /**

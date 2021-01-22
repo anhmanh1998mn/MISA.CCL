@@ -8,7 +8,7 @@
     tools:context=".view.login.ActivityAccountRegister">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
-        style="@style/Theme.ToolBar"
+        style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <LinearLayout
@@ -23,8 +23,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <TextView
-                style="@style/Theme.FontTextColor"
-                android:textSize="@dimen/font_shop_type"
+                style="@style/Theme.FontTextLarge"
                 android:text="@string/register_account"
                 android:layout_width="0dp"
                 android:layout_weight="3.5"

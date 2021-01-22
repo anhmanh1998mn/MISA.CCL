@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <TextView
+        style="@style/Theme.FontText"
         android:id="@+id/tvNoOrder"
         android:gravity="center"
         android:layout_weight="0.3"
@@ -21,11 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <TextView
+        style="@style/Theme.FontText"
         android:id="@+id/tvAddFood"
         android:gravity="center"
         android:layout_weight="0.3"
         android:textColor="@color/purple_500"
-        android:text="Bấm vào đây hoặc dấu + để chọn món"
+        android:text="@string/notification_select_food"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <androidx.recyclerview.widget.RecyclerView

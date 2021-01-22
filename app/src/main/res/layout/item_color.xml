@@ -21,7 +21,7 @@
                 android:id="@+id/ivColor"
                 android:layout_width="@dimen/size_large"
                 android:layout_height="35dp"
-                app:layout_constraintRight_toLeftOf="@id/glMenuOne" />
+                app:layout_constraintRight_toLeftOf="@id/glOne" />
             <TextView
                 android:id="@+id/tvTick"
                 android:visibility="gone"

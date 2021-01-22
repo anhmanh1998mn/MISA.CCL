@@ -1,5 +1,7 @@
 package vn.com.misa.ccl.presenter;
 
+import android.app.Activity;
+
 import java.util.List;
 
 import vn.com.misa.ccl.entity.Setting;
@@ -17,8 +19,8 @@ public class ActivityRestaurantManagePresenter implements IActivityRestaurantMan
     private ActivityRestaurantManageModel mManageModel=new ActivityRestaurantManageModel(this);
 
     @Override
-    public void getListSetting() {
-        mManageModel.getListSetting();
+    public void getListSetting(Activity activity) {
+        mManageModel.getListSetting(activity);
     }
 
     @Override

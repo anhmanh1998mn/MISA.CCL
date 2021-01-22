@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        style="@style/Theme.IconBack"
+        style="@style/Theme.IconMargin"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -27,7 +27,7 @@
         <Button
             android:backgroundTint="@color/dark_blue"
             android:id="@+id/btnLoginFacebook"
-            style="@style/Theme.LoginByPhone"
+            style="@style/Theme.FontButtonColor"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next"
             android:drawableLeft="@drawable/ic_facebook"
@@ -35,14 +35,14 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btnLoginGoogle"
-            style="@style/Theme.LoginByPhone"
+            style="@style/Theme.FontButtonColor"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next" />
 
         <Button
             android:id="@+id/btnLoginNext"
-            style="@style/Theme.LoginByPhone"
+            style="@style/Theme.FontButtonColor"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next"
             android:drawableLeft="@drawable/ic_phone"

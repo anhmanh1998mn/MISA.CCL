@@ -8,7 +8,7 @@
     tools:context=".view.restaurantsetup.ActivityRestaurantMenu">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
-        style="@style/Theme.ToolBar"
+        style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <LinearLayout
@@ -24,7 +24,7 @@
                 android:layout_height="match_parent"/>
             <TextView
                 android:id="@+id/tvSetupName"
-                style="@style/Theme.AppOverviewNext"
+                style="@style/Theme.TextWhiteLarge"
                 android:text="@string/menu"
                 android:layout_width="0dp"
                 android:layout_weight="3.5"
@@ -46,7 +46,7 @@
     <Button
         android:id="@+id/btnSuccess"
         android:text="@string/success"
-        style="@style/Theme.BottomButton"
+        style="@style/Theme.FontButton"
         android:layout_margin="8dp"
         android:layout_weight="1.2"
         android:layout_width="match_parent"

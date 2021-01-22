@@ -1,5 +1,7 @@
 package vn.com.misa.ccl.model;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +18,19 @@ public class ActivityRestaurantManageModel {
 
     private List<Setting> mListSetting;
 
-    public void getListSetting(){
+    public void getListSetting(Activity activity){
         mListSetting=new ArrayList<>();
-        mListSetting.add(new Setting("Bán hàng", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Thực đơn", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Báo cáo", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Thiết lập", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Đồng bộ dữ liệu", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Thiết lập", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Trợ giúp", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Thông báo", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Giới thiệu cho bạn", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Đánh giá ứng dụng", R.drawable.ic_circle_tick));
-        mListSetting.add(new Setting("Thông tin sản phẩm", R.drawable.ic_circle_tick));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.sell), R.drawable.ic_coffee_cup_on_hand));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.menu), R.drawable.ic_notes));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.chart), R.drawable.ic_bar_graph));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.setting), R.drawable.ic_computing_cloud));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.synchronize), R.drawable.ic_computing_cloud));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.setting), R.drawable.ic_settings));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.support), R.drawable.ic_share));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.notification), R.drawable.ic_notification));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.introduce), R.drawable.ic_share));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.rate), R.drawable.ic_star));
+        mListSetting.add(new Setting(activity.getResources().getString(R.string.product_infomation), R.drawable.ic_rounded_info_button));
         if (mListSetting!=null){
             mIManageModel.getListSettingSucess(mListSetting);
             return;

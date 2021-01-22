@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -126,6 +128,12 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
        }
     }
 
+    @Override
+    public void initMenuSuccess() {
+        dialogSetupSuccess.dismiss();
+        startActivity(new Intent(this, ActivityRestaurantManage.class));
+    }
+
     /**
      * Mục đích method thực hiện việc nhận kết quả lấy dữ liệu thất bại và xử lý
      *
@@ -174,8 +182,8 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
                     break;
                 }
                 case R.id.tvSuccessNext:{
-                    dialogSetupSuccess.dismiss();
-                    startActivity(new Intent(this, ActivityRestaurantManage.class));
+                    mRestaurantMenuPresenter=new ActivityRestaurantMenuPresenter(this);
+                    mRestaurantMenuPresenter.initMenu(this,mListProductCategory);
                     break;
                 }
             }

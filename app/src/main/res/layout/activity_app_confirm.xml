@@ -11,7 +11,7 @@
     <ImageView
         android:layout_weight="1"
         android:id="@+id/ivBack"
-        style="@style/Theme.IconBack"
+        style="@style/Theme.IconMargin"
         android:src="@drawable/ic_back"
         android:layout_width="wrap_content"
         android:layout_height="0dp"/>
@@ -43,7 +43,7 @@
         android:background="@color/light_blue"
         android:layout_height="0dp">
         <TextView
-            style="@style/Theme.AppOverviewClose"
+            style="@style/Theme.TextWhiteSmall"
             android:text="@string/question_account"
             android:id="@+id/tvCloseAppOverview"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -52,7 +52,7 @@
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/tvAppOverViewNext"
-            style="@style/Theme.AppOverviewNext"
+            style="@style/Theme.TextWhiteLarge"
             android:text="@string/login"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintRight_toRightOf="parent"

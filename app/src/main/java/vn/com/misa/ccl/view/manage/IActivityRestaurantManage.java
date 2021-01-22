@@ -8,7 +8,7 @@ import vn.com.misa.ccl.entity.Setting;
 
 public interface IActivityRestaurantManage {
     public interface IActivityManagePresenter{
-        public void getListSetting();
+        public void getListSetting(Activity activity);
     }
 
     public interface IActivityManageView{

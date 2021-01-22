@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tbShopType"
-        style="@style/Theme.ToolBar"
+        style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <LinearLayout
@@ -24,10 +24,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <TextView
-                android:layout_marginLeft="@dimen/margin_login"
+                style="@style/Theme.FontTextLarge"
                 android:gravity="center|left"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_shop_type"
                 android:text="@string/product_infomation"
                 android:layout_width="0dp"
                 android:layout_weight="4"

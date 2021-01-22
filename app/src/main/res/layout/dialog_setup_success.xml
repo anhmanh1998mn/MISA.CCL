@@ -22,7 +22,7 @@
             <ImageView
                 app:tint="@color/white"
                 android:id="@+id/ivItemMenu"
-                app:layout_constraintRight_toLeftOf="@id/glMenuOne"
+                app:layout_constraintRight_toLeftOf="@id/glOne"
                 android:src="@drawable/ic_tick"
                 android:layout_width="@dimen/size_larg"
                 android:layout_height="@dimen/size_larg"/>
@@ -37,12 +37,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
+        style="@style/Theme.TextWhiteLarge"
         app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/tvSuccessNext"
         android:layout_marginTop="22dp"
-        android:gravity="center"
         android:text="@string/confirm_next"
-        android:textColor="@color/white"
         android:background="@color/greenn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNotifiSuccess"

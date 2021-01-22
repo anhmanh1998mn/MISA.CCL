@@ -8,7 +8,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/ivItemUnit"
-        app:layout_constraintRight_toLeftOf="@id/glMenuOne"
+        app:layout_constraintRight_toLeftOf="@id/glOne"
         android:src="@drawable/ic_circle_tick"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,7 +16,7 @@
         android:layout_height="@dimen/size_larg"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glMenuOne"
+        android:id="@+id/glOne"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
         style="@style/Theme.FontText"
         android:id="@+id/tvUnitName"
         android:text="dfsdfsdf"
-        app:layout_constraintLeft_toLeftOf="@id/glMenuOne"
+        app:layout_constraintLeft_toLeftOf="@id/glOne"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -1,8 +1,10 @@
 package vn.com.misa.ccl.model;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,8 +94,39 @@ public class ActivityRestaurantMenuModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo menu cho cửa hàng
+     *
+     * @param activity instance activity
+     * @param  listMenu danh sách sản phẩm của cửa hàng
+     *
+     * @created_by cvmanh on 01/22/2021
+     */
+    public void initMenu(Activity activity,List<ProductCategory> listMenu){
+        long result = 0;
+        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+        ContentValues contentValues=new ContentValues();
+        for(int i=0;i<listMenu.size();i++){
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME,listMenu.get(i).getmProduct().getmProductName());
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE,listMenu.get(i).getmProduct().getmProductPrice());
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS,listMenu.get(i).getmProduct().getmProductStatus());
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID,listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
+            contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID,listMenu.get(i).getmProduct().getmUnit().getmUnitID());
+            contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID,listMenu.get(i).getmProduct().getmColor().getColorID());
+            result=mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS,null,contentValues);
+        }
+
+        if(result>0){
+            Cursor cursor=mSqliteDatabase.rawQuery("Select * FROM "+DatabaseInfomation.TABLE_MYPRODUCTS+"",null);
+            Log.d("MenuSize",cursor.getCount()+"");
+            mIResultActivityRestaurantMenu.initMenuSuccess();
+        }
+    }
+
     public interface IResultActivityRestaurantMenu {
         public void loadListProductSuccess(List<ProductCategory> listProductCategory);
+
+        public void initMenuSuccess();
 
         public void onLoadFailed();
     }

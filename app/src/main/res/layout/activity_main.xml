@@ -19,7 +19,7 @@
         android:background="@color/light_blue"
         android:layout_height="0dp">
         <TextView
-            style="@style/Theme.AppOverviewClose"
+            style="@style/Theme.TextWhiteSmall"
             android:text="@string/close_app_overview"
             android:id="@+id/tvCloseAppOverview"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/tvAppOverViewNext"
-            style="@style/Theme.AppOverviewNext"
+            style="@style/Theme.TextWhiteLarge"
             android:drawableRight="@drawable/ic_next"
             android:text="@string/next_app_overview"
             app:layout_constraintRight_toRightOf="parent"

@@ -27,9 +27,8 @@
             android:layout_height="wrap_content"/>
     </FrameLayout>
     <View
-        android:background="@color/grey"
+        style="@style/Theme.VerticalLine"
         app:layout_constraintTop_toBottomOf="@+id/frmItemShopType"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_line"/>
+        android:layout_width="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

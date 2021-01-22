@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.SettingAdapter;
 import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
+import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
 
 public class ActivityRestaurantManage extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantManage.IActivityManageView {
@@ -28,7 +30,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu;
+    private TextView tvMenu,tvAdd;
 
     private ImageView ivUser;
 
@@ -60,6 +62,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         ivUser=findViewById(R.id.ivUser);
         ivUser.setClipToOutline(true);
         rcvMenu=findViewById(R.id.rcvMenu);
+        tvAdd=findViewById(R.id.tvAdd);
     }
 
     private void initActionbar() {
@@ -69,6 +72,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private void clickViewListener(){
         tvMenu.setOnClickListener(this);
+        tvAdd.setOnClickListener(this);
     }
 
     @Override
@@ -77,6 +81,9 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             case R.id.tvMenu:{
                 dlRestaurantManage.openDrawer(GravityCompat.START);
                 break;
+            }
+            case R.id.tvAdd:{
+                startActivity(new Intent(this, ActivityOrder.class));
             }
         }
     }
@@ -89,7 +96,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private void loadListSetting(){
         mActivityManage=new ActivityRestaurantManagePresenter(this);
-        mActivityManage.getListSetting();
+        mActivityManage.getListSetting(this);
     }
 
     @Override

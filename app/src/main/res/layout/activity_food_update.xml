@@ -8,7 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbFoodUpdate"
-        style="@style/Theme.ToolBar"
+        style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/tvSetupName"
-                style="@style/Theme.AppOverviewNext"
+                style="@style/Theme.TextWhiteLarge"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3.5"
@@ -73,10 +73,9 @@
     </LinearLayout>
 
     <View
+        style="@style/Theme.VerticalLine"
         android:id="@+id/vLineFootname"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@+id/llFoodName" />
 
     <LinearLayout
@@ -110,9 +109,8 @@
 
     <View
         android:id="@+id/vLineFootPrice"
+        style="@style/Theme.VerticalLine"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@+id/llFoodPrice" />
 
     <LinearLayout
@@ -145,10 +143,9 @@
     </LinearLayout>
 
     <View
+        style="@style/Theme.VerticalLine"
         android:id="@+id/vLineFootUnit"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@+id/llFoodUnit" />
 
     <LinearLayout
@@ -181,7 +178,7 @@
                 android:id="@+id/ivColor"
                 android:layout_width="@dimen/size_large"
                 android:layout_height="35dp"
-                app:layout_constraintRight_toLeftOf="@id/glMenuOne" />
+                app:layout_constraintRight_toLeftOf="@id/glOne" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -208,7 +205,7 @@
                     android:layout_width="@dimen/height_largee"
                     android:layout_height="@dimen/height_largee"
                     android:src="@drawable/ic_tick"
-                    app:layout_constraintRight_toLeftOf="@id/glMenuOne" />
+                    app:layout_constraintRight_toLeftOf="@id/glOne" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
@@ -239,7 +236,7 @@
 
     <Button
         android:id="@+id/btnDelete"
-        style="@style/Theme.BottomButton"
+        style="@style/Theme.FontButton"
         android:layout_width="180dp"
         android:layout_height="@dimen/height_next"
         android:text="@string/delete"
@@ -249,7 +246,7 @@
 
     <Button
         android:id="@+id/btnSave"
-        style="@style/Theme.BottomButton"
+        style="@style/Theme.FontButton"
         android:layout_width="180dp"
         android:layout_height="@dimen/height_next"
         android:text="@string/save"

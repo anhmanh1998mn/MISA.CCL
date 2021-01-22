@@ -11,15 +11,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/ivBack"
-        style="@style/Theme.IconBack"
+        style="@style/Theme.IconMargin"
         app:tint="@color/white"
         android:src="@drawable/ic_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:id="@+id/llAccount"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
         android:background="@drawable/view_login"
         android:layout_marginTop="150dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etUserName"
-                style="@style/Theme.UserNamePassword"
+                style="@style/Theme.TextUser"
                 android:drawableLeft="@drawable/ic_user"
                 android:hint="@string/phone_email_account"
                 android:layout_width="match_parent"
@@ -48,17 +48,16 @@
                 android:layout_height="@dimen/notification"/>
         </FrameLayout>
         <View
+            style="@style/Theme.VerticalLine"
             android:layout_marginLeft="@dimen/margin_left_large"
-            android:background="@color/grey"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
+            android:layout_width="match_parent" />
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
                 android:inputType="textPassword"
                 android:id="@+id/etPassword"
-                style="@style/Theme.UserNamePassword"
+                style="@style/Theme.TextUser"
                 android:drawableLeft="@drawable/ic_lock"
                 android:hint="@string/password"
                 android:layout_width="match_parent"
@@ -89,7 +88,7 @@
     <TextView
         android:id="@+id/tvForgotPassword"
         android:layout_marginTop="@dimen/notification"
-        style="@style/Theme.AppOverviewClose"
+        style="@style/Theme.TextWhiteSmall"
         android:text="@string/forgot_password"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

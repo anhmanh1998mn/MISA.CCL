@@ -29,6 +29,8 @@ public class DatabaseInfomation {
 
     public static String TABLE_UNITS="Units";
 
+    public static String TABLE_MYPRODUCTS="MyProducts";
+
     public static String COLUMN_CATEGORY_ID="CategoryID";
 
     public static String COLUMN_CATEGORY_NAME="CategoryName";
@@ -54,4 +56,6 @@ public class DatabaseInfomation {
     public static String COLUMN_UNIT_ID="UnitID";
 
     public static String COLUMN_UNIT_NAME="UnitName";
+
+    public static String COLUMN_MYPRODUCT_ID="MyproductID";
 }

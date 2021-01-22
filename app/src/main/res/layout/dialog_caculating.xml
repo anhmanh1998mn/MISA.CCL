@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
         <TextView
+            style="@style/Theme.TextWhiteLarge"
             android:id="@+id/tvPrice"
             android:paddingLeft="@dimen/margin"
             android:gravity="center|left"
-            android:textSize="20sp"
-            android:textColor="@color/white"
             android:text="@string/price"
             android:background="@color/purple_500"
             android:layout_width="match_parent"
@@ -29,6 +28,7 @@
             android:layout_height="@dimen/margin"/>
     </FrameLayout>
     <TextView
+        style="@style/Theme.FontText"
         android:text="0"
         android:gravity="center"
         android:maxLines="1"
