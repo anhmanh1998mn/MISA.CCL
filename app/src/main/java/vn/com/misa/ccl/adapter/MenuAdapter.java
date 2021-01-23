@@ -78,31 +78,34 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 holder.ivItemMenu.setImageResource(R.drawable.ic_tick);
                 holder.ivItemMenu.setColorFilter(Color.WHITE);
                 holder.ivItemMenu.getLayoutParams().width = 50;
-                holder.tvQuantity.setText(String.valueOf(quantity[0]=quantity[0]+1));
+                quantity[0]=quantity[0]+1;
+                mListProduct.get(position).setQuantity(quantity[0]);
+                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
+
                 holder.tvQuantity.setVisibility(View.VISIBLE);
                 holder.cvAdd.setVisibility(View.VISIBLE);
                 holder.cvRemove.setVisibility(View.VISIBLE);
                 holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
                 total[0] = total[0] +mListProduct.get(position).getmProductPrice();
                 mITotalAmount.processTotalAmount(formatMoney(total[0]));
-                mITotalAmount.getQuantity(Integer.parseInt(holder.tvQuantity.getText().toString()));
             }
         });
         holder.cvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("Tag", "onClick: add");
-                holder.tvQuantity.setText(String.valueOf(quantity[0]=quantity[0]+1));
+                quantity[0]=quantity[0]+1;
+                mListProduct.get(position).setQuantity(quantity[0]);
+                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
                 total[0] = total[0] +mListProduct.get(position).getmProductPrice();
                 mITotalAmount.processTotalAmount(formatMoney(total[0]));
-                mITotalAmount.getQuantity(Integer.parseInt(holder.tvQuantity.getText().toString()));
             }
         });
         holder.cvRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("Tag", "onClick: remove");
-                if (Integer.parseInt(holder.tvQuantity.getText().toString()) <1) {
+                if (Integer.parseInt(holder.tvQuantity.getText().toString()) <2) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),
                             0, mListProduct.get(position).getmProductImage().getmImage().length);
                     holder.ivItemMenu.setImageBitmap(bitmap);
@@ -113,12 +116,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     holder.ivItemMenu.setColorFilter(null);
                     holder.tvQuantity.setVisibility(View.GONE);
                     holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
+                    total[0] = total[0] -mListProduct.get(position).getmProductPrice();
+                    mITotalAmount.processTotalAmount(formatMoney(total[0]));
+                    quantity[0]=0;
+                    mListProduct.get(position).setQuantity(quantity[0]);
                     return;
                 }
-                holder.tvQuantity.setText(String.valueOf(quantity[0]=quantity[0]-1));
+                quantity[0]=quantity[0]-1;
+                mListProduct.get(position).setQuantity(quantity[0]);
+                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
                 total[0] = total[0] -mListProduct.get(position).getmProductPrice();
                 mITotalAmount.processTotalAmount(formatMoney(total[0]));
-                mITotalAmount.getQuantity(Integer.parseInt(holder.tvQuantity.getText().toString()));
             }
         });
     }
@@ -162,6 +170,5 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     public interface ITotalAmount{
         public void processTotalAmount(String totalAmount);
 
-        public void getQuantity(int quantity);
     }
 }

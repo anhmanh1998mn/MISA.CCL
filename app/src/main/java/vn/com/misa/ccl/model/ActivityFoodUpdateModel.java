@@ -3,7 +3,6 @@ package vn.com.misa.ccl.model;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +108,7 @@ public class ActivityFoodUpdateModel {
     public void loadCaculating(Activity activity){
         try {
             mListCaculate=new ArrayList<>();
-            mListCaculate.add(activity.getResources().getString(R.string.caculator_c));
+            mListCaculate.add(activity.getResources().getString(R.string.caculator_clear));
             mListCaculate.add(activity.getResources().getString(R.string.caculator_decrease));
             mListCaculate.add(activity.getResources().getString(R.string.caculator_increase));
             mListCaculate.add(activity.getResources().getString(R.string.caculator));

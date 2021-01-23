@@ -24,8 +24,19 @@ public class ActivityOrderPresenter implements IActivityOrder.IActivityOrderPres
     }
 
     @Override
+    public void getResultCaculate(String textInput,String numberEnter) {
+        mActivityOrderModel.getResultCaculate(textInput,numberEnter);
+    }
+
+
+    @Override
     public void getListMenuSuccess(List<Product> listMenu) {
         mIActivityOrderView.getListMenuSuccess(listMenu);
+    }
+
+    @Override
+    public void resultProcessCaculateSuccess(String result) {
+        mIActivityOrderView.getResultCaculateSuccess(result);
     }
 
     @Override

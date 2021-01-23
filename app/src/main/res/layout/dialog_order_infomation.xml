@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/clDialogOrder"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frmHeaderOrder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_lare"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvDialogTittle"
+            android:textSize="20sp"
+            style="@style/Theme.TextWhiteSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:gravity="left|center"
+            android:text="@string/enter_table_name" />
+
+        <ImageView
+            style="@style/Theme.EffectClick"
+            android:layout_width="@dimen/notification"
+            android:layout_height="@dimen/notification"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_close" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        style="@style/Theme.ViewMargin"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frmHeaderOrder">
+
+        <TextView
+            android:gravity="right|center"
+            style="@style/Theme.TextColor"
+            android:id="@+id/tvResult"
+            android:textStyle="bold"
+            android:layout_marginRight="8dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.97"
+            android:background="@drawable/view_enter_phone" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvItemCaculate"
+                style="@style/Theme.FontCaculate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/ivBackKeyboard"
+                android:layout_width="45dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back_keyboard" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ViewMargin"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowOne">
+
+        <TextView
+            android:text="@string/caculator_decrease"
+            android:id="@+id/tvItemDown"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_increase"
+            android:id="@+id/tvItemUp"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_clear"
+            android:id="@+id/tvItemClear"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ViewMargin"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowTwo">
+
+        <TextView
+            android:text="@string/caculator_7"
+            android:id="@+id/tvItemSeven"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_8"
+            android:id="@+id/tvItemEight"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_9"
+            android:id="@+id/tvItemNine"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ViewMargin"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowThree">
+
+        <TextView
+            android:text="@string/caculator_4"
+            android:id="@+id/tvItemFour"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_5"
+            android:id="@+id/tvItemFive"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_6"
+            android:id="@+id/tvItemSix"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowFive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ViewMargin"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowFour">
+
+        <TextView
+            android:text="@string/caculator_1"
+            android:id="@+id/tvItemOne"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_2"
+            android:id="@+id/tvItemTwo"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/caculator_3"
+            android:id="@+id/tvItemThree"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowSix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ViewMargin"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowFive">
+
+        <TextView
+            android:text="@string/caculator_0"
+            android:id="@+id/tvItemZero"
+            style="@style/Theme.FontCaculate"
+            android:layout_width="0dp"
+            android:layout_weight="1.94" />
+
+        <TextView
+            android:id="@+id/tvSuccess"
+            android:layout_marginLeft="4dp"
+            android:text="@string/success"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4.06"
+            android:background="@color/purple_500" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvSuccesss"
+            android:layout_marginLeft="4dp"
+            android:text="@string/success"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4.06"
+            android:background="@color/purple_500" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

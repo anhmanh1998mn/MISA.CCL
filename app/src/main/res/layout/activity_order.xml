@@ -63,6 +63,8 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+                android:gravity="center"
+                android:id="@+id/tvSelectTable"
                 style="@style/Theme.EffectClick"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
@@ -78,6 +80,8 @@
                 android:layout_width="0dp"
                 android:layout_height="16dp"/>
             <TextView
+                android:gravity="center"
+                android:id="@+id/tvPeopeNumber"
                 style="@style/Theme.EffectClick"
                 android:background="@drawable/view_order_table_people"
                 android:layout_margin="8dp"
@@ -109,6 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
+                android:paddingLeft="12dp"
+                android:drawableLeft="@drawable/ic_microphone"
                 android:focusable="true"
                 android:clickable="true"
                 style="@style/Theme.IconMargin"
@@ -116,19 +122,22 @@
                 android:background="@drawable/view_order_table_people"
                 android:layout_width="45dp"
                 android:layout_height="45dp"/>
+
             <TextView
-                android:focusable="true"
-                android:clickable="true"
-                android:background="@drawable/view_order_table_people"
-                android:textColor="@color/purple_500"
+                android:id="@+id/tvSave"
                 style="@style/Theme.TextWhiteSmall"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="@string/save"
-                android:layout_weight="2.5"
                 android:layout_width="0dp"
-                android:layout_height="45dp"/>
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_weight="2.5"
+                android:background="@drawable/view_order_table_people"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textColor="@color/purple_500" />
             <Button
+
                 style="@style/Theme.FontButton"
                 android:layout_margin="4dp"
                 android:text="@string/bill"

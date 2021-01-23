@@ -26,6 +26,27 @@ public class Product implements Serializable {
 
     private Color mColor;
 
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus, ProductImage mProductImage, Unit mUnit, Color mColor, int quantity) {
+        this.mProductID = mProductID;
+        this.mProductName = mProductName;
+        this.mProductPrice = mProductPrice;
+        this.mProductStatus = mProductStatus;
+        this.mProductImage = mProductImage;
+        this.mUnit = mUnit;
+        this.mColor = mColor;
+        this.quantity = quantity;
+    }
+
     public int getmProductID() {
         return mProductID;
     }

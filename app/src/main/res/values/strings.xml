@@ -35,7 +35,7 @@
     <string name="cancle">Hủy bỏ</string>
     <string name="error">Có lỗi xảy ra, vui lòng thử lại</string>
     <string name="unit_name">Đơn vị tính</string>
-    <string name="caculator_c">C</string>
+    <string name="caculator_clear">C</string>
     <string name="caculator_decrease">Giảm</string>
     <string name="caculator_increase">Tăng</string>
     <string name="caculator"></string>
@@ -69,4 +69,7 @@
     <string name="bill">Thu tiền</string>
     <string name="total_amount">Tổng tiền</string>
     <string name="notification_select_food">Bấm vào đây hoặc dấu + để chọn món</string>
+    <string name="remove_order">Hủy</string>
+    <string name="enter_table_name">Nhập số bàn</string>
+    <string name="enter_people_name">Nhập số người</string>
 </resources>
