@@ -58,4 +58,26 @@ public class DatabaseInfomation {
     public static String COLUMN_UNIT_NAME="UnitName";
 
     public static String COLUMN_MYPRODUCT_ID="MyproductID";
+
+    public static String TABLE_ORDERS="Orders";
+
+    public static String COLUMN_ORDER_ID="OrderID";
+
+    public static String COLUMN_ORDER_STATUS="OrderStatus";
+
+    public static String COLUMN_ORDER_CREATED_AT="CreatedAt";
+
+    public static String COLUMN_TABLE_NAME="TableName";
+
+    public static String COLUMN_TOTAL_PEOPLE="TotalPeople";
+
+    public static String TABLE_ORDER_DETAIL="OrderDetails";
+
+    public static String COLUMN_QUANTITY="Quantity";
+
+    public static String COLUMN_PRICE_OUT="PriceOut";
+
+    public static String COLUM_ORDER_DETAIL_ID="OrderDetailID";
+
+    public static String COLUM_ORDER_AMOUNT="Amount";
 }

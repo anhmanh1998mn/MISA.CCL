@@ -13,12 +13,16 @@ public interface IActivityOrder {
 
         public void getResultCaculate(String textInput,String numberEnter);
 
+        public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount);
+
     }
 
     public interface IActivityOrderView{
         public void getListMenuSuccess(List<Product> listProduct);
 
         public void getResultCaculateSuccess(String result);
+
+        public void addNewOrderSuccess();
 
         public void onFailed();
     }

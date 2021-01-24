@@ -87,7 +87,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 holder.cvRemove.setVisibility(View.VISIBLE);
                 holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
                 total[0] = total[0] +mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]));
+                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
             }
         });
         holder.cvAdd.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +98,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 mListProduct.get(position).setQuantity(quantity[0]);
                 holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
                 total[0] = total[0] +mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]));
+                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
             }
         });
         holder.cvRemove.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +117,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     holder.tvQuantity.setVisibility(View.GONE);
                     holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
                     total[0] = total[0] -mListProduct.get(position).getmProductPrice();
-                    mITotalAmount.processTotalAmount(formatMoney(total[0]));
+                    mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
                     quantity[0]=0;
                     mListProduct.get(position).setQuantity(quantity[0]);
                     return;
@@ -126,7 +126,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 mListProduct.get(position).setQuantity(quantity[0]);
                 holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
                 total[0] = total[0] -mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]));
+                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
             }
         });
     }
@@ -168,7 +168,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     }
 
     public interface ITotalAmount{
-        public void processTotalAmount(String totalAmount);
+        public void processTotalAmount(String totalAmount,float totalMoney);
 
     }
 }

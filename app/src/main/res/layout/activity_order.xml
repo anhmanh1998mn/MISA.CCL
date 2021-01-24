@@ -137,7 +137,7 @@
                 android:text="@string/save"
                 android:textColor="@color/purple_500" />
             <Button
-
+                android:id="@+id/btnMoney"
                 style="@style/Theme.FontButton"
                 android:layout_margin="4dp"
                 android:text="@string/bill"

@@ -1,10 +1,13 @@
 package vn.com.misa.ccl.model;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
@@ -28,6 +31,8 @@ public class ActivityOrderModel {
     private SQLiteDatabase mSqliteDatabase;
 
     private String resultNumberEnter="";
+
+    private int mSumQuantity=0;
 
     public void getListMenu(Activity activity){
         mListMenu=new ArrayList<>();
@@ -169,10 +174,60 @@ public class ActivityOrderModel {
         }
     }
 
+    public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount){
+        mSqliteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
+        if(tableName.equals("")){
+            tableName="0";
+        }
+        if(totalPeople.equals("")){
+            totalPeople="0";
+        }
+        for(int i=0;i<listProduct.size();i++){
+            if(listProduct.get(i).getQuantity()>0){
+                mSumQuantity=mSumQuantity+1;
+            }
+        }
+        if(mSumQuantity>0){
+            ContentValues contentValues=new ContentValues();
+            ContentValues contentOrderDetail=new ContentValues();
+            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS,1);
+            contentValues.put(DatabaseInfomation.COLUMN_ORDER_CREATED_AT,getDate());
+            contentValues.put(DatabaseInfomation.COLUMN_TABLE_NAME,tableName);
+            contentValues.put(DatabaseInfomation.COLUMN_TOTAL_PEOPLE,Integer.parseInt(totalPeople));
+            contentValues.put(DatabaseInfomation.COLUM_ORDER_AMOUNT,amount);
+            long resultInsertOrder=mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDERS,null,contentValues);
+            if(resultInsertOrder>0){
+                for (int i=0;i<listProduct.size();i++){
+                    if(listProduct.get(i).getQuantity()>0){
+                        contentOrderDetail.put(DatabaseInfomation.COLUMN_ORDER_ID,resultInsertOrder);
+                        contentOrderDetail.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID,listProduct.get(i).getmProductID());
+                        contentOrderDetail.put(DatabaseInfomation.COLUMN_QUANTITY,listProduct.get(i).getQuantity());
+                        mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDER_DETAIL,null,contentOrderDetail);
+                    }
+                }
+            }
+            mIActivityOrderModel.addNewOrderSuccess();
+            return;
+        }
+        mIActivityOrderModel.onFailed();
+    }
+
+    private String getDate(){
+        Calendar calendar=Calendar.getInstance();
+        int mYear=calendar.get(Calendar.YEAR);
+        int mMonth=calendar.get(Calendar.MONTH);
+        int mDay=calendar.get(Calendar.DATE);
+        calendar.set(mYear,mMonth,mDay);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
     public interface IActivityOrderModel{
         public void getListMenuSuccess(List<Product> listMenu);
 
         public void resultProcessCaculateSuccess(String result);
+
+        public void addNewOrderSuccess();
 
         public void onFailed();
     }

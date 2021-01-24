@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +23,12 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.MenuAdapter;
+import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.presenter.ActivityOrderPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.util.DatabaseInfomation;
+import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 public class ActivityOrder extends AppCompatActivity implements IActivityOrder.IActivityOrderView,
         MenuAdapter.ITotalAmount, View.OnClickListener {
@@ -40,11 +47,15 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
 
     private String mResultSelect;
 
+    private Button btnMoney;
+
     private TextView tvTotalAmount,tvSave,tvSelectTable,tvPeopeNumber, tvSuccess,tvDialogTittle,
             tvResult,tvItemDown,tvItemUp,tvItemClear,tvItemSeven,tvItemEight,tvItemNine,tvItemFour,
             tvItemFive,tvItemSix,tvItemOne,tvItemTwo,tvItemThree,tvItemZero,tvSuccesss;
 
     private ImageView ivBackKeyboard;
+
+    private float mAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +77,7 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
         tvSave=findViewById(R.id.tvSave);
         tvSelectTable=findViewById(R.id.tvSelectTable);
         tvPeopeNumber=findViewById(R.id.tvPeopeNumber);
+        btnMoney=findViewById(R.id.btnMoney);
     }
 
     private void getListMenu(){
@@ -90,13 +102,19 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
     }
 
     @Override
+    public void addNewOrderSuccess() {
+        startActivity(new Intent(this, ActivityRestaurantManage.class));
+    }
+
+    @Override
     public void onFailed() {
         Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void processTotalAmount(String totalAmount) {
+    public void processTotalAmount(String totalAmount,float totalMoney) {
         tvTotalAmount.setText(totalAmount);
+        mAmount=totalMoney;
     }
 
     private void getItemSelect(){
@@ -106,17 +124,26 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
         tvSave.setOnClickListener(this);
         tvPeopeNumber.setOnClickListener(this);
         tvSelectTable.setOnClickListener(this);
+        btnMoney.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tvSave:{
-                for(int i=0;i<mListProduct.size();i++){
-                    if(mListProduct.get(i).getQuantity()>0){
-                        Log.d("ProductSelect",mListProduct.get(i).getmProductName()+":"+mListProduct.get(i).getQuantity());
-                    }
-                }
+                mActivityOrderPresenter=new ActivityOrderPresenter(this);
+                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount);
+//                for(int i=0;i<mListProduct.size();i++){
+//                    if(mListProduct.get(i).getQuantity()>0){
+//                        Log.d("ProductSelect",mListProduct.get(i).getmProductName()+":"+mListProduct.get(i).getQuantity());
+//                    }
+//                }
+                break;
+            }
+            case R.id.btnMoney:{
+//                SQLiteDatabase database= DatabaseHelper.initDatabase(this, DatabaseInfomation.DATABASE_NAME);
+//                Cursor cursor=database.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_ORDER_DETAIL+"",null);
+//                Log.d("acccc",cursor.getCount()+"");
                 break;
             }
             case R.id.tvSelectTable:{

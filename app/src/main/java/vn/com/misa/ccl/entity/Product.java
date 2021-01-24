@@ -28,6 +28,13 @@ public class Product implements Serializable {
 
     private int quantity;
 
+    public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus) {
+        this.mProductID = mProductID;
+        this.mProductName = mProductName;
+        this.mProductPrice = mProductPrice;
+        this.mProductStatus = mProductStatus;
+    }
+
     public int getQuantity() {
         return quantity;
     }

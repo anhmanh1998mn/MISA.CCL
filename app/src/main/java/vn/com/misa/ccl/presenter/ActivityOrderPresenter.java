@@ -28,6 +28,11 @@ public class ActivityOrderPresenter implements IActivityOrder.IActivityOrderPres
         mActivityOrderModel.getResultCaculate(textInput,numberEnter);
     }
 
+    @Override
+    public void addNewOrder(Activity activity, List<Product> listProduct,String tableName,String totalPeople,float amount) {
+        mActivityOrderModel.addNewOrder(activity,listProduct,tableName,totalPeople,amount);
+    }
+
 
     @Override
     public void getListMenuSuccess(List<Product> listMenu) {
@@ -37,6 +42,11 @@ public class ActivityOrderPresenter implements IActivityOrder.IActivityOrderPres
     @Override
     public void resultProcessCaculateSuccess(String result) {
         mIActivityOrderView.getResultCaculateSuccess(result);
+    }
+
+    @Override
+    public void addNewOrderSuccess() {
+        mIActivityOrderView.addNewOrderSuccess();
     }
 
     @Override
