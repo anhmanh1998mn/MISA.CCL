@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@+id/vLeft"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/grey"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="1px"
+        android:layout_height="45dp"/>
+    <View
+        android:id="@+id/vRight"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/grey"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="1px"
+        android:layout_height="45dp"/>
+    <View
+        android:id="@+id/vBottom"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/vRight"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <TextView
+        android:layout_marginLeft="4dp"
+        android:id="@+id/tvProductName"
+        style="@style/Theme.TextColor"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:text="@string/product_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/vLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+    <TextView
+        android:textSize="15sp"
+        app:layout_constraintRight_toLeftOf="@+id/guidelineTwo"
+        android:id="@+id/tvAmount"
+        style="@style/Theme.TextColor"
+        android:gravity="center"
+        android:text="@string/amount"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/guidelineOne"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+    <TextView
+        android:textSize="15sp"
+        app:layout_constraintRight_toLeftOf="@+id/guidelineThree"
+        android:id="@+id/tvUnitPrice"
+        style="@style/Theme.TextColor"
+        android:gravity="center"
+        android:text="@string/unit_price"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/guidelineTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15sp"
+        android:id="@+id/tvTotalMoney"
+        style="@style/Theme.TextColor"
+        android:gravity="center"
+        android:text="@string/total_money"
+        android:layout_marginRight="4dp"
+        app:layout_constraintRight_toLeftOf="@+id/vRight"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineOne"
+        app:layout_constraintGuide_percent="0.3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTwo"
+        app:layout_constraintGuide_percent="0.43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineThree"
+        app:layout_constraintGuide_percent="0.68"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

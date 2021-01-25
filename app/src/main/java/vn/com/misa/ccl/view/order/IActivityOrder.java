@@ -13,7 +13,7 @@ public interface IActivityOrder {
 
         public void getResultCaculate(String textInput,String numberEnter);
 
-        public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount);
+        public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount,int typeClick);
 
     }
 
@@ -23,6 +23,8 @@ public interface IActivityOrder {
         public void getResultCaculateSuccess(String result);
 
         public void addNewOrderSuccess();
+
+        public void addNewOrderTwoSuccess(int orderID);
 
         public void onFailed();
     }

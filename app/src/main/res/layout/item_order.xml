@@ -72,7 +72,8 @@
                     style="@style/Theme.FontText"
                     android:drawableRight="@drawable/ic_foot_menu"
                     android:id="@+id/tvListProduct"
-                    android:maxLines="2"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="match_parent"
@@ -93,7 +94,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <TextView
-
                     android:drawableTint="@color/red"
                     android:drawableLeft="@drawable/ic_close"
                     android:id="@+id/tvCancel"

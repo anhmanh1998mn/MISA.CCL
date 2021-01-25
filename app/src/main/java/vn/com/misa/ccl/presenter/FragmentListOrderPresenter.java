@@ -24,8 +24,18 @@ public class FragmentListOrderPresenter implements IFragmentListOrder.IFragmentL
     }
 
     @Override
+    public void removeItemOrder(Activity activity, int orderID) {
+        mFragmentListOrderModel.removeItemOrder(activity,orderID);
+    }
+
+    @Override
     public void getListOrderSuccess(List<OrderDetail> listOrderDetail) {
         mIFragmentListOrderView.getListOrderSuccess(listOrderDetail);
+    }
+
+    @Override
+    public void removeOrderSuccess() {
+        mIFragmentListOrderView.removeOrderSuccess();
     }
 
     @Override

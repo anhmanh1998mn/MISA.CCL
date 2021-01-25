@@ -8,26 +8,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.MenuAdapter;
-import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.presenter.ActivityOrderPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
-import vn.com.misa.ccl.util.DatabaseInfomation;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 public class ActivityOrder extends AppCompatActivity implements IActivityOrder.IActivityOrderView,
@@ -48,6 +42,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
     private String mResultSelect;
 
     private Button btnMoney;
+
+    private int MCLICK_BUTTON_SAVE =1;
+
+    private int MCLICK_BUTTON_MONEY=2;
+
+    private String ORDER_ID="ORDER_ID";
 
     private TextView tvTotalAmount,tvSave,tvSelectTable,tvPeopeNumber, tvSuccess,tvDialogTittle,
             tvResult,tvItemDown,tvItemUp,tvItemClear,tvItemSeven,tvItemEight,tvItemNine,tvItemFour,
@@ -107,6 +107,13 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
     }
 
     @Override
+    public void addNewOrderTwoSuccess(int orderID) {
+        Intent intent=new Intent(this, ActivityBill.class);
+        intent.putExtra(ORDER_ID,orderID);
+        startActivity(intent);
+    }
+
+    @Override
     public void onFailed() {
         Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
@@ -132,7 +139,7 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
         switch (v.getId()){
             case R.id.tvSave:{
                 mActivityOrderPresenter=new ActivityOrderPresenter(this);
-                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount);
+                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_SAVE);
 //                for(int i=0;i<mListProduct.size();i++){
 //                    if(mListProduct.get(i).getQuantity()>0){
 //                        Log.d("ProductSelect",mListProduct.get(i).getmProductName()+":"+mListProduct.get(i).getQuantity());
@@ -141,6 +148,9 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                 break;
             }
             case R.id.btnMoney:{
+                mActivityOrderPresenter=new ActivityOrderPresenter(this);
+                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_MONEY);
+//                startActivity(new Intent(this,ActivityBill.class));
 //                SQLiteDatabase database= DatabaseHelper.initDatabase(this, DatabaseInfomation.DATABASE_NAME);
 //                Cursor cursor=database.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_ORDER_DETAIL+"",null);
 //                Log.d("acccc",cursor.getCount()+"");

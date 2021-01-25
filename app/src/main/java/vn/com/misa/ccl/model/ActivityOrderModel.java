@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Color;
 import vn.com.misa.ccl.entity.Product;
@@ -33,6 +32,10 @@ public class ActivityOrderModel {
     private String resultNumberEnter="";
 
     private int mSumQuantity=0;
+
+    private int CICK_BUTTON_SAVE =1;
+
+    private int CLICK_BUTTON_MONEY=2;
 
     public void getListMenu(Activity activity){
         mListMenu=new ArrayList<>();
@@ -174,7 +177,7 @@ public class ActivityOrderModel {
         }
     }
 
-    public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount){
+    public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount,int typeClick){
         mSqliteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
         if(tableName.equals("")){
             tableName="0";
@@ -206,7 +209,12 @@ public class ActivityOrderModel {
                     }
                 }
             }
-            mIActivityOrderModel.addNewOrderSuccess();
+            if(typeClick== CICK_BUTTON_SAVE){
+                mIActivityOrderModel.addNewOrderSuccess();
+            }else {
+                mIActivityOrderModel.addNewOrderTwoSuccess(Integer.parseInt(String.valueOf((resultInsertOrder))));
+            }
+
             return;
         }
         mIActivityOrderModel.onFailed();
@@ -228,6 +236,8 @@ public class ActivityOrderModel {
         public void resultProcessCaculateSuccess(String result);
 
         public void addNewOrderSuccess();
+
+        public void addNewOrderTwoSuccess(int orderID);
 
         public void onFailed();
     }

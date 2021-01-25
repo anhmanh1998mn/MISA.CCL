@@ -15,6 +15,15 @@ public class Order {
 
     private float totalMoney;
 
+    public Order(int orderId, int orderStatus, String createdAt, String tableName, int totalPeople, float totalMoney) {
+        this.orderId = orderId;
+        this.orderStatus = orderStatus;
+        this.createdAt = createdAt;
+        this.tableName = tableName;
+        this.totalPeople = totalPeople;
+        this.totalMoney = totalMoney;
+    }
+
     public float getTotalMoney() {
         return totalMoney;
     }

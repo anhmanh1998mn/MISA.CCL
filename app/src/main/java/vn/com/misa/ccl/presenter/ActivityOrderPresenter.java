@@ -29,8 +29,8 @@ public class ActivityOrderPresenter implements IActivityOrder.IActivityOrderPres
     }
 
     @Override
-    public void addNewOrder(Activity activity, List<Product> listProduct,String tableName,String totalPeople,float amount) {
-        mActivityOrderModel.addNewOrder(activity,listProduct,tableName,totalPeople,amount);
+    public void addNewOrder(Activity activity, List<Product> listProduct,String tableName,String totalPeople,float amount,int typeClick) {
+        mActivityOrderModel.addNewOrder(activity,listProduct,tableName,totalPeople,amount,typeClick);
     }
 
 
@@ -47,6 +47,11 @@ public class ActivityOrderPresenter implements IActivityOrder.IActivityOrderPres
     @Override
     public void addNewOrderSuccess() {
         mIActivityOrderView.addNewOrderSuccess();
+    }
+
+    @Override
+    public void addNewOrderTwoSuccess(int orderID) {
+        mIActivityOrderView.addNewOrderTwoSuccess(orderID);
     }
 
     @Override

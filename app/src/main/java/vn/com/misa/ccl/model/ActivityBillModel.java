@@ -16,20 +16,21 @@ import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
-public class FragmentListOrderModel {
-    private IFragmentListOrderModel mIFragmentListOrderModel;
+public class ActivityBillModel {
 
-    public FragmentListOrderModel(IFragmentListOrderModel mIFragmentListOrderModel) {
-        this.mIFragmentListOrderModel = mIFragmentListOrderModel;
+    private IActivityBillModel mIActivityBillModel;
+
+    public ActivityBillModel(IActivityBillModel mIActivityBillModel) {
+        this.mIActivityBillModel = mIActivityBillModel;
     }
 
     private SQLiteDatabase mSqLiteDatabase;
 
-    private List<OrderDetail> mListOrderDetail;
+    private List<OrderDetail> mListOrderDetaill;
 
-    public void getListOrder(Activity activity){
-        mSqLiteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        mListOrderDetail=new ArrayList<>();
+    public void getOrderDetail(Activity activity,int orderID){
+        mListOrderDetaill=new ArrayList<>();
+        mSqLiteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
         Cursor cursor=mSqLiteDatabase.rawQuery("SELECT "+DatabaseInfomation.TABLE_ORDERS+"."
                 +DatabaseInfomation.COLUMN_ORDER_ID+"" +
                 ","+DatabaseInfomation.COLUMN_ORDER_STATUS+","+DatabaseInfomation.COLUMN_TABLE_NAME+"" +
@@ -43,9 +44,9 @@ public class FragmentListOrderModel {
                 DatabaseInfomation.COLUMN_MYPRODUCT_ID+","+DatabaseInfomation.COLUMN_PRODUCT_PRICE+","+
                 DatabaseInfomation.COLUMN_PRODUCT_STATUS+","+DatabaseInfomation.TABLE_UNITS+"."
                 +DatabaseInfomation.COLUMN_UNIT_ID+","
-                +DatabaseInfomation.COLUMN_UNIT_NAME+"," +
-                "group_concat("+DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                +DatabaseInfomation.COLUMN_PRODUCT_NAME+ "||' ('||" +DatabaseInfomation.COLUMN_QUANTITY+"||')',', ') as Tong" +" FROM "
+                +DatabaseInfomation.COLUMN_UNIT_NAME+","
+                +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_NAME+","+
+                DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+" FROM "
                 +DatabaseInfomation.TABLE_ORDERS+", "
                 +DatabaseInfomation.TABLE_UNITS+","
                 +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","+DatabaseInfomation.TABLE_COLORS+","
@@ -66,19 +67,20 @@ public class FragmentListOrderModel {
                 +"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND "
                 +DatabaseInfomation.TABLE_MYPRODUCTS+"."
                 +DatabaseInfomation.COLUMN_COLOR_ID+"="+DatabaseInfomation.TABLE_COLORS+"."
-                +DatabaseInfomation.COLUMN_COLOR_ID+" GROUP BY "
-                +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"",null);
+                +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
+                +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"="+orderID+"",null);
         for(int i=cursor.getCount()-1;i>=0;i--){
             cursor.moveToPosition(i);
-            mListOrderDetail.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
+            mListOrderDetaill.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
                     new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
                             cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_STATUS)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)),
                             cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TABLE_NAME)),
                             cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TOTAL_PEOPLE)),
                             cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_AMOUNT))),
 
                     new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
-                            cursor.getString(cursor.getColumnIndex("Tong")),
+                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
                             cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_PRICE)),
                             cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_STATUS)),
                             new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
@@ -90,31 +92,14 @@ public class FragmentListOrderModel {
                     cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY))));
         }
         if(cursor!=null){
-            mIFragmentListOrderModel.getListOrderSuccess(mListOrderDetail);
-        }
-    }
-
-    public void removeItemOrder(Activity activity,int orderID){
-        mSqLiteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-        long resulOrderDetail=mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDER_DETAIL,
-                DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
-        if(resulOrderDetail>0){
-            long resultOrder=mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDERS,
-                    DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
-            if(resultOrder>0){
-                mIFragmentListOrderModel.removeOrderSuccess();
-                return;
-            }
-            mIFragmentListOrderModel.onFailed();
+            mIActivityBillModel.getOrderDetail(mListOrderDetaill);
             return;
         }
-        mIFragmentListOrderModel.onFailed();
+        mIActivityBillModel.onFailed();
     }
 
-    public interface IFragmentListOrderModel{
-        public void getListOrderSuccess(List<OrderDetail> listOrderDetail);
-
-        public void removeOrderSuccess();
+    public interface IActivityBillModel{
+        public void getOrderDetail(List<OrderDetail> listOrderDetail);
 
         public void onFailed();
     }

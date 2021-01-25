@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/clBill"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvDialogTittle"
+        style="@style/Theme.TextWhiteSmall"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_lare"
+        android:layout_marginLeft="8dp"
+        android:gravity="right|center"
+        android:text="@string/enter_table_name"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCaculate"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/grey_bill"
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogTittle">
+
+        <LinearLayout
+            android:id="@+id/llRowTwo"
+            style="@style/Theme.ViewMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+
+                android:id="@+id/tvItemSeven"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_7" />
+
+            <TextView
+                android:id="@+id/tvItemEight"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_8" />
+
+            <TextView
+                android:id="@+id/tvItemNine"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_9" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/Theme.FontCaculateBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" />
+
+                <ImageView
+                    android:id="@+id/ivBackKeyboard"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_back_keyboard" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRowFour"
+            style="@style/Theme.ViewMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llRowTwo">
+
+            <TextView
+                android:id="@+id/tvItemFour"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_4" />
+
+            <TextView
+                android:id="@+id/tvItemFive"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_5" />
+
+            <TextView
+                android:id="@+id/tvItemSix"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_6" />
+
+            <TextView
+                android:id="@+id/tvItemClear"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_clear" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRowFive"
+            style="@style/Theme.ViewMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llRowFour">
+
+            <TextView
+                android:id="@+id/tvItemOne"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_1" />
+
+            <TextView
+                android:id="@+id/tvItemTwo"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_2" />
+
+            <TextView
+                android:id="@+id/tvItemThree"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_3" />
+
+            <TextView
+                android:id="@+id/tvItemDot"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/caculator_dot" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRowSix"
+            style="@style/Theme.ViewMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llRowFive">
+
+            <TextView
+                android:id="@+id/tvItemZero"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="0.98"
+                android:text="@string/caculator_0" />
+
+            <TextView
+                android:id="@+id/tvItemZeroo"
+                style="@style/Theme.FontCaculateBill"
+                android:layout_width="0dp"
+                android:layout_weight="0.98"
+                android:text="@string/caculator_000" />
+
+            <TextView
+                android:id="@+id/tvSuccess"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="2.04"
+                android:background="@color/purple_500"
+                android:text="@string/accept" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/tvSuggestMoney"
+        style="@style/Theme.ViewMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/suggest_money"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/clCaculate" />
+
+    <LinearLayout
+        android:id="@+id/llRowSevent"
+        style="@style/Theme.ViewMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSuggestMoney">
+
+
+        <TextView
+            android:id="@+id/tvMoneyOne"
+            style="@style/Theme.FontCaculateBill"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/greenn"
+            android:text="@string/ten_money"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvMonetTwo"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/greenn"
+            android:text="11.000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRowEight"
+        style="@style/Theme.ViewMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llRowSevent">
+
+
+        <TextView
+            android:id="@+id/tvMoneyFour"
+            style="@style/Theme.FontCaculateBill"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/greenn"
+            android:text="20.000"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvMonetFive"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/greenn"
+            android:text="50.000" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

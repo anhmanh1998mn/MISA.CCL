@@ -1,5 +1,8 @@
 package vn.com.misa.ccl.view.order;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +27,8 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.FragmentListOrderPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
-public class FragmentListOrder extends Fragment implements View.OnClickListener, IFragmentListOrder.IFragmentListOrderView {
+public class FragmentListOrder extends Fragment implements View.OnClickListener, IFragmentListOrder.IFragmentListOrderView,
+        OrderAdapter.ICLickButtonRemove {
 
     private ImageView ivLogo;
 
@@ -39,6 +43,8 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
     private OrderAdapter mOrderAdapter;
 
     private LinearLayout llListOrder;
+
+    private Dialog mDialogConfirmRemove;
 
     @Nullable
     @Override
@@ -104,6 +110,7 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         rcvOrder.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         rcvOrder.setAdapter(mOrderAdapter);
         mOrderAdapter.notifyDataSetChanged();
+        mOrderAdapter.setmICLickButtonRemove(this);
 //        tvAddFood.setVisibility(View.GONE);
 //        tvNoOrder.setVisibility(View.GONE);
 //        ivLogo.setVisibility(View.GONE);
@@ -111,7 +118,34 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public void removeOrderSuccess() {
+        getListOrder();
+        mDialogConfirmRemove.dismiss();
+    }
+
+    @Override
     public void onFailed() {
         Toast.makeText(getContext(), getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setOnClickButtoRemove(int orderID) {
+        mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);
+        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        builder.setTitle(getResources().getString(R.string.app));
+        builder.setMessage(getResources().getString(R.string.remove_confirm));
+        builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mFragmentListOrderPresenter.removeItemOrder(getActivity(),orderID);
+            }
+        });
+        mDialogConfirmRemove=builder.create();
+        mDialogConfirmRemove.show();
     }
 }

@@ -72,4 +72,22 @@
     <string name="remove_order">Hủy</string>
     <string name="enter_table_name">Nhập số bàn</string>
     <string name="enter_people_name">Nhập số người</string>
+    <string name="app">CUKCUK LITE</string>
+    <string name="remove_confirm">Bạn có chắc chắn muốn hủy các món đã chọn không?</string>
+    <string name="yes">CÓ</string>
+    <string name="no">KHÔNG</string>
+    <string name="bill_order">HÓA ĐƠN</string>
+    <string name="number">Số:</string>
+    <string name="table_name">Bàn:</string>
+    <string name="date">Ngày:</string>
+    <string name="product_name">Tên hàng</string>
+    <string name="amount">SL</string>
+    <string name="unit_price">Đơn giá</string>
+    <string name="total_money">Thành tiền</string>
+    <string name="total_moneyy">Số tiền phải trả</string>
+    <string name="amount_in">Tiền khách đưa</string>
+    <string name="amount_out">Tiền trả lại cho khách</string>
+    <string name="accept">ĐỒNG Ý</string>
+    <string name="suggest_money">GỢI Ý TIỀN MẶT</string>
+    <string name="ten_money">10.000</string>
 </resources>
