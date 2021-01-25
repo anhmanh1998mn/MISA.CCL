@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,14 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.UnitAdapter;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.presenter.ActivityUnitPresenter;
+
+/**
+‐ Mục đích Class thực hiện những công việc hiển thị danh sách Unit
+*
+‐ {@link ActivityUnitPresenter}
+*
+‐ @created_by cvmanh on 01/26/2021
+*/
 
 public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IActivityUnitView, View.OnClickListener,
         UnitAdapter.IItemClickListener {
@@ -55,6 +64,11 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         loadListUnit();
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo actionBar
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void initActionBar() {
         try {
             tbUnit=findViewById(R.id.tbUnit);
@@ -64,6 +78,11 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void initView() {
         try {
             mActivityUnitPresenter=new ActivityUnitPresenter(this);
@@ -75,6 +94,11 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện gọi presenter xử lý lấy danh sách Unit
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void loadListUnit(){
         try {
             mActivityUnitPresenter.loadListUnit(this);
@@ -83,6 +107,13 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện nhận danh sách Unit và hiển thị lên recycleView
+     *
+     * @param listUnit Danh sách Unit
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void loadListUnitSuccess(List<Unit> listUnit) {
         try {
@@ -97,11 +128,21 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý thất bại và hiện thông báo
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void onFailed() {
         Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Mục đích method thực hiện việc lắng nghe xự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void clickViewListener(){
         try {
             tvBack.setOnClickListener(this);
@@ -111,6 +152,13 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện xử lý câc công việc theo view click
+     *
+     * @param view view
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void onClick(View view) {
         try {
@@ -133,6 +181,14 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện nhận UnitName và unitID từ presenter
+     *
+     * @param unitID mã unit
+     * @param  unitName tên unit
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void getUnitNameItemClick(String unitName, int unitID) {
         try {

@@ -11,6 +11,14 @@ import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
+/**
+‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityUnit
+*
+‐ {@link vn.com.misa.ccl.presenter.ActivityUnitPresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class ActivityUnitModel {
 
     private IResultProcessActivityUnit mIResultProcessActivityUnit;
@@ -23,6 +31,13 @@ public class ActivityUnitModel {
 
     private SQLiteDatabase mSqliteDatabase;
 
+    /**
+     * Mục đích method thực hiện việc lấy danh sách Unit và gửi kết quả về Presenter
+     *
+     * @param activity instance activity
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void loadListUnit(Activity activity){
         try {
             mListUnit=new ArrayList<>();

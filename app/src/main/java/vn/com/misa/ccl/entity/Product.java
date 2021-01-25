@@ -3,7 +3,7 @@ package vn.com.misa.ccl.entity;
 import java.io.Serializable;
 
 /**
- * ‐ Mục đích Class thực hiện khai báo đối tượng Product
+ * ‐ Mục đích Class thực hiện khai báo Product
  * <p>
  * ‐ {@link ProductCategory}
  * <p>

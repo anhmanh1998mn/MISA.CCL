@@ -8,6 +8,14 @@ import java.util.List;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Setting;
 
+/**
+‐ Mục đích Class thực hiện việc xử lý các công vệc của ActivityRestaurantManage
+*
+‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class ActivityRestaurantManageModel {
 
     private IActivityManageModel mIManageModel;
@@ -18,6 +26,13 @@ public class ActivityRestaurantManageModel {
 
     private List<Setting> mListSetting;
 
+    /**
+     * Mục đích method thực hiện việc tạo dữ liệu danh sách setting và gửi dữ liệu về presenter
+     *
+     * @param activity intance activity
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void getListSetting(Activity activity){
         mListSetting=new ArrayList<>();
         mListSetting.add(new Setting(activity.getResources().getString(R.string.sell), R.drawable.ic_coffee_cup_on_hand));

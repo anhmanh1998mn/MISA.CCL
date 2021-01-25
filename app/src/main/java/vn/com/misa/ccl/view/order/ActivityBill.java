@@ -6,13 +6,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +23,16 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.BillAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.ActivityBillPresenter;
+import vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+
+/**
+‐ Mục đích Class thực hiện những công việc hiển thị chi tiết hóa đơn
+*
+‐ {@link ActivityBillPresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
 
 public class ActivityBill extends AppCompatActivity implements IActivityBill.IActivityBillView, View.OnClickListener {
 
@@ -31,7 +40,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
 
     private String ORDER_ID="ORDER_ID";
 
-    private TextView tvOrderID,tvTableName,tvCreatedAt,tvTotal,tvMoneyIn,tvMoneyOut,tvDialogTittle;
+    private TextView tvOrderID,tvTableName,tvCreatedAt,tvTotal,tvMoneyIn,tvMoneyOut,tvDialogTittle,tvMoneyOne,
+            tvMonetTwo,tvMoneyFour,tvMonetFive;
 
     private RecyclerView rcvListOrderInfomation;
 
@@ -47,6 +57,11 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
 
     private ConstraintLayout clBill;
 
+    private ImageView ivBackKeyboard;
+
+    private TextView tvResultCaculate,tvItemSeven,tvItemEight,tvItemNine,tvItemFour,tvItemFive,tvItemSix,tvItemClear,
+            tvItemOne,tvItemTwo,tvItemThree,tvItemDot,tvItemZero,tvItemZeroo,tvSuccess;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +76,21 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         onViewClickListener();
     }
 
+    /**
+     * Mục đích method thực hiện những công việc khởi tạo actionBar
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void initActionBar() {
         mHeaderBill=findViewById(R.id.tbBill);
         setSupportActionBar(mHeaderBill);
     }
 
+    /**
+     * Mục đích method thực hiện những công việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void initView(){
         tvOrderID=findViewById(R.id.tvOrderID);
         tvTableName=findViewById(R.id.tvTableName);
@@ -77,6 +102,11 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         btnSuccess=findViewById(R.id.btnSuccess);
     }
 
+    /**
+     * Mục đích method thực hiện những công việc lấy mã order và gọi model lấy chi tiết order theo mã order
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void getOrderDetail(){
         Intent intent=getIntent();
 //        Log.d("bbb",intent.getIntExtra(ORDER_ID,-1)+"");
@@ -84,6 +114,13 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         mActivityBillPresenter.getOrderDetail(this,intent.getIntExtra(ORDER_ID,-1));
     }
 
+    /**
+     * Mục đích method thực hiện những công việc nhận danh sách orderDetail và hiển thị kết quả lên view
+     *
+     * @param listOrderDetail Danh sách orderDetail
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
     public void getOrderDetailSuccess(List<OrderDetail> listOrderDetail) {
         mListOrderDetail=listOrderDetail;
@@ -98,25 +135,175 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         tvCreatedAt.setText(mListOrderDetail.get(0).getmOrder().getCreatedAt());
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý hiển thị kết quả nhập trên máy tính và hiên thị lên view
+     *
+     * @param result số tiền nhận từ người dùng
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    @Override
+    public void resultEnterProcessSuccess(String result) {
+        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+        tvResultCaculate.setText(result);
+        tvMoneyIn.setText(decimalFormat.format(Integer.parseInt(result)));
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý tiền thừa từ presenter và hiển thị lên view
+     *
+     * @param moneyOut Tiền thừa trả lại khách
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    @Override
+    public void resultMoneyOutSuccess(String moneyOut) {
+        mBillCaculate.dismiss();
+        tvMoneyOut.setText((moneyOut));
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý thất bại và hiển thị thông báo cho người dùng
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
     public void onFailed() {
         Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Mục đích method thực hiện lắng nghe xự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void onViewClickListener(){
         tvMoneyIn.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện xử lý công việc theo vew được click
+     *
+     * @param view view
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    public void onClick(View view) {
+        switch (view.getId()){
             case R.id.tvMoneyIn:{
                 showBillCaculate();
+                break;
+            }
+            case R.id.tvMoneyOne:{
+                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
+                tvMoneyOut.setText(decimalFormat.format(10000));
+                mBillCaculate.dismiss();
+                break;
+            }
+            case R.id.tvMonetTwo:{
+                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
+                tvMoneyOut.setText(decimalFormat.format(30000));
+                mBillCaculate.dismiss();
+                break;
+            }
+            case R.id.tvMoneyFour:{
+                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
+                tvMoneyOut.setText(decimalFormat.format(40000));
+                mBillCaculate.dismiss();
+                break;
+            }
+            case R.id.tvMonetFive:{
+                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
+                tvMoneyOut.setText(decimalFormat.format(50000));
+                mBillCaculate.dismiss();
+                break;
+            }
+            case R.id.tvItemSeven:{
+                processCaculate(tvItemSeven.getText().toString());
+                break;
+            }
+            case R.id.tvItemEight:{
+                processCaculate(tvItemEight.getText().toString());
+                break;
+            }
+            case R.id.tvItemNine:{
+                processCaculate(tvItemNine.getText().toString());
+                break;
+            }
+            case R.id.ivBackKeyboard:{
+                processCaculate("");
+                break;
+            }
+            case R.id.tvItemFour:{
+                processCaculate(tvItemFour.getText().toString());
+                break;
+            }
+            case R.id.tvItemFive:{
+                processCaculate(tvItemFive.getText().toString());
+                break;
+            }
+            case R.id.tvItemSix:{
+                processCaculate(tvItemSix.getText().toString());
+                break;
+            }
+            case R.id.tvItemClear:{
+                processCaculate(tvItemClear.getText().toString());
+                break;
+            }
+            case R.id.tvItemOne:{
+                processCaculate(tvItemOne.getText().toString());
+                break;
+            }
+            case R.id.tvItemTwo:{
+                processCaculate(tvItemTwo.getText().toString());
+                break;
+            }
+            case R.id.tvItemThree:{
+                processCaculate(tvItemThree.getText().toString());
+                break;
+            }
+            case R.id.tvItemDot:{
+                processCaculate(tvItemDot.getText().toString());
+                break;
+            }
+            case R.id.tvItemZero:{
+                processCaculate(tvItemZero.getText().toString());
+                break;
+            }
+            case R.id.tvItemZeroo:{
+                processCaculate(tvItemZeroo.getText().toString());
+                break;
+            }
+            case R.id.tvSuccess:{
+                processCaculate(tvSuccess.getText().toString());
                 break;
             }
         }
     }
 
+    /**
+     * Mục đích method thực hiện gọi presenter xử lý kết quả thao tác trên máy tính
+     *
+     * @param nameClick value button click
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    private void processCaculate(String nameClick){
+        mActivityBillPresenter=new ActivityBillPresenter(this);
+        mActivityBillPresenter.processCaculator(this,tvResultCaculate.getText().toString().trim(),
+                nameClick,mListOrderDetail.get(0).getmOrder().getTotalMoney());
+    }
+
+    /**
+     * Mục đích method thực hiện hiển thị dialog máy tính
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void showBillCaculate() {
         mBillCaculate=new Dialog(this);
         mBillCaculate.setContentView(R.layout.dialog_bill_caculate);
@@ -125,10 +312,77 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         clBill.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
         clBill.getLayoutParams().height= AndroidDeviceHelper.getHeightScreen(this)*10/18;
         clBill.requestLayout();
+        showSuggestMoney();
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view trong dialog
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void initViewDialog() {
-        tvDialogTittle=mBillCaculate.findViewById(R.id.tvDialogTittle);
+        tvDialogTittle=mBillCaculate.findViewById(R.id.tvResultCaculate);
         clBill=mBillCaculate.findViewById(R.id.clBill);
+        tvMoneyOne=mBillCaculate.findViewById(R.id.tvMoneyOne);
+        tvMonetTwo=mBillCaculate.findViewById(R.id.tvMonetTwo);
+        tvMoneyFour=mBillCaculate.findViewById(R.id.tvMoneyFour);
+        tvMonetFive=mBillCaculate.findViewById(R.id.tvMonetFive);
+        tvResultCaculate=mBillCaculate.findViewById(R.id.tvResultCaculate);
+        tvItemSeven=mBillCaculate.findViewById(R.id.tvItemSeven);
+        tvItemEight=mBillCaculate.findViewById(R.id.tvItemEight);
+        tvItemNine=mBillCaculate.findViewById(R.id.tvItemNine);
+        ivBackKeyboard=mBillCaculate.findViewById(R.id.ivBackKeyboard);
+        tvItemFour=mBillCaculate.findViewById(R.id.tvItemFour);
+        tvItemSix=mBillCaculate.findViewById(R.id.tvItemSix);
+        tvItemFive=mBillCaculate.findViewById(R.id.tvItemFive);
+        tvItemClear=mBillCaculate.findViewById(R.id.tvItemClear);
+        tvItemOne=mBillCaculate.findViewById(R.id.tvItemOne);
+        tvItemTwo=mBillCaculate.findViewById(R.id.tvItemTwo);
+        tvItemThree=mBillCaculate.findViewById(R.id.tvItemThree);
+        tvItemDot=mBillCaculate.findViewById(R.id.tvItemDot);
+        tvItemZero=mBillCaculate.findViewById(R.id.tvItemZero);
+        tvItemZeroo=mBillCaculate.findViewById(R.id.tvItemZeroo);
+        tvSuccess=mBillCaculate.findViewById(R.id.tvSuccess);
+        onViewDialogClickListener();
+    }
+
+    /**
+     * Mục đích method thực hiện lắng nghe xự kiện click view trong dialog
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    private void onViewDialogClickListener() {
+        tvMoneyOne.setOnClickListener(this);
+        tvMonetTwo.setOnClickListener(this);
+        tvMoneyFour.setOnClickListener(this);
+        tvMonetFive.setOnClickListener(this);
+        tvItemSeven.setOnClickListener(this);
+        tvItemEight.setOnClickListener(this);
+        tvItemNine.setOnClickListener(this);
+        ivBackKeyboard.setOnClickListener(this);
+        tvItemFour.setOnClickListener(this);
+        tvItemFive.setOnClickListener(this);
+        tvItemSix.setOnClickListener(this);
+        tvItemClear.setOnClickListener(this);
+        tvItemOne.setOnClickListener(this);
+        tvItemTwo.setOnClickListener(this);
+        tvItemThree.setOnClickListener(this);
+        tvItemDot.setOnClickListener(this);
+        tvItemZero.setOnClickListener(this);
+        tvItemZeroo.setOnClickListener(this);
+        tvSuccess.setOnClickListener(this);
+    }
+
+    /**
+     * Mục đích method thực hiện việc hiển thị số tiền gợi ý
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    private void showSuggestMoney(){
+        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+        tvMoneyOne.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
+        tvMonetTwo.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
+        tvMoneyFour.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
+        tvMonetFive.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
     }
 }

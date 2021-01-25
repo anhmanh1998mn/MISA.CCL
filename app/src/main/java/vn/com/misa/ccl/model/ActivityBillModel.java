@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,14 @@ import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
+
+/**
+‐ Mục đích Class thực hiện việc xử lý các công việc trong ActivityBill
+*
+‐ {@link vn.com.misa.ccl.presenter.ActivityBillPresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
 
 public class ActivityBillModel {
 
@@ -28,6 +37,16 @@ public class ActivityBillModel {
 
     private List<OrderDetail> mListOrderDetaill;
 
+    private String resultNumberEnter="0";
+
+    /**
+     * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
+     *
+     * @param activity instance activity
+     * @param orderID Mã order
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void getOrderDetail(Activity activity,int orderID){
         mListOrderDetaill=new ArrayList<>();
         mSqLiteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
@@ -98,8 +117,135 @@ public class ActivityBillModel {
         mIActivityBillModel.onFailed();
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý tiền thừa và tiền khách đưa trên máy tính và gửi kết quả về presenter
+     *
+     * @param activity instace activity
+     * @param  numberEnter Giá trị hiển thị khi người dùng click button trên máy tính
+     * @param amount Tổng tiền Order
+     * @param nameClick Số mà người dùng chọn
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
+    public void processCaculator(Activity activity,String numberEnter,String nameClick,float amount){
+        try {
+            switch (nameClick){
+                case "C":{
+                    resultNumberEnter="0";
+                    mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                    break;
+                }
+                case "":{
+                    if(numberEnter.equals("0")||numberEnter.length()==1){
+                        resultNumberEnter="0";
+                        mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                        return;
+                    }
+                    resultNumberEnter=(numberEnter.substring(0,numberEnter.length()-1));
+                    mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                    break;
+                }
+                case "7":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "8":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "9":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "4":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "5":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "6":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "1":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "2":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "3":{
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "0":{
+                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
+                        resultNumberEnter=(nameClick);
+                        mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                        return;
+                    }
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case "000":{
+                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
+                        resultNumberEnter="0";
+                        mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                        return;
+                    }
+                    checkNumberCaculate(numberEnter,nameClick);
+                    break;
+                }
+                case ",":{
+
+                    break;
+                }
+                case "ĐỒNG Ý":{
+                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                    mIActivityBillModel.resultSuccess(decimalFormat.format(Float.parseFloat(numberEnter)-amount));
+                    break;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Mục đích method thực hiện việc kiểm tra khi người dùng chọn số trong máy tính
+     *
+     * @param numberEnter Giá trị có trong textview
+     * @param  nameItemClick số mà người dùng chọn
+     *
+     * @created_by cvmanh on 01/21/2021
+     */
+    private void checkNumberCaculate(String numberEnter,String nameItemClick){
+        try {
+            if(numberEnter.startsWith("0")){
+                resultNumberEnter=(nameItemClick);
+                mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                return;
+            }
+            if(numberEnter.length()<9){
+                resultNumberEnter=numberEnter+(nameItemClick);
+                mIActivityBillModel.resultTextEnter(resultNumberEnter);
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public interface IActivityBillModel{
         public void getOrderDetail(List<OrderDetail> listOrderDetail);
+
+        public void resultTextEnter(String moneyIn);
+
+        public void resultSuccess(String amount);
 
         public void onFailed();
     }

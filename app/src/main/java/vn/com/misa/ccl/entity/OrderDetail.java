@@ -1,5 +1,16 @@
 package vn.com.misa.ccl.entity;
 
+import android.app.Activity;
+
+/**
+‐ Mục đích Class thực hiện việc khai báo OrderDetail
+*
+‐ {@link vn.com.misa.ccl.adapter.OrderAdapter}
+‐ {@link vn.com.misa.ccl.adapter.BillAdapter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class OrderDetail {
     private int mOrderDetailID;
 

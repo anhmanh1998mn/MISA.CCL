@@ -3,7 +3,7 @@ package vn.com.misa.ccl.entity;
 import java.io.Serializable;
 
 /**
- * ‐ Mục đích Class thực hiện khai báo đối tượng Color
+ * ‐ Mục đích Class thực hiện khai báo Color
  * <p>
  * ‐ @created_by cvmanh on 01/13/2021
  */

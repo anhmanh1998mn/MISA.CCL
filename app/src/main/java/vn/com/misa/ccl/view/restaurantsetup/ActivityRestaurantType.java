@@ -193,7 +193,6 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
 
     }
 
-
     /**
      * Mục đích method thực hiện nhận mã loại cửa hàng
      *

@@ -1,5 +1,15 @@
 package vn.com.misa.ccl.entity;
 
+import android.app.Activity;
+
+/**
+‐ Mục đích Class thực hiện những việc khai báo Setting
+*
+‐ {@link vn.com.misa.ccl.adapter.SettingAdapter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class Setting {
     private String settingName;
 

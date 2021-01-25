@@ -128,6 +128,11 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
        }
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả khởi tạo menu thành công và tắt dialog
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void initMenuSuccess() {
         dialogSetupSuccess.dismiss();
@@ -192,6 +197,11 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc hiển thị dialog thông báo khởi tạo menu thành công
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void showDialogSetupSuccess(){
          dialogSetupSuccess=new Dialog(this);
         dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);

@@ -19,7 +19,6 @@ import vn.com.misa.ccl.util.DatabaseInfomation;
 ‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityFoodUpdate
 *
 ‐ {@link vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter}
-‐ {@link DatabaseInfomation}
 *
 ‐ @created_by cvmanh on 01/19/2021
 */

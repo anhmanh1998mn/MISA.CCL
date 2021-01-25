@@ -9,11 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,6 +25,14 @@ import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
 import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
+
+/**
+‐ Mục đích Class thực hiện những công việc chứa các fragment quản lý cửa hàng
+*
+‐ {@link FragmentListOrder}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
 
 public class ActivityRestaurantManage extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantManage.IActivityManageView {
 
@@ -56,6 +66,11 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         loadListSetting();
     }
 
+    /**
+     * Mục đích method thực hiện những công việc khởi tạo các view
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void initView() {
         dlRestaurantManage=findViewById(R.id.dlRestaurantManage);
         tvMenu=findViewById(R.id.tvMenu);
@@ -65,19 +80,36 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         tvAdd=findViewById(R.id.tvAdd);
     }
 
+    /**
+     * Mục đích method thực hiện những công việc khởi tạo actionbar
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void initActionbar() {
         tbRestaurantManage=findViewById(R.id.tbRestaurantManage);
         setSupportActionBar(tbRestaurantManage);
     }
 
+    /**
+     * Mục đích method thực hiện những công việc lắng nghe xự kiện click view từ người dùng
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void clickViewListener(){
         tvMenu.setOnClickListener(this);
         tvAdd.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện những công việc tương ứng với xự kiện click từ người dùng
+     *
+     * @param view view
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    public void onClick(View view) {
+        switch (view.getId()){
             case R.id.tvMenu:{
                 dlRestaurantManage.openDrawer(GravityCompat.START);
                 break;
@@ -88,17 +120,39 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo fragment
+     *
+     * @param fragment fragment
+     * @see #onCreate
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void addFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frmRestaurantManage,fragment);
         fragmentTransaction.commit();
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi presenter lấy danh sách setting
+     *
+     * @return giải thích hàm này trả về
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void loadListSetting(){
         mActivityManage=new ActivityRestaurantManagePresenter(this);
         mActivityManage.getListSetting(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận danh sách setting từ presenter và hiển thị lên recycleView
+     *
+     * @param listSetting Danh sách setting
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
     public void getListSettingSuccess(List<Setting> listSetting) {
         mSettingAdapter=new SettingAdapter(this,R.layout.item_setting,listSetting);
@@ -107,8 +161,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         mSettingAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý lỗi và hiển thị thông báo cho người dùng
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
     public void onFailed() {
-
+        Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 }

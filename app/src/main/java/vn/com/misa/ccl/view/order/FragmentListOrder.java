@@ -1,5 +1,6 @@
 package vn.com.misa.ccl.view.order;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -26,6 +27,14 @@ import vn.com.misa.ccl.adapter.OrderAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.FragmentListOrderPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+
+/**
+‐ Mục đích Class thực hiện những công việc hiển thị danh sách các order chưa thu tiền
+*
+‐ {@link FragmentListOrderPresenter}
+*
+‐ @created_by cvmanh on 01/26/2021
+*/
 
 public class FragmentListOrder extends Fragment implements View.OnClickListener, IFragmentListOrder.IFragmentListOrderView,
         OrderAdapter.ICLickButtonRemove {
@@ -62,6 +71,11 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         return view;
     }
 
+    /**
+     * Mục đích method thực hiện việc kiể tra số lượng danh sách order để ẩn hiện các view tương ứng
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void checkListOrderSize() {
         if(mListOrderDetail.size()<1){
             tvAddFood.setVisibility(View.VISIBLE);
@@ -76,6 +90,13 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         llListOrder.setBackgroundColor(getResources().getColor(R.color.grey_lighh));
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @param view view
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void initView(View view) {
         ivLogo=view.findViewById(R.id.ivLogo);
         tvAddFood=view.findViewById(R.id.tvAddFood);
@@ -84,6 +105,11 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         llListOrder=view.findViewById(R.id.llListOrder);
     }
 
+    /**
+     * Mục đích method thực hiện việc lắng nghe xự kiện click từ người dùng
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void viewClickListener(){
         tvAddFood.setOnClickListener(this);
     }
@@ -93,9 +119,16 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         mFragmentListOrderPresenter.getListOrder(getActivity());
     }
 
+    /**
+     * Mục đích method thực hiện công việc theo view click
+     *
+     * @param view view
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    public void onClick(View view) {
+        switch (view.getId()){
             case R.id.tvAddFood:{
                 startActivity(new Intent(getContext(),ActivityOrder.class));
                 break;
@@ -103,6 +136,13 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Mục đích method thực hiện nhận danh sách order và hiển thị lên recycleView
+     *
+     * @param listOrderDetail Danh sách orderDetail
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void getListOrderSuccess(List<OrderDetail> listOrderDetail) {
         mListOrderDetail=listOrderDetail;
@@ -117,17 +157,34 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
 //        llListOrder.setBackgroundColor(getResources().getColor(R.color.grey_lighh));
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả xóa order thành công và tắt dialog
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void removeOrderSuccess() {
         getListOrder();
         mDialogConfirmRemove.dismiss();
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả xóa order thất bại
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void onFailed() {
         Toast.makeText(getContext(), getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Mục đích method thực hiện việc nhân mà order từ adapter và gọi presenter xóa order
+     *
+     * @param orderID Mã order
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     public void setOnClickButtoRemove(int orderID) {
         mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);

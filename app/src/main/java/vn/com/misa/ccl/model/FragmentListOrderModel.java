@@ -16,6 +16,14 @@ import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
+/**
+‐ Mục đích Class thực hiện việc xử lý các công việc của FragmentListOrder
+*
+‐ {@link vn.com.misa.ccl.presenter.FragmentListOrderPresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class FragmentListOrderModel {
     private IFragmentListOrderModel mIFragmentListOrderModel;
 
@@ -27,6 +35,13 @@ public class FragmentListOrderModel {
 
     private List<OrderDetail> mListOrderDetail;
 
+    /**
+     * Mục đích method thực hiện việc lấy danh sách Order từ database rồi gửi kết quả về presenter
+     *
+     * @param activity instance activity
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void getListOrder(Activity activity){
         mSqLiteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
         mListOrderDetail=new ArrayList<>();
@@ -94,6 +109,14 @@ public class FragmentListOrderModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xóa order theo mã order trong database và gửi kết quả về presenter
+     *
+     * @param activity instance activity
+     * @param  orderID mã order
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void removeItemOrder(Activity activity,int orderID){
         mSqLiteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
         long resulOrderDetail=mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDER_DETAIL,

@@ -6,13 +6,13 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvDialogTittle"
+        android:textColor="@color/black"
+        android:id="@+id/tvResultCaculate"
         style="@style/Theme.TextWhiteSmall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_lare"
         android:layout_marginLeft="8dp"
         android:gravity="right|center"
-        android:text="@string/enter_table_name"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:background="@color/grey_bill"
-        app:layout_constraintTop_toBottomOf="@+id/tvDialogTittle">
+        app:layout_constraintTop_toBottomOf="@+id/tvResultCaculate">
 
         <LinearLayout
             android:id="@+id/llRowTwo"

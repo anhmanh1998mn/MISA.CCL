@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvDialogTittle"
+            android:id="@+id/tvResultCaculate"
             android:textSize="20sp"
             style="@style/Theme.TextWhiteSmall"
             android:layout_width="match_parent"

@@ -17,6 +17,14 @@ import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
+/**
+‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityOrderModel
+*
+‐ {@link vn.com.misa.ccl.presenter.ActivityOrderPresenter}
+*
+‐ @created_by cvmanh on 01/25/2021
+*/
+
 public class ActivityOrderModel {
 
     public ActivityOrderModel(IActivityOrderModel mIActivityOrderModel) {
@@ -37,6 +45,13 @@ public class ActivityOrderModel {
 
     private int CLICK_BUTTON_MONEY=2;
 
+    /**
+     * Mục đích method thực hiện việc lấy danh sách các món ăn có trong menu và gửi kết quả về presenter
+     *
+     * @param activity instance activity
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void getListMenu(Activity activity){
         mListMenu=new ArrayList<>();
         mSqliteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
@@ -76,6 +91,14 @@ public class ActivityOrderModel {
         mIActivityOrderModel.onFailed();
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý kết quả hiển thị trên máy tính và gửi kết quả về presenter
+     *
+     * @param numberEnter Giá trị hiển thị kết quả xử lý
+     * @param textInput  Button mà người dùng click trên máy tính
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void getResultCaculate(String textInput,String numberEnter){
         switch (textInput){
             case "C":{
@@ -160,14 +183,24 @@ public class ActivityOrderModel {
             }
         }
     }
+
+
+    /**
+     * Mục đích method thực hiện việc kiểm tra nếu người dùng click vào các số
+     *
+     * @param numberEnter Kết quả hiển thị trên view
+     * @param  nameItemClick Số mà người dùng click
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private void checkNumberCaculate(String numberEnter,String nameItemClick){
         try {
-            if(numberEnter.startsWith("0")){
+            if(numberEnter.startsWith("0")){ // Text bắt đầu bằng 0
                 resultNumberEnter=(nameItemClick);
                 mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
                 return;
             }
-            if(numberEnter.length()<9){
+            if(numberEnter.length()<9){ // Độ dài chuỗi < 9
                 resultNumberEnter=numberEnter+(nameItemClick);
                 mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
                 return;
@@ -177,6 +210,18 @@ public class ActivityOrderModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc thêm mới môt order và gửi kết quả về presenter
+     *
+     * @param activity instace activity
+     * @param  listProduct Danh sách Product
+     * @param tableName Tên bàn
+     * @param totalPeople Số lượng người
+     * @param amount Tổng tiền đơn hàng
+     * @param typeClick Loại button clcik: 1: Thực hiện Lưu . 2: Thực hiện thu iền
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount,int typeClick){
         mSqliteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
         if(tableName.equals("")){
@@ -220,6 +265,13 @@ public class ActivityOrderModel {
         mIActivityOrderModel.onFailed();
     }
 
+    /**
+     * Mục đích method thực hiện việc lấy ngày tháng năm hiện tại
+     *
+     * @return trả về ngày tháng năm hiện tại
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     private String getDate(){
         Calendar calendar=Calendar.getInstance();
         int mYear=calendar.get(Calendar.YEAR);

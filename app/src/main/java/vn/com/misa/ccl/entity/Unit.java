@@ -3,7 +3,7 @@ package vn.com.misa.ccl.entity;
 import java.io.Serializable;
 
 /**
- * ‐ Mục đích Class thực hiện khai báo đối tượng Unit
+ * ‐ Mục đích Class thực hiện khai báo Unit
  * <p>
  * ‐ {@link vn.com.misa.ccl.adapter.UnitAdapter}
  * <p>

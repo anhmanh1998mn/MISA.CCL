@@ -19,6 +19,15 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.view.order.ActivityBill;
 
+/**
+ ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
+ *
+ ‐ {@link vn.com.misa.ccl.view.order.ActivityOrder}
+ ‐ {@link OrderDetail}
+ *
+ ‐ @created_by cvmanh on 01/25/2021
+ */
+
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
     private Activity mContext;

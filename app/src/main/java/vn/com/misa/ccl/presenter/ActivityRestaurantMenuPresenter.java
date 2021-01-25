@@ -56,6 +56,11 @@ public class ActivityRestaurantMenuPresenter implements IActivityRestaurantMenu.
         mIActivityRestaurantMenuView.loadListProductSuccess(listProductCategory);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả khởi tạo MyMenu thành công và gửi kết quả về view
+     *
+     * @created_by cvmanh on 01/25/2021
+     */
     @Override
     public void initMenuSuccess() {
         mIActivityRestaurantMenuView.initMenuSuccess();

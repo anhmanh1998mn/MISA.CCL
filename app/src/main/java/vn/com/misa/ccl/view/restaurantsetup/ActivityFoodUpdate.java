@@ -108,6 +108,11 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * Mục đích method thực hiện tạo sharePreference
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -195,6 +200,11 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc hiển thị máy tính
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
     private void showDialogCaculating(){
         try {
             Dialog dialog=new Dialog(this);

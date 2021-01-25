@@ -14,7 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Setting;
+
+/**
+ ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
+ *
+ ‐ {@link vn.com.misa.ccl.view.manage.ActivityRestaurantManage}
+ ‐ {@link Setting}
+ *
+ ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHolder> {
 
@@ -39,7 +49,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(position ==3||position ==6) {
+        if(position ==3||position ==6) { //3: Item là Thiết lập, 6: Item là trợ giúp
             holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
             holder.line.setVisibility(View.VISIBLE);
             holder.tvSettingName.setTextSize(13);
