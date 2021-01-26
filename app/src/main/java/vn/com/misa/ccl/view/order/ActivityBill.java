@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.BillAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.ActivityBillPresenter;
-import vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**
@@ -59,6 +57,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
 
     private ImageView ivBackKeyboard;
 
+    private int mOrderID;
+
     private TextView tvResultCaculate,tvItemSeven,tvItemEight,tvItemNine,tvItemFour,tvItemFive,tvItemSix,tvItemClear,
             tvItemOne,tvItemTwo,tvItemThree,tvItemDot,tvItemZero,tvItemZeroo,tvSuccess;
 
@@ -82,8 +82,12 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void initActionBar() {
-        mHeaderBill=findViewById(R.id.tbBill);
-        setSupportActionBar(mHeaderBill);
+        try {
+            mHeaderBill=findViewById(R.id.tbBill);
+            setSupportActionBar(mHeaderBill);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -92,14 +96,18 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void initView(){
-        tvOrderID=findViewById(R.id.tvOrderID);
-        tvTableName=findViewById(R.id.tvTableName);
-        tvCreatedAt=findViewById(R.id.tvCreatedAt);
-        rcvListOrderInfomation=findViewById(R.id.rcvListOrderInfomation);
-        tvTotal=findViewById(R.id.tvTotal);
-        tvMoneyIn=findViewById(R.id.tvMoneyIn);
-        tvMoneyOut=findViewById(R.id.tvMoneyOut);
-        btnSuccess=findViewById(R.id.btnSuccess);
+        try {
+            tvOrderID=findViewById(R.id.tvOrderID);
+            tvTableName=findViewById(R.id.tvTableName);
+            tvCreatedAt=findViewById(R.id.tvCreatedAt);
+            rcvListOrderInfomation=findViewById(R.id.rcvListOrderInfomation);
+            tvTotal=findViewById(R.id.tvTotal);
+            tvMoneyIn=findViewById(R.id.tvMoneyIn);
+            tvMoneyOut=findViewById(R.id.tvMoneyOut);
+            btnSuccess=findViewById(R.id.btnSuccess);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -108,10 +116,14 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void getOrderDetail(){
-        Intent intent=getIntent();
-//        Log.d("bbb",intent.getIntExtra(ORDER_ID,-1)+"");
-        mActivityBillPresenter=new ActivityBillPresenter(this);
-        mActivityBillPresenter.getOrderDetail(this,intent.getIntExtra(ORDER_ID,-1));
+        try {
+            Intent intent=getIntent();
+            mActivityBillPresenter=new ActivityBillPresenter(this);
+            mActivityBillPresenter.getOrderDetail(this,intent.getIntExtra(ORDER_ID,-1));
+            mOrderID =intent.getIntExtra(ORDER_ID,-1);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -123,16 +135,20 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      */
     @Override
     public void getOrderDetailSuccess(List<OrderDetail> listOrderDetail) {
-        mListOrderDetail=listOrderDetail;
-        mBillAdapter=new BillAdapter(this,R.layout.item_bill,mListOrderDetail);
-        rcvListOrderInfomation.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvListOrderInfomation.setAdapter(mBillAdapter);
-        mBillAdapter.notifyDataSetChanged();
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        tvTotal.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()));
-        tvTableName.setText(mListOrderDetail.get(0).getmOrder().getTableName());
-        tvOrderID.setText(getResources().getString(R.string.number)+"  "+ mListOrderDetail.get(0).getmOrder().getOrderId());
-        tvCreatedAt.setText(mListOrderDetail.get(0).getmOrder().getCreatedAt());
+        try {
+            mListOrderDetail=listOrderDetail;
+            mBillAdapter=new BillAdapter(this,R.layout.item_bill,mListOrderDetail);
+            rcvListOrderInfomation.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            rcvListOrderInfomation.setAdapter(mBillAdapter);
+            mBillAdapter.notifyDataSetChanged();
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            tvTotal.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()));
+            tvTableName.setText(mListOrderDetail.get(0).getmOrder().getTableName());
+            tvOrderID.setText(getResources().getString(R.string.number)+"  "+ mListOrderDetail.get(0).getmOrder().getOrderId());
+            tvCreatedAt.setText(mListOrderDetail.get(0).getmOrder().getCreatedAt());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -144,9 +160,13 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      */
     @Override
     public void resultEnterProcessSuccess(String result) {
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        tvResultCaculate.setText(result);
-        tvMoneyIn.setText(decimalFormat.format(Integer.parseInt(result)));
+        try {
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            tvResultCaculate.setText(result);
+            tvMoneyIn.setText(decimalFormat.format(Integer.parseInt(result)));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -158,8 +178,23 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      */
     @Override
     public void resultMoneyOutSuccess(String moneyOut) {
-        mBillCaculate.dismiss();
-        tvMoneyOut.setText((moneyOut));
+        try {
+            mBillCaculate.dismiss();
+            tvMoneyOut.setText((moneyOut));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateOrderStatusSuccess() {
+        try {
+            startActivity(new Intent(this,ActivityOrder.class));
+            finish();
+            Toast.makeText(this, getResources().getString(R.string.update_status), Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -178,7 +213,12 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void onViewClickListener(){
-        tvMoneyIn.setOnClickListener(this);
+        try {
+            tvMoneyIn.setOnClickListener(this);
+            btnSuccess.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -190,99 +230,108 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvMoneyIn:{
-                showBillCaculate();
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvMoneyIn:{
+                    showBillCaculate();
+                    break;
+                }
+                case R.id.tvMoneyOne:{
+                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
+                    tvMoneyOut.setText(decimalFormat.format(10000));
+                    mBillCaculate.dismiss();
+                    break;
+                }
+                case R.id.tvMonetTwo:{
+                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
+                    tvMoneyOut.setText(decimalFormat.format(30000));
+                    mBillCaculate.dismiss();
+                    break;
+                }
+                case R.id.tvMoneyFour:{
+                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
+                    tvMoneyOut.setText(decimalFormat.format(40000));
+                    mBillCaculate.dismiss();
+                    break;
+                }
+                case R.id.tvMonetFive:{
+                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
+                    tvMoneyOut.setText(decimalFormat.format(50000));
+                    mBillCaculate.dismiss();
+                    break;
+                }
+                case R.id.tvItemSeven:{
+                    processCaculate(tvItemSeven.getText().toString());
+                    break;
+                }
+                case R.id.tvItemEight:{
+                    processCaculate(tvItemEight.getText().toString());
+                    break;
+                }
+                case R.id.tvItemNine:{
+                    processCaculate(tvItemNine.getText().toString());
+                    break;
+                }
+                case R.id.ivBackKeyboard:{
+                    processCaculate("");
+                    break;
+                }
+                case R.id.tvItemFour:{
+                    processCaculate(tvItemFour.getText().toString());
+                    break;
+                }
+                case R.id.tvItemFive:{
+                    processCaculate(tvItemFive.getText().toString());
+                    break;
+                }
+                case R.id.tvItemSix:{
+                    processCaculate(tvItemSix.getText().toString());
+                    break;
+                }
+                case R.id.tvItemClear:{
+                    processCaculate(tvItemClear.getText().toString());
+                    break;
+                }
+                case R.id.tvItemOne:{
+                    processCaculate(tvItemOne.getText().toString());
+                    break;
+                }
+                case R.id.tvItemTwo:{
+                    processCaculate(tvItemTwo.getText().toString());
+                    break;
+                }
+                case R.id.tvItemThree:{
+                    processCaculate(tvItemThree.getText().toString());
+                    break;
+                }
+                case R.id.tvItemDot:{
+                    processCaculate(tvItemDot.getText().toString());
+                    break;
+                }
+                case R.id.tvItemZero:{
+                    processCaculate(tvItemZero.getText().toString());
+                    break;
+                }
+                case R.id.tvItemZeroo:{
+                    processCaculate(tvItemZeroo.getText().toString());
+                    break;
+                }
+                case R.id.tvSuccess:{
+                    processCaculate(tvSuccess.getText().toString());
+                    break;
+                }
+                case R.id.btnSuccess:{
+                    mActivityBillPresenter=new ActivityBillPresenter(this);
+                    mActivityBillPresenter.updateOrderStatus(this,mOrderID);
+                    break;
+                }
             }
-            case R.id.tvMoneyOne:{
-                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
-                tvMoneyOut.setText(decimalFormat.format(10000));
-                mBillCaculate.dismiss();
-                break;
-            }
-            case R.id.tvMonetTwo:{
-                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
-                tvMoneyOut.setText(decimalFormat.format(30000));
-                mBillCaculate.dismiss();
-                break;
-            }
-            case R.id.tvMoneyFour:{
-                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
-                tvMoneyOut.setText(decimalFormat.format(40000));
-                mBillCaculate.dismiss();
-                break;
-            }
-            case R.id.tvMonetFive:{
-                DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-                tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
-                tvMoneyOut.setText(decimalFormat.format(50000));
-                mBillCaculate.dismiss();
-                break;
-            }
-            case R.id.tvItemSeven:{
-                processCaculate(tvItemSeven.getText().toString());
-                break;
-            }
-            case R.id.tvItemEight:{
-                processCaculate(tvItemEight.getText().toString());
-                break;
-            }
-            case R.id.tvItemNine:{
-                processCaculate(tvItemNine.getText().toString());
-                break;
-            }
-            case R.id.ivBackKeyboard:{
-                processCaculate("");
-                break;
-            }
-            case R.id.tvItemFour:{
-                processCaculate(tvItemFour.getText().toString());
-                break;
-            }
-            case R.id.tvItemFive:{
-                processCaculate(tvItemFive.getText().toString());
-                break;
-            }
-            case R.id.tvItemSix:{
-                processCaculate(tvItemSix.getText().toString());
-                break;
-            }
-            case R.id.tvItemClear:{
-                processCaculate(tvItemClear.getText().toString());
-                break;
-            }
-            case R.id.tvItemOne:{
-                processCaculate(tvItemOne.getText().toString());
-                break;
-            }
-            case R.id.tvItemTwo:{
-                processCaculate(tvItemTwo.getText().toString());
-                break;
-            }
-            case R.id.tvItemThree:{
-                processCaculate(tvItemThree.getText().toString());
-                break;
-            }
-            case R.id.tvItemDot:{
-                processCaculate(tvItemDot.getText().toString());
-                break;
-            }
-            case R.id.tvItemZero:{
-                processCaculate(tvItemZero.getText().toString());
-                break;
-            }
-            case R.id.tvItemZeroo:{
-                processCaculate(tvItemZeroo.getText().toString());
-                break;
-            }
-            case R.id.tvSuccess:{
-                processCaculate(tvSuccess.getText().toString());
-                break;
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -294,9 +343,13 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void processCaculate(String nameClick){
-        mActivityBillPresenter=new ActivityBillPresenter(this);
-        mActivityBillPresenter.processCaculator(this,tvResultCaculate.getText().toString().trim(),
-                nameClick,mListOrderDetail.get(0).getmOrder().getTotalMoney());
+       try {
+           mActivityBillPresenter=new ActivityBillPresenter(this);
+           mActivityBillPresenter.processCaculator(this,tvResultCaculate.getText().toString().trim(),
+                   nameClick,mListOrderDetail.get(0).getmOrder().getTotalMoney());
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     /**
@@ -305,14 +358,18 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void showBillCaculate() {
-        mBillCaculate=new Dialog(this);
-        mBillCaculate.setContentView(R.layout.dialog_bill_caculate);
-        mBillCaculate.show();
-        initViewDialog();
-        clBill.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
-        clBill.getLayoutParams().height= AndroidDeviceHelper.getHeightScreen(this)*10/18;
-        clBill.requestLayout();
-        showSuggestMoney();
+        try {
+            mBillCaculate=new Dialog(this);
+            mBillCaculate.setContentView(R.layout.dialog_bill_caculate);
+            mBillCaculate.show();
+            initViewDialog();
+            clBill.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
+            clBill.getLayoutParams().height= AndroidDeviceHelper.getHeightScreen(this)*10/18;
+            clBill.requestLayout();
+            showSuggestMoney();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -321,29 +378,33 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void initViewDialog() {
-        tvDialogTittle=mBillCaculate.findViewById(R.id.tvResultCaculate);
-        clBill=mBillCaculate.findViewById(R.id.clBill);
-        tvMoneyOne=mBillCaculate.findViewById(R.id.tvMoneyOne);
-        tvMonetTwo=mBillCaculate.findViewById(R.id.tvMonetTwo);
-        tvMoneyFour=mBillCaculate.findViewById(R.id.tvMoneyFour);
-        tvMonetFive=mBillCaculate.findViewById(R.id.tvMonetFive);
-        tvResultCaculate=mBillCaculate.findViewById(R.id.tvResultCaculate);
-        tvItemSeven=mBillCaculate.findViewById(R.id.tvItemSeven);
-        tvItemEight=mBillCaculate.findViewById(R.id.tvItemEight);
-        tvItemNine=mBillCaculate.findViewById(R.id.tvItemNine);
-        ivBackKeyboard=mBillCaculate.findViewById(R.id.ivBackKeyboard);
-        tvItemFour=mBillCaculate.findViewById(R.id.tvItemFour);
-        tvItemSix=mBillCaculate.findViewById(R.id.tvItemSix);
-        tvItemFive=mBillCaculate.findViewById(R.id.tvItemFive);
-        tvItemClear=mBillCaculate.findViewById(R.id.tvItemClear);
-        tvItemOne=mBillCaculate.findViewById(R.id.tvItemOne);
-        tvItemTwo=mBillCaculate.findViewById(R.id.tvItemTwo);
-        tvItemThree=mBillCaculate.findViewById(R.id.tvItemThree);
-        tvItemDot=mBillCaculate.findViewById(R.id.tvItemDot);
-        tvItemZero=mBillCaculate.findViewById(R.id.tvItemZero);
-        tvItemZeroo=mBillCaculate.findViewById(R.id.tvItemZeroo);
-        tvSuccess=mBillCaculate.findViewById(R.id.tvSuccess);
-        onViewDialogClickListener();
+        try {
+            tvDialogTittle=mBillCaculate.findViewById(R.id.tvResultCaculate);
+            clBill=mBillCaculate.findViewById(R.id.clBill);
+            tvMoneyOne=mBillCaculate.findViewById(R.id.tvMoneyOne);
+            tvMonetTwo=mBillCaculate.findViewById(R.id.tvMonetTwo);
+            tvMoneyFour=mBillCaculate.findViewById(R.id.tvMoneyFour);
+            tvMonetFive=mBillCaculate.findViewById(R.id.tvMonetFive);
+            tvResultCaculate=mBillCaculate.findViewById(R.id.tvResultCaculate);
+            tvItemSeven=mBillCaculate.findViewById(R.id.tvItemSeven);
+            tvItemEight=mBillCaculate.findViewById(R.id.tvItemEight);
+            tvItemNine=mBillCaculate.findViewById(R.id.tvItemNine);
+            ivBackKeyboard=mBillCaculate.findViewById(R.id.ivBackKeyboard);
+            tvItemFour=mBillCaculate.findViewById(R.id.tvItemFour);
+            tvItemSix=mBillCaculate.findViewById(R.id.tvItemSix);
+            tvItemFive=mBillCaculate.findViewById(R.id.tvItemFive);
+            tvItemClear=mBillCaculate.findViewById(R.id.tvItemClear);
+            tvItemOne=mBillCaculate.findViewById(R.id.tvItemOne);
+            tvItemTwo=mBillCaculate.findViewById(R.id.tvItemTwo);
+            tvItemThree=mBillCaculate.findViewById(R.id.tvItemThree);
+            tvItemDot=mBillCaculate.findViewById(R.id.tvItemDot);
+            tvItemZero=mBillCaculate.findViewById(R.id.tvItemZero);
+            tvItemZeroo=mBillCaculate.findViewById(R.id.tvItemZeroo);
+            tvSuccess=mBillCaculate.findViewById(R.id.tvSuccess);
+            onViewDialogClickListener();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -352,25 +413,29 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void onViewDialogClickListener() {
-        tvMoneyOne.setOnClickListener(this);
-        tvMonetTwo.setOnClickListener(this);
-        tvMoneyFour.setOnClickListener(this);
-        tvMonetFive.setOnClickListener(this);
-        tvItemSeven.setOnClickListener(this);
-        tvItemEight.setOnClickListener(this);
-        tvItemNine.setOnClickListener(this);
-        ivBackKeyboard.setOnClickListener(this);
-        tvItemFour.setOnClickListener(this);
-        tvItemFive.setOnClickListener(this);
-        tvItemSix.setOnClickListener(this);
-        tvItemClear.setOnClickListener(this);
-        tvItemOne.setOnClickListener(this);
-        tvItemTwo.setOnClickListener(this);
-        tvItemThree.setOnClickListener(this);
-        tvItemDot.setOnClickListener(this);
-        tvItemZero.setOnClickListener(this);
-        tvItemZeroo.setOnClickListener(this);
-        tvSuccess.setOnClickListener(this);
+        try {
+            tvMoneyOne.setOnClickListener(this);
+            tvMonetTwo.setOnClickListener(this);
+            tvMoneyFour.setOnClickListener(this);
+            tvMonetFive.setOnClickListener(this);
+            tvItemSeven.setOnClickListener(this);
+            tvItemEight.setOnClickListener(this);
+            tvItemNine.setOnClickListener(this);
+            ivBackKeyboard.setOnClickListener(this);
+            tvItemFour.setOnClickListener(this);
+            tvItemFive.setOnClickListener(this);
+            tvItemSix.setOnClickListener(this);
+            tvItemClear.setOnClickListener(this);
+            tvItemOne.setOnClickListener(this);
+            tvItemTwo.setOnClickListener(this);
+            tvItemThree.setOnClickListener(this);
+            tvItemDot.setOnClickListener(this);
+            tvItemZero.setOnClickListener(this);
+            tvItemZeroo.setOnClickListener(this);
+            tvSuccess.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -379,10 +444,14 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
      * @created_by cvmanh on 01/25/2021
      */
     private void showSuggestMoney(){
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        tvMoneyOne.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
-        tvMonetTwo.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
-        tvMoneyFour.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
-        tvMonetFive.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
+        try {
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            tvMoneyOne.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+10000));
+            tvMonetTwo.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+30000));
+            tvMoneyFour.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+40000));
+            tvMonetFive.setText(decimalFormat.format(mListOrderDetail.get(0).getmOrder().getTotalMoney()+50000));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -269,7 +269,7 @@ public class ActivityFoodUpdateModel {
                     break;
                 }
                 case "XONG":{
-                    resultCaculatorProcess(numberEnter);
+                    resultCaculatorProcessSuccess(numberEnter);
                     break;
                 }
             }
@@ -350,6 +350,42 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    private void resultCaculatorProcessSuccess(String textInput){
+        try {
+            addOperation(textInput);
+            addNumber(textInput);
+            if(mListOperation.size()<1){
+                mIResultActivityFoodUpdate.resultTextEnterSuccess(textInput);
+                return;
+            }
+            float result=0;
+            for(int i=0;i<(mListNumber.size()-1);i++){
+                switch (mListOperation.get(i)){
+                    case "+":{
+                        if(i==0){
+                            result=mListNumber.get(i)+mListNumber.get(i+1);
+                        }
+                        else {
+                            result=result+mListNumber.get(i+1);
+                        }
+                        break;
+                    }
+                    case "-":{
+                        if(i==0){
+                            result=mListNumber.get(i)-mListNumber.get(i+1);
+                        }
+                        else {
+                            result=result-mListNumber.get(i+1);
+                        }
+                    }
+                }
+            }
+            mIResultActivityFoodUpdate.resultTextEnterSuccess(String.valueOf(result));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Mục đích method thực hiện việc tách các phép tính +,- sau đó thêm vào mảng phép tính
      *
@@ -398,6 +434,36 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    public void removeItemProduct(int productID){
+        try {
+            for(int i=0;i< ActivityRestaurantMenuModel.mListProductCategory.size();i++){
+                if(ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID()==productID){
+                    ActivityRestaurantMenuModel.mListProductCategory.remove(i);
+                }
+            }
+            mIResultActivityFoodUpdate.removeItemProductSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        try {
+            for(int i=0;i<ActivityRestaurantMenuModel.mListProductCategory.size();i++){
+                if(ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID()==productId){
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductName(productName);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductPrice(productPrice);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductImage().setmProductImageID(imageID);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmUnit().setmUnitID(unitID);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmColor().setColorID(colorID);
+                }
+            }
+            mIResultActivityFoodUpdate.updateItemProductSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public interface IResultActivityFoodUpdate{
         public void loadListColorSuccess(List<Color> listColor);
 
@@ -406,6 +472,12 @@ public class ActivityFoodUpdateModel {
         public void loadCaculating(List<String> listCaculate);
 
         public void resultTextEnter(String resutText);
+
+        public void resultTextEnterSuccess(String resutText);
+
+        public void removeItemProductSuccess();
+
+        public void updateItemProductSuccess();
 
         public void onFailed();
     }

@@ -84,14 +84,18 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/25/2021
      */
     private void initView() {
-        tbOrder=findViewById(R.id.tbOrder);
-        setSupportActionBar(tbOrder);
-        rcvListFood=findViewById(R.id.rcvListFood);
-        tvTotalAmount=findViewById(R.id.tvTotalAmount);
-        tvSave=findViewById(R.id.tvSave);
-        tvSelectTable=findViewById(R.id.tvSelectTable);
-        tvPeopeNumber=findViewById(R.id.tvPeopeNumber);
-        btnMoney=findViewById(R.id.btnMoney);
+        try {
+            tbOrder=findViewById(R.id.tbOrder);
+            setSupportActionBar(tbOrder);
+            rcvListFood=findViewById(R.id.rcvListFood);
+            tvTotalAmount=findViewById(R.id.tvTotalAmount);
+            tvSave=findViewById(R.id.tvSave);
+            tvSelectTable=findViewById(R.id.tvSelectTable);
+            tvPeopeNumber=findViewById(R.id.tvPeopeNumber);
+            btnMoney=findViewById(R.id.btnMoney);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -100,8 +104,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/25/2021
      */
     private void getListMenu(){
-        mActivityOrderPresenter=new ActivityOrderPresenter(this);
-        mActivityOrderPresenter.getListMenu(this);
+        try {
+            mActivityOrderPresenter=new ActivityOrderPresenter(this);
+            mActivityOrderPresenter.getListMenu(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -113,12 +121,16 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void getListMenuSuccess(List<Product> listProduct) {
-        mListProduct=listProduct;
-        mMenuAdapter=new MenuAdapter(this,R.layout.item_select_food,mListProduct);
-        rcvListFood.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvListFood.setAdapter(mMenuAdapter);
-        mMenuAdapter.notifyDataSetChanged();
-        mMenuAdapter.setmITotalAmount(this);
+        try {
+            mListProduct=listProduct;
+            mMenuAdapter=new MenuAdapter(this,R.layout.item_select_food,mListProduct);
+            rcvListFood.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            rcvListFood.setAdapter(mMenuAdapter);
+            mMenuAdapter.notifyDataSetChanged();
+            mMenuAdapter.setmITotalAmount(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -130,8 +142,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void getResultCaculateSuccess(String result) {
-        tvResult.setText(result);
-        mResultSelect=result;
+        try {
+            tvResult.setText(result);
+            mResultSelect=result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -153,9 +169,13 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void addNewOrderTwoSuccess(int orderID) {
-        Intent intent=new Intent(this, ActivityBill.class);
-        intent.putExtra(ORDER_ID,orderID);
-        startActivity(intent);
+        try {
+            Intent intent=new Intent(this, ActivityBill.class);
+            intent.putExtra(ORDER_ID,orderID);
+            startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -178,8 +198,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void processTotalAmount(String totalAmount,float totalMoney) {
-        tvTotalAmount.setText(totalAmount);
-        mAmount=totalMoney;
+        try {
+            tvTotalAmount.setText(totalAmount);
+            mAmount=totalMoney;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void getItemSelect(){
@@ -191,10 +215,14 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/25/2021
      */
     private void onViewClickListener(){
-        tvSave.setOnClickListener(this);
-        tvPeopeNumber.setOnClickListener(this);
-        tvSelectTable.setOnClickListener(this);
-        btnMoney.setOnClickListener(this);
+        try {
+            tvSave.setOnClickListener(this);
+            tvPeopeNumber.setOnClickListener(this);
+            tvSelectTable.setOnClickListener(this);
+            btnMoney.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -206,103 +234,98 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvSave:{
-                mActivityOrderPresenter=new ActivityOrderPresenter(this);
-                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_SAVE);
-//                for(int i=0;i<mListProduct.size();i++){
-//                    if(mListProduct.get(i).getQuantity()>0){
-//                        Log.d("ProductSelect",mListProduct.get(i).getmProductName()+":"+mListProduct.get(i).getQuantity());
-//                    }
-//                }
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvSave:{
+                    mActivityOrderPresenter=new ActivityOrderPresenter(this);
+                    mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_SAVE);
+                    break;
+                }
+                case R.id.btnMoney:{
+                    mActivityOrderPresenter=new ActivityOrderPresenter(this);
+                    mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_MONEY);
+                    break;
+                }
+                case R.id.tvSelectTable:{
+                    showDialogOrderInfomation();
+                    break;
+                }
+                case R.id.tvPeopeNumber:{
+                    showDialogOrderInfomation();
+                    tvSuccesss.setVisibility(View.VISIBLE);
+                    tvSuccess.setVisibility(View.GONE);
+                    tvDialogTittle.setText(getResources().getString(R.string.enter_people_name));
+                    break;
+                }
+                case R.id.ivBackKeyboard:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemDown:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_decrease),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemUp:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_increase),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemClear:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_clear),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemSeven:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_7),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemEight:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_8),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemNine:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_9),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemFour:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_4),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemFive:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_5),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemSix:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_6),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemOne:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_1),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemTwo:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_2),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemThree:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_3),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvItemZero:{
+                    mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_0),tvResult.getText().toString());
+                    break;
+                }
+                case R.id.tvSuccess:{
+                    mOrderDialog.dismiss();
+                    tvSelectTable.setText(mResultSelect);
+                    break;
+                }
+                case R.id.tvSuccesss:{
+                    mOrderDialog.dismiss();
+                    tvPeopeNumber.setText(mResultSelect);
+                    break;
+                }
             }
-            case R.id.btnMoney:{
-                mActivityOrderPresenter=new ActivityOrderPresenter(this);
-                mActivityOrderPresenter.addNewOrder(this,mListProduct,tvSelectTable.getText().toString(),tvPeopeNumber.getText().toString(),mAmount, MCLICK_BUTTON_MONEY);
-//                startActivity(new Intent(this,ActivityBill.class));
-//                SQLiteDatabase database= DatabaseHelper.initDatabase(this, DatabaseInfomation.DATABASE_NAME);
-//                Cursor cursor=database.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_ORDER_DETAIL+"",null);
-//                Log.d("acccc",cursor.getCount()+"");
-                break;
-            }
-            case R.id.tvSelectTable:{
-                showDialogOrderInfomation();
-                break;
-            }
-            case R.id.tvPeopeNumber:{
-                showDialogOrderInfomation();
-                tvSuccesss.setVisibility(View.VISIBLE);
-                tvSuccess.setVisibility(View.GONE);
-                tvDialogTittle.setText(getResources().getString(R.string.enter_people_name));
-                break;
-            }
-            case R.id.ivBackKeyboard:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemDown:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_decrease),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemUp:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_increase),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemClear:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_clear),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemSeven:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_7),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemEight:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_8),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemNine:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_9),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemFour:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_4),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemFive:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_5),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemSix:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_6),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemOne:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_1),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemTwo:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_2),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemThree:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_3),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvItemZero:{
-                mActivityOrderPresenter.getResultCaculate(getResources().getString(R.string.caculator_0),tvResult.getText().toString());
-                break;
-            }
-            case R.id.tvSuccess:{
-                mOrderDialog.dismiss();
-                tvSelectTable.setText(mResultSelect);
-                break;
-            }
-            case R.id.tvSuccesss:{
-                mOrderDialog.dismiss();
-                tvPeopeNumber.setText(mResultSelect);
-                break;
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -312,33 +335,37 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/25/2021
      */
     private void showDialogOrderInfomation(){
-        mOrderDialog =new Dialog(this);
-        mOrderDialog.setContentView(R.layout.dialog_order_infomation);
-        mOrderDialog.show();
-        ConstraintLayout clDialogOrder= mOrderDialog.findViewById(R.id.clDialogOrder);
-        clDialogOrder.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
-        clDialogOrder.getLayoutParams().height= AndroidDeviceHelper.getHeightScreen(this)*8/15;
-        clDialogOrder.requestLayout();
-        tvSuccess = mOrderDialog.findViewById(R.id.tvSuccess);
-        tvDialogTittle= mOrderDialog.findViewById(R.id.tvResultCaculate);
-        tvResult= mOrderDialog.findViewById(R.id.tvResult);
-        ivBackKeyboard= mOrderDialog.findViewById(R.id.ivBackKeyboard);
-        tvItemDown= mOrderDialog.findViewById(R.id.tvItemDown);
-        tvItemUp= mOrderDialog.findViewById(R.id.tvItemUp);
-        tvItemClear= mOrderDialog.findViewById(R.id.tvItemClear);
-        tvItemSeven= mOrderDialog.findViewById(R.id.tvItemSeven);
-        tvItemEight= mOrderDialog.findViewById(R.id.tvItemEight);
-        tvItemNine= mOrderDialog.findViewById(R.id.tvItemNine);
-        tvItemFour= mOrderDialog.findViewById(R.id.tvItemFour);
-        tvItemFive= mOrderDialog.findViewById(R.id.tvItemFive);
-        tvItemSix= mOrderDialog.findViewById(R.id.tvItemSix);
-        tvItemOne= mOrderDialog.findViewById(R.id.tvItemOne);
-        tvItemTwo= mOrderDialog.findViewById(R.id.tvItemTwo);
-        tvItemThree= mOrderDialog.findViewById(R.id.tvItemThree);
-        tvItemZero= mOrderDialog.findViewById(R.id.tvItemZero);
-        tvSuccesss=mOrderDialog.findViewById(R.id.tvSuccesss);
-        mActivityOrderPresenter=new ActivityOrderPresenter(this);
-        onViewDialogClickListener();
+        try {
+            mOrderDialog =new Dialog(this);
+            mOrderDialog.setContentView(R.layout.dialog_order_infomation);
+            mOrderDialog.show();
+            ConstraintLayout clDialogOrder= mOrderDialog.findViewById(R.id.clDialogOrder);
+            clDialogOrder.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
+            clDialogOrder.getLayoutParams().height= AndroidDeviceHelper.getHeightScreen(this)*8/15;
+            clDialogOrder.requestLayout();
+            tvSuccess = mOrderDialog.findViewById(R.id.tvSuccess);
+            tvDialogTittle= mOrderDialog.findViewById(R.id.tvResultCaculate);
+            tvResult= mOrderDialog.findViewById(R.id.tvResult);
+            ivBackKeyboard= mOrderDialog.findViewById(R.id.ivBackKeyboard);
+            tvItemDown= mOrderDialog.findViewById(R.id.tvItemDown);
+            tvItemUp= mOrderDialog.findViewById(R.id.tvItemUp);
+            tvItemClear= mOrderDialog.findViewById(R.id.tvItemClear);
+            tvItemSeven= mOrderDialog.findViewById(R.id.tvItemSeven);
+            tvItemEight= mOrderDialog.findViewById(R.id.tvItemEight);
+            tvItemNine= mOrderDialog.findViewById(R.id.tvItemNine);
+            tvItemFour= mOrderDialog.findViewById(R.id.tvItemFour);
+            tvItemFive= mOrderDialog.findViewById(R.id.tvItemFive);
+            tvItemSix= mOrderDialog.findViewById(R.id.tvItemSix);
+            tvItemOne= mOrderDialog.findViewById(R.id.tvItemOne);
+            tvItemTwo= mOrderDialog.findViewById(R.id.tvItemTwo);
+            tvItemThree= mOrderDialog.findViewById(R.id.tvItemThree);
+            tvItemZero= mOrderDialog.findViewById(R.id.tvItemZero);
+            tvSuccesss=mOrderDialog.findViewById(R.id.tvSuccesss);
+            mActivityOrderPresenter=new ActivityOrderPresenter(this);
+            onViewDialogClickListener();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -347,21 +374,25 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/26/2021
      */
     private void onViewDialogClickListener(){
-        ivBackKeyboard.setOnClickListener(this);
-        tvItemDown.setOnClickListener(this);
-        tvItemUp.setOnClickListener(this);
-        tvItemClear.setOnClickListener(this);
-        tvItemSeven.setOnClickListener(this);
-        tvItemEight.setOnClickListener(this);
-        tvItemNine.setOnClickListener(this);
-        tvItemFour.setOnClickListener(this);
-        tvItemFive.setOnClickListener(this);
-        tvItemSix.setOnClickListener(this);
-        tvItemOne.setOnClickListener(this);
-        tvItemTwo.setOnClickListener(this);
-        tvItemThree.setOnClickListener(this);
-        tvItemZero.setOnClickListener(this);
-        tvSuccess.setOnClickListener(this);
-        tvSuccesss.setOnClickListener(this);
+        try {
+            ivBackKeyboard.setOnClickListener(this);
+            tvItemDown.setOnClickListener(this);
+            tvItemUp.setOnClickListener(this);
+            tvItemClear.setOnClickListener(this);
+            tvItemSeven.setOnClickListener(this);
+            tvItemEight.setOnClickListener(this);
+            tvItemNine.setOnClickListener(this);
+            tvItemFour.setOnClickListener(this);
+            tvItemFive.setOnClickListener(this);
+            tvItemSix.setOnClickListener(this);
+            tvItemOne.setOnClickListener(this);
+            tvItemTwo.setOnClickListener(this);
+            tvItemThree.setOnClickListener(this);
+            tvItemZero.setOnClickListener(this);
+            tvSuccess.setOnClickListener(this);
+            tvSuccesss.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

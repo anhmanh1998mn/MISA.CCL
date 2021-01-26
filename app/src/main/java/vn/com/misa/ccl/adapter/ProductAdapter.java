@@ -48,11 +48,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Bitmap bitmap= BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),0,
-                mListProduct.get(position).getmProductImage().getmImage().length);
-        holder.ivItemMenu.setImageBitmap(bitmap);
-        holder.tvFootName.setText(mListProduct.get(position).getmProductName());
-        holder.tvFootPrice.setText(String.valueOf(mListProduct.get(position).getmProductPrice()));
+        try {
+            Bitmap bitmap= BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),0,
+                    mListProduct.get(position).getmProductImage().getmImage().length);
+            holder.ivItemMenu.setImageBitmap(bitmap);
+            holder.tvFootName.setText(mListProduct.get(position).getmProductName());
+            holder.tvFootPrice.setText(String.valueOf(mListProduct.get(position).getmProductPrice()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -69,9 +73,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivItemMenu=itemView.findViewById(R.id.ivItemMenu);
-            tvFootName=itemView.findViewById(R.id.tvFootName);
-            tvFootPrice=itemView.findViewById(R.id.tvFootPrice);
+            try {
+                ivItemMenu=itemView.findViewById(R.id.ivItemMenu);
+                tvFootName=itemView.findViewById(R.id.tvFootName);
+                tvFootPrice=itemView.findViewById(R.id.tvFootPrice);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

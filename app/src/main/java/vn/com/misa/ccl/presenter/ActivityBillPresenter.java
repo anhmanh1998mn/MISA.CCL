@@ -54,6 +54,11 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
         mActivityBillModel.processCaculator(activity,resultProcess,nameClick,amount);
     }
 
+    @Override
+    public void updateOrderStatus(Activity activity,int orderID) {
+        mActivityBillModel.updateOrderStatus(activity,orderID);
+    }
+
     /**
      * Mục đích method thực hiện việc nhận dữ liệu xử lý lấy orderDetail và gửi kết quả về view
      *
@@ -88,6 +93,11 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
     @Override
     public void resultSuccess(String amount) {
         mIActivityBillView.resultMoneyOutSuccess(amount);
+    }
+
+    @Override
+    public void updateOrderStatusSuccess() {
+        mIActivityBillView.updateOrderStatusSuccess();
     }
 
     /**

@@ -76,6 +76,17 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mActivityFoodUpdateModel.processCaculator(activity,numberEnter,nameClick);
     }
 
+    @Override
+    public void removeItemProduct(int productID) {
+        mActivityFoodUpdateModel.removeItemProduct(productID);
+    }
+
+    @Override
+    public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        mActivityFoodUpdateModel.updateItemProduct(productId,productName,productPrice,
+                imageID,unitID,colorID);
+    }
+
     /**
      * Mục đích method thực hiện việc nhận danh sách màu từ ActivityFoodUpdateModel và gửi danh sách tới view
      *
@@ -122,6 +133,21 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
     @Override
     public void resultTextEnter(String resutText) {
         mIActivityFoodUpdateView.processCaculatorSuccess(resutText);
+    }
+
+    @Override
+    public void resultTextEnterSuccess(String resutText) {
+        mIActivityFoodUpdateView.processEnterSuccess(resutText);
+    }
+
+    @Override
+    public void removeItemProductSuccess() {
+        mIActivityFoodUpdateView.removeProductItemSuccess();
+    }
+
+    @Override
+    public void updateItemProductSuccess() {
+        mIActivityFoodUpdateView.updateItemProductSuccess();
     }
 
     /**

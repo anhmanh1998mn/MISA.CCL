@@ -72,12 +72,16 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * @created_by cvmanh on 01/25/2021
      */
     private void initView() {
-        dlRestaurantManage=findViewById(R.id.dlRestaurantManage);
-        tvMenu=findViewById(R.id.tvMenu);
-        ivUser=findViewById(R.id.ivUser);
-        ivUser.setClipToOutline(true);
-        rcvMenu=findViewById(R.id.rcvMenu);
-        tvAdd=findViewById(R.id.tvAdd);
+        try {
+            dlRestaurantManage=findViewById(R.id.dlRestaurantManage);
+            tvMenu=findViewById(R.id.tvMenu);
+            ivUser=findViewById(R.id.ivUser);
+            ivUser.setClipToOutline(true);
+            rcvMenu=findViewById(R.id.rcvMenu);
+            tvAdd=findViewById(R.id.tvAdd);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -86,8 +90,12 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * @created_by cvmanh on 01/25/2021
      */
     private void initActionbar() {
-        tbRestaurantManage=findViewById(R.id.tbRestaurantManage);
-        setSupportActionBar(tbRestaurantManage);
+        try {
+            tbRestaurantManage=findViewById(R.id.tbRestaurantManage);
+            setSupportActionBar(tbRestaurantManage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -96,8 +104,12 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * @created_by cvmanh on 01/25/2021
      */
     private void clickViewListener(){
-        tvMenu.setOnClickListener(this);
-        tvAdd.setOnClickListener(this);
+        try {
+            tvMenu.setOnClickListener(this);
+            tvAdd.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -109,14 +121,18 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvMenu:{
-                dlRestaurantManage.openDrawer(GravityCompat.START);
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvMenu:{
+                    dlRestaurantManage.openDrawer(GravityCompat.START);
+                    break;
+                }
+                case R.id.tvAdd:{
+                    startActivity(new Intent(this, ActivityOrder.class));
+                }
             }
-            case R.id.tvAdd:{
-                startActivity(new Intent(this, ActivityOrder.class));
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -129,9 +145,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * @created_by cvmanh on 01/25/2021
      */
     private void addFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frmRestaurantManage,fragment);
-        fragmentTransaction.commit();
+        try {
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frmRestaurantManage,fragment);
+            fragmentTransaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -142,8 +162,12 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * @created_by cvmanh on 01/25/2021
      */
     private void loadListSetting(){
-        mActivityManage=new ActivityRestaurantManagePresenter(this);
-        mActivityManage.getListSetting(this);
+        try {
+            mActivityManage=new ActivityRestaurantManagePresenter(this);
+            mActivityManage.getListSetting(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -155,10 +179,14 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      */
     @Override
     public void getListSettingSuccess(List<Setting> listSetting) {
-        mSettingAdapter=new SettingAdapter(this,R.layout.item_setting,listSetting);
-        rcvMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        rcvMenu.setAdapter(mSettingAdapter);
-        mSettingAdapter.notifyDataSetChanged();
+        try {
+            mSettingAdapter=new SettingAdapter(this,R.layout.item_setting,listSetting);
+            rcvMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            rcvMenu.setAdapter(mSettingAdapter);
+            mSettingAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -46,11 +46,15 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        holder.tvProductName.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
-        holder.tvAmount.setText(String.valueOf(mListOrderDetail.get(position).getmQuantity()));
-        holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getmProduct().getmProductPrice()));
-        holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getmQuantity()*mListOrderDetail.get(position).getmProduct().getmProductPrice()));
+        try {
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            holder.tvProductName.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
+            holder.tvAmount.setText(String.valueOf(mListOrderDetail.get(position).getmQuantity()));
+            holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getmProduct().getmProductPrice()));
+            holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getmQuantity()*mListOrderDetail.get(position).getmProduct().getmProductPrice()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -67,10 +71,14 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            tvProductName=itemView.findViewById(R.id.tvProductName);
-            tvAmount=itemView.findViewById(R.id.tvAmount);
-            tvUnitPrice=itemView.findViewById(R.id.tvUnitPrice);
-            tvTotalMoney=itemView.findViewById(R.id.tvTotalMoney);
+            try {
+                tvProductName=itemView.findViewById(R.id.tvProductName);
+                tvAmount=itemView.findViewById(R.id.tvAmount);
+                tvUnitPrice=itemView.findViewById(R.id.tvUnitPrice);
+                tvTotalMoney=itemView.findViewById(R.id.tvTotalMoney);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

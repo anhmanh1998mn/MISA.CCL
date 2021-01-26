@@ -20,6 +20,7 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.UnitAdapter;
 import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.presenter.ActivityUnitPresenter;
+import vn.com.misa.ccl.util.Common;
 
 /**
 ‐ Mục đích Class thực hiện những công việc hiển thị danh sách Unit
@@ -171,6 +172,8 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
                     SharedPreferences sharedPreferences=getSharedPreferences("UnitSelection",MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putString("UNIT_NAME",mUnitName);
+                    editor.putInt("UNIT_ID",mUnitID);
+                    Common.PRODUCT_UNIT_ID=mUnitID;
                     editor.commit();
                     finish();
                     break;

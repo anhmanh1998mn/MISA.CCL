@@ -22,6 +22,7 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Product;
+import vn.com.misa.ccl.util.Common;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
@@ -60,80 +61,90 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        mWidthImgae = holder.ivItemMenu.getLayoutParams().width;
-        holder.tvFootName.setText(mListProduct.get(position).getmProductName());
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        holder.tvFootPrice.setText(decimalFormat.format(mListProduct.get(position).getmProductPrice()));
-        Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),
-                0, mListProduct.get(position).getmProductImage().getmImage().length);
-        holder.ivItemMenu.setImageBitmap(bitmap);
-        holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
-        final int[] quantity = {0};
+        try {
+            mWidthImgae = holder.ivItemMenu.getLayoutParams().width;
+            holder.tvFootName.setText(mListProduct.get(position).getmProductName());
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            holder.tvFootPrice.setText(decimalFormat.format(mListProduct.get(position).getmProductPrice()));
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),
+                    0, mListProduct.get(position).getmProductImage().getmImage().length);
+            holder.ivItemMenu.setImageBitmap(bitmap);
+            holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
+            final int[] quantity = {0};
 
-        holder.clFoodSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Tag", "onClick: parent");
-                holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.greenn));
-                holder.ivItemMenu.setImageResource(R.drawable.ic_tick);
-                holder.ivItemMenu.setColorFilter(Color.WHITE);
-                holder.ivItemMenu.getLayoutParams().width = 50;
-                quantity[0]=quantity[0]+1;
-                mListProduct.get(position).setQuantity(quantity[0]);
-                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
+            holder.clFoodSelect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Tag", "onClick: parent");
+                    holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.greenn));
+                    holder.ivItemMenu.setImageResource(R.drawable.ic_tick);
+                    holder.ivItemMenu.setColorFilter(Color.WHITE);
+                    holder.ivItemMenu.getLayoutParams().width = 50;
+                    quantity[0]=quantity[0]+1;
+                    mListProduct.get(position).setQuantity(quantity[0]);
+                    holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
 
-                holder.tvQuantity.setVisibility(View.VISIBLE);
-                holder.cvAdd.setVisibility(View.VISIBLE);
-                holder.cvRemove.setVisibility(View.VISIBLE);
-                holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
-                total[0] = total[0] +mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
-            }
-        });
-        holder.cvAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Tag", "onClick: add");
-                quantity[0]=quantity[0]+1;
-                mListProduct.get(position).setQuantity(quantity[0]);
-                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
-                total[0] = total[0] +mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
-            }
-        });
-        holder.cvRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Tag", "onClick: remove");
-                if (Integer.parseInt(holder.tvQuantity.getText().toString()) <2) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),
-                            0, mListProduct.get(position).getmProductImage().getmImage().length);
-                    holder.ivItemMenu.setImageBitmap(bitmap);
-                    holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
-                    holder.cvAdd.setVisibility(View.GONE);
-                    holder.cvRemove.setVisibility(View.GONE);
-                    holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
-                    holder.ivItemMenu.setColorFilter(null);
-                    holder.tvQuantity.setVisibility(View.GONE);
-                    holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
+                    holder.tvQuantity.setVisibility(View.VISIBLE);
+                    holder.cvAdd.setVisibility(View.VISIBLE);
+                    holder.cvRemove.setVisibility(View.VISIBLE);
+                    holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
+                    total[0] = total[0] +mListProduct.get(position).getmProductPrice();
+                    mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
+                }
+            });
+            holder.cvAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Tag", "onClick: add");
+                    quantity[0]=quantity[0]+1;
+                    mListProduct.get(position).setQuantity(quantity[0]);
+                    holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
+                    total[0] = total[0] +mListProduct.get(position).getmProductPrice();
+                    mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
+                }
+            });
+            holder.cvRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Tag", "onClick: remove");
+                    if (Integer.parseInt(holder.tvQuantity.getText().toString()) <2) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),
+                                0, mListProduct.get(position).getmProductImage().getmImage().length);
+                        holder.ivItemMenu.setImageBitmap(bitmap);
+                        holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
+                        holder.cvAdd.setVisibility(View.GONE);
+                        holder.cvRemove.setVisibility(View.GONE);
+                        holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                        holder.ivItemMenu.setColorFilter(null);
+                        holder.tvQuantity.setVisibility(View.GONE);
+                        holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
+                        total[0] = total[0] -mListProduct.get(position).getmProductPrice();
+                        mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
+                        quantity[0]=0;
+                        mListProduct.get(position).setQuantity(quantity[0]);
+                        return;
+                    }
+                    quantity[0]=quantity[0]-1;
+                    mListProduct.get(position).setQuantity(quantity[0]);
+                    holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
                     total[0] = total[0] -mListProduct.get(position).getmProductPrice();
                     mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
-                    quantity[0]=0;
-                    mListProduct.get(position).setQuantity(quantity[0]);
-                    return;
                 }
-                quantity[0]=quantity[0]-1;
-                mListProduct.get(position).setQuantity(quantity[0]);
-                holder.tvQuantity.setText(String.valueOf(mListProduct.get(position).getQuantity()));
-                total[0] = total[0] -mListProduct.get(position).getmProductPrice();
-                mITotalAmount.processTotalAmount(formatMoney(total[0]),total[0]);
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private String formatMoney(float money){
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        return decimalFormat.format(money);
+        try {
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            return decimalFormat.format(money);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
     @Override
@@ -154,16 +165,20 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvFootName = itemView.findViewById(R.id.tvFootName);
-            tvFootPrice = itemView.findViewById(R.id.tvFootPrice);
-            tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            ivRemove = itemView.findViewById(R.id.ivRemove);
-            ivAdd = itemView.findViewById(R.id.ivAdd);
-            ivItemMenu = itemView.findViewById(R.id.ivItemMenu);
-            cvImage = itemView.findViewById(R.id.cvImage);
-            cvAdd = itemView.findViewById(R.id.cvAdd);
-            cvRemove = itemView.findViewById(R.id.cvRemove);
-            clFoodSelect = itemView.findViewById(R.id.clFoodSelect);
+            try {
+                tvFootName = itemView.findViewById(R.id.tvFootName);
+                tvFootPrice = itemView.findViewById(R.id.tvFootPrice);
+                tvQuantity = itemView.findViewById(R.id.tvQuantity);
+                ivRemove = itemView.findViewById(R.id.ivRemove);
+                ivAdd = itemView.findViewById(R.id.ivAdd);
+                ivItemMenu = itemView.findViewById(R.id.ivItemMenu);
+                cvImage = itemView.findViewById(R.id.cvImage);
+                cvAdd = itemView.findViewById(R.id.cvAdd);
+                cvRemove = itemView.findViewById(R.id.cvRemove);
+                clFoodSelect = itemView.findViewById(R.id.clFoodSelect);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

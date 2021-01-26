@@ -11,6 +11,7 @@ public interface IActivityRestaurantMenu {
         public void loadListProduct(Activity activity,int categoryID);
 
         public void initMenu(Activity activity,List<ProductCategory> listMenu);
+
     }
 
     public interface IFragmentRestaurantMenuView {

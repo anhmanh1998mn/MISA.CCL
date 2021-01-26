@@ -59,22 +59,26 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Bitmap bitmap= BitmapFactory.decodeByteArray(mListProductCategory.get(position).getmProduct().getmProductImage().getmImage(),0,
-                mListProductCategory.get(position).getmProduct().getmProductImage().getmImage().length);
-        holder.ivItemMenu.setImageBitmap(bitmap);
-        holder.tvFootName.setText(mListProductCategory.get(position).getmProduct().getmProductName());
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getmProduct().getmProductPrice())));
-        holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getmProduct().getmColor().getColorName()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(mContext, ActivityFoodUpdate.class);
-                ProductCategory productCategory=mListProductCategory.get(position);
-                intent.putExtra("Object",productCategory);
-                mContext.startActivity(intent);
-            }
-        });
+        try {
+            Bitmap bitmap= BitmapFactory.decodeByteArray(mListProductCategory.get(position).getmProduct().getmProductImage().getmImage(),0,
+                    mListProductCategory.get(position).getmProduct().getmProductImage().getmImage().length);
+            holder.ivItemMenu.setImageBitmap(bitmap);
+            holder.tvFootName.setText(mListProductCategory.get(position).getmProduct().getmProductName());
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getmProduct().getmProductPrice())));
+            holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getmProduct().getmColor().getColorName()));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, ActivityFoodUpdate.class);
+                    ProductCategory productCategory=mListProductCategory.get(position);
+                    intent.putExtra("Object",productCategory);
+                    mContext.startActivity(intent);
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -93,10 +97,14 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivItemMenu=itemView.findViewById(R.id.ivItemMenu);
-            tvFootName=itemView.findViewById(R.id.tvFootName);
-            tvFootPrice=itemView.findViewById(R.id.tvFootPrice);
-            cvImage=itemView.findViewById(R.id.cvImage);
+           try {
+               ivItemMenu=itemView.findViewById(R.id.ivItemMenu);
+               tvFootName=itemView.findViewById(R.id.tvFootName);
+               tvFootPrice=itemView.findViewById(R.id.tvFootPrice);
+               cvImage=itemView.findViewById(R.id.cvImage);
+           }catch (Exception e){
+               e.printStackTrace();
+           }
         }
     }
 }

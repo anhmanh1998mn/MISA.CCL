@@ -58,23 +58,27 @@ public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvItemCaculate.setText(mListCaculate.get(position));
-        if(position==mListCaculate.size()-1){
-            holder.tvItemCaculate.setBackgroundColor(mContext.getResources().getColor(R.color.purple_500));
-            holder.tvItemCaculate.setTextColor(Color.WHITE);
-        }
-        if(position==3){
-            holder.ivBackKeyboard.setVisibility(View.VISIBLE);
-        }
-
-        holder.tvItemCaculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mIResultClickItem!=null){
-                    mIResultClickItem.resultClickItem(mListCaculate.get(position));
-                }
+        try {
+            holder.tvItemCaculate.setText(mListCaculate.get(position));
+            if(position==mListCaculate.size()-1){
+                holder.tvItemCaculate.setBackgroundColor(mContext.getResources().getColor(R.color.purple_500));
+                holder.tvItemCaculate.setTextColor(Color.WHITE);
             }
-        });
+            if(position==3){
+                holder.ivBackKeyboard.setVisibility(View.VISIBLE);
+            }
+
+            holder.tvItemCaculate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mIResultClickItem!=null){
+                        mIResultClickItem.resultClickItem(mListCaculate.get(position));
+                    }
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -89,8 +93,12 @@ public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvItemCaculate=itemView.findViewById(R.id.tvItemCaculate);
-            ivBackKeyboard=itemView.findViewById(R.id.ivBackKeyboard);
+            try {
+                tvItemCaculate=itemView.findViewById(R.id.tvItemCaculate);
+                ivBackKeyboard=itemView.findViewById(R.id.ivBackKeyboard);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

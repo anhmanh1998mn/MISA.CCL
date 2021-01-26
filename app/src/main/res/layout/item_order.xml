@@ -62,6 +62,7 @@
             android:layout_weight="5.13"
             android:layout_height="match_parent">
             <LinearLayout
+                android:id="@+id/llItemOder"
                 style="@style/Theme.EffectClick"
                 android:paddingTop="16dp"
                 android:orientation="vertical"

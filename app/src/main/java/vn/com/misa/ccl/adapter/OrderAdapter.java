@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,9 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.OrderDetail;
+import vn.com.misa.ccl.util.Common;
 import vn.com.misa.ccl.view.order.ActivityBill;
+import vn.com.misa.ccl.view.order.ActivityOrder;
 
 /**
  ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
@@ -63,40 +66,51 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvListProduct.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
-//        holder.tvImage.getBackground().setTint(Color.parseColor(mListOrderDetail.get(position).getmProduct().getmColor().getColorName()));
-        DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-        holder.tvTotalAmount.setText(decimalFormat.format((mListOrderDetail.get(position).getmOrder().getTotalMoney())));
-        if(mListOrderDetail.get(position).getmOrder().getTableName().equals("0")){
-            holder.tvImage.getBackground().setTint(mContext.getResources().getColor(R.color.light_grey));
-            holder.tvImage.setText("");
-        }else {
-            holder.tvImage.getBackground().setTint(Color.parseColor(mListOrderDetail.get(position).getmProduct().getmColor().getColorName()));
-            holder.tvImage.setText(mListOrderDetail.get(position).getmOrder().getTableName());
-        }
-
-        if(mListOrderDetail.get(position).getmOrder().getTotalPeople()==0){
-            holder.tvPeople.setVisibility(View.GONE);
-            holder.ivPerson.setVisibility(View.GONE);
-        }else {
-            holder.tvPeople.setText(String.valueOf(mListOrderDetail.get(position).getmOrder().getTotalPeople()));
-        }
-
-        holder.tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mICLickButtonRemove.setOnClickButtoRemove(mListOrderDetail.get(position).getmOrder().getOrderId());
+        try {
+            holder.tvListProduct.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
+            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            holder.tvTotalAmount.setText(decimalFormat.format((mListOrderDetail.get(position).getmOrder().getTotalMoney())));
+            if(mListOrderDetail.get(position).getmOrder().getTableName().equals("0")){
+                holder.tvImage.getBackground().setTint(mContext.getResources().getColor(R.color.light_grey));
+                holder.tvImage.setText("");
+            }else {
+                holder.tvImage.getBackground().setTint(Color.parseColor(mListOrderDetail.get(position).getmProduct().getmColor().getColorName()));
+                holder.tvImage.setText(mListOrderDetail.get(position).getmOrder().getTableName());
             }
-        });
 
-        holder.tvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(mContext, ActivityBill.class);
-                intent.putExtra(ORDER_ID,mListOrderDetail.get(position).getmOrder().getOrderId());
-                mContext.startActivity(intent);
+            if(mListOrderDetail.get(position).getmOrder().getTotalPeople()==0){
+                holder.tvPeople.setVisibility(View.GONE);
+                holder.ivPerson.setVisibility(View.GONE);
+            }else {
+                holder.tvPeople.setText(String.valueOf(mListOrderDetail.get(position).getmOrder().getTotalPeople()));
             }
-        });
+
+            holder.tvCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mICLickButtonRemove.setOnClickButtoRemove(mListOrderDetail.get(position).getmOrder().getOrderId());
+                }
+            });
+
+            holder.tvSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, ActivityBill.class);
+                    intent.putExtra(ORDER_ID,mListOrderDetail.get(position).getmOrder().getOrderId());
+                    mContext.startActivity(intent);
+                }
+            });
+
+            holder.llItemOder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.ORDER_ID=mListOrderDetail.get(position).getmOrder().getOrderId();
+                    mContext.startActivity(new Intent(mContext, ActivityOrder.class));
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -110,16 +124,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         private ImageView ivPerson;
 
+        private LinearLayout llItemOder;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvImage = itemView.findViewById(R.id.tvImage);
-            tvPeople = itemView.findViewById(R.id.tvPeople);
-            tvListProduct = itemView.findViewById(R.id.tvListProduct);
-            tvTotalAmount = itemView.findViewById(R.id.tvTotalAmount);
-            ivPerson=itemView.findViewById(R.id.ivPerson);
-            tvCancel=itemView.findViewById(R.id.tvCancel);
-            tvSave=itemView.findViewById(R.id.tvSave);
+            try {
+                tvImage = itemView.findViewById(R.id.tvImage);
+                tvPeople = itemView.findViewById(R.id.tvPeople);
+                tvListProduct = itemView.findViewById(R.id.tvListProduct);
+                tvTotalAmount = itemView.findViewById(R.id.tvTotalAmount);
+                ivPerson=itemView.findViewById(R.id.ivPerson);
+                tvCancel=itemView.findViewById(R.id.tvCancel);
+                tvSave=itemView.findViewById(R.id.tvSave);
+                llItemOder=itemView.findViewById(R.id.llItemOder);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

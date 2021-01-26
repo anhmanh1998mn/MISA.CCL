@@ -18,6 +18,11 @@ public interface IActivityFoodUpdate {
         public void loadCaculating(Activity activity);
 
         public void processCaculator(Activity activity,String tvNumberEnter,String nameClick);
+
+        public void removeItemProduct(int productID);
+
+        public void updateItemProduct(int productId,String productName,float productPrice,int imageID,int unitID,
+                                      int colorID);
     }
 
     public interface IActivityFoodUpdateView{
@@ -29,6 +34,12 @@ public interface IActivityFoodUpdate {
         public void loadCaculatingSuccess(List<String> listCaculate);
 
         public void processCaculatorSuccess(String resulText);
+
+        public void processEnterSuccess(String resultText);
+
+        public void removeProductItemSuccess();
+
+        public void updateItemProductSuccess();
 
         public void onFailed();
     }

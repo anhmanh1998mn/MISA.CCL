@@ -71,24 +71,39 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         return view;
     }
 
+    @Override
+    public void onResume() {
+        getListOrder();
+
+        checkListOrderSize();
+        super.onResume();
+    }
+
+
+
     /**
      * Mục đích method thực hiện việc kiể tra số lượng danh sách order để ẩn hiện các view tương ứng
      *
      * @created_by cvmanh on 01/26/2021
      */
     private void checkListOrderSize() {
-        if(mListOrderDetail.size()<1){
-            tvAddFood.setVisibility(View.VISIBLE);
-            tvNoOrder.setVisibility(View.VISIBLE);
-            ivLogo.setVisibility(View.VISIBLE);
-            llListOrder.setBackgroundColor(getResources().getColor(R.color.white));
-            return;
+        try {
+            if(mListOrderDetail.size()<1){
+                tvAddFood.setVisibility(View.VISIBLE);
+                tvNoOrder.setVisibility(View.VISIBLE);
+                ivLogo.setVisibility(View.VISIBLE);
+                llListOrder.setBackgroundColor(getResources().getColor(R.color.white));
+                return;
+            }
+            tvAddFood.setVisibility(View.GONE);
+            tvNoOrder.setVisibility(View.GONE);
+            ivLogo.setVisibility(View.GONE);
+            llListOrder.setBackgroundColor(getResources().getColor(R.color.grey_lighh));
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        tvAddFood.setVisibility(View.GONE);
-        tvNoOrder.setVisibility(View.GONE);
-        ivLogo.setVisibility(View.GONE);
-        llListOrder.setBackgroundColor(getResources().getColor(R.color.grey_lighh));
     }
+
 
     /**
      * Mục đích method thực hiện việc khởi tạo các view
@@ -98,11 +113,15 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      * @created_by cvmanh on 01/26/2021
      */
     private void initView(View view) {
-        ivLogo=view.findViewById(R.id.ivLogo);
-        tvAddFood=view.findViewById(R.id.tvAddFood);
-        tvNoOrder=view.findViewById(R.id.tvNoOrder);
-        rcvOrder=view.findViewById(R.id.rcvOrder);
-        llListOrder=view.findViewById(R.id.llListOrder);
+        try {
+            ivLogo=view.findViewById(R.id.ivLogo);
+            tvAddFood=view.findViewById(R.id.tvAddFood);
+            tvNoOrder=view.findViewById(R.id.tvNoOrder);
+            rcvOrder=view.findViewById(R.id.rcvOrder);
+            llListOrder=view.findViewById(R.id.llListOrder);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -111,12 +130,20 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      * @created_by cvmanh on 01/26/2021
      */
     private void viewClickListener(){
-        tvAddFood.setOnClickListener(this);
+        try {
+            tvAddFood.setOnClickListener(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void getListOrder(){
-        mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);
-        mFragmentListOrderPresenter.getListOrder(getActivity());
+        try {
+            mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);
+            mFragmentListOrderPresenter.getListOrder(getActivity());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -128,11 +155,15 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tvAddFood:{
-                startActivity(new Intent(getContext(),ActivityOrder.class));
-                break;
+        try {
+            switch (view.getId()){
+                case R.id.tvAddFood:{
+                    startActivity(new Intent(getContext(),ActivityOrder.class));
+                    break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -145,16 +176,17 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      */
     @Override
     public void getListOrderSuccess(List<OrderDetail> listOrderDetail) {
-        mListOrderDetail=listOrderDetail;
-        mOrderAdapter=new OrderAdapter(getActivity(),R.layout.item_order,mListOrderDetail);
-        rcvOrder.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
-        rcvOrder.setAdapter(mOrderAdapter);
-        mOrderAdapter.notifyDataSetChanged();
-        mOrderAdapter.setmICLickButtonRemove(this);
-//        tvAddFood.setVisibility(View.GONE);
-//        tvNoOrder.setVisibility(View.GONE);
-//        ivLogo.setVisibility(View.GONE);
-//        llListOrder.setBackgroundColor(getResources().getColor(R.color.grey_lighh));
+        try {
+            mListOrderDetail=listOrderDetail;
+            mOrderAdapter=new OrderAdapter(getActivity(),R.layout.item_order,mListOrderDetail);
+            rcvOrder.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+            rcvOrder.setAdapter(mOrderAdapter);
+            mOrderAdapter.notifyDataSetChanged();
+            mOrderAdapter.setmICLickButtonRemove(this);
+            checkListOrderSize();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -164,8 +196,12 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      */
     @Override
     public void removeOrderSuccess() {
-        getListOrder();
-        mDialogConfirmRemove.dismiss();
+       try {
+           getListOrder();
+           mDialogConfirmRemove.dismiss();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     /**
@@ -187,22 +223,26 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
      */
     @Override
     public void setOnClickButtoRemove(int orderID) {
-        mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);
-        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
-        builder.setTitle(getResources().getString(R.string.app));
-        builder.setMessage(getResources().getString(R.string.remove_confirm));
-        builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mFragmentListOrderPresenter.removeItemOrder(getActivity(),orderID);
-            }
-        });
-        mDialogConfirmRemove=builder.create();
-        mDialogConfirmRemove.show();
+        try {
+            mFragmentListOrderPresenter=new FragmentListOrderPresenter(this);
+            AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+            builder.setTitle(getResources().getString(R.string.app));
+            builder.setMessage(getResources().getString(R.string.remove_confirm));
+            builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mFragmentListOrderPresenter.removeItemOrder(getActivity(),orderID);
+                }
+            });
+            mDialogConfirmRemove=builder.create();
+            mDialogConfirmRemove.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

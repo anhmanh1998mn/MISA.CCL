@@ -12,6 +12,8 @@ public interface IActivityBill {
         public void getOrderDetail(Activity activity,int orderID);
 
         public void processCaculator(Activity activity,String resultProcess,String nameClick,float amount);
+
+        public void updateOrderStatus(Activity activity,int orderID);
     }
 
     public interface IActivityBillView{
@@ -20,6 +22,8 @@ public interface IActivityBill {
         public void resultEnterProcessSuccess(String result);
 
         public void resultMoneyOutSuccess(String moneyOut);
+
+        public void updateOrderStatusSuccess();
 
         public void onFailed();
     }

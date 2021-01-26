@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.model;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -48,73 +49,77 @@ public class ActivityBillModel {
      * @created_by cvmanh on 01/25/2021
      */
     public void getOrderDetail(Activity activity,int orderID){
-        mListOrderDetaill=new ArrayList<>();
-        mSqLiteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-        Cursor cursor=mSqLiteDatabase.rawQuery("SELECT "+DatabaseInfomation.TABLE_ORDERS+"."
-                +DatabaseInfomation.COLUMN_ORDER_ID+"" +
-                ","+DatabaseInfomation.COLUMN_ORDER_STATUS+","+DatabaseInfomation.COLUMN_TABLE_NAME+"" +
-                ","+DatabaseInfomation.COLUMN_TOTAL_PEOPLE+","+DatabaseInfomation.COLUM_ORDER_AMOUNT+"," +
-                ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+","
-                +DatabaseInfomation.COLUMN_IMAGE+"," +
-                ""+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUM_ORDER_DETAIL_ID+","
-                +DatabaseInfomation.COLUMN_QUANTITY+","+DatabaseInfomation.TABLE_COLORS+"."+
-                DatabaseInfomation.COLUMN_COLOR_ID+","+DatabaseInfomation.COLUMN_COLOR_KEY+","
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."+
-                DatabaseInfomation.COLUMN_MYPRODUCT_ID+","+DatabaseInfomation.COLUMN_PRODUCT_PRICE+","+
-                DatabaseInfomation.COLUMN_PRODUCT_STATUS+","+DatabaseInfomation.TABLE_UNITS+"."
-                +DatabaseInfomation.COLUMN_UNIT_ID+","
-                +DatabaseInfomation.COLUMN_UNIT_NAME+","
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_NAME+","+
-                DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+" FROM "
-                +DatabaseInfomation.TABLE_ORDERS+", "
-                +DatabaseInfomation.TABLE_UNITS+","
-                +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","+DatabaseInfomation.TABLE_COLORS+","
-                +DatabaseInfomation.TABLE_ORDER_DETAIL+","
-                +DatabaseInfomation.TABLE_MYPRODUCTS+" WHERE "
-                +DatabaseInfomation.TABLE_ORDERS+"."
-                +DatabaseInfomation.COLUMN_ORDER_ID+"="
-                +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                +DatabaseInfomation.COLUMN_ORDER_ID+" AND "
-                +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                +DatabaseInfomation.COLUMN_MYPRODUCT_ID+"="
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                +DatabaseInfomation.COLUMN_MYPRODUCT_ID+" AND "
-                +DatabaseInfomation.TABLE_UNITS+"."+DatabaseInfomation.COLUMN_UNIT_ID+"="
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_UNIT_ID+" AND "
-                +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
-                +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="+DatabaseInfomation.TABLE_MYPRODUCTS
-                +"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND "
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                +DatabaseInfomation.COLUMN_COLOR_ID+"="+DatabaseInfomation.TABLE_COLORS+"."
-                +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
-                +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"="+orderID+"",null);
-        for(int i=cursor.getCount()-1;i>=0;i--){
-            cursor.moveToPosition(i);
-            mListOrderDetaill.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
-                    new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
-                            cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_STATUS)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TABLE_NAME)),
-                            cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TOTAL_PEOPLE)),
-                            cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_AMOUNT))),
+        try {
+            mListOrderDetaill=new ArrayList<>();
+            mSqLiteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor=mSqLiteDatabase.rawQuery("SELECT "+DatabaseInfomation.TABLE_ORDERS+"."
+                    +DatabaseInfomation.COLUMN_ORDER_ID+"" +
+                    ","+DatabaseInfomation.COLUMN_ORDER_STATUS+","+DatabaseInfomation.COLUMN_TABLE_NAME+"" +
+                    ","+DatabaseInfomation.COLUMN_TOTAL_PEOPLE+","+DatabaseInfomation.COLUM_ORDER_AMOUNT+"," +
+                    ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+","
+                    +DatabaseInfomation.COLUMN_IMAGE+"," +
+                    ""+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUM_ORDER_DETAIL_ID+","
+                    +DatabaseInfomation.COLUMN_QUANTITY+","+DatabaseInfomation.TABLE_COLORS+"."+
+                    DatabaseInfomation.COLUMN_COLOR_ID+","+DatabaseInfomation.COLUMN_COLOR_KEY+","
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+
+                    DatabaseInfomation.COLUMN_MYPRODUCT_ID+","+DatabaseInfomation.COLUMN_PRODUCT_PRICE+","+
+                    DatabaseInfomation.COLUMN_PRODUCT_STATUS+","+DatabaseInfomation.TABLE_UNITS+"."
+                    +DatabaseInfomation.COLUMN_UNIT_ID+","
+                    +DatabaseInfomation.COLUMN_UNIT_NAME+","
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_NAME+","+
+                    DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+" FROM "
+                    +DatabaseInfomation.TABLE_ORDERS+", "
+                    +DatabaseInfomation.TABLE_UNITS+","
+                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","+DatabaseInfomation.TABLE_COLORS+","
+                    +DatabaseInfomation.TABLE_ORDER_DETAIL+","
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+" WHERE "
+                    +DatabaseInfomation.TABLE_ORDERS+"."
+                    +DatabaseInfomation.COLUMN_ORDER_ID+"="
+                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
+                    +DatabaseInfomation.COLUMN_ORDER_ID+" AND "
+                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
+                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+"="
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
+                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+" AND "
+                    +DatabaseInfomation.TABLE_UNITS+"."+DatabaseInfomation.COLUMN_UNIT_ID+"="
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_UNIT_ID+" AND "
+                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
+                    +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="+DatabaseInfomation.TABLE_MYPRODUCTS
+                    +"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND "
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
+                    +DatabaseInfomation.COLUMN_COLOR_ID+"="+DatabaseInfomation.TABLE_COLORS+"."
+                    +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
+                    +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"="+orderID+"",null);
+            for(int i=cursor.getCount()-1;i>=0;i--){
+                cursor.moveToPosition(i);
+                mListOrderDetaill.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
+                        new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
+                                cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_STATUS)),
+                                cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)),
+                                cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TABLE_NAME)),
+                                cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TOTAL_PEOPLE)),
+                                cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_AMOUNT))),
 
-                    new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
-                            cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_PRICE)),
-                            cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_STATUS)),
-                            new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
-                                    cursor.getBlob(cursor.getColumnIndex(DatabaseInfomation.COLUMN_IMAGE))),
-                            new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
-                                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))),
-                            new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
-                                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY)))),
-                    cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY))));
+                        new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
+                                cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
+                                cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_PRICE)),
+                                cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_STATUS)),
+                                new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
+                                        cursor.getBlob(cursor.getColumnIndex(DatabaseInfomation.COLUMN_IMAGE))),
+                                new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
+                                        cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))),
+                                new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
+                                        cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY)))),
+                        cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY))));
+            }
+            if(cursor!=null){
+                mIActivityBillModel.getOrderDetail(mListOrderDetaill);
+                return;
+            }
+            mIActivityBillModel.onFailed();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if(cursor!=null){
-            mIActivityBillModel.getOrderDetail(mListOrderDetaill);
-            return;
-        }
-        mIActivityBillModel.onFailed();
     }
 
     /**
@@ -240,12 +245,31 @@ public class ActivityBillModel {
         }
     }
 
+    public void updateOrderStatus(Activity activity,int orderID){
+        try {
+            mSqLiteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
+            ContentValues contentValues=new ContentValues();
+            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS,2); // 2: trạng thái order là đã thu tiền
+            long result=mSqLiteDatabase.update(DatabaseInfomation.TABLE_ORDERS,contentValues,
+                    DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
+            if(result>0){
+                mIActivityBillModel.updateOrderStatusSuccess();
+                return;
+            }
+            mIActivityBillModel.onFailed();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public interface IActivityBillModel{
         public void getOrderDetail(List<OrderDetail> listOrderDetail);
 
         public void resultTextEnter(String moneyIn);
 
         public void resultSuccess(String amount);
+
+        public void updateOrderStatusSuccess();
 
         public void onFailed();
     }

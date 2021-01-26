@@ -60,15 +60,19 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.cvColor.getBackground().setTint(android.graphics.Color.parseColor(mListColor.get(position).getColorName()));
-        holder.cvColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mIColorSelection!=null){
-                    mIColorSelection.onClickListener(mListColor.get(position).getColorName());
+        try {
+            holder.cvColor.getBackground().setTint(android.graphics.Color.parseColor(mListColor.get(position).getColorName()));
+            holder.cvColor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mIColorSelection!=null){
+                        mIColorSelection.onClickListener(mListColor.get(position).getColorName(),mListColor.get(position).getColorID());
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -83,12 +87,16 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cvColor=itemView.findViewById(R.id.cvColor);
-            tvTick=itemView.findViewById(R.id.tvTick);
+            try {
+                cvColor=itemView.findViewById(R.id.cvColor);
+                tvTick=itemView.findViewById(R.id.tvTick);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
     public interface IColorSelection{
-        public void onClickListener(String keyColor);
+        public void onClickListener(String keyColor,int colorID);
     }
 }

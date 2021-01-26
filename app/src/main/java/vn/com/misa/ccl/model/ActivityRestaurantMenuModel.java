@@ -35,7 +35,7 @@ public class ActivityRestaurantMenuModel {
         this.mIResultActivityRestaurantMenu = mIResultFragmentShopMenu;
     }
 
-    private List<ProductCategory> mListProductCategory;
+    public static List<ProductCategory> mListProductCategory;
 
     private SQLiteDatabase mSqliteDatabase;
 
@@ -103,25 +103,30 @@ public class ActivityRestaurantMenuModel {
      * @created_by cvmanh on 01/22/2021
      */
     public void initMenu(Activity activity,List<ProductCategory> listMenu){
-        long result = 0;
-        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        ContentValues contentValues=new ContentValues();
-        for(int i=0;i<listMenu.size();i++){
-            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME,listMenu.get(i).getmProduct().getmProductName());
-            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE,listMenu.get(i).getmProduct().getmProductPrice());
-            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS,listMenu.get(i).getmProduct().getmProductStatus());
-            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID,listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
-            contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID,listMenu.get(i).getmProduct().getmUnit().getmUnitID());
-            contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID,listMenu.get(i).getmProduct().getmColor().getColorID());
-            result=mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS,null,contentValues);
-        }
+        try {
+            long result = 0;
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            ContentValues contentValues=new ContentValues();
+            for(int i=0;i<listMenu.size();i++){
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME,listMenu.get(i).getmProduct().getmProductName());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE,listMenu.get(i).getmProduct().getmProductPrice());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS,listMenu.get(i).getmProduct().getmProductStatus());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID,listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
+                contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID,listMenu.get(i).getmProduct().getmUnit().getmUnitID());
+                contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID,listMenu.get(i).getmProduct().getmColor().getColorID());
+                result=mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS,null,contentValues);
+            }
 
-        if(result>0){
-            Cursor cursor=mSqliteDatabase.rawQuery("Select * FROM "+DatabaseInfomation.TABLE_MYPRODUCTS+"",null);
-            Log.d("MenuSize",cursor.getCount()+"");
-            mIResultActivityRestaurantMenu.initMenuSuccess();
+            if(result>0){
+                Cursor cursor=mSqliteDatabase.rawQuery("Select * FROM "+DatabaseInfomation.TABLE_MYPRODUCTS+"",null);
+                Log.d("MenuSize",cursor.getCount()+"");
+                mIResultActivityRestaurantMenu.initMenuSuccess();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
+
 
     public interface IResultActivityRestaurantMenu {
         public void loadListProductSuccess(List<ProductCategory> listProductCategory);

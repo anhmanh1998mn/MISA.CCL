@@ -63,23 +63,27 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvUnitName.setText(mListUnit.get(position).getmUnitName());
-        holder.clUnit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mIItemClickListener!=null){
-                    mIItemClickListener.getUnitNameItemClick(mListUnit.get(position).getmUnitName(),
-                            mListUnit.get(position).getmUnitID());
-                }
+        try {
+            holder.tvUnitName.setText(mListUnit.get(position).getmUnitName());
+            holder.clUnit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mIItemClickListener!=null){
+                        mIItemClickListener.getUnitNameItemClick(mListUnit.get(position).getmUnitName(),
+                                mListUnit.get(position).getmUnitID());
+                    }
 
-                if(clUnit!=null && ivCheck!=null){
-                    ivCheck.setVisibility(View.GONE);
+                    if(clUnit!=null && ivCheck!=null){
+                        ivCheck.setVisibility(View.GONE);
+                    }
+                    holder.ivItemUnit.setVisibility(View.VISIBLE);
+                    clUnit= holder.clUnit ;
+                    ivCheck=holder.ivItemUnit;
                 }
-                holder.ivItemUnit.setVisibility(View.VISIBLE);
-                clUnit= holder.clUnit ;
-                ivCheck=holder.ivItemUnit;
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -97,10 +101,14 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUnitName=itemView.findViewById(R.id.tvUnitName);
-            ivUpdateUnitName=itemView.findViewById(R.id.ivUpdateUnitName);
-            ivItemUnit=itemView.findViewById(R.id.ivItemUnit);
-            clUnit=itemView.findViewById(R.id.clUnit);
+            try {
+                tvUnitName=itemView.findViewById(R.id.tvUnitName);
+                ivUpdateUnitName=itemView.findViewById(R.id.ivUpdateUnitName);
+                ivItemUnit=itemView.findViewById(R.id.ivItemUnit);
+                clUnit=itemView.findViewById(R.id.clUnit);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

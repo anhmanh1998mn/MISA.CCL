@@ -21,6 +21,7 @@ import vn.com.misa.ccl.adapter.ProductCategoryAdapter;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.presenter.ActivityRestaurantMenuPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.util.Common;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 /**
@@ -32,7 +33,7 @@ import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 */
 
 public class ActivityRestaurantMenu extends AppCompatActivity implements IActivityRestaurantMenu.IFragmentRestaurantMenuView,
-        View.OnClickListener {
+        View.OnClickListener{
 
     private ProductCategoryAdapter mProductAdapter;
 
@@ -62,6 +63,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         loadListProduct();
 
         clickViewListener();
+
     }
 
     /**
@@ -89,6 +91,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         try {
             Intent intent=getIntent();
             mCategoryID=intent.getIntExtra("ab",-1);
+            Common.CATEGORY_ID=mCategoryID;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -102,7 +105,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
     private void loadListProduct() {
         try {
             mRestaurantMenuPresenter =new ActivityRestaurantMenuPresenter(this);
-            mRestaurantMenuPresenter.loadListProduct(this,mCategoryID);
+            mRestaurantMenuPresenter.loadListProduct(this,Common.CATEGORY_ID);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -138,6 +141,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         dialogSetupSuccess.dismiss();
         startActivity(new Intent(this, ActivityRestaurantManage.class));
     }
+
 
     /**
      * Mục đích method thực hiện việc nhận kết quả lấy dữ liệu thất bại và xử lý
@@ -203,14 +207,35 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * @created_by cvmanh on 01/26/2021
      */
     private void showDialogSetupSuccess(){
-         dialogSetupSuccess=new Dialog(this);
-        dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
-        dialogSetupSuccess.setCanceledOnTouchOutside(false);
-        dialogSetupSuccess.show();
-        tvSuccessNext=dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
-        ConstraintLayout clSuccess=dialogSetupSuccess.findViewById(R.id.clSuccess);
-        clSuccess.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
-        clSuccess.requestLayout();
-        tvSuccessNext.setOnClickListener(this);
+         try {
+             dialogSetupSuccess=new Dialog(this);
+             dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
+             dialogSetupSuccess.setCanceledOnTouchOutside(false);
+             dialogSetupSuccess.show();
+             tvSuccessNext=dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
+             ConstraintLayout clSuccess=dialogSetupSuccess.findViewById(R.id.clSuccess);
+             clSuccess.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
+             clSuccess.requestLayout();
+             tvSuccessNext.setOnClickListener(this);
+         }catch (Exception e){
+             e.printStackTrace();
+         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc hiển thị lại danh sách menu khi người dùng xóa item
+     *
+     * @created_by cvmanh on 01/26/2021
+     */
+    @Override
+    protected void onRestart() {
+        mProductAdapter.notifyDataSetChanged();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        mProductAdapter.notifyDataSetChanged();
+        super.onResume();
     }
 }

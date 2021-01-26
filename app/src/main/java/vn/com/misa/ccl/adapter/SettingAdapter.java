@@ -49,16 +49,20 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(position ==3||position ==6) { //3: Item là Thiết lập, 6: Item là trợ giúp
+        try {
+            if(position ==3||position ==6) { //3: Item là Thiết lập, 6: Item là trợ giúp
+                holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
+                holder.line.setVisibility(View.VISIBLE);
+                holder.tvSettingName.setTextSize(13);
+                holder.tvSettingName.setTextColor(mContext.getResources().getColor(R.color.grey));
+                return;
+            }
+            Drawable drawableLeft = mContext.getResources().getDrawable(mListSetting.get(position).getIconSetting());
+            holder.tvSettingName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
             holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
-            holder.line.setVisibility(View.VISIBLE);
-            holder.tvSettingName.setTextSize(13);
-            holder.tvSettingName.setTextColor(mContext.getResources().getColor(R.color.grey));
-            return;
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        Drawable drawableLeft = mContext.getResources().getDrawable(mListSetting.get(position).getIconSetting());
-        holder.tvSettingName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
-        holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
     }
 
     @Override
@@ -72,8 +76,12 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
         private View line;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvSettingName=itemView.findViewById(R.id.tvSettingName);
-            line=itemView.findViewById(R.id.line);
+            try {
+                tvSettingName=itemView.findViewById(R.id.tvSettingName);
+                line=itemView.findViewById(R.id.line);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

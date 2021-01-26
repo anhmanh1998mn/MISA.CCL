@@ -65,21 +65,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvCategoryName.setText(mListCategory.get(position).getmCategoryName());
-        holder.clRestaurantType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mIItemClickListener!=null){
-                    mIItemClickListener.onClickListener(mListCategory.get(position).getmCategoryID());
+        try {
+            holder.tvCategoryName.setText(mListCategory.get(position).getmCategoryName());
+            holder.clRestaurantType.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mIItemClickListener!=null){
+                        mIItemClickListener.onClickListener(mListCategory.get(position).getmCategoryID());
+                    }
+                    if(clCheck!=null && ivCheck!=null){
+                        ivCheck.setVisibility(View.GONE);
+                    }
+                    holder.ivTick.setVisibility(View.VISIBLE);
+                    clCheck= holder.clRestaurantType ;
+                    ivCheck=holder.ivTick;
                 }
-                if(clCheck!=null && ivCheck!=null){
-                    ivCheck.setVisibility(View.GONE);
-                }
-                holder.ivTick.setVisibility(View.VISIBLE);
-                clCheck= holder.clRestaurantType ;
-                ivCheck=holder.ivTick;
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -97,9 +101,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvCategoryName=itemView.findViewById(R.id.tvCategoryName);
-            ivTick=itemView.findViewById(R.id.ivTick);
-            clRestaurantType=itemView.findViewById(R.id.clRestaurantType);
+            try {
+                tvCategoryName=itemView.findViewById(R.id.tvCategoryName);
+                ivTick=itemView.findViewById(R.id.ivTick);
+                clRestaurantType=itemView.findViewById(R.id.clRestaurantType);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

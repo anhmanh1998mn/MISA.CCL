@@ -90,4 +90,5 @@
     <string name="accept">ĐỒNG Ý</string>
     <string name="suggest_money">GỢI Ý TIỀN MẶT</string>
     <string name="ten_money">10.000</string>
+    <string name="update_status">Đã thu tiền thành công. Vui lòng chọn món mới.</string>
 </resources>

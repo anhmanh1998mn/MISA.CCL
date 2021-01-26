@@ -53,42 +53,46 @@ public class ActivityOrderModel {
      * @created_by cvmanh on 01/25/2021
      */
     public void getListMenu(Activity activity){
-        mListMenu=new ArrayList<>();
-        mSqliteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_UNITS+","
-                +DatabaseInfomation.TABLE_MYPRODUCTS+","
-                +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","
-                +DatabaseInfomation.TABLE_COLORS+" WHERE "
-                +DatabaseInfomation.TABLE_UNITS+"."
-                +DatabaseInfomation.COLUMN_UNIT_ID+"="
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                +DatabaseInfomation.COLUMN_UNIT_ID+" AND "
-                +DatabaseInfomation.TABLE_COLORS+"."
-                +DatabaseInfomation.COLUMN_COLOR_ID+"="
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
-                +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
-                +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="
-                +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"",null);
-        for(int i=0;i<cursor.getCount();i++){
-            cursor.moveToPosition(i);
-            mListMenu.add(new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
-                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
-                    cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_PRICE)),
-                    cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_STATUS)),
-                    new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
-                            cursor.getBlob(cursor.getColumnIndex(DatabaseInfomation.COLUMN_IMAGE))),
-                    new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))),
-                    new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY))),
-                    0));
+        try {
+            mListMenu=new ArrayList<>();
+            mSqliteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_UNITS+","
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+","
+                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","
+                    +DatabaseInfomation.TABLE_COLORS+" WHERE "
+                    +DatabaseInfomation.TABLE_UNITS+"."
+                    +DatabaseInfomation.COLUMN_UNIT_ID+"="
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
+                    +DatabaseInfomation.COLUMN_UNIT_ID+" AND "
+                    +DatabaseInfomation.TABLE_COLORS+"."
+                    +DatabaseInfomation.COLUMN_COLOR_ID+"="
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
+                    +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
+                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
+                    +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="
+                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"",null);
+            for(int i=0;i<cursor.getCount();i++){
+                cursor.moveToPosition(i);
+                mListMenu.add(new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
+                        cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_PRICE)),
+                        cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_STATUS)),
+                        new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
+                                cursor.getBlob(cursor.getColumnIndex(DatabaseInfomation.COLUMN_IMAGE))),
+                        new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
+                                cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))),
+                        new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
+                                cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY))),
+                        0));
+            }
+            if(cursor!=null){
+                mIActivityOrderModel.getListMenuSuccess(mListMenu);
+                return;
+            }
+            mIActivityOrderModel.onFailed();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if(cursor!=null){
-            mIActivityOrderModel.getListMenuSuccess(mListMenu);
-            return;
-        }
-        mIActivityOrderModel.onFailed();
     }
 
     /**
@@ -100,87 +104,91 @@ public class ActivityOrderModel {
      * @created_by cvmanh on 01/25/2021
      */
     public void getResultCaculate(String textInput,String numberEnter){
-        switch (textInput){
-            case "C":{
-                resultNumberEnter="0";
-                mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                break;
-            }
-            case "Giảm":{
-                if(Integer.parseInt(numberEnter.trim())<1){
+        try {
+            switch (textInput){
+                case "C":{
                     resultNumberEnter="0";
                     mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                    return;
+                    break;
                 }
-                resultNumberEnter=((Integer.parseInt(numberEnter)-1)+"");
-                mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                break;
-            }
-            case "Tăng":{
-                if(numberEnter.equals("")){
-                    resultNumberEnter=resultNumberEnter+1;
+                case "Giảm":{
+                    if(Integer.parseInt(numberEnter.trim())<1){
+                        resultNumberEnter="0";
+                        mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
+                        return;
+                    }
+                    resultNumberEnter=((Integer.parseInt(numberEnter)-1)+"");
                     mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                    return;
+                    break;
                 }
-                resultNumberEnter=((Integer.parseInt(numberEnter)+1)+"");
-                mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                break;
-            }
-            case "":{
-                if(numberEnter.equals("0")||numberEnter.length()==1){
-                    resultNumberEnter="0";
+                case "Tăng":{
+                    if(numberEnter.equals("")){
+                        resultNumberEnter=resultNumberEnter+1;
+                        mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
+                        return;
+                    }
+                    resultNumberEnter=((Integer.parseInt(numberEnter)+1)+"");
                     mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                    return;
+                    break;
                 }
-                resultNumberEnter=(numberEnter.substring(0,numberEnter.length()-1));
-                mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                break;
-            }
-            case "7":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "8":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "9":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "4":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "5":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "6":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "1":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "2":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "3":{
-                checkNumberCaculate(numberEnter,textInput);
-                break;
-            }
-            case "0":{
-                if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
-                    resultNumberEnter=(textInput);
+                case "":{
+                    if(numberEnter.equals("0")||numberEnter.length()==1){
+                        resultNumberEnter="0";
+                        mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
+                        return;
+                    }
+                    resultNumberEnter=(numberEnter.substring(0,numberEnter.length()-1));
                     mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
-                    return;
+                    break;
                 }
-                checkNumberCaculate(numberEnter,textInput);
-                break;
+                case "7":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "8":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "9":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "4":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "5":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "6":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "1":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "2":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "3":{
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
+                case "0":{
+                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
+                        resultNumberEnter=(textInput);
+                        mIActivityOrderModel.resultProcessCaculateSuccess(resultNumberEnter);
+                        return;
+                    }
+                    checkNumberCaculate(numberEnter,textInput);
+                    break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -223,46 +231,50 @@ public class ActivityOrderModel {
      * @created_by cvmanh on 01/25/2021
      */
     public void addNewOrder(Activity activity,List<Product> listProduct,String tableName,String totalPeople,float amount,int typeClick){
-        mSqliteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-        if(tableName.equals("")){
-            tableName="0";
-        }
-        if(totalPeople.equals("")){
-            totalPeople="0";
-        }
-        for(int i=0;i<listProduct.size();i++){
-            if(listProduct.get(i).getQuantity()>0){
-                mSumQuantity=mSumQuantity+1;
+        try {
+            mSqliteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
+            if(tableName.equals("")){
+                tableName="0";
             }
-        }
-        if(mSumQuantity>0){
-            ContentValues contentValues=new ContentValues();
-            ContentValues contentOrderDetail=new ContentValues();
-            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS,1);
-            contentValues.put(DatabaseInfomation.COLUMN_ORDER_CREATED_AT,getDate());
-            contentValues.put(DatabaseInfomation.COLUMN_TABLE_NAME,tableName);
-            contentValues.put(DatabaseInfomation.COLUMN_TOTAL_PEOPLE,Integer.parseInt(totalPeople));
-            contentValues.put(DatabaseInfomation.COLUM_ORDER_AMOUNT,amount);
-            long resultInsertOrder=mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDERS,null,contentValues);
-            if(resultInsertOrder>0){
-                for (int i=0;i<listProduct.size();i++){
-                    if(listProduct.get(i).getQuantity()>0){
-                        contentOrderDetail.put(DatabaseInfomation.COLUMN_ORDER_ID,resultInsertOrder);
-                        contentOrderDetail.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID,listProduct.get(i).getmProductID());
-                        contentOrderDetail.put(DatabaseInfomation.COLUMN_QUANTITY,listProduct.get(i).getQuantity());
-                        mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDER_DETAIL,null,contentOrderDetail);
-                    }
+            if(totalPeople.equals("")){
+                totalPeople="0";
+            }
+            for(int i=0;i<listProduct.size();i++){
+                if(listProduct.get(i).getQuantity()>0){
+                    mSumQuantity=mSumQuantity+1;
                 }
             }
-            if(typeClick== CICK_BUTTON_SAVE){
-                mIActivityOrderModel.addNewOrderSuccess();
-            }else {
-                mIActivityOrderModel.addNewOrderTwoSuccess(Integer.parseInt(String.valueOf((resultInsertOrder))));
-            }
+            if(mSumQuantity>0){
+                ContentValues contentValues=new ContentValues();
+                ContentValues contentOrderDetail=new ContentValues();
+                contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS,1); // 1: trạng thái đơn hàng là chưa thu tiền
+                contentValues.put(DatabaseInfomation.COLUMN_ORDER_CREATED_AT,getDate());
+                contentValues.put(DatabaseInfomation.COLUMN_TABLE_NAME,tableName);
+                contentValues.put(DatabaseInfomation.COLUMN_TOTAL_PEOPLE,Integer.parseInt(totalPeople));
+                contentValues.put(DatabaseInfomation.COLUM_ORDER_AMOUNT,amount);
+                long resultInsertOrder=mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDERS,null,contentValues);
+                if(resultInsertOrder>0){
+                    for (int i=0;i<listProduct.size();i++){
+                        if(listProduct.get(i).getQuantity()>0){
+                            contentOrderDetail.put(DatabaseInfomation.COLUMN_ORDER_ID,resultInsertOrder);
+                            contentOrderDetail.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID,listProduct.get(i).getmProductID());
+                            contentOrderDetail.put(DatabaseInfomation.COLUMN_QUANTITY,listProduct.get(i).getQuantity());
+                            mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDER_DETAIL,null,contentOrderDetail);
+                        }
+                    }
+                }
+                if(typeClick== CICK_BUTTON_SAVE){
+                    mIActivityOrderModel.addNewOrderSuccess();
+                }else {
+                    mIActivityOrderModel.addNewOrderTwoSuccess(Integer.parseInt(String.valueOf((resultInsertOrder))));
+                }
 
-            return;
+                return;
+            }
+            mIActivityOrderModel.onFailed();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        mIActivityOrderModel.onFailed();
     }
 
     /**
@@ -273,13 +285,18 @@ public class ActivityOrderModel {
      * @created_by cvmanh on 01/25/2021
      */
     private String getDate(){
-        Calendar calendar=Calendar.getInstance();
-        int mYear=calendar.get(Calendar.YEAR);
-        int mMonth=calendar.get(Calendar.MONTH);
-        int mDay=calendar.get(Calendar.DATE);
-        calendar.set(mYear,mMonth,mDay);
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
-        return simpleDateFormat.format(calendar.getTime());
+        try {
+            Calendar calendar=Calendar.getInstance();
+            int mYear=calendar.get(Calendar.YEAR);
+            int mMonth=calendar.get(Calendar.MONTH);
+            int mDay=calendar.get(Calendar.DATE);
+            calendar.set(mYear,mMonth,mDay);
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(calendar.getTime());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public interface IActivityOrderModel{

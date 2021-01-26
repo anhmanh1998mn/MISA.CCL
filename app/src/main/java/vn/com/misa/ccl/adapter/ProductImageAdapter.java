@@ -49,17 +49,21 @@ public class ProductImageAdapter extends RecyclerView.Adapter<ProductImageAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Bitmap bitmap= BitmapFactory.decodeByteArray(mListProductImage.get(position).getmImage(),0,
-                mListProductImage.get(position).getmImage().length);
-        holder.ivProductImage.setImageBitmap(bitmap);
-        holder.ivProductImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mClickItemListener!=null){
-                    mClickItemListener.selectionItem(mListProductImage.get(position).getmImage());
+        try {
+            Bitmap bitmap= BitmapFactory.decodeByteArray(mListProductImage.get(position).getmImage(),0,
+                    mListProductImage.get(position).getmImage().length);
+            holder.ivProductImage.setImageBitmap(bitmap);
+            holder.ivProductImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mClickItemListener!=null){
+                        mClickItemListener.selectionItem(mListProductImage.get(position).getmImage(),mListProductImage.get(position).getmProductImageID());
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,11 +77,15 @@ public class ProductImageAdapter extends RecyclerView.Adapter<ProductImageAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivProductImage=itemView.findViewById(R.id.ivProductImage);
+            try {
+                ivProductImage=itemView.findViewById(R.id.ivProductImage);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
     public interface IOnClickItemListener{
-        public void selectionItem(byte[] productImage);
+        public void selectionItem(byte[] productImage,int imageID);
     }
 }
