@@ -9,12 +9,12 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Setting;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công vệc của ActivityRestaurantManage
-*
-‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công vệc của ActivityRestaurantManage
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class ActivityRestaurantManageModel {
 
@@ -30,12 +30,11 @@ public class ActivityRestaurantManageModel {
      * Mục đích method thực hiện việc tạo dữ liệu danh sách setting và gửi dữ liệu về presenter
      *
      * @param activity intance activity
-     *
      * @created_by cvmanh on 01/25/2021
      */
-    public void getListSetting(Activity activity){
+    public void getListSetting(Activity activity) {
         try {
-            mListSetting=new ArrayList<>();
+            mListSetting = new ArrayList<>();
             mListSetting.add(new Setting(activity.getResources().getString(R.string.sell), R.drawable.ic_coffee_cup_on_hand));
             mListSetting.add(new Setting(activity.getResources().getString(R.string.menu), R.drawable.ic_notes));
             mListSetting.add(new Setting(activity.getResources().getString(R.string.chart), R.drawable.ic_bar_graph));
@@ -47,17 +46,17 @@ public class ActivityRestaurantManageModel {
             mListSetting.add(new Setting(activity.getResources().getString(R.string.introduce), R.drawable.ic_share));
             mListSetting.add(new Setting(activity.getResources().getString(R.string.rate), R.drawable.ic_star));
             mListSetting.add(new Setting(activity.getResources().getString(R.string.product_infomation), R.drawable.ic_rounded_info_button));
-            if (mListSetting!=null){
+            if (mListSetting != null) {
                 mIManageModel.getListSettingSucess(mListSetting);
                 return;
             }
             mIManageModel.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface IActivityManageModel{
+    public interface IActivityManageModel {
         public void getListSettingSucess(List<Setting> listSetting);
 
         public void onFailed();

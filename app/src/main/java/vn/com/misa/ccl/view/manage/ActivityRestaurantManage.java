@@ -27,12 +27,12 @@ import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
 
 /**
-‐ Mục đích Class thực hiện những công việc chứa các fragment quản lý cửa hàng
-*
-‐ {@link FragmentListOrder}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện những công việc chứa các fragment quản lý cửa hàng
+ * <p>
+ * ‐ {@link FragmentListOrder}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class ActivityRestaurantManage extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantManage.IActivityManageView {
 
@@ -40,7 +40,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu,tvAdd;
+    private TextView tvMenu, tvAdd;
 
     private ImageView ivUser;
 
@@ -73,13 +73,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      */
     private void initView() {
         try {
-            dlRestaurantManage=findViewById(R.id.dlRestaurantManage);
-            tvMenu=findViewById(R.id.tvMenu);
-            ivUser=findViewById(R.id.ivUser);
+            dlRestaurantManage = findViewById(R.id.dlRestaurantManage);
+            tvMenu = findViewById(R.id.tvMenu);
+            ivUser = findViewById(R.id.ivUser);
             ivUser.setClipToOutline(true);
-            rcvMenu=findViewById(R.id.rcvMenu);
-            tvAdd=findViewById(R.id.tvAdd);
-        }catch (Exception e){
+            rcvMenu = findViewById(R.id.rcvMenu);
+            tvAdd = findViewById(R.id.tvAdd);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -91,9 +91,9 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      */
     private void initActionbar() {
         try {
-            tbRestaurantManage=findViewById(R.id.tbRestaurantManage);
+            tbRestaurantManage = findViewById(R.id.tbRestaurantManage);
             setSupportActionBar(tbRestaurantManage);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -103,11 +103,11 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      *
      * @created_by cvmanh on 01/25/2021
      */
-    private void clickViewListener(){
+    private void clickViewListener() {
         try {
             tvMenu.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -116,22 +116,24 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * Mục đích method thực hiện những công việc tương ứng với xự kiện click từ người dùng
      *
      * @param view view
-     *
      * @created_by cvmanh on 01/25/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.tvMenu:{
+            switch (view.getId()) {
+                case R.id.tvMenu: {
                     dlRestaurantManage.openDrawer(GravityCompat.START);
                     break;
                 }
-                case R.id.tvAdd:{
-                    startActivity(new Intent(this, ActivityOrder.class));
+                case R.id.tvAdd: {
+                    Intent intent = new Intent(this, ActivityOrder.class);
+                    intent.putExtra("ORDER_ID", -1);
+                    startActivity(intent);
+                    break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -140,16 +142,15 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * Mục đích method thực hiện việc khởi tạo fragment
      *
      * @param fragment fragment
-     * @see #onCreate
-     *
      * @created_by cvmanh on 01/25/2021
+     * @see #onCreate
      */
-    private void addFragment(Fragment fragment){
+    private void addFragment(Fragment fragment) {
         try {
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frmRestaurantManage,fragment);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frmRestaurantManage, fragment);
             fragmentTransaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -158,14 +159,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * Mục đích method thực hiện việc gọi presenter lấy danh sách setting
      *
      * @return giải thích hàm này trả về
-     *
      * @created_by cvmanh on 01/25/2021
      */
-    private void loadListSetting(){
+    private void loadListSetting() {
         try {
-            mActivityManage=new ActivityRestaurantManagePresenter(this);
+            mActivityManage = new ActivityRestaurantManagePresenter(this);
             mActivityManage.getListSetting(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -174,17 +174,16 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      * Mục đích method thực hiện việc nhận danh sách setting từ presenter và hiển thị lên recycleView
      *
      * @param listSetting Danh sách setting
-     *
      * @created_by cvmanh on 01/25/2021
      */
     @Override
     public void getListSettingSuccess(List<Setting> listSetting) {
         try {
-            mSettingAdapter=new SettingAdapter(this,R.layout.item_setting,listSetting);
-            rcvMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            mSettingAdapter = new SettingAdapter(this, R.layout.item_setting, listSetting);
+            rcvMenu.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             rcvMenu.setAdapter(mSettingAdapter);
             mSettingAdapter.notifyDataSetChanged();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -5,40 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.restaurantsetup.ActivityAppInformation">
+
     <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tbShopType"
         style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:weightSum="5"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
             <TextView
-                android:drawableLeft="@drawable/ic_back"
-                style="@style/Theme.FontTextColor"
                 android:id="@+id/tvBack"
+                style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:drawableLeft="@drawable/ic_back" />
+
             <TextView
                 style="@style/Theme.FontTextLarge"
-                android:gravity="center|left"
-                android:text="@string/product_infomation"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:layout_height="match_parent"/>
+                android:gravity="center|left"
+                android:text="@string/product_infomation" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <ImageView
-        android:scaleType="centerCrop"
-        android:background="@drawable/ic_app_information"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbShopType"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_app_information"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbShopType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

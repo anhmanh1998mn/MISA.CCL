@@ -6,12 +6,12 @@ import com.facebook.CallbackManager;
 
 public interface ISignInView {
 
-    public interface IViewClickListener{
+    public interface IViewClickListener {
         public void onSelectionListenerWithFacebook(Activity mContext, CallbackManager mCallbackManager);
 
     }
 
-    public interface IResultLogin{
+    public interface IResultLogin {
 
         public void signInFail();
 

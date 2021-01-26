@@ -73,14 +73,14 @@
     </LinearLayout>
 
     <View
-        style="@style/Theme.VerticalLine"
         android:id="@+id/vLineFootname"
+        style="@style/Theme.VerticalLine"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/llFoodName" />
 
     <LinearLayout
-        style="@style/Theme.EffectClick"
         android:id="@+id/llFoodPrice"
+        style="@style/Theme.EffectClick"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_smal"
         android:gravity="center"
@@ -96,13 +96,13 @@
             android:text="@string/price" />
 
         <TextView
-            android:drawablePadding="@dimen/margin_small"
             android:id="@+id/tvPrice"
             style="@style/Theme.FontText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
             android:drawableRight="@drawable/ic_foot_menu"
+            android:drawablePadding="@dimen/margin_small"
             android:gravity="right"
             android:text="@string/food_name" />
     </LinearLayout>
@@ -136,15 +136,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
-            android:drawablePadding="@dimen/margin_small"
             android:drawableRight="@drawable/ic_foot_menu"
+            android:drawablePadding="@dimen/margin_small"
             android:gravity="right"
             android:text="@string/food_name" />
     </LinearLayout>
 
     <View
-        style="@style/Theme.VerticalLine"
         android:id="@+id/vLineFootUnit"
+        style="@style/Theme.VerticalLine"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/llFoodUnit" />
 
@@ -166,18 +166,19 @@
             android:text="@string/color_name" />
 
         <androidx.cardview.widget.CardView
-            style="@style/Theme.EffectClick"
             android:id="@+id/cvColor"
-            android:backgroundTint="@color/purple_500"
-            app:cardCornerRadius="100dp"
+            style="@style/Theme.EffectClick"
             android:layout_width="@dimen/height_smal"
-            android:layout_height="@dimen/height_smal">
+            android:layout_height="@dimen/height_smal"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="100dp">
+
             <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/ic_select_color"
                 android:id="@+id/ivColor"
                 android:layout_width="@dimen/size_large"
                 android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_select_color"
                 app:layout_constraintRight_toLeftOf="@id/glOne" />
         </androidx.cardview.widget.CardView>
 

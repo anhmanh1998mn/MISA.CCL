@@ -1,82 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.login.ActivityAccountRegister">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
         style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <TextView
-                android:drawableLeft="@drawable/ic_back"
-                style="@style/Theme.FontTextColor"
                 android:id="@+id/tvBack"
+                style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:drawableLeft="@drawable/ic_back" />
+
             <TextView
                 style="@style/Theme.FontTextLarge"
-                android:text="@string/register_account"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="3.5"
-                android:layout_height="match_parent"/>
+                android:text="@string/register_account" />
+
             <TextView
-                style="@style/Theme.FontTextColor"
                 android:id="@+id/tvNext"
-                android:text="@string/register_confirm"
+                style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:layout_height="match_parent"/>
+                android:text="@string/register_confirm" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <TextView
         style="@style/Theme.FontText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/phone_email_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:text="@string/phone_email_account" />
+
     <EditText
         style="@style/Theme.FontText"
-        android:hint="@string/phone_mail_enter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_mail_enter" />
+
     <TextView
-        android:layout_marginTop="@dimen/notification"
         style="@style/Theme.FontText"
-        android:text="@string/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/notification"
+        android:text="@string/password" />
+
     <EditText
         style="@style/Theme.FontText"
-        android:hint="@string/password_enter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/password_enter" />
+
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
         <Button
-            android:textColor="@color/white"
             style="@style/Theme.FontText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_next"
             android:text="@string/register_account"
             android:textAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_next"/>
+            android:textColor="@color/white" />
+
         <TextView
             android:id="@+id/tvTermOfService"
             style="@style/Theme.FontText"
-            android:text="@string/notification_confirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/notification_confirm" />
     </LinearLayout>
 
 </LinearLayout>

@@ -16,12 +16,12 @@ import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityFoodUpdate
-*
-‐ {@link vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityFoodUpdate
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ActivityFoodUpdateModel {
 
@@ -39,7 +39,7 @@ public class ActivityFoodUpdateModel {
 
     private List<String> mListCaculate;
 
-    private String resultNumberEnter="";
+    private String resultNumberEnter = "";
 
     private List<String> mListOperation;
 
@@ -49,25 +49,24 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc xử lý lấy danh sách màu và gửi tới presenter
      *
      * @param activity instace activity
-     *
      * @created_by cvmanh on 01/19/2021
      */
-    public void loadListColor(Activity activity){
+    public void loadListColor(Activity activity) {
         try {
-            mListColor=new ArrayList<>();
-            mSqliteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-            Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_COLORS+"",null);
-            for(int i=0;i<cursor.getCount();i++){
+            mListColor = new ArrayList<>();
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor = mSqliteDatabase.rawQuery("SELECT * FROM " + DatabaseInfomation.TABLE_COLORS + "", null);
+            for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 mListColor.add(new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
                         cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY))));
             }
-            if(cursor!=null){
+            if (cursor != null) {
                 mIResultActivityFoodUpdate.loadListColorSuccess(mListColor);
                 return;
             }
             mIResultActivityFoodUpdate.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -76,25 +75,24 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc xử lý lấy danh sách hình ảnh và gửi tới presenter
      *
      * @param activity instace activity
-     *
      * @created_by cvmanh on 01/19/2021
      */
-    public void loadListProductImage(Activity activity){
+    public void loadListProductImage(Activity activity) {
         try {
-            mListProductImage=new ArrayList<>();
-            mSqliteDatabase=DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-            Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"",null);
-            for(int i=0;i<cursor.getCount();i++){
+            mListProductImage = new ArrayList<>();
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor = mSqliteDatabase.rawQuery("SELECT * FROM " + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "", null);
+            for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 mListProductImage.add(new ProductImage(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID)),
                         cursor.getBlob(cursor.getColumnIndex(DatabaseInfomation.COLUMN_IMAGE))));
             }
-            if (cursor!=null){
+            if (cursor != null) {
                 mIResultActivityFoodUpdate.loadListImageSuccess(mListProductImage);
                 return;
             }
             mIResultActivityFoodUpdate.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -104,9 +102,9 @@ public class ActivityFoodUpdateModel {
      *
      * @created_by cvmanh on 01/21/2021
      */
-    public void loadCaculating(Activity activity){
+    public void loadCaculating(Activity activity) {
         try {
-            mListCaculate=new ArrayList<>();
+            mListCaculate = new ArrayList<>();
             mListCaculate.add(activity.getResources().getString(R.string.caculator_clear));
             mListCaculate.add(activity.getResources().getString(R.string.caculator_decrease));
             mListCaculate.add(activity.getResources().getString(R.string.caculator_increase));
@@ -128,7 +126,7 @@ public class ActivityFoodUpdateModel {
             mListCaculate.add(activity.getResources().getString(R.string.caculator_dot));
             mListCaculate.add(activity.getResources().getString(R.string.caculator_result));
             mIResultActivityFoodUpdate.loadCaculating(mListCaculate);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -138,142 +136,141 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc xử lý xự kiện click trong máy tính và trả kết quả về prsenter
      *
      * @param numberEnter Giá trị có trong textview
-     * @param  nameClick giá trị người dùng click trong máy tính
-     *
+     * @param nameClick   giá trị người dùng click trong máy tính
      * @created_by cvmanh on 01/21/2021
      */
-    public void processCaculator(Activity activity,String numberEnter,String nameClick){
+    public void processCaculator(Activity activity, String numberEnter, String nameClick) {
         try {
-            switch (nameClick){
-                case "C":{
-                    resultNumberEnter="0";
+            switch (nameClick) {
+                case "C": {
+                    resultNumberEnter = "0";
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "Giảm":{
-                    if(Float.parseFloat(numberEnter.trim())<1){
-                        resultNumberEnter="0";
+                case "Giảm": {
+                    if (Float.parseFloat(numberEnter.trim()) < 1) {
+                        resultNumberEnter = "0";
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    resultNumberEnter=((Float.parseFloat(numberEnter)-1)+"");
+                    resultNumberEnter = ((Float.parseFloat(numberEnter) - 1) + "");
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "Tăng":{
-                    resultNumberEnter=((Float.parseFloat(numberEnter)+1)+"");
+                case "Tăng": {
+                    resultNumberEnter = ((Float.parseFloat(numberEnter) + 1) + "");
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "":{
-                    if(numberEnter.equals("0")||numberEnter.length()==1){
-                        resultNumberEnter="0";
+                case "": {
+                    if (numberEnter.equals("0") || numberEnter.length() == 1) {
+                        resultNumberEnter = "0";
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    resultNumberEnter=(numberEnter.substring(0,numberEnter.length()-1));
+                    resultNumberEnter = (numberEnter.substring(0, numberEnter.length() - 1));
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "7":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "7": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "8":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "8": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "9":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "9": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "-":{
-                    if(numberEnter.startsWith("0")){
-                        resultNumberEnter="0";
+                case "-": {
+                    if (numberEnter.startsWith("0")) {
+                        resultNumberEnter = "0";
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    if(numberEnter.endsWith("-")||numberEnter.endsWith("+")){
+                    if (numberEnter.endsWith("-") || numberEnter.endsWith("+")) {
                         return;
                     }
-                    resultNumberEnter=numberEnter+nameClick;
+                    resultNumberEnter = numberEnter + nameClick;
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "4":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "4": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "5":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "5": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "6":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "6": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "+":{
-                    if(numberEnter.startsWith("0")){
-                        resultNumberEnter="0";
+                case "+": {
+                    if (numberEnter.startsWith("0")) {
+                        resultNumberEnter = "0";
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    if(numberEnter.endsWith("+")||numberEnter.endsWith("-")){
+                    if (numberEnter.endsWith("+") || numberEnter.endsWith("-")) {
                         return;
                     }
-                    resultNumberEnter=numberEnter+(nameClick);
+                    resultNumberEnter = numberEnter + (nameClick);
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "1":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "1": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "2":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "2": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "3":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "3": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "±":{
-                    if(numberEnter.startsWith("-")){
+                case "±": {
+                    if (numberEnter.startsWith("-")) {
                         return;
                     }
-                    resultNumberEnter=("-"+numberEnter);
+                    resultNumberEnter = ("-" + numberEnter);
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "0":{
-                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
-                        resultNumberEnter=(nameClick);
+                case "0": {
+                    if (numberEnter.startsWith("0") || numberEnter.startsWith("-0")) {
+                        resultNumberEnter = (nameClick);
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    checkNumberCaculate(numberEnter,nameClick);
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "000":{
-                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
-                        resultNumberEnter="0";
+                case "000": {
+                    if (numberEnter.startsWith("0") || numberEnter.startsWith("-0")) {
+                        resultNumberEnter = "0";
                         mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    checkNumberCaculate(numberEnter,nameClick);
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case ",":{
-                    resultNumberEnter=(nameClick);
+                case ",": {
+                    resultNumberEnter = (nameClick);
                     mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "XONG":{
+                case "XONG": {
                     resultCaculatorProcessSuccess(numberEnter);
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -282,27 +279,26 @@ public class ActivityFoodUpdateModel {
     /**
      * Mục đích method thực hiện việc kiểm tra khi người dùng chọn số trong máy tính
      *
-     * @param numberEnter Giá trị có trong textview
-     * @param  nameItemClick số mà người dùng chọn
-     *
+     * @param numberEnter   Giá trị có trong textview
+     * @param nameItemClick số mà người dùng chọn
      * @created_by cvmanh on 01/21/2021
      */
-    private void checkNumberCaculate(String numberEnter,String nameItemClick){
+    private void checkNumberCaculate(String numberEnter, String nameItemClick) {
         try {
-            if(numberEnter.startsWith("0")){
-                resultNumberEnter=(nameItemClick);
+            if (numberEnter.startsWith("0")) {
+                resultNumberEnter = (nameItemClick);
                 mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                 return;
             }
-            if(numberEnter.contains("+")||numberEnter.contains("-")){
-                resultNumberEnter=numberEnter+(nameItemClick);
+            if (numberEnter.contains("+") || numberEnter.contains("-")) {
+                resultNumberEnter = numberEnter + (nameItemClick);
                 mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
-            }else if(numberEnter.length()<17){
-                resultNumberEnter=numberEnter+(nameItemClick);
+            } else if (numberEnter.length() < 17) {
+                resultNumberEnter = numberEnter + (nameItemClick);
                 mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -311,77 +307,72 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc xử lý tính toán và trả kết quả về presenter
      *
      * @param textInput Phép tính
-     *
      * @created_by cvmanh on 01/21/2021
      */
-    private void resultCaculatorProcess(String textInput){
+    private void resultCaculatorProcess(String textInput) {
         try {
             addOperation(textInput);
             addNumber(textInput);
-            if(mListOperation.size()<1){
+            if (mListOperation.size() < 1) {
                 mIResultActivityFoodUpdate.resultTextEnter(textInput);
                 return;
             }
-            float result=0;
-            for(int i=0;i<(mListNumber.size()-1);i++){
-                switch (mListOperation.get(i)){
-                    case "+":{
-                        if(i==0){
-                            result=mListNumber.get(i)+mListNumber.get(i+1);
-                        }
-                        else {
-                            result=result+mListNumber.get(i+1);
+            float result = 0;
+            for (int i = 0; i < (mListNumber.size() - 1); i++) {
+                switch (mListOperation.get(i)) {
+                    case "+": {
+                        if (i == 0) {
+                            result = mListNumber.get(i) + mListNumber.get(i + 1);
+                        } else {
+                            result = result + mListNumber.get(i + 1);
                         }
                         break;
                     }
-                    case "-":{
-                        if(i==0){
-                            result=mListNumber.get(i)-mListNumber.get(i+1);
-                        }
-                        else {
-                            result=result-mListNumber.get(i+1);
+                    case "-": {
+                        if (i == 0) {
+                            result = mListNumber.get(i) - mListNumber.get(i + 1);
+                        } else {
+                            result = result - mListNumber.get(i + 1);
                         }
                     }
                 }
             }
             mIResultActivityFoodUpdate.resultTextEnter(String.valueOf(result));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void resultCaculatorProcessSuccess(String textInput){
+    private void resultCaculatorProcessSuccess(String textInput) {
         try {
             addOperation(textInput);
             addNumber(textInput);
-            if(mListOperation.size()<1){
+            if (mListOperation.size() < 1) {
                 mIResultActivityFoodUpdate.resultTextEnterSuccess(textInput);
                 return;
             }
-            float result=0;
-            for(int i=0;i<(mListNumber.size()-1);i++){
-                switch (mListOperation.get(i)){
-                    case "+":{
-                        if(i==0){
-                            result=mListNumber.get(i)+mListNumber.get(i+1);
-                        }
-                        else {
-                            result=result+mListNumber.get(i+1);
+            float result = 0;
+            for (int i = 0; i < (mListNumber.size() - 1); i++) {
+                switch (mListOperation.get(i)) {
+                    case "+": {
+                        if (i == 0) {
+                            result = mListNumber.get(i) + mListNumber.get(i + 1);
+                        } else {
+                            result = result + mListNumber.get(i + 1);
                         }
                         break;
                     }
-                    case "-":{
-                        if(i==0){
-                            result=mListNumber.get(i)-mListNumber.get(i+1);
-                        }
-                        else {
-                            result=result-mListNumber.get(i+1);
+                    case "-": {
+                        if (i == 0) {
+                            result = mListNumber.get(i) - mListNumber.get(i + 1);
+                        } else {
+                            result = result - mListNumber.get(i + 1);
                         }
                     }
                 }
             }
             mIResultActivityFoodUpdate.resultTextEnterSuccess(String.valueOf(result));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -390,26 +381,25 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc tách các phép tính +,- sau đó thêm vào mảng phép tính
      *
      * @param inputText Phép tính
-     *
      * @created_by cvmanh on 01/21/2021
      */
-    private void addOperation(String inputText){
+    private void addOperation(String inputText) {
         try {
-            mListOperation=new ArrayList<>();
-            char[] cArray=inputText.toCharArray();// lấy tất cả các ký tự có trong chuỗi và lưu vào cArray
-            for(int i=0;i<cArray.length;i++){
-                switch (cArray[i]){
-                    case '+':{
-                        mListOperation.add(cArray[i]+"");
+            mListOperation = new ArrayList<>();
+            char[] cArray = inputText.toCharArray();// lấy tất cả các ký tự có trong chuỗi và lưu vào cArray
+            for (int i = 0; i < cArray.length; i++) {
+                switch (cArray[i]) {
+                    case '+': {
+                        mListOperation.add(cArray[i] + "");
                         break;
                     }
-                    case '-':{
-                        mListOperation.add(cArray[i]+"");
+                    case '-': {
+                        mListOperation.add(cArray[i] + "");
                         break;
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -418,39 +408,38 @@ public class ActivityFoodUpdateModel {
      * Mục đích method thực hiện việc tách các số từ phép tính, sau đó thêm vào mảng sô
      *
      * @param inputText Phép tính
-     *
      * @created_by cvmanh on 01/21/2021
      */
-    private void addNumber(String inputText){
+    private void addNumber(String inputText) {
         try {
-            mListNumber=new ArrayList<>();
-            Pattern regex=Pattern.compile("(\\d+(?:\\.\\d+)?)");// lấy tất cả các số có trong chuỗi
-            Matcher matcher=regex.matcher(inputText);
-            while (matcher.find()){
+            mListNumber = new ArrayList<>();
+            Pattern regex = Pattern.compile("(\\d+(?:\\.\\d+)?)");// lấy tất cả các số có trong chuỗi
+            Matcher matcher = regex.matcher(inputText);
+            while (matcher.find()) {
                 mListNumber.add(Float.valueOf(matcher.group(1)));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void removeItemProduct(int productID){
+    public void removeItemProduct(int productID) {
         try {
-            for(int i=0;i< ActivityRestaurantMenuModel.mListProductCategory.size();i++){
-                if(ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID()==productID){
+            for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
+                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID() == productID) {
                     ActivityRestaurantMenuModel.mListProductCategory.remove(i);
                 }
             }
             mIResultActivityFoodUpdate.removeItemProductSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
         try {
-            for(int i=0;i<ActivityRestaurantMenuModel.mListProductCategory.size();i++){
-                if(ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID()==productId){
+            for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
+                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID() == productId) {
                     ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductName(productName);
                     ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductPrice(productPrice);
                     ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductImage().setmProductImageID(imageID);
@@ -459,12 +448,12 @@ public class ActivityFoodUpdateModel {
                 }
             }
             mIResultActivityFoodUpdate.updateItemProductSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface IResultActivityFoodUpdate{
+    public interface IResultActivityFoodUpdate {
         public void loadListColorSuccess(List<Color> listColor);
 
         public void loadListImageSuccess(List<ProductImage> listImage);

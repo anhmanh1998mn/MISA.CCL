@@ -18,12 +18,12 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Setting;
 
 /**
- ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
- *
- ‐ {@link vn.com.misa.ccl.view.manage.ActivityRestaurantManage}
- ‐ {@link Setting}
- *
- ‐ @created_by cvmanh on 01/25/2021
+ * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.view.manage.ActivityRestaurantManage}
+ * ‐ {@link Setting}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
  */
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHolder> {
@@ -43,14 +43,14 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(mContext).inflate(mLayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mLayout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            if(position ==3||position ==6) { //3: Item là Thiết lập, 6: Item là trợ giúp
+            if (position == 3 || position == 6) { //3: Item là Thiết lập, 6: Item là trợ giúp
                 holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
                 holder.line.setVisibility(View.VISIBLE);
                 holder.tvSettingName.setTextSize(13);
@@ -60,7 +60,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
             Drawable drawableLeft = mContext.getResources().getDrawable(mListSetting.get(position).getIconSetting());
             holder.tvSettingName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
             holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -74,12 +74,13 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
         private TextView tvSettingName;
 
         private View line;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             try {
-                tvSettingName=itemView.findViewById(R.id.tvSettingName);
-                line=itemView.findViewById(R.id.line);
-            }catch (Exception e){
+                tvSettingName = itemView.findViewById(R.id.tvSettingName);
+                line = itemView.findViewById(R.id.line);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

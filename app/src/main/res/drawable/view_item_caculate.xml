@@ -3,8 +3,8 @@
     android:color="@color/light_bluee">
     <item>
         <shape>
-            <corners android:radius="4dp"/>
-            <solid android:color="@color/light_grey"/>
+            <corners android:radius="4dp" />
+            <solid android:color="@color/light_grey" />
         </shape>
     </item>
 

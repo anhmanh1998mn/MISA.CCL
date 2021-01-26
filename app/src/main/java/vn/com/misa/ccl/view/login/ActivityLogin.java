@@ -16,20 +16,20 @@ import vn.com.misa.ccl.view.restaurantsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**
- ‐ Mục đích Class thực hiện việc đăng nhập bằng tài khoản đã được đăng ký
- *
- ‐ @created_by cvmanh on 01/07/2021
+ * ‐ Mục đích Class thực hiện việc đăng nhập bằng tài khoản đã được đăng ký
+ * <p>
+ * ‐ @created_by cvmanh on 01/07/2021
  */
 
 public class ActivityLogin extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText etUserName,etPassword;
+    private EditText etUserName, etPassword;
 
     private ImageView ivAppInformation;
 
     private TextView tvForgotPassword;
 
-    private ImageView ivTextClearUserName,ivTextClearPassword;
+    private ImageView ivTextClearUserName, ivTextClearPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +50,13 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     private void initView() {
         try {
-            etUserName=findViewById(R.id.etUserName);
-            etPassword=findViewById(R.id.etPassword);
-            ivAppInformation=findViewById(R.id.ivAppInformation);
-            tvForgotPassword=findViewById(R.id.tvForgotPassword);
-            ivTextClearUserName=findViewById(R.id.ivTextClearUserName);
-            ivTextClearPassword=findViewById(R.id.ivTextClearPassword);
-        }catch (Exception e){
+            etUserName = findViewById(R.id.etUserName);
+            etPassword = findViewById(R.id.etPassword);
+            ivAppInformation = findViewById(R.id.ivAppInformation);
+            tvForgotPassword = findViewById(R.id.tvForgotPassword);
+            ivTextClearUserName = findViewById(R.id.ivTextClearUserName);
+            ivTextClearPassword = findViewById(R.id.ivTextClearPassword);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,11 +66,11 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      *
      * @created_by cvmanh on 01/11/2021
      */
-    private void onClickViewListener(){
+    private void onClickViewListener() {
         try {
             ivAppInformation.setOnClickListener(this);
             tvForgotPassword.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -79,23 +79,22 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      * Mục đích method thực hiện việc xử lý các yêu cầu khi người dùng click
      *
      * @param view
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.ivAppInformation:{
+            switch (view.getId()) {
+                case R.id.ivAppInformation: {
                     startActivity(new Intent(this, ActivityAppInformation.class));
                     break;
                 }
-                case R.id.tvForgotPassword:{
+                case R.id.tvForgotPassword: {
                     showDialogForgotPassword();
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -106,7 +105,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      *
      * @created_by cvmanh on 01/07/2021
      */
-    private void onFocusEditTextListener(){
+    private void onFocusEditTextListener() {
         try {
             etUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
@@ -122,7 +121,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                     ivTextClearPassword.setVisibility(View.VISIBLE);
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -134,15 +133,15 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     private void showDialogForgotPassword() {
         try {
-            Dialog dialog=new Dialog(this);
+            Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.dialog_forgot_password);
             dialog.closeOptionsMenu();
             dialog.setCanceledOnTouchOutside(false);
-            ConstraintLayout clForgotPassword=dialog.findViewById(R.id.clForgotPassword);
-            clForgotPassword.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-80;
+            ConstraintLayout clForgotPassword = dialog.findViewById(R.id.clForgotPassword);
+            clForgotPassword.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 80;
             clForgotPassword.requestLayout();
             dialog.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

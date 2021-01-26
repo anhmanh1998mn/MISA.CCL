@@ -25,15 +25,15 @@ import vn.com.misa.ccl.util.Common;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 /**
-‐ Mục đích Class thực hiện những công việc của ActivityRestaurantMenu
-*
-‐ {@link ActivityRestaurantMenuPresenter}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện những công việc của ActivityRestaurantMenu
+ * <p>
+ * ‐ {@link ActivityRestaurantMenuPresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ActivityRestaurantMenu extends AppCompatActivity implements IActivityRestaurantMenu.IFragmentRestaurantMenuView,
-        View.OnClickListener{
+        View.OnClickListener {
 
     private ProductCategoryAdapter mProductAdapter;
 
@@ -45,7 +45,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
 
     private int mCategoryID;
 
-    private TextView tvBack,tvSuccess,tvSuccessNext;
+    private TextView tvBack, tvSuccess, tvSuccessNext;
 
     private Button btnSuccess;
 
@@ -73,11 +73,11 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     private void initView() {
         try {
-            rcvRestaurantMenu =findViewById(R.id.rcvShopType);
-            tvBack=findViewById(R.id.tvBack);
-            tvSuccess=findViewById(R.id.tvSuccess);
-            btnSuccess=findViewById(R.id.btnSuccess);
-        }catch (Exception e){
+            rcvRestaurantMenu = findViewById(R.id.rcvShopType);
+            tvBack = findViewById(R.id.tvBack);
+            tvSuccess = findViewById(R.id.tvSuccess);
+            btnSuccess = findViewById(R.id.btnSuccess);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -89,10 +89,10 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     private void receiveCategoryID() {
         try {
-            Intent intent=getIntent();
-            mCategoryID=intent.getIntExtra("ab",-1);
-            Common.CATEGORY_ID=mCategoryID;
-        }catch (Exception e){
+            Intent intent = getIntent();
+            mCategoryID = intent.getIntExtra("ab", -1);
+            Common.CATEGORY_ID = mCategoryID;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -104,9 +104,9 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     private void loadListProduct() {
         try {
-            mRestaurantMenuPresenter =new ActivityRestaurantMenuPresenter(this);
-            mRestaurantMenuPresenter.loadListProduct(this,Common.CATEGORY_ID);
-        }catch (Exception e){
+            mRestaurantMenuPresenter = new ActivityRestaurantMenuPresenter(this);
+            mRestaurantMenuPresenter.loadListProduct(this, Common.CATEGORY_ID);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -115,20 +115,19 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * Mục đích method thực hiện việc nhận danh sách sản phẩm và hiển thị danh sách lên recycleView
      *
      * @param listProductCategory Danh sách sản phẩm
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void loadListProductSuccess(List<ProductCategory> listProductCategory) {
-       try {
-           mListProductCategory=listProductCategory;
-           mProductAdapter=new ProductCategoryAdapter(this,R.layout.item_restaurant_menu,mListProductCategory);
-           rcvRestaurantMenu.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-           rcvRestaurantMenu.setAdapter(mProductAdapter);
-           mProductAdapter.notifyDataSetChanged();
-       }catch (Exception e){
-           e.printStackTrace();
-       }
+        try {
+            mListProductCategory = listProductCategory;
+            mProductAdapter = new ProductCategoryAdapter(this, R.layout.item_restaurant_menu, mListProductCategory);
+            rcvRestaurantMenu.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+            rcvRestaurantMenu.setAdapter(mProductAdapter);
+            mProductAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -162,7 +161,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
             tvBack.setOnClickListener(this);
             tvSuccess.setOnClickListener(this);
             btnSuccess.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -171,32 +170,31 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      * Mục đích method thực hiện việc xử lý các công việc khi click view
      *
      * @param view
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.tvBack:{
+            switch (view.getId()) {
+                case R.id.tvBack: {
                     finish();
                     break;
                 }
-                case R.id.tvSuccess:{
+                case R.id.tvSuccess: {
                     showDialogSetupSuccess();
                     break;
                 }
-                case R.id.btnSuccess:{
+                case R.id.btnSuccess: {
                     showDialogSetupSuccess();
                     break;
                 }
-                case R.id.tvSuccessNext:{
-                    mRestaurantMenuPresenter=new ActivityRestaurantMenuPresenter(this);
-                    mRestaurantMenuPresenter.initMenu(this,mListProductCategory);
+                case R.id.tvSuccessNext: {
+                    mRestaurantMenuPresenter = new ActivityRestaurantMenuPresenter(this);
+                    mRestaurantMenuPresenter.initMenu(this, mListProductCategory);
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -206,20 +204,20 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      *
      * @created_by cvmanh on 01/26/2021
      */
-    private void showDialogSetupSuccess(){
-         try {
-             dialogSetupSuccess=new Dialog(this);
-             dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
-             dialogSetupSuccess.setCanceledOnTouchOutside(false);
-             dialogSetupSuccess.show();
-             tvSuccessNext=dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
-             ConstraintLayout clSuccess=dialogSetupSuccess.findViewById(R.id.clSuccess);
-             clSuccess.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(this)-100;
-             clSuccess.requestLayout();
-             tvSuccessNext.setOnClickListener(this);
-         }catch (Exception e){
-             e.printStackTrace();
-         }
+    private void showDialogSetupSuccess() {
+        try {
+            dialogSetupSuccess = new Dialog(this);
+            dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
+            dialogSetupSuccess.setCanceledOnTouchOutside(false);
+            dialogSetupSuccess.show();
+            tvSuccessNext = dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
+            ConstraintLayout clSuccess = dialogSetupSuccess.findViewById(R.id.clSuccess);
+            clSuccess.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
+            clSuccess.requestLayout();
+            tvSuccessNext.setOnClickListener(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -1,63 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clUnit"
-    android:layout_height="@dimen/height_smal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_smal">
+
     <ImageView
+        android:id="@+id/ivItemUnit"
+        android:layout_width="@dimen/size_larg"
+        android:layout_height="@dimen/size_larg"
+        android:src="@drawable/ic_circle_tick"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/ivItemUnit"
-        app:layout_constraintRight_toLeftOf="@id/glOne"
-        android:src="@drawable/ic_circle_tick"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="@dimen/size_larg"
-        android:layout_height="@dimen/size_larg"/>
+        app:layout_constraintRight_toLeftOf="@id/glOne"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glOne"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.13"
-        android:orientation="vertical" />
-    <TextView
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/Theme.FontText"
+        app:layout_constraintGuide_percent="0.13" />
+
+    <TextView
         android:id="@+id/tvUnitName"
-        android:text="dfsdfsdf"
-        app:layout_constraintLeft_toLeftOf="@id/glOne"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Theme.FontText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="dfsdfsdf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/glOne"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glMenuTwo"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.85"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
     <FrameLayout
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        android:layout_width="@dimen/size_larg"
+        android:layout_height="@dimen/size_larg"
         android:background="@drawable/view_circle"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintLeft_toRightOf="@id/glMenuTwo"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="@dimen/size_larg"
-        android:layout_height="@dimen/size_larg">
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:layout_gravity="center"
             android:id="@+id/ivUpdateUnitName"
-            android:gravity="center"
-            android:src="@drawable/ic_pencil"
             android:layout_width="@dimen/notification"
-            android:layout_height="@dimen/notification"/>
+            android:layout_height="@dimen/notification"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/ic_pencil" />
     </FrameLayout>
+
     <View
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/view"
-        android:background="@color/grey"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_line"/>
+        android:layout_height="@dimen/height_line"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

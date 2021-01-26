@@ -18,11 +18,11 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.OrderDetail;
 
 /**
- ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
- *
- ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate}
- *
- ‐ @created_by cvmanh on 01/25/2021
+ * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
  */
 
 public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHolder> {
@@ -52,7 +52,7 @@ public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(mContext).inflate(mLayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mLayout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,23 +60,23 @@ public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
             holder.tvItemCaculate.setText(mListCaculate.get(position));
-            if(position==mListCaculate.size()-1){
+            if (position == mListCaculate.size() - 1) {
                 holder.tvItemCaculate.setBackgroundColor(mContext.getResources().getColor(R.color.purple_500));
                 holder.tvItemCaculate.setTextColor(Color.WHITE);
             }
-            if(position==3){
+            if (position == 3) {
                 holder.ivBackKeyboard.setVisibility(View.VISIBLE);
             }
 
             holder.tvItemCaculate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mIResultClickItem!=null){
+                    if (mIResultClickItem != null) {
                         mIResultClickItem.resultClickItem(mListCaculate.get(position));
                     }
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -94,15 +94,15 @@ public class CaculateAdapter extends RecyclerView.Adapter<CaculateAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             try {
-                tvItemCaculate=itemView.findViewById(R.id.tvItemCaculate);
-                ivBackKeyboard=itemView.findViewById(R.id.ivBackKeyboard);
-            }catch (Exception e){
+                tvItemCaculate = itemView.findViewById(R.id.tvItemCaculate);
+                ivBackKeyboard = itemView.findViewById(R.id.ivBackKeyboard);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public interface IResultClickItem{
+    public interface IResultClickItem {
         public void resultClickItem(String nameClick);
     }
 }

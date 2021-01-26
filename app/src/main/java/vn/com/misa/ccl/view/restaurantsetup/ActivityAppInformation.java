@@ -9,9 +9,9 @@ import android.widget.TextView;
 import vn.com.misa.ccl.R;
 
 /**
- ‐ Mục đích Class thực hiện việc hiển thị thông tin điều khoản sử dụng ứng dụng
- *
- ‐ @created_by cvmanh on 01/07/2021
+ * ‐ Mục đích Class thực hiện việc hiển thị thông tin điều khoản sử dụng ứng dụng
+ * <p>
+ * ‐ @created_by cvmanh on 01/07/2021
  */
 
 public class ActivityAppInformation extends AppCompatActivity implements View.OnClickListener {
@@ -35,8 +35,8 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
      */
     private void initView() {
         try {
-            tvBack=findViewById(R.id.tvBack);
-        }catch (Exception e){
+            tvBack = findViewById(R.id.tvBack);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -46,10 +46,10 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
      *
      * @created_by cvmanh on 01/11/2021
      */
-    private void onClickViewListener(){
+    private void onClickViewListener() {
         try {
             tvBack.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -58,19 +58,18 @@ public class ActivityAppInformation extends AppCompatActivity implements View.On
      * Mục đích method thực hiện việc xử lý các công việc khi người dùng click
      *
      * @param view view được click
-     *
      * @created_by cvmanh on 01/11/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.tvBack:{
+            switch (view.getId()) {
+                case R.id.tvBack: {
                     finish();
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

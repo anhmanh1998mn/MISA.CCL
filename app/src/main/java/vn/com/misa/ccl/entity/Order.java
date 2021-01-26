@@ -5,12 +5,12 @@ import android.app.Activity;
 import java.util.Date;
 
 /**
-‐ Mục đích Class thực hiện những việc khai báo Order
-*
-‐ {@link }
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện những việc khai báo Order
+ * <p>
+ * ‐ {@link }
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class Order {
     private int orderId;

@@ -25,7 +25,7 @@ import vn.com.misa.ccl.presenter.ActivityRestaurantTypePresenter;
  */
 
 public class ActivityRestaurantType extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantType.IActivityRestaurantTypeView,
-        CategoryAdapter.IItemClickListener{
+        CategoryAdapter.IItemClickListener {
 
     private Toolbar tbShopSetup;
 
@@ -43,11 +43,11 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
 
     private int mCategoryID;
 
-    private int CATEGORY_ID=1;
+    private int CATEGORY_ID = 1;
 
-    private String CATEGORY_INTENT="ab";
+    private String CATEGORY_INTENT = "ab";
 
-    private String  PRODUCT_ID="PRODUCT_ID";
+    private String PRODUCT_ID = "PRODUCT_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +73,8 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
         try {
             tbShopSetup = findViewById(R.id.tbShopType);
             setSupportActionBar(tbShopSetup);
-            btnNext=findViewById(R.id.btnNext);
-            rcvRestaurantType =findViewById(R.id.rcvShopType);
+            btnNext = findViewById(R.id.btnNext);
+            rcvRestaurantType = findViewById(R.id.rcvShopType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,8 +88,8 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
     private void initView() {
         try {
             tvNext = findViewById(R.id.tvNext);
-            tvBack=findViewById(R.id.tvBack);
-            btnNext=findViewById(R.id.btnNext);
+            tvBack = findViewById(R.id.tvBack);
+            btnNext = findViewById(R.id.btnNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,7 +105,7 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
             tvBack.setOnClickListener(this);
             tvNext.setOnClickListener(this);
             btnNext.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -125,31 +125,31 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
                     break;
                 }
                 case R.id.tvNext: {
-                    Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                    if(mCategoryID<CATEGORY_ID){
-                        intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
-                        intent.putExtra(PRODUCT_ID,-1);
-                    }else {
-                        intent.putExtra(CATEGORY_INTENT,mCategoryID);
-                        intent.putExtra(PRODUCT_ID,-1);
+                    Intent intent = new Intent(this, ActivityRestaurantMenu.class);
+                    if (mCategoryID < CATEGORY_ID) {
+                        intent.putExtra(CATEGORY_INTENT, CATEGORY_ID);
+                        intent.putExtra(PRODUCT_ID, -1);
+                    } else {
+                        intent.putExtra(CATEGORY_INTENT, mCategoryID);
+                        intent.putExtra(PRODUCT_ID, -1);
                     }
                     startActivity(intent);
                     break;
                 }
-                case R.id.btnNext:{
-                    Intent intent=new Intent(this,ActivityRestaurantMenu.class);
-                    if(mCategoryID<CATEGORY_ID){
-                        intent.putExtra(CATEGORY_INTENT,CATEGORY_ID);
-                        intent.putExtra(PRODUCT_ID,-1);
-                    }else {
-                        intent.putExtra(CATEGORY_INTENT,mCategoryID);
-                        intent.putExtra(PRODUCT_ID,-1);
+                case R.id.btnNext: {
+                    Intent intent = new Intent(this, ActivityRestaurantMenu.class);
+                    if (mCategoryID < CATEGORY_ID) {
+                        intent.putExtra(CATEGORY_INTENT, CATEGORY_ID);
+                        intent.putExtra(PRODUCT_ID, -1);
+                    } else {
+                        intent.putExtra(CATEGORY_INTENT, mCategoryID);
+                        intent.putExtra(PRODUCT_ID, -1);
                     }
                     startActivity(intent);
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -161,9 +161,9 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      */
     private void loadListType() {
         try {
-            mActivityRestaurantTypePresenter =new ActivityRestaurantTypePresenter(this);
+            mActivityRestaurantTypePresenter = new ActivityRestaurantTypePresenter(this);
             mActivityRestaurantTypePresenter.loadListShopType(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -172,19 +172,18 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      * Mục đích method thực hiện việc nhận danh sách loại cửa hàng và hiển thị lên recycleView
      *
      * @param listCategory Danh sách loại cửa hàng
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void loadListRestaurantTypeSuccess(List<Category> listCategory) {
         try {
-            mListCategory=listCategory;
-            mCategoryAdapter=new CategoryAdapter(this,R.layout.item_restaurant_type,mListCategory);
-            rcvRestaurantType.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+            mListCategory = listCategory;
+            mCategoryAdapter = new CategoryAdapter(this, R.layout.item_restaurant_type, mListCategory);
+            rcvRestaurantType.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             rcvRestaurantType.setAdapter(mCategoryAdapter);
             mCategoryAdapter.notifyDataSetChanged();
             mCategoryAdapter.setmIItemClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -203,14 +202,13 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
      * Mục đích method thực hiện nhận mã loại cửa hàng
      *
      * @param position Mã loại cửa hàng
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void onClickListener(int position) {
         try {
-            mCategoryID=position;
-        }catch (Exception e){
+            mCategoryID = position;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -25,20 +25,20 @@
         android:orientation="vertical">
 
         <Button
-            android:backgroundTint="@color/dark_blue"
             android:id="@+id/btnLoginFacebook"
             style="@style/Theme.FontButtonColor"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next"
+            android:backgroundTint="@color/dark_blue"
             android:drawableLeft="@drawable/ic_facebook"
             android:text="@string/login_with_facebook" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btnLoginGoogle"
             style="@style/Theme.FontButtonColor"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_next" />
+            android:layout_height="@dimen/height_next"
+            android:layout_marginTop="@dimen/margin_small" />
 
         <Button
             android:id="@+id/btnLoginNext"

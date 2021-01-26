@@ -9,7 +9,7 @@ import vn.com.misa.ccl.entity.Color;
 import vn.com.misa.ccl.entity.ProductImage;
 
 public interface IActivityFoodUpdate {
-    public interface IActivityFoodUpdatePresenter{
+    public interface IActivityFoodUpdatePresenter {
 
         public void loadListColor(Activity activity);
 
@@ -17,15 +17,15 @@ public interface IActivityFoodUpdate {
 
         public void loadCaculating(Activity activity);
 
-        public void processCaculator(Activity activity,String tvNumberEnter,String nameClick);
+        public void processCaculator(Activity activity, String tvNumberEnter, String nameClick);
 
         public void removeItemProduct(int productID);
 
-        public void updateItemProduct(int productId,String productName,float productPrice,int imageID,int unitID,
+        public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID,
                                       int colorID);
     }
 
-    public interface IActivityFoodUpdateView{
+    public interface IActivityFoodUpdateView {
 
         public void loadListColorSuccess(List<Color> listColor);
 

@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.restaurantsetup.ActivityRestaurantType">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbShopType"
         style="@style/Theme.BackgroundColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <TextView
-                android:drawableLeft="@drawable/ic_back"
-                style="@style/Theme.FontTextColor"
                 android:id="@+id/tvBack"
+                style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:drawableLeft="@drawable/ic_back" />
+
             <TextView
                 android:id="@+id/tvSetupName"
                 style="@style/Theme.TextWhiteLarge"
-                android:text="@string/selection_shop_type"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="3.5"
-                android:layout_height="match_parent"/>
+                android:text="@string/selection_shop_type" />
+
             <TextView
-                style="@style/Theme.FontTextColor"
                 android:id="@+id/tvNext"
-                android:text="@string/next_shop_type"
+                style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:layout_height="match_parent"/>
+                android:text="@string/next_shop_type" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvShopType"
         android:layout_width="match_parent"
-        android:layout_weight="14.4"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="14.4" />
+
     <Button
         android:id="@+id/btnNext"
-        android:text="@string/next_shop_type"
         style="@style/Theme.FontButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
         android:layout_weight="1.2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:text="@string/next_shop_type" />
 
 
 </LinearLayout>

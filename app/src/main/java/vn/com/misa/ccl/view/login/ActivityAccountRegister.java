@@ -11,11 +11,11 @@ import android.widget.TextView;
 import vn.com.misa.ccl.R;
 
 /**
-‐ Mục đích Class thực hiện những việc đăng ký tài khoản mới
-*
-*
-‐ @created_by cvmanh on 01/07/2021
-*/
+ * ‐ Mục đích Class thực hiện những việc đăng ký tài khoản mới
+ * <p>
+ * <p>
+ * ‐ @created_by cvmanh on 01/07/2021
+ */
 
 public class ActivityAccountRegister extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,9 +40,9 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      */
     private void initView() {
         try {
-            tvTermOfService=findViewById(R.id.tvTermOfService);
-            tvBack=findViewById(R.id.tvBack);
-        }catch (Exception e){
+            tvTermOfService = findViewById(R.id.tvTermOfService);
+            tvBack = findViewById(R.id.tvBack);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -52,11 +52,11 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      *
      * @created_by cvmanh on 01/07/2021
      */
-    private void onClickViewListener(){
+    private void onClickViewListener() {
         try {
             tvTermOfService.setOnClickListener(this);
             tvBack.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -65,24 +65,23 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      * Mục đích method thực hiện việc xử lý các yêu cầu khi click
      *
      * @param view
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.tvTermOfService:{
-                    Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://register.cukcuk.vn/LicenseAgrement.htm"));
+            switch (view.getId()) {
+                case R.id.tvTermOfService: {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://register.cukcuk.vn/LicenseAgrement.htm"));
                     startActivity(intent);
                     break;
                 }
-                case R.id.tvBack:{
+                case R.id.tvBack: {
                     finish();
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

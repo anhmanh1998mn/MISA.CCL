@@ -7,11 +7,11 @@ import java.util.List;
 import vn.com.misa.ccl.entity.Setting;
 
 public interface IActivityRestaurantManage {
-    public interface IActivityManagePresenter{
+    public interface IActivityManagePresenter {
         public void getListSetting(Activity activity);
     }
 
-    public interface IActivityManageView{
+    public interface IActivityManageView {
         public void getListSettingSuccess(List<Setting> listSetting);
 
         public void onFailed();

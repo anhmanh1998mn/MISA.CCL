@@ -12,13 +12,13 @@ import vn.com.misa.ccl.entity.Category;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityRestaurantType
-*
-‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType}
-‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantTypePresenter}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityRestaurantType
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType}
+ * ‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantTypePresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ActivityRestaurantTypeModel {
 
@@ -36,26 +36,25 @@ public class ActivityRestaurantTypeModel {
      * Mục đích method thực hiện việc lấy dữ liệu danh sách loại sản phẩm rồi gửi dữ liệu về ActivityRestaurantTypePresenter
      *
      * @param activity instance activity
-     *
      * @created_by cvmanh on 01/19/2021
      */
-    public void loadListRestaurantType(Activity activity){
-       try {
-           mSqliteDatabase=DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-           Cursor cursor=mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_CATEGORIES+"",null);
-           mListCategory=new ArrayList<>();
-           for (int i=0;i<cursor.getCount();i++){
-               cursor.moveToPosition(i);
-               mListCategory.add(new Category(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_ID)),
-                       cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_NAME))));
-           }
-           if(cursor!=null){
-               mIActivityRestaurantTypeModel.loadListRestaurantTypeSuccess(mListCategory);
-               return;
-           }
-           mIActivityRestaurantTypeModel.onFailed();
-       }catch (Exception e){
-           e.printStackTrace();
-       }
+    public void loadListRestaurantType(Activity activity) {
+        try {
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor = mSqliteDatabase.rawQuery("SELECT * FROM " + DatabaseInfomation.TABLE_CATEGORIES + "", null);
+            mListCategory = new ArrayList<>();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                mListCategory.add(new Category(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_ID)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_NAME))));
+            }
+            if (cursor != null) {
+                mIActivityRestaurantTypeModel.loadListRestaurantTypeSuccess(mListCategory);
+                return;
+            }
+            mIActivityRestaurantTypeModel.onFailed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

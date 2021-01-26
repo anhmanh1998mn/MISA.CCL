@@ -17,12 +17,12 @@ import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công việc của FragmentListOrder
-*
-‐ {@link vn.com.misa.ccl.presenter.FragmentListOrderPresenter}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công việc của FragmentListOrder
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.FragmentListOrderPresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class FragmentListOrderModel {
     private IFragmentListOrderModel mIFragmentListOrderModel;
@@ -35,59 +35,58 @@ public class FragmentListOrderModel {
 
     private List<OrderDetail> mListOrderDetail;
 
-    private int ORDER_UN_SUCCESS=1;
+    private int ORDER_UN_SUCCESS = 1;
 
     /**
      * Mục đích method thực hiện việc lấy danh sách Order từ database rồi gửi kết quả về presenter
      *
      * @param activity instance activity
-     *
      * @created_by cvmanh on 01/25/2021
      */
-    public void getListOrder(Activity activity){
+    public void getListOrder(Activity activity) {
         try {
-            mSqLiteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-            mListOrderDetail=new ArrayList<>();
-            Cursor cursor=mSqLiteDatabase.rawQuery("SELECT "+DatabaseInfomation.TABLE_ORDERS+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+"" +
-                    ","+DatabaseInfomation.COLUMN_ORDER_STATUS+","+DatabaseInfomation.COLUMN_TABLE_NAME+"" +
-                    ","+DatabaseInfomation.COLUMN_TOTAL_PEOPLE+","+DatabaseInfomation.COLUM_ORDER_AMOUNT+"," +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+","
-                    +DatabaseInfomation.COLUMN_IMAGE+"," +
-                    ""+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUM_ORDER_DETAIL_ID+","
-                    +DatabaseInfomation.COLUMN_QUANTITY+","+DatabaseInfomation.TABLE_COLORS+"."+
-                    DatabaseInfomation.COLUMN_COLOR_ID+","+DatabaseInfomation.COLUMN_COLOR_KEY+","
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+
-                    DatabaseInfomation.COLUMN_MYPRODUCT_ID+","+DatabaseInfomation.COLUMN_PRODUCT_PRICE+","+
-                    DatabaseInfomation.COLUMN_PRODUCT_STATUS+","+DatabaseInfomation.TABLE_UNITS+"."
-                    +DatabaseInfomation.COLUMN_UNIT_ID+","
-                    +DatabaseInfomation.COLUMN_UNIT_NAME+"," +
-                    "group_concat("+DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                    +DatabaseInfomation.COLUMN_PRODUCT_NAME+ "||' ('||" +DatabaseInfomation.COLUMN_QUANTITY+"||')',', ') as Tong" +" FROM "
-                    +DatabaseInfomation.TABLE_ORDERS+", "
-                    +DatabaseInfomation.TABLE_UNITS+","
-                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","+DatabaseInfomation.TABLE_COLORS+","
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+","
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+" WHERE "
-                    +DatabaseInfomation.TABLE_ORDERS+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+"="
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+" AND "
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+"="
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+" AND "
-                    +DatabaseInfomation.TABLE_UNITS+"."+DatabaseInfomation.COLUMN_UNIT_ID+"="
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_UNIT_ID+" AND "
-                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
-                    +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="+DatabaseInfomation.TABLE_MYPRODUCTS
-                    +"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND "
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                    +DatabaseInfomation.COLUMN_COLOR_ID+"="+DatabaseInfomation.TABLE_COLORS+"."
-                    +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
-                    +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_STATUS+"="+ORDER_UN_SUCCESS+" GROUP BY "
-                    +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"",null);
-            for(int i=cursor.getCount()-1;i>=0;i--){
+            mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            mListOrderDetail = new ArrayList<>();
+            Cursor cursor = mSqLiteDatabase.rawQuery("SELECT " + DatabaseInfomation.TABLE_ORDERS + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + "" +
+                    "," + DatabaseInfomation.COLUMN_ORDER_STATUS + "," + DatabaseInfomation.COLUMN_TABLE_NAME + "" +
+                    "," + DatabaseInfomation.COLUMN_TOTAL_PEOPLE + "," + DatabaseInfomation.COLUM_ORDER_AMOUNT + "," +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + ","
+                    + DatabaseInfomation.COLUMN_IMAGE + "," +
+                    "" + DatabaseInfomation.TABLE_ORDER_DETAIL + "." + DatabaseInfomation.COLUM_ORDER_DETAIL_ID + ","
+                    + DatabaseInfomation.COLUMN_QUANTITY + "," + DatabaseInfomation.TABLE_COLORS + "." +
+                    DatabaseInfomation.COLUMN_COLOR_ID + "," + DatabaseInfomation.COLUMN_COLOR_KEY + ","
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." +
+                    DatabaseInfomation.COLUMN_MYPRODUCT_ID + "," + DatabaseInfomation.COLUMN_PRODUCT_PRICE + "," +
+                    DatabaseInfomation.COLUMN_PRODUCT_STATUS + "," + DatabaseInfomation.TABLE_UNITS + "."
+                    + DatabaseInfomation.COLUMN_UNIT_ID + ","
+                    + DatabaseInfomation.COLUMN_UNIT_NAME + "," +
+                    "group_concat(" + DatabaseInfomation.TABLE_MYPRODUCTS + "."
+                    + DatabaseInfomation.COLUMN_PRODUCT_NAME + "||' ('||" + DatabaseInfomation.COLUMN_QUANTITY + "||')',', ') as Tong" + " FROM "
+                    + DatabaseInfomation.TABLE_ORDERS + ", "
+                    + DatabaseInfomation.TABLE_UNITS + ","
+                    + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "," + DatabaseInfomation.TABLE_COLORS + ","
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + ","
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + " WHERE "
+                    + DatabaseInfomation.TABLE_ORDERS + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + "="
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + " AND "
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + "."
+                    + DatabaseInfomation.COLUMN_MYPRODUCT_ID + "="
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "."
+                    + DatabaseInfomation.COLUMN_MYPRODUCT_ID + " AND "
+                    + DatabaseInfomation.TABLE_UNITS + "." + DatabaseInfomation.COLUMN_UNIT_ID + "="
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." + DatabaseInfomation.COLUMN_UNIT_ID + " AND "
+                    + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "."
+                    + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + "=" + DatabaseInfomation.TABLE_MYPRODUCTS
+                    + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + " AND "
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "."
+                    + DatabaseInfomation.COLUMN_COLOR_ID + "=" + DatabaseInfomation.TABLE_COLORS + "."
+                    + DatabaseInfomation.COLUMN_COLOR_ID + " AND "
+                    + DatabaseInfomation.TABLE_ORDERS + "." + DatabaseInfomation.COLUMN_ORDER_STATUS + "=" + ORDER_UN_SUCCESS + " GROUP BY "
+                    + DatabaseInfomation.TABLE_ORDERS + "." + DatabaseInfomation.COLUMN_ORDER_ID + "", null);
+            for (int i = cursor.getCount() - 1; i >= 0; i--) {
                 cursor.moveToPosition(i);
                 mListOrderDetail.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
                         new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
@@ -108,10 +107,10 @@ public class FragmentListOrderModel {
                                         cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY)))),
                         cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY))));
             }
-            if(cursor!=null){
+            if (cursor != null) {
                 mIFragmentListOrderModel.getListOrderSuccess(mListOrderDetail);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -120,19 +119,18 @@ public class FragmentListOrderModel {
      * Mục đích method thực hiện việc xóa order theo mã order trong database và gửi kết quả về presenter
      *
      * @param activity instance activity
-     * @param  orderID mã order
-     *
+     * @param orderID  mã order
      * @created_by cvmanh on 01/25/2021
      */
-    public void removeItemOrder(Activity activity,int orderID){
+    public void removeItemOrder(Activity activity, int orderID) {
         try {
-            mSqLiteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-            long resulOrderDetail=mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDER_DETAIL,
-                    DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
-            if(resulOrderDetail>0){
-                long resultOrder=mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDERS,
-                        DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
-                if(resultOrder>0){
+            mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            long resulOrderDetail = mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDER_DETAIL,
+                    DatabaseInfomation.COLUMN_ORDER_ID + "=?", new String[]{String.valueOf(orderID)});
+            if (resulOrderDetail > 0) {
+                long resultOrder = mSqLiteDatabase.delete(DatabaseInfomation.TABLE_ORDERS,
+                        DatabaseInfomation.COLUMN_ORDER_ID + "=?", new String[]{String.valueOf(orderID)});
+                if (resultOrder > 0) {
                     mIFragmentListOrderModel.removeOrderSuccess();
                     return;
                 }
@@ -140,12 +138,12 @@ public class FragmentListOrderModel {
                 return;
             }
             mIFragmentListOrderModel.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface IFragmentListOrderModel{
+    public interface IFragmentListOrderModel {
         public void getListOrderSuccess(List<OrderDetail> listOrderDetail);
 
         public void removeOrderSuccess();

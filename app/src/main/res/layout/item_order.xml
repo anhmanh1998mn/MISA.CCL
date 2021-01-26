@@ -1,120 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.ViewMargin"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    style="@style/Theme.ViewMargin"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="horizontal">
+
     <LinearLayout
-        android:weightSum="7"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_weight="1.95"
-            android:layout_height="wrap_content">
-           <TextView
-               android:textSize="25sp"
-               android:layout_marginTop="16dp"
-               style="@style/Theme.FontTextColor"
-               android:gravity="center"
-               android:background="@drawable/view_circle"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintRight_toRightOf="parent"
-               app:layout_constraintLeft_toLeftOf="parent"
-               android:id="@+id/tvImage"
-               android:layout_width="70dp"
-               android:layout_height="70dp"/>
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_weight="1.95">
+
+            <TextView
+                android:id="@+id/tvImage"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/view_circle"
                 android:gravity="center"
-                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="25sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvImage"
-                android:orientation="horizontal"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvImage">
+
                 <TextView
                     android:id="@+id/tvPeople"
                     style="@style/Theme.SmallText"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
+
                 <ImageView
                     android:id="@+id/ivPerson"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_user"
                     android:layout_width="13dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_user" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             style="@style/Theme.VerticalLine"
             android:layout_width="0dp"
-            android:layout_weight="0.01"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_weight="0.01" />
+
         <LinearLayout
-            android:weightSum="3"
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="5.13"
-            android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:weightSum="3">
+
             <LinearLayout
                 android:id="@+id/llItemOder"
                 style="@style/Theme.EffectClick"
-                android:paddingTop="16dp"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
                 <TextView
-                    style="@style/Theme.FontText"
-                    android:drawableRight="@drawable/ic_foot_menu"
                     android:id="@+id/tvListProduct"
-                    android:maxLines="3"
-                    android:ellipsize="end"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
                     style="@style/Theme.FontText"
-                    android:id="@+id/tvTotalAmount"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvListProduct"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:background="@color/light_grey"
-                android:weightSum="7"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_foot_menu"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:drawableTint="@color/red"
-                    android:drawableLeft="@drawable/ic_close"
+                    android:id="@+id/tvTotalAmount"
+                    style="@style/Theme.FontText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvListProduct" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/light_grey"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <TextView
                     android:id="@+id/tvCancel"
                     style="@style/Theme.FontButtonn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3.495"
+                    android:drawableLeft="@drawable/ic_close"
+                    android:drawableTint="@color/red"
                     android:text="@string/remove_order" />
+
                 <View
                     style="@style/Theme.VerticalLine"
                     android:layout_width="0dp"
-                    android:layout_weight="0.01"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.01" />
+
                 <TextView
-                    android:drawableLeft="@drawable/ic_dolar"
                     android:id="@+id/tvSave"
                     style="@style/Theme.FontButtonn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3.495"
+                    android:drawableLeft="@drawable/ic_dolar"
                     android:text="@string/bill" />
             </LinearLayout>
         </LinearLayout>

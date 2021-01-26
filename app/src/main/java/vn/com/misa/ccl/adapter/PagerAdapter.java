@@ -8,16 +8,16 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import vn.com.misa.ccl.view.welcome.FragmentAppOverview;
 
 /**
-‐ Mục đích Class thực hiện quy định dữ liệu và cách hiển thị dữ liệu lên view
-*
-‐ {@link vn.com.misa.ccl.MainActivity#initViewPager}
-*
-‐ @created_by cvmanh on 01/10/2021
-*/
+ * ‐ Mục đích Class thực hiện quy định dữ liệu và cách hiển thị dữ liệu lên view
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.MainActivity#initViewPager}
+ * <p>
+ * ‐ @created_by cvmanh on 01/10/2021
+ */
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private int mTotalFragment=5;
+    private int mTotalFragment = 5;
 
     public PagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
@@ -27,9 +27,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
      * Mục đích method thực hiện việc trả về fragment tương ứng
      *
      * @param position giá trị fragment
-     *
      * @return trả về fragment tương ứng
-     *
      * @created_by cvmanh on 01/10/2021
      */
     @NonNull
@@ -41,9 +39,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     /**
      * Mục đích method chỉ định số lượng fragment được tạo ra
      *
-     *
      * @return trả về số lượng fragment
-     *
      * @created_by cvmanh on 01/10/2021
      */
     @Override

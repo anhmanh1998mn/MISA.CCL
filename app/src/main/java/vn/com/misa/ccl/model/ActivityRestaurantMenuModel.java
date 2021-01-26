@@ -19,13 +19,13 @@ import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công việc trong ActivityRestaurantMenu
-*
-‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantMenuPresenter}
-‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantMenu}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công việc trong ActivityRestaurantMenu
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.ActivityRestaurantMenuPresenter}
+ * ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantMenu}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ActivityRestaurantMenuModel {
 
@@ -42,30 +42,29 @@ public class ActivityRestaurantMenuModel {
     /**
      * Mục đích method thực hiện việc lấy dữ liệu danh sách Product rồi gửi dữ liệu về ActivityRestaurantMenuPresenter
      *
-     * @param activity instance activity
-     * @param  categoryID Mã loại sản phẩm
-     *
+     * @param activity   instance activity
+     * @param categoryID Mã loại sản phẩm
      * @created_by cvmanh on 01/19/2021
      */
-    public void loadListProduct(Activity activity,int categoryID) {
+    public void loadListProduct(Activity activity, int categoryID) {
         try {
             mListProductCategory = new ArrayList<>();
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-            Cursor cursor = mSqliteDatabase.rawQuery("SELECT * FROM "+DatabaseInfomation.TABLE_PRODUCTS+"," +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"," +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_CATEGORY+","+DatabaseInfomation.TABLE_UNITS+"," +
-                    ""+DatabaseInfomation.TABLE_CATEGORIES+","+DatabaseInfomation.TABLE_COLORS+" WHERE " +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"=" +
-                    ""+DatabaseInfomation.TABLE_PRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND " +
-                    ""+DatabaseInfomation.TABLE_PRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_ID+"=" +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_CATEGORY+"."+DatabaseInfomation.COLUMN_PRODUCT_ID+" AND" +
-                    " "+DatabaseInfomation.TABLE_PRODUCT_CATEGORY+"."+DatabaseInfomation.COLUMN_CATEGORY_ID+"=" +
-                    ""+DatabaseInfomation.TABLE_CATEGORIES+"."+DatabaseInfomation.COLUMN_CATEGORY_ID+" AND " +
-                    ""+DatabaseInfomation.TABLE_PRODUCTS+"."+DatabaseInfomation.COLUMN_UNIT_ID+"=" +
-                    ""+DatabaseInfomation.TABLE_UNITS+"."+DatabaseInfomation.COLUMN_UNIT_ID+" AND " +
-                    ""+DatabaseInfomation.TABLE_COLORS+"."+DatabaseInfomation.COLUMN_COLOR_ID+"=" +
-                    ""+DatabaseInfomation.TABLE_PRODUCTS+"."+DatabaseInfomation.COLUMN_COLOR_ID+" AND " +
-                    ""+DatabaseInfomation.TABLE_CATEGORIES+"."+DatabaseInfomation.COLUMN_CATEGORY_ID+"="+categoryID+"", null);
+            Cursor cursor = mSqliteDatabase.rawQuery("SELECT * FROM " + DatabaseInfomation.TABLE_PRODUCTS + "," +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "," +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_CATEGORY + "," + DatabaseInfomation.TABLE_UNITS + "," +
+                    "" + DatabaseInfomation.TABLE_CATEGORIES + "," + DatabaseInfomation.TABLE_COLORS + " WHERE " +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + "=" +
+                    "" + DatabaseInfomation.TABLE_PRODUCTS + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + " AND " +
+                    "" + DatabaseInfomation.TABLE_PRODUCTS + "." + DatabaseInfomation.COLUMN_PRODUCT_ID + "=" +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_CATEGORY + "." + DatabaseInfomation.COLUMN_PRODUCT_ID + " AND" +
+                    " " + DatabaseInfomation.TABLE_PRODUCT_CATEGORY + "." + DatabaseInfomation.COLUMN_CATEGORY_ID + "=" +
+                    "" + DatabaseInfomation.TABLE_CATEGORIES + "." + DatabaseInfomation.COLUMN_CATEGORY_ID + " AND " +
+                    "" + DatabaseInfomation.TABLE_PRODUCTS + "." + DatabaseInfomation.COLUMN_UNIT_ID + "=" +
+                    "" + DatabaseInfomation.TABLE_UNITS + "." + DatabaseInfomation.COLUMN_UNIT_ID + " AND " +
+                    "" + DatabaseInfomation.TABLE_COLORS + "." + DatabaseInfomation.COLUMN_COLOR_ID + "=" +
+                    "" + DatabaseInfomation.TABLE_PRODUCTS + "." + DatabaseInfomation.COLUMN_COLOR_ID + " AND " +
+                    "" + DatabaseInfomation.TABLE_CATEGORIES + "." + DatabaseInfomation.COLUMN_CATEGORY_ID + "=" + categoryID + "", null);
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 mListProductCategory.add(
@@ -84,12 +83,12 @@ public class ActivityRestaurantMenuModel {
                                         cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_CATEGORY_NAME)))));
 
             }
-            if(cursor!=null){
+            if (cursor != null) {
                 mIResultActivityRestaurantMenu.loadListProductSuccess(mListProductCategory);
                 return;
             }
             mIResultActivityRestaurantMenu.onLoadFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -98,31 +97,30 @@ public class ActivityRestaurantMenuModel {
      * Mục đích method thực hiện việc khởi tạo menu cho cửa hàng
      *
      * @param activity instance activity
-     * @param  listMenu danh sách sản phẩm của cửa hàng
-     *
+     * @param listMenu danh sách sản phẩm của cửa hàng
      * @created_by cvmanh on 01/22/2021
      */
-    public void initMenu(Activity activity,List<ProductCategory> listMenu){
+    public void initMenu(Activity activity, List<ProductCategory> listMenu) {
         try {
             long result = 0;
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-            ContentValues contentValues=new ContentValues();
-            for(int i=0;i<listMenu.size();i++){
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME,listMenu.get(i).getmProduct().getmProductName());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE,listMenu.get(i).getmProduct().getmProductPrice());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS,listMenu.get(i).getmProduct().getmProductStatus());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID,listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
-                contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID,listMenu.get(i).getmProduct().getmUnit().getmUnitID());
-                contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID,listMenu.get(i).getmProduct().getmColor().getColorID());
-                result=mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS,null,contentValues);
+            ContentValues contentValues = new ContentValues();
+            for (int i = 0; i < listMenu.size(); i++) {
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, listMenu.get(i).getmProduct().getmProductName());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, listMenu.get(i).getmProduct().getmProductPrice());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, listMenu.get(i).getmProduct().getmProductStatus());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
+                contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, listMenu.get(i).getmProduct().getmUnit().getmUnitID());
+                contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, listMenu.get(i).getmProduct().getmColor().getColorID());
+                result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
             }
 
-            if(result>0){
-                Cursor cursor=mSqliteDatabase.rawQuery("Select * FROM "+DatabaseInfomation.TABLE_MYPRODUCTS+"",null);
-                Log.d("MenuSize",cursor.getCount()+"");
+            if (result > 0) {
+                Cursor cursor = mSqliteDatabase.rawQuery("Select * FROM " + DatabaseInfomation.TABLE_MYPRODUCTS + "", null);
+                Log.d("MenuSize", cursor.getCount() + "");
                 mIResultActivityRestaurantMenu.initMenuSuccess();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

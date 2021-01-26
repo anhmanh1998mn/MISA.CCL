@@ -8,12 +8,12 @@ import vn.com.misa.ccl.entity.Unit;
 
 public interface IActivityUnit {
 
-    public interface IActivityUnitPresenter{
+    public interface IActivityUnitPresenter {
 
         public void loadListUnit(Activity activity);
     }
 
-    public interface IActivityUnitView{
+    public interface IActivityUnitView {
 
         public void loadListUnitSuccess(List<Unit> listUnit);
 

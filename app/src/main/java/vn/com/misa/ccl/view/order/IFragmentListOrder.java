@@ -8,13 +8,13 @@ import vn.com.misa.ccl.entity.OrderDetail;
 
 public interface IFragmentListOrder {
 
-    public interface IFragmentListOrderPresenter{
+    public interface IFragmentListOrderPresenter {
         public void getListOrder(Activity activity);
 
-        public void removeItemOrder(Activity activity,int orderID);
+        public void removeItemOrder(Activity activity, int orderID);
     }
 
-    public interface IFragmentListOrderView{
+    public interface IFragmentListOrderView {
         public void getListOrderSuccess(List<OrderDetail> listOrderDetail);
 
         public void removeOrderSuccess();

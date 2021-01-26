@@ -9,13 +9,13 @@ import vn.com.misa.ccl.model.ActivityRestaurantManageModel;
 import vn.com.misa.ccl.view.manage.IActivityRestaurantManage;
 
 /**
-‐ Mục đích Class thực hiện những công việc luân chuyển dữ liệu giữa ActivityRestaurantMange và ActivityRestaurantMangeModel
-*
-‐ {@link vn.com.misa.ccl.view.manage.ActivityRestaurantManage}
-‐ {@link ActivityRestaurantManageModel}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện những công việc luân chuyển dữ liệu giữa ActivityRestaurantMange và ActivityRestaurantMangeModel
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.view.manage.ActivityRestaurantManage}
+ * ‐ {@link ActivityRestaurantManageModel}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class ActivityRestaurantManagePresenter implements IActivityRestaurantManage.IActivityManagePresenter, ActivityRestaurantManageModel.IActivityManageModel {
 
@@ -25,13 +25,12 @@ public class ActivityRestaurantManagePresenter implements IActivityRestaurantMan
         this.mManageView = mManageView;
     }
 
-    private ActivityRestaurantManageModel mManageModel=new ActivityRestaurantManageModel(this);
+    private ActivityRestaurantManageModel mManageModel = new ActivityRestaurantManageModel(this);
 
     /**
      * Mục đích method thực hiện gọi hàm xử lý lấy danh sách setting từ model
      *
      * @param activity instance activity
-     *
      * @created_by cvmanh on 01/25/2021
      */
     @Override
@@ -43,7 +42,6 @@ public class ActivityRestaurantManagePresenter implements IActivityRestaurantMan
      * Mục đích method thực hiện nhận danh sách setting khi xử lý thành công và gửi về view
      *
      * @param listSetting Danh sách setting
-     *
      * @created_by cvmanh on 01/25/2021
      */
     @Override

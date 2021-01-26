@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/clDialogOrder"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
@@ -14,13 +14,13 @@
 
         <TextView
             android:id="@+id/tvResultCaculate"
-            android:textSize="20sp"
             style="@style/Theme.TextWhiteSmall"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:gravity="left|center"
-            android:text="@string/enter_table_name" />
+            android:text="@string/enter_table_name"
+            android:textSize="20sp" />
 
         <ImageView
             style="@style/Theme.EffectClick"
@@ -33,25 +33,25 @@
 
     <LinearLayout
         android:id="@+id/llRowOne"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        style="@style/Theme.ViewMargin"
         android:orientation="horizontal"
         android:weightSum="6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frmHeaderOrder">
 
         <TextView
-            android:gravity="right|center"
-            style="@style/Theme.TextColor"
             android:id="@+id/tvResult"
-            android:textStyle="bold"
-            android:layout_marginRight="8dp"
+            style="@style/Theme.TextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="3.97"
-            android:background="@drawable/view_enter_phone" />
+            android:background="@drawable/view_enter_phone"
+            android:gravity="right|center"
+            android:textStyle="bold" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -79,9 +79,9 @@
 
     <LinearLayout
         android:id="@+id/llRowTwo"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Theme.ViewMargin"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -89,32 +89,32 @@
         app:layout_constraintTop_toBottomOf="@+id/llRowOne">
 
         <TextView
-            android:text="@string/caculator_decrease"
             android:id="@+id/tvItemDown"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_decrease" />
 
         <TextView
-            android:text="@string/caculator_increase"
             android:id="@+id/tvItemUp"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_increase" />
 
         <TextView
-            android:text="@string/caculator_clear"
             android:id="@+id/tvItemClear"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_clear" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llRowThree"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Theme.ViewMargin"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -122,32 +122,32 @@
         app:layout_constraintTop_toBottomOf="@+id/llRowTwo">
 
         <TextView
-            android:text="@string/caculator_7"
             android:id="@+id/tvItemSeven"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_7" />
 
         <TextView
-            android:text="@string/caculator_8"
             android:id="@+id/tvItemEight"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_8" />
 
         <TextView
-            android:text="@string/caculator_9"
             android:id="@+id/tvItemNine"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_9" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llRowFour"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Theme.ViewMargin"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -155,32 +155,32 @@
         app:layout_constraintTop_toBottomOf="@+id/llRowThree">
 
         <TextView
-            android:text="@string/caculator_4"
             android:id="@+id/tvItemFour"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_4" />
 
         <TextView
-            android:text="@string/caculator_5"
             android:id="@+id/tvItemFive"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_5" />
 
         <TextView
-            android:text="@string/caculator_6"
             android:id="@+id/tvItemSix"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_6" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llRowFive"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Theme.ViewMargin"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -188,32 +188,32 @@
         app:layout_constraintTop_toBottomOf="@+id/llRowFour">
 
         <TextView
-            android:text="@string/caculator_1"
             android:id="@+id/tvItemOne"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_1" />
 
         <TextView
-            android:text="@string/caculator_2"
             android:id="@+id/tvItemTwo"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_2" />
 
         <TextView
-            android:text="@string/caculator_3"
             android:id="@+id/tvItemThree"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/caculator_3" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llRowSix"
+        style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Theme.ViewMargin"
         android:layout_marginRight="12dp"
         android:orientation="horizontal"
         android:weightSum="6"
@@ -221,31 +221,32 @@
         app:layout_constraintTop_toBottomOf="@+id/llRowFive">
 
         <TextView
-            android:text="@string/caculator_0"
             android:id="@+id/tvItemZero"
             style="@style/Theme.FontCaculate"
             android:layout_width="0dp"
-            android:layout_weight="1.94" />
+            android:layout_weight="1.94"
+            android:text="@string/caculator_0" />
 
         <TextView
             android:id="@+id/tvSuccess"
-            android:layout_marginLeft="4dp"
-            android:text="@string/success"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
             android:layout_weight="4.06"
-            android:background="@color/purple_500" />
+            android:background="@color/purple_500"
+            android:text="@string/success" />
+
         <TextView
-            android:visibility="gone"
             android:id="@+id/tvSuccesss"
-            android:layout_marginLeft="4dp"
-            android:text="@string/success"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
             android:layout_weight="4.06"
-            android:background="@color/purple_500" />
+            android:background="@color/purple_500"
+            android:text="@string/success"
+            android:visibility="gone" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,14 +18,14 @@ import vn.com.misa.ccl.util.DatabaseInfomation;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 /**
- ‐ Mục đích Class thực hiện việc show splash Screen
- *
- ‐ @created_by cvmanh on 01/06/2021
+ * ‐ Mục đích Class thực hiện việc show splash Screen
+ * <p>
+ * ‐ @created_by cvmanh on 01/06/2021
  */
 
 public class SplashActivity extends AppCompatActivity {
 
-    private int TIME_SHOW=2000;
+    private int TIME_SHOW = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,15 +45,15 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     checkData();
-                    if(checkData()){
+                    if (checkData()) {
                         startActivity(new Intent(SplashActivity.this, ActivityRestaurantManage.class));
                         return;
                     }
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 }
-            },TIME_SHOW);
-        }catch (Exception e){
+            }, TIME_SHOW);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -62,11 +62,10 @@ public class SplashActivity extends AppCompatActivity {
      * Mục đích method thực hiện việc kiểm tra xem có tồn tại database trong ứng dụng
      *
      * @return trả về true nếu tồn tại database
-     *
      * @created_by cvmanh on 01/22/2021
      */
-    private boolean checkData(){
-        File databaseName=this.getDatabasePath(DatabaseInfomation.DATABASE_NAME);
+    private boolean checkData() {
+        File databaseName = this.getDatabasePath(DatabaseInfomation.DATABASE_NAME);
         return databaseName.exists();
     }
 }

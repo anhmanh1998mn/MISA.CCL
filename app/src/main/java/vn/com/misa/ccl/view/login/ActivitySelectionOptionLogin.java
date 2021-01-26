@@ -28,15 +28,15 @@ import vn.com.misa.ccl.presenter.SignInPresenter;
 import vn.com.misa.ccl.R;
 
 /**
-‐ Mục đích Class thực hiện show các lựa chọn đăng nhập vào ứng dụng
-*
-‐ {@link SignInPresenter}
-*
-‐ @created_by cvmanh on 01/11/2021
-*/
+ * ‐ Mục đích Class thực hiện show các lựa chọn đăng nhập vào ứng dụng
+ * <p>
+ * ‐ {@link SignInPresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/11/2021
+ */
 
 public class ActivitySelectionOptionLogin extends AppCompatActivity implements View.OnClickListener,
-        GoogleApiClient.OnConnectionFailedListener ,ISignInView.IResultLogin{
+        GoogleApiClient.OnConnectionFailedListener, ISignInView.IResultLogin {
 
     private ImageView ivBack;
 
@@ -48,7 +48,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
 
     private GoogleApiClient mGoogleApiClient;
 
-    private int mSignIn =001;
+    private int mSignIn = 001;
 
     private SignInPresenter mSignInPresenter;
 
@@ -78,7 +78,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
             tvRegisterAccount = findViewById(R.id.tvRegisterAccount);
             btnLoginNext = findViewById(R.id.btnLoginNext);
 //        btnLoginFacebook=findViewById(R.id.btnLoginFacebook);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +93,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
             ivBack.setOnClickListener(this);
             tvRegisterAccount.setOnClickListener(this);
             btnLoginNext.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -102,7 +102,6 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * Mục đích method thực hiện việc xử lý các công việc khi người dúng click
      *
      * @param view View được click
-     *
      * @created_by cvmanh on 01/11/2021
      */
     @Override
@@ -121,7 +120,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
                     startActivity(new Intent(this, ActivityLogin.class));
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -130,9 +129,8 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * Mục đích method thực hiện việc trả về kết quả callback
      *
      * @param requestCode giá trị trả về
-     * @param  resultCode kết quả trả về đúng
-     * @param data dữ liệu
-     *
+     * @param resultCode  kết quả trả về đúng
+     * @param data        dữ liệu
      * @created_by cvmanh on 01/11/2021
      */
     @Override
@@ -141,11 +139,11 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         try {
             mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
-            if(requestCode== mSignIn){
-                GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (requestCode == mSignIn) {
+                GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 handleSignInResult(result);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -157,17 +155,17 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      */
     private void setLoginFacebook() {
         try {
-            mSignInPresenter=new SignInPresenter(this);
+            mSignInPresenter = new SignInPresenter(this);
             mCallbackManager = CallbackManager.Factory.create();// xử lý các phản hồi đăng nhập
-            mSignInPresenter.onSelectionListenerWithFacebook(this,mCallbackManager);
-            Button btnLoginFacebook =findViewById(R.id.btnLoginFacebook);
+            mSignInPresenter.onSelectionListenerWithFacebook(this, mCallbackManager);
+            Button btnLoginFacebook = findViewById(R.id.btnLoginFacebook);
             btnLoginFacebook.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LoginManager.getInstance().logInWithReadPermissions(ActivitySelectionOptionLogin.this, Arrays.asList("public_profile", "email")); // xin quyền lấy email
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -177,7 +175,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      *
      * @created_by cvmanh on 01/19/2021
      */
-    private void setLoginGoogle(){
+    private void setLoginGoogle() {
         try {
             //Yêu cầu người dùng cung cấp thông tin cơ bản: email, tên, hình ảnh
             GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -185,8 +183,8 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
                     .build();
             //Kết nối với google api client
             mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this,this)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions)
+                    .enableAutoManage(this, this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                     .build();
             SignInButton btnLoginGoogle = findViewById(R.id.btnLoginGoogle);
             btnLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
@@ -196,7 +194,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
                     signIn();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -211,7 +209,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         try {
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, mSignIn);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -226,13 +224,13 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      *
      * @created_by cvmanh on 01/08/2021
      */
-    private void handleSignInResult(GoogleSignInResult result){
+    private void handleSignInResult(GoogleSignInResult result) {
         try {
-            if(result.isSuccess()){
-                GoogleSignInAccount accountProfile=result.getSignInAccount();
+            if (result.isSuccess()) {
+                GoogleSignInAccount accountProfile = result.getSignInAccount();
                 Toast.makeText(this, accountProfile.getEmail().toString(), Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -251,7 +249,6 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * Mục đích method thực hiện việc nhận và xử lý dữ liệu khi đăng nhập thành
      *
      * @param mailName Tên gmail đăng nhập thành công
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override

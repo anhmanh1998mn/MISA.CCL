@@ -18,12 +18,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý đăng nhập với facebook
-*
-‐ {@link vn.com.misa.ccl.presenter.SignInPresenter#onSelectionListenerWithFacebook}
-*
-‐ @created_by cvmanh on 01/09/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý đăng nhập với facebook
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.SignInPresenter#onSelectionListenerWithFacebook}
+ * <p>
+ * ‐ @created_by cvmanh on 01/09/2021
+ */
 
 public class SignInModel extends FragmentActivity {
 
@@ -36,12 +36,11 @@ public class SignInModel extends FragmentActivity {
     /**
      * Mục đích method thực hiện việc đăng nhập facebook, yêu cầu lấy tên gmail và trả về kết quả
      *
-     * @param mContext class hiện tại
+     * @param mContext         class hiện tại
      * @param mCallbackManager Phản hồi việc đăng nhập
-     *
      * @created_by cvmanh on 01/10/2021
      */
-    public void signInWithFacebook(Activity mContext,CallbackManager mCallbackManager){
+    public void signInWithFacebook(Activity mContext, CallbackManager mCallbackManager) {
         try {
             LoginManager.getInstance().registerCallback(mCallbackManager,// đăng ký gọi lại, phản hồi kết quả đăng nhập
                     new FacebookCallback<LoginResult>() {
@@ -74,12 +73,12 @@ public class SignInModel extends FragmentActivity {
                             mSignInResulLogin.onSignInFail();
                         }
                     });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface ISignInResultLogin{
+    public interface ISignInResultLogin {
 
         public void onSignInFacebookSuccess(String mailName);
 

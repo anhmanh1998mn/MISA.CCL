@@ -16,13 +16,13 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.OrderDetail;
 
 /**
-‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
-*
-‐ {@link vn.com.misa.ccl.view.order.ActivityBill}
-‐ {@link OrderDetail}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.view.order.ActivityBill}
+ * ‐ {@link OrderDetail}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
     private Activity mContext;
@@ -40,24 +40,23 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(mContext).inflate(mlayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mlayout, parent, false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         try {
-            DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             holder.tvProductName.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
             holder.tvAmount.setText(String.valueOf(mListOrderDetail.get(position).getmQuantity()));
-            holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getmProduct().getmProductPrice()));
-            holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getmQuantity()*mListOrderDetail.get(position).getmProduct().getmProductPrice()));
-        }catch (Exception e){
+            holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getmProductPriceOut()));
+            holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getmQuantity() * mListOrderDetail.get(position).getmProductPriceOut()));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -66,17 +65,17 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        private TextView tvProductName,tvAmount,tvUnitPrice,tvTotalMoney;
+        private TextView tvProductName, tvAmount, tvUnitPrice, tvTotalMoney;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             try {
-                tvProductName=itemView.findViewById(R.id.tvProductName);
-                tvAmount=itemView.findViewById(R.id.tvAmount);
-                tvUnitPrice=itemView.findViewById(R.id.tvUnitPrice);
-                tvTotalMoney=itemView.findViewById(R.id.tvTotalMoney);
-            }catch (Exception e){
+                tvProductName = itemView.findViewById(R.id.tvProductName);
+                tvAmount = itemView.findViewById(R.id.tvAmount);
+                tvUnitPrice = itemView.findViewById(R.id.tvUnitPrice);
+                tvTotalMoney = itemView.findViewById(R.id.tvTotalMoney);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

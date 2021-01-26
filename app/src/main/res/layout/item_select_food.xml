@@ -1,138 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
-    style="@style/Theme.EffectClick"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clFoodSelect"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    style="@style/Theme.EffectClick"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvImage"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/greenn"
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/cvImage"
-        app:layout_constraintRight_toLeftOf="@+id/glOne"
-        android:backgroundTint="@color/greenn"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="55dp"
-        android:layout_height="55dp">
+        app:layout_constraintRight_toLeftOf="@+id/glOne"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/ivItemMenu"
-                app:layout_constraintRight_toLeftOf="@id/glOne"
-                android:src="@drawable/ic_tick"
                 android:layout_width="@dimen/height_largee"
-                android:layout_height="@dimen/height_largee"/>
+                android:layout_height="@dimen/height_largee"
+                android:src="@drawable/ic_tick"
+                app:layout_constraintRight_toLeftOf="@id/glOne" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glOne"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.18"
-        android:orientation="vertical" />
-    <TextView
-        android:textStyle="bold"
-        style="@style/Theme.FontText"
-        android:id="@+id/tvFootName"
-        app:layout_constraintLeft_toLeftOf="@id/glOne"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tvFootPrice"
-        android:layout_height="wrap_content"/>
-    <TextView
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <TextView
+        android:id="@+id/tvFootName"
+        style="@style/Theme.FontText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvFootPrice"
+        app:layout_constraintLeft_toLeftOf="@id/glOne"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvFootPrice"
         style="@style/Theme.FontText"
-        app:layout_constraintLeft_toLeftOf="@id/glOne"
-        app:layout_constraintTop_toBottomOf="@+id/tvFootName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/glOne"
+        app:layout_constraintTop_toBottomOf="@+id/tvFootName" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glTwo"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.61"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.61" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvRemove"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
         app:cardCornerRadius="100dp"
-        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/glTwo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="45dp"
-        android:layout_height="45dp">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/ivRemove"
-                android:src="@drawable/ic_remove"
                 android:layout_width="25dp"
-                android:layout_height="25dp"/>
+                android:layout_height="25dp"
+                android:src="@drawable/ic_remove" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glThree"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.74"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.74" />
+
     <TextView
-        android:visibility="gone"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/tvQuantity"
-        android:text="1"
-        android:background="@drawable/view_login"
-        app:layout_constraintLeft_toRightOf="@id/glThree"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="45dp"
-        android:layout_height="45dp"/>
+        android:layout_height="45dp"
+        android:background="@drawable/view_login"
+        android:gravity="center"
+        android:text="1"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/glThree"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glFour"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.87"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.87" />
+
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
+        android:id="@+id/cvAdd"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:clickable="true"
         android:focusable="true"
-        android:id="@+id/cvAdd"
+        android:visibility="gone"
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/glFour"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="45dp"
-        android:layout_height="45dp">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
-                app:tint="@color/greenn"
                 android:id="@+id/ivAdd"
-                android:src="@drawable/ic_plus"
                 android:layout_width="25dp"
-                android:layout_height="25dp"/>
+                android:layout_height="25dp"
+                android:src="@drawable/ic_plus"
+                app:tint="@color/greenn" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
     <View
         style="@style/Theme.VerticalLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

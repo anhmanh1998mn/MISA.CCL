@@ -20,13 +20,13 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Color;
 
 /**
-‐ Mục đích Class thực hiện việc quy định số lượng,cách hiển thị dữ liệu lên view
-*
-‐ {@link Color}
-‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc quy định số lượng,cách hiển thị dữ liệu lên view
+ * <p>
+ * ‐ {@link Color}
+ * ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
     private Activity mContext;
@@ -54,7 +54,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(mContext).inflate(mLayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mLayout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -65,12 +65,12 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
             holder.cvColor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mIColorSelection!=null){
-                        mIColorSelection.onClickListener(mListColor.get(position).getColorName(),mListColor.get(position).getColorID());
+                    if (mIColorSelection != null) {
+                        mIColorSelection.onClickListener(mListColor.get(position).getColorName(), mListColor.get(position).getColorID());
                     }
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -88,15 +88,15 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             try {
-                cvColor=itemView.findViewById(R.id.cvColor);
-                tvTick=itemView.findViewById(R.id.tvTick);
-            }catch (Exception e){
+                cvColor = itemView.findViewById(R.id.cvColor);
+                tvTick = itemView.findViewById(R.id.tvTick);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public interface IColorSelection{
-        public void onClickListener(String keyColor,int colorID);
+    public interface IColorSelection {
+        public void onClickListener(String keyColor, int colorID);
     }
 }

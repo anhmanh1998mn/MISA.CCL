@@ -1,108 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_tab_login"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_tab_login"
     tools:context=".view.login.ActivityLogin">
+
     <ImageView
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/ivBack"
         style="@style/Theme.IconMargin"
-        app:tint="@color/white"
-        android:src="@drawable/ic_back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
     <LinearLayout
         android:id="@+id/llAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
+        android:layout_marginTop="150dp"
         android:layout_marginRight="14dp"
         android:background="@drawable/view_login"
-        android:layout_marginTop="150dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivBack"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/etUserName"
                 style="@style/Theme.TextUser"
-                android:drawableLeft="@drawable/ic_user"
-                android:hint="@string/phone_email_account"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_next"/>
+                android:layout_height="@dimen/height_next"
+                android:drawableLeft="@drawable/ic_user"
+                android:hint="@string/phone_email_account" />
+
             <ImageView
                 android:id="@+id/ivTextClearUserName"
-                android:visibility="gone"
-                android:layout_marginRight="@dimen/notification"
-                android:layout_gravity="center|right"
-                app:tint="@color/grey"
-                android:src="@drawable/ic_close"
                 android:layout_width="@dimen/notification"
-                android:layout_height="@dimen/notification"/>
+                android:layout_height="@dimen/notification"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="@dimen/notification"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="@color/grey" />
         </FrameLayout>
+
         <View
             style="@style/Theme.VerticalLine"
-            android:layout_marginLeft="@dimen/margin_left_large"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/margin_left_large" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
-                android:inputType="textPassword"
                 android:id="@+id/etPassword"
                 style="@style/Theme.TextUser"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_next"
                 android:drawableLeft="@drawable/ic_lock"
                 android:hint="@string/password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_next"/>
+                android:inputType="textPassword" />
+
             <ImageView
                 android:id="@+id/ivTextClearPassword"
-                android:visibility="gone"
-                android:layout_marginRight="@dimen/notification"
-                android:layout_gravity="center|right"
-                app:tint="@color/grey"
-                android:src="@drawable/ic_close"
                 android:layout_width="@dimen/notification"
-                android:layout_height="@dimen/notification"/>
+                android:layout_height="@dimen/notification"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="@dimen/notification"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="@color/grey" />
         </FrameLayout>
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btnLogin"
-        android:layout_marginTop="@dimen/margin_login"
-        app:layout_constraintTop_toBottomOf="@+id/llAccount"
-        android:textColor="@color/white"
         style="@style/Theme.FontText"
-        android:text="@string/login"
-        android:backgroundTint="@color/dark_blue"
-        android:textAllCaps="true"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_next"/>
+        android:layout_height="@dimen/height_next"
+        android:layout_marginTop="@dimen/margin_login"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/llAccount" />
+
     <TextView
         android:id="@+id/tvForgotPassword"
-        android:layout_marginTop="@dimen/notification"
         style="@style/Theme.TextWhiteSmall"
-        android:text="@string/forgot_password"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/notification"
+        android:text="@string/forgot_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
     <ImageView
         android:id="@+id/ivAppInformation"
-        android:layout_marginBottom="@dimen/margin_login"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_information"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_login"
+        android:src="@drawable/ic_information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

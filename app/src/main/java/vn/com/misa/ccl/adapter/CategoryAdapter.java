@@ -17,12 +17,12 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Category;
 
 /**
-‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị dữ liệu category lên view
-*
-‐ {@link Category}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị dữ liệu category lên view
+ * <p>
+ * ‐ {@link Category}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -32,15 +32,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Category> mListCategory;
 
-    private Boolean mCheckVisible=false;
+    private Boolean mCheckVisible = false;
 
     private IItemClickListener mIItemClickListener;
 
-    private boolean checkItem=false;
+    private boolean checkItem = false;
 
-    private ConstraintLayout clCheck=null;
+    private ConstraintLayout clCheck = null;
 
-    private ImageView ivCheck=null;
+    private ImageView ivCheck = null;
 
     public IItemClickListener getmIItemClickListener() {
         return mIItemClickListener;
@@ -59,7 +59,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(mContext).inflate(mLayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mLayout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -70,18 +70,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.clRestaurantType.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mIItemClickListener!=null){
+                    if (mIItemClickListener != null) {
                         mIItemClickListener.onClickListener(mListCategory.get(position).getmCategoryID());
                     }
-                    if(clCheck!=null && ivCheck!=null){
+                    if (clCheck != null && ivCheck != null) {
                         ivCheck.setVisibility(View.GONE);
                     }
                     holder.ivTick.setVisibility(View.VISIBLE);
-                    clCheck= holder.clRestaurantType ;
-                    ivCheck=holder.ivTick;
+                    clCheck = holder.clRestaurantType;
+                    ivCheck = holder.ivTick;
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -102,16 +102,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             try {
-                tvCategoryName=itemView.findViewById(R.id.tvCategoryName);
-                ivTick=itemView.findViewById(R.id.ivTick);
-                clRestaurantType=itemView.findViewById(R.id.clRestaurantType);
-            }catch (Exception e){
+                tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
+                ivTick = itemView.findViewById(R.id.ivTick);
+                clRestaurantType = itemView.findViewById(R.id.clRestaurantType);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public interface IItemClickListener{
+    public interface IItemClickListener {
         public void onClickListener(int position);
     }
 }

@@ -14,10 +14,10 @@ import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
 
 /**
-‐ Mục đích Class thực hiện việc thông báo đăng nhập hoặc tiếp tục truy cập vào ứng dụng
-*
-‐ @created_by cvmanh on 01/11/2021
-*/
+ * ‐ Mục đích Class thực hiện việc thông báo đăng nhập hoặc tiếp tục truy cập vào ứng dụng
+ * <p>
+ * ‐ @created_by cvmanh on 01/11/2021
+ */
 
 public class ActivityAppConfirm extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,10 +44,10 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
      */
     private void initView() {
         try {
-            ivBack=findViewById(R.id.ivBack);
-            btnLoginNext=findViewById(R.id.btnLoginNext);
-            tvAppOverViewNext=findViewById(R.id.tvAppOverViewNext);
-        }catch (Exception e){
+            ivBack = findViewById(R.id.ivBack);
+            btnLoginNext = findViewById(R.id.btnLoginNext);
+            tvAppOverViewNext = findViewById(R.id.tvAppOverViewNext);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -57,12 +57,12 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
      *
      * @created_by cvmanh on 01/11/2021
      */
-    private void onClickViewListener(){
+    private void onClickViewListener() {
         try {
             ivBack.setOnClickListener(this);
             btnLoginNext.setOnClickListener(this);
             tvAppOverViewNext.setOnClickListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -71,27 +71,26 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
      * Mục đích method thực hiện việc xử lý các công việc khi người dùng click
      *
      * @param view view được click
-     *
      * @created_by cvmanh on 01/11/2021
      */
     @Override
     public void onClick(View view) {
         try {
-            switch (view.getId()){
-                case R.id.ivBack:{
+            switch (view.getId()) {
+                case R.id.ivBack: {
                     finish();
                     break;
                 }
-                case R.id.btnLoginNext:{
+                case R.id.btnLoginNext: {
                     startActivity(new Intent(this, ActivityRestaurantType.class));
                     break;
                 }
-                case R.id.tvAppOverViewNext:{
+                case R.id.tvAppOverViewNext: {
                     startActivity(new Intent(this, ActivitySelectionOptionLogin.class));
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

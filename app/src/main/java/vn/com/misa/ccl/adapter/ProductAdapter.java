@@ -18,12 +18,12 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Product;
 
 /**
-‐ Mục đích Class thực hiện quy định dữ liệu và cách thức hiển thị dữ liệu product lên view
-*
-‐ {@link Product}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện quy định dữ liệu và cách thức hiển thị dữ liệu product lên view
+ * <p>
+ * ‐ {@link Product}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
@@ -42,19 +42,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(mContext).inflate(mLayout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(mLayout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap= BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(),0,
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(), 0,
                     mListProduct.get(position).getmProductImage().getmImage().length);
             holder.ivItemMenu.setImageBitmap(bitmap);
             holder.tvFootName.setText(mListProduct.get(position).getmProductName());
             holder.tvFootPrice.setText(String.valueOf(mListProduct.get(position).getmProductPrice()));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -68,16 +68,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         ImageView ivItemMenu;
 
-        TextView tvFootName,tvFootPrice;
+        TextView tvFootName, tvFootPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             try {
-                ivItemMenu=itemView.findViewById(R.id.ivItemMenu);
-                tvFootName=itemView.findViewById(R.id.tvFootName);
-                tvFootPrice=itemView.findViewById(R.id.tvFootPrice);
-            }catch (Exception e){
+                ivItemMenu = itemView.findViewById(R.id.ivItemMenu);
+                tvFootName = itemView.findViewById(R.id.tvFootName);
+                tvFootPrice = itemView.findViewById(R.id.tvFootPrice);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

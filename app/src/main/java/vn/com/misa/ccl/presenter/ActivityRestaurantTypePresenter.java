@@ -10,13 +10,13 @@ import vn.com.misa.ccl.model.IActivityRestaurantTypeModel;
 import vn.com.misa.ccl.view.restaurantsetup.IActivityRestaurantType;
 
 /**
-‐ Mục đích Class thực hiện việc luân chuyển dữ liệu giữa ActivityRestaurantTypeModel và ActivityRestaurantType
-*
-‐ {@link ActivityRestaurantTypeModel}
-‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType}
-*
-‐ @created_by cvmanh on 01/19/2021
-*/
+ * ‐ Mục đích Class thực hiện việc luân chuyển dữ liệu giữa ActivityRestaurantTypeModel và ActivityRestaurantType
+ * <p>
+ * ‐ {@link ActivityRestaurantTypeModel}
+ * ‐ {@link vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType}
+ * <p>
+ * ‐ @created_by cvmanh on 01/19/2021
+ */
 
 public class ActivityRestaurantTypePresenter implements IActivityRestaurantType.IFragmentRestaurantTypePresenter, IActivityRestaurantTypeModel {
 
@@ -26,13 +26,12 @@ public class ActivityRestaurantTypePresenter implements IActivityRestaurantType.
         this.mIActivityShopTypeView = mIFragmentShopTypeView;
     }
 
-    private ActivityRestaurantTypeModel mActivityRestaurantTypeModel =new ActivityRestaurantTypeModel(this);
+    private ActivityRestaurantTypeModel mActivityRestaurantTypeModel = new ActivityRestaurantTypeModel(this);
 
     /**
      * Mục đích method thực hiện việc gọi hàm xử lý lấy dữ liệu danh sách loại cửa hàng
      *
      * @param activity instance activity
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override
@@ -44,7 +43,6 @@ public class ActivityRestaurantTypePresenter implements IActivityRestaurantType.
      * Mục đích method thực hiện việc nhận danh sách loại cửa hàng và gửi tới view
      *
      * @param listCategory Danh sách loại cửa hàng
-     *
      * @created_by cvmanh on 01/19/2021
      */
     @Override

@@ -19,12 +19,12 @@ import vn.com.misa.ccl.entity.Unit;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
-‐ Mục đích Class thực hiện việc xử lý các công việc trong ActivityBill
-*
-‐ {@link vn.com.misa.ccl.presenter.ActivityBillPresenter}
-*
-‐ @created_by cvmanh on 01/25/2021
-*/
+ * ‐ Mục đích Class thực hiện việc xử lý các công việc trong ActivityBill
+ * <p>
+ * ‐ {@link vn.com.misa.ccl.presenter.ActivityBillPresenter}
+ * <p>
+ * ‐ @created_by cvmanh on 01/25/2021
+ */
 
 public class ActivityBillModel {
 
@@ -38,59 +38,59 @@ public class ActivityBillModel {
 
     private List<OrderDetail> mListOrderDetaill;
 
-    private String resultNumberEnter="0";
+    private String resultNumberEnter = "0";
 
     /**
      * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
      *
      * @param activity instance activity
-     * @param orderID Mã order
-     *
+     * @param orderID  Mã order
      * @created_by cvmanh on 01/25/2021
      */
-    public void getOrderDetail(Activity activity,int orderID){
+    public void getOrderDetail(Activity activity, int orderID) {
         try {
-            mListOrderDetaill=new ArrayList<>();
-            mSqLiteDatabase= DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-            Cursor cursor=mSqLiteDatabase.rawQuery("SELECT "+DatabaseInfomation.TABLE_ORDERS+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+"" +
-                    ","+DatabaseInfomation.COLUMN_ORDER_STATUS+","+DatabaseInfomation.COLUMN_TABLE_NAME+"" +
-                    ","+DatabaseInfomation.COLUMN_TOTAL_PEOPLE+","+DatabaseInfomation.COLUM_ORDER_AMOUNT+"," +
-                    ""+DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+","
-                    +DatabaseInfomation.COLUMN_IMAGE+"," +
-                    ""+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUM_ORDER_DETAIL_ID+","
-                    +DatabaseInfomation.COLUMN_QUANTITY+","+DatabaseInfomation.TABLE_COLORS+"."+
-                    DatabaseInfomation.COLUMN_COLOR_ID+","+DatabaseInfomation.COLUMN_COLOR_KEY+","
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+
-                    DatabaseInfomation.COLUMN_MYPRODUCT_ID+","+DatabaseInfomation.COLUMN_PRODUCT_PRICE+","+
-                    DatabaseInfomation.COLUMN_PRODUCT_STATUS+","+DatabaseInfomation.TABLE_UNITS+"."
-                    +DatabaseInfomation.COLUMN_UNIT_ID+","
-                    +DatabaseInfomation.COLUMN_UNIT_NAME+","
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_PRODUCT_NAME+","+
-                    DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+" FROM "
-                    +DatabaseInfomation.TABLE_ORDERS+", "
-                    +DatabaseInfomation.TABLE_UNITS+","
-                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+","+DatabaseInfomation.TABLE_COLORS+","
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+","
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+" WHERE "
-                    +DatabaseInfomation.TABLE_ORDERS+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+"="
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                    +DatabaseInfomation.COLUMN_ORDER_ID+" AND "
-                    +DatabaseInfomation.TABLE_ORDER_DETAIL+"."
-                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+"="
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                    +DatabaseInfomation.COLUMN_MYPRODUCT_ID+" AND "
-                    +DatabaseInfomation.TABLE_UNITS+"."+DatabaseInfomation.COLUMN_UNIT_ID+"="
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."+DatabaseInfomation.COLUMN_UNIT_ID+" AND "
-                    +DatabaseInfomation.TABLE_PRODUCT_IMAGES+"."
-                    +DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+"="+DatabaseInfomation.TABLE_MYPRODUCTS
-                    +"."+DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID+" AND "
-                    +DatabaseInfomation.TABLE_MYPRODUCTS+"."
-                    +DatabaseInfomation.COLUMN_COLOR_ID+"="+DatabaseInfomation.TABLE_COLORS+"."
-                    +DatabaseInfomation.COLUMN_COLOR_ID+" AND "
-                    +DatabaseInfomation.TABLE_ORDERS+"."+DatabaseInfomation.COLUMN_ORDER_ID+"="+orderID+"",null);
-            for(int i=cursor.getCount()-1;i>=0;i--){
+            mListOrderDetaill = new ArrayList<>();
+            mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            Cursor cursor = mSqLiteDatabase.rawQuery("SELECT " + DatabaseInfomation.TABLE_ORDERS + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + "" +
+                    "," + DatabaseInfomation.COLUMN_ORDER_STATUS + "," + DatabaseInfomation.COLUMN_TABLE_NAME + "" +
+                    "," + DatabaseInfomation.COLUMN_TOTAL_PEOPLE + "," + DatabaseInfomation.COLUM_ORDER_AMOUNT + "," +
+                    "" + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + ","
+                    + DatabaseInfomation.COLUMN_IMAGE + "," +
+                    "" + DatabaseInfomation.TABLE_ORDER_DETAIL + "." + DatabaseInfomation.COLUM_ORDER_DETAIL_ID + ","
+                    + DatabaseInfomation.COLUMN_QUANTITY + "," + DatabaseInfomation.TABLE_COLORS + "." +
+                    DatabaseInfomation.COLUMN_COLOR_ID + "," + DatabaseInfomation.COLUMN_COLOR_KEY + ","
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." +
+                    DatabaseInfomation.COLUMN_MYPRODUCT_ID + "," + DatabaseInfomation.COLUMN_PRODUCT_PRICE + "," +
+                    DatabaseInfomation.COLUMN_PRODUCT_STATUS + "," + DatabaseInfomation.TABLE_UNITS + "."
+                    + DatabaseInfomation.COLUMN_UNIT_ID + ","
+                    + DatabaseInfomation.COLUMN_UNIT_NAME + ","
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." + DatabaseInfomation.COLUMN_PRODUCT_NAME + "," +
+                    DatabaseInfomation.TABLE_ORDERS + "." + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + "," +
+                    DatabaseInfomation.TABLE_ORDER_DETAIL + "." + DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT + " FROM "
+                    + DatabaseInfomation.TABLE_ORDERS + ", "
+                    + DatabaseInfomation.TABLE_UNITS + ","
+                    + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "," + DatabaseInfomation.TABLE_COLORS + ","
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + ","
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + " WHERE "
+                    + DatabaseInfomation.TABLE_ORDERS + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + "="
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + "."
+                    + DatabaseInfomation.COLUMN_ORDER_ID + " AND "
+                    + DatabaseInfomation.TABLE_ORDER_DETAIL + "."
+                    + DatabaseInfomation.COLUMN_MYPRODUCT_ID + "="
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "."
+                    + DatabaseInfomation.COLUMN_MYPRODUCT_ID + " AND "
+                    + DatabaseInfomation.TABLE_UNITS + "." + DatabaseInfomation.COLUMN_UNIT_ID + "="
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." + DatabaseInfomation.COLUMN_UNIT_ID + " AND "
+                    + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "."
+                    + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + "=" + DatabaseInfomation.TABLE_MYPRODUCTS
+                    + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + " AND "
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "."
+                    + DatabaseInfomation.COLUMN_COLOR_ID + "=" + DatabaseInfomation.TABLE_COLORS + "."
+                    + DatabaseInfomation.COLUMN_COLOR_ID + " AND "
+                    + DatabaseInfomation.TABLE_ORDERS + "." + DatabaseInfomation.COLUMN_ORDER_ID + "=" + orderID + "", null);
+            for (int i = cursor.getCount() - 1; i >= 0; i--) {
                 cursor.moveToPosition(i);
                 mListOrderDetaill.add(new OrderDetail(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
                         new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
@@ -110,14 +110,15 @@ public class ActivityBillModel {
                                         cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME))),
                                 new Color(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_ID)),
                                         cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_COLOR_KEY)))),
-                        cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY))));
+                        cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_QUANTITY)),
+                        cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT))));
             }
-            if(cursor!=null){
+            if (cursor != null) {
                 mIActivityBillModel.getOrderDetail(mListOrderDetaill);
                 return;
             }
             mIActivityBillModel.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -125,96 +126,95 @@ public class ActivityBillModel {
     /**
      * Mục đích method thực hiện việc xử lý tiền thừa và tiền khách đưa trên máy tính và gửi kết quả về presenter
      *
-     * @param activity instace activity
-     * @param  numberEnter Giá trị hiển thị khi người dùng click button trên máy tính
-     * @param amount Tổng tiền Order
-     * @param nameClick Số mà người dùng chọn
-     *
+     * @param activity    instace activity
+     * @param numberEnter Giá trị hiển thị khi người dùng click button trên máy tính
+     * @param amount      Tổng tiền Order
+     * @param nameClick   Số mà người dùng chọn
      * @created_by cvmanh on 01/25/2021
      */
-    public void processCaculator(Activity activity,String numberEnter,String nameClick,float amount){
+    public void processCaculator(Activity activity, String numberEnter, String nameClick, float amount) {
         try {
-            switch (nameClick){
-                case "C":{
-                    resultNumberEnter="0";
+            switch (nameClick) {
+                case "C": {
+                    resultNumberEnter = "0";
                     mIActivityBillModel.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "":{
-                    if(numberEnter.equals("0")||numberEnter.length()==1){
-                        resultNumberEnter="0";
+                case "": {
+                    if (numberEnter.equals("0") || numberEnter.length() == 1) {
+                        resultNumberEnter = "0";
                         mIActivityBillModel.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    resultNumberEnter=(numberEnter.substring(0,numberEnter.length()-1));
+                    resultNumberEnter = (numberEnter.substring(0, numberEnter.length() - 1));
                     mIActivityBillModel.resultTextEnter(resultNumberEnter);
                     break;
                 }
-                case "7":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "7": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "8":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "8": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "9":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "9": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "4":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "4": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "5":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "5": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "6":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "6": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "1":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "1": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "2":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "2": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "3":{
-                    checkNumberCaculate(numberEnter,nameClick);
+                case "3": {
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "0":{
-                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
-                        resultNumberEnter=(nameClick);
+                case "0": {
+                    if (numberEnter.startsWith("0") || numberEnter.startsWith("-0")) {
+                        resultNumberEnter = (nameClick);
                         mIActivityBillModel.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    checkNumberCaculate(numberEnter,nameClick);
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case "000":{
-                    if(numberEnter.startsWith("0")||numberEnter.startsWith("-0")){
-                        resultNumberEnter="0";
+                case "000": {
+                    if (numberEnter.startsWith("0") || numberEnter.startsWith("-0")) {
+                        resultNumberEnter = "0";
                         mIActivityBillModel.resultTextEnter(resultNumberEnter);
                         return;
                     }
-                    checkNumberCaculate(numberEnter,nameClick);
+                    checkNumberCaculate(numberEnter, nameClick);
                     break;
                 }
-                case ",":{
+                case ",": {
 
                     break;
                 }
-                case "ĐỒNG Ý":{
-                    DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
-                    mIActivityBillModel.resultSuccess(decimalFormat.format(Float.parseFloat(numberEnter)-amount));
+                case "ĐỒNG Ý": {
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                    mIActivityBillModel.resultSuccess(decimalFormat.format(Float.parseFloat(numberEnter) - amount));
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -223,46 +223,45 @@ public class ActivityBillModel {
     /**
      * Mục đích method thực hiện việc kiểm tra khi người dùng chọn số trong máy tính
      *
-     * @param numberEnter Giá trị có trong textview
-     * @param  nameItemClick số mà người dùng chọn
-     *
+     * @param numberEnter   Giá trị có trong textview
+     * @param nameItemClick số mà người dùng chọn
      * @created_by cvmanh on 01/21/2021
      */
-    private void checkNumberCaculate(String numberEnter,String nameItemClick){
+    private void checkNumberCaculate(String numberEnter, String nameItemClick) {
         try {
-            if(numberEnter.startsWith("0")){
-                resultNumberEnter=(nameItemClick);
+            if (numberEnter.startsWith("0")) {
+                resultNumberEnter = (nameItemClick);
                 mIActivityBillModel.resultTextEnter(resultNumberEnter);
                 return;
             }
-            if(numberEnter.length()<9){
-                resultNumberEnter=numberEnter+(nameItemClick);
+            if (numberEnter.length() < 9) {
+                resultNumberEnter = numberEnter + (nameItemClick);
                 mIActivityBillModel.resultTextEnter(resultNumberEnter);
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void updateOrderStatus(Activity activity,int orderID){
+    public void updateOrderStatus(Activity activity, int orderID) {
         try {
-            mSqLiteDatabase=DatabaseHelper.initDatabase(activity,DatabaseInfomation.DATABASE_NAME);
-            ContentValues contentValues=new ContentValues();
-            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS,2); // 2: trạng thái order là đã thu tiền
-            long result=mSqLiteDatabase.update(DatabaseInfomation.TABLE_ORDERS,contentValues,
-                    DatabaseInfomation.COLUMN_ORDER_ID+"=?",new String[]{String.valueOf(orderID)});
-            if(result>0){
+            mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS, 2); // 2: trạng thái order là đã thu tiền
+            long result = mSqLiteDatabase.update(DatabaseInfomation.TABLE_ORDERS, contentValues,
+                    DatabaseInfomation.COLUMN_ORDER_ID + "=?", new String[]{String.valueOf(orderID)});
+            if (result > 0) {
                 mIActivityBillModel.updateOrderStatusSuccess();
                 return;
             }
             mIActivityBillModel.onFailed();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface IActivityBillModel{
+    public interface IActivityBillModel {
         public void getOrderDetail(List<OrderDetail> listOrderDetail);
 
         public void resultTextEnter(String moneyIn);
