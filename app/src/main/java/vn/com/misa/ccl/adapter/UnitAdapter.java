@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
-import vn.com.misa.ccl.entity.ProductCategory;
-import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
 
 /**
@@ -65,6 +64,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
             holder.tvUnitName.setText(mListUnit.get(position).getmUnitName());
+//            holder.frmIconUpdate.getBackground().setTint(mContext.getResources().getColor(R.color.white));
             holder.clUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -103,7 +103,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
             super(itemView);
             try {
                 tvUnitName = itemView.findViewById(R.id.tvUnitName);
-                ivUpdateUnitName = itemView.findViewById(R.id.ivUpdateUnitName);
+//                ivUpdateUnitName = itemView.findViewById(R.id.ivUpdateUnitName);
                 ivItemUnit = itemView.findViewById(R.id.ivItemUnit);
                 clUnit = itemView.findViewById(R.id.clUnit);
             } catch (Exception e) {

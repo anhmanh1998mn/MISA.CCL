@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/grey_lighh"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:background="@color/white"
+        style="@style/Theme.EffectClick"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:id="@+id/llReportHeader"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            style="@style/Theme.TextColor"
+            android:text="@string/time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/ic_down_arrow"
+            android:gravity="center|right"
+            android:paddingRight="8dp"
+            style="@style/Theme.TextColor"
+            android:text="@string/time_new"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_margin="8dp"
+        android:id="@+id/frmMainReportContent"
+        app:layout_constraintTop_toBottomOf="@+id/llReportHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -290,7 +290,7 @@ public class ActivityOrderModel {
             int mMonth = calendar.get(Calendar.MONTH);
             int mDay = calendar.get(Calendar.DATE);
             calendar.set(mYear, mMonth, mDay);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             return simpleDateFormat.format(calendar.getTime());
         } catch (Exception e) {
             e.printStackTrace();

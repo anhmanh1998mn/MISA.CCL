@@ -26,6 +26,7 @@ import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
 import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
+import vn.com.misa.ccl.view.report.FragmentMainReport;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate;
 import vn.com.misa.ccl.view.rmenu.FragmentMenu;
 
@@ -44,7 +45,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu;
+    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu,tvVisible;
 
     private ImageView ivUser;
 
@@ -85,6 +86,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvAdd = findViewById(R.id.tvAdd);
             tvSetupName = findViewById(R.id.tvSetupName);
             tvAddMenu = findViewById(R.id.tvAddMenu);
+            tvVisible=findViewById(R.id.tvVisible);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -227,6 +229,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                 tvSetupName.setText(getResources().getString(R.string.sell));
                 tvAddMenu.setVisibility(View.GONE);
                 tvAdd.setVisibility(View.VISIBLE);
+                tvVisible.setVisibility(View.GONE);
                 break;
             }
             case "Thực đơn": {
@@ -235,9 +238,16 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                 tvSetupName.setText(getResources().getString(R.string.menu));
                 tvAddMenu.setVisibility(View.VISIBLE);
                 tvAdd.setVisibility(View.GONE);
+                tvVisible.setVisibility(View.GONE);
                 break;
             }
             case "Báo cáo": {
+                addFragment(new FragmentMainReport());
+                dlRestaurantManage.closeDrawer(GravityCompat.START);
+                tvSetupName.setText(getResources().getString(R.string.main_report));
+                tvAddMenu.setVisibility(View.GONE);
+                tvAdd.setVisibility(View.GONE);
+                tvVisible.setVisibility(View.VISIBLE);
                 break;
             }
         }

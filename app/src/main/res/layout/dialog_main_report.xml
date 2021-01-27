@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/clDialogMainReport"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvTimeHeader"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Theme.FontTextLarge"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="@string/time" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/frmTimeNew"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeNew"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_new" />
+        <ImageView
+            android:id="@+id/ivTick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineOne"
+        app:layout_constraintTop_toBottomOf="@+id/frmTimeNew"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        android:id="@+id/frmTimeThisWeek"
+        app:layout_constraintTop_toBottomOf="@+id/vLineOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeThisWeek"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_this_week" />
+        <ImageView
+            android:id="@+id/ivTickTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineTwo"
+        app:layout_constraintTop_toBottomOf="@+id/frmTimeThisWeek"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        android:id="@+id/frmTimeLastWeek"
+        app:layout_constraintTop_toBottomOf="@+id/vLineTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeLastWeek"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_last_week" />
+        <ImageView
+            android:id="@+id/ivTickThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineThree"
+        app:layout_constraintTop_toBottomOf="@+id/frmTimeLastWeek"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+   <FrameLayout
+       android:id="@+id/frmTimeThisMonth"
+       app:layout_constraintTop_toBottomOf="@+id/vLineThree"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <TextView
+           android:id="@+id/tvTimeThisMonth"
+           style="@style/Theme.FontTextReport"
+           android:layout_width="match_parent"
+           android:text="@string/time_this_month" />
+       <ImageView
+           android:id="@+id/ivTickFour"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center|right"
+           android:layout_marginRight="@dimen/margin_right_small"
+           android:src="@drawable/ic_tick"
+           android:visibility="gone" />
+   </FrameLayout>
+    <View
+        android:id="@+id/vLineFour"
+        app:layout_constraintTop_toBottomOf="@+id/frmTimeThisMonth"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        android:id="@+id/frmTimeLastMonth"
+        app:layout_constraintTop_toBottomOf="@+id/vLineFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeLastMonth"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_last_mont" />
+        <ImageView
+            android:id="@+id/ivTickFive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineFive"
+        app:layout_constraintTop_toBottomOf="@+id/frmTimeLastMonth"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        android:id="@+id/frmThisYear"
+        app:layout_constraintTop_toBottomOf="@+id/vLineFive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeThisYear"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_this_year" />
+        <ImageView
+            android:id="@+id/ivTickSix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineSix"
+        app:layout_constraintTop_toBottomOf="@+id/frmThisYear"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        android:id="@+id/frmLastYear"
+        app:layout_constraintTop_toBottomOf="@+id/vLineSix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeLastYear"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_last_year" />
+        <ImageView
+            android:id="@+id/ivTickSeven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+    <View
+        android:id="@+id/vLineSeven"
+        app:layout_constraintTop_toBottomOf="@+id/frmLastYear"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent" />
+    <FrameLayout
+        app:layout_constraintTop_toBottomOf="@+id/vLineSeven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTimeOther"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="match_parent"
+            android:text="@string/time_other" />
+        <ImageView
+            android:id="@+id/ivTickEight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

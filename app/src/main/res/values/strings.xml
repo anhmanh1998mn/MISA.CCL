@@ -94,4 +94,16 @@
     <string name="update_status">Đã thu tiền thành công. Vui lòng chọn món mới.</string>
     <string name="add_new_product">Thêm món</string>
     <string name="enter_food_name">Nhập tên món</string>
+    <string name="main_report">Doanh thu</string>
+    <string name="time">Thời gian</string>
+    <string name="time_new">Gần đây</string>
+    <string name="time_this_week">Tuần này</string>
+    <string name="time_last_week">Tuần trước</string>
+    <string name="time_this_month">Tháng này</string>
+    <string name="time_last_mont">Tháng trước</string>
+    <string name="time_this_year">Năm nay</string>
+    <string name="time_last_year">Năm trước</string>
+    <string name="time_other">Khác</string>
+    <string name="time_last_day">Hôm qua</string>
+    <string name="time_this_day">Hôm nay</string>
 </resources>

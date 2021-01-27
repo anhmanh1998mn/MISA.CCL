@@ -19,4 +19,6 @@
     <color name="greyy">#CCCCCC</color>
     <color name="grey_lighh">#d1d6dc</color>
     <color name="grey_bill">#cac9cf</color>
+    <color name="orange">#fd9804</color>
+    <color name="green_light">#50aa52</color>
 </resources>

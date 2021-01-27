@@ -42,9 +42,10 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <FrameLayout
+
         android:layout_width="@dimen/size_larg"
         android:layout_height="@dimen/size_larg"
-        android:background="@drawable/view_circle"
+        android:background="@drawable/view_icon_circle"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintLeft_toRightOf="@id/glMenuTwo"
         app:layout_constraintRight_toRightOf="parent"

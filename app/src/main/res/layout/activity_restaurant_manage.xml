@@ -58,6 +58,13 @@
                     android:layout_weight="0.8"
                     android:drawableTop="@drawable/ic_plus"
                     android:paddingTop="16dp" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvVisible"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:paddingTop="16dp" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
