@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.model;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -423,6 +424,12 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện xử lý xóa item product và gửi kết quả về presenter
+     *
+     * @param productID mã product
+     * @created_by cvmanh on 01/27/2021
+     */
     public void removeItemProduct(int productID) {
         try {
             for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
@@ -436,6 +443,17 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý cập nhật thông tin sản phẩm theo mã sản phẩm và gửi kết quả về presenter
+     *
+     * @param productId    mã product
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
     public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
         try {
             for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
@@ -453,6 +471,82 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý xóa sản phẩm theo mã sản phẩm và gửi kết quả vềpresenter
+     *
+     * @param activity  instance activity
+     * @param productID mã product
+     * @created_by cvmanh on 01/27/2021
+     */
+    public void deleteItemProductMenu(Activity activity, int productID) {
+        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+        long result = mSqliteDatabase.delete(DatabaseInfomation.TABLE_MYPRODUCTS, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
+                new String[]{String.valueOf(productID)});
+        if (result > 0) {
+            mIResultActivityFoodUpdate.deleteItemProductMenuSuccess();
+            return;
+        }
+        mIResultActivityFoodUpdate.onFailed();
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý cập nahatj thông tin sản phẩm trong menu và gửi kết quả về presenter
+     *
+     * @param activity     instance activity
+     * @param productId    mã product
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
+    public void updateItemProductMenu(Activity activity, int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
+        contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
+        contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
+        long result = mSqliteDatabase.update(DatabaseInfomation.TABLE_MYPRODUCTS,
+                contentValues, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
+                new String[]{String.valueOf(productId)});
+        if (result > 0) {
+            mIResultActivityFoodUpdate.updateItemProducrMenuSuccess();
+            return;
+        }
+        mIResultActivityFoodUpdate.onFailed();
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý thêm mới một sản phẩm vào menu và gửi kết quả về presenter
+     *
+     * @param activity     instance activity
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
+    public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
+        contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
+        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, 1);
+        contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
+        long result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
+        if (result > 0) {
+            mIResultActivityFoodUpdate.addNewFoodMenuSuccess();
+            return;
+        }
+        mIResultActivityFoodUpdate.onFailed();
+    }
+
     public interface IResultActivityFoodUpdate {
         public void loadListColorSuccess(List<Color> listColor);
 
@@ -467,6 +561,12 @@ public class ActivityFoodUpdateModel {
         public void removeItemProductSuccess();
 
         public void updateItemProductSuccess();
+
+        public void deleteItemProductMenuSuccess();
+
+        public void updateItemProducrMenuSuccess();
+
+        public void addNewFoodMenuSuccess();
 
         public void onFailed();
     }

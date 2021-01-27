@@ -73,15 +73,77 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mActivityFoodUpdateModel.processCaculator(activity, numberEnter, nameClick);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý xóa item product
+     *
+     * @param productID mã product
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void removeItemProduct(int productID) {
         mActivityFoodUpdateModel.removeItemProduct(productID);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý sửa thông tin product
+     *
+     * @param productId    mã product
+     * @param productName  tên product
+     * @param productPrice giá product
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
         mActivityFoodUpdateModel.updateItemProduct(productId, productName, productPrice,
                 imageID, unitID, colorID);
+    }
+
+    /**
+     * Mục đích method thực hiện gọi model xử lý xóa đồ trong menu
+     *
+     * @param activity  instance activity
+     * @param productID mã product
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void deleteItemProductMenu(Activity activity, int productID) {
+        mActivityFoodUpdateModel.deleteItemProductMenu(activity, productID);
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý cập nhật thông tin sản phẩm trong menu
+     *
+     * @param activity     instance activity
+     * @param productId    mã product
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void updateItemProductMenu(Activity activity, int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        mActivityFoodUpdateModel.updateItemProductMenu(activity, productId, productName, productPrice, imageID, unitID, colorID);
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý cthêm mới thông tin sản phẩm trong menu
+     *
+     * @param activity     instance activity
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã unit
+     * @param colorID      mã màu
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID, int colorID) {
+        mActivityFoodUpdateModel.addNewFoodMenu(activity, productName, productPrice, imageID, unitID, colorID);
     }
 
     /**
@@ -128,19 +190,65 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mIActivityFoodUpdateView.processCaculatorSuccess(resutText);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả xử lý
+     *
+     * @param resutText Kết quả xử lý
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void resultTextEnterSuccess(String resutText) {
         mIActivityFoodUpdateView.processEnterSuccess(resutText);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả xóa thông tin item product thành công và gửi kết quả về view
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void removeItemProductSuccess() {
         mIActivityFoodUpdateView.removeProductItemSuccess();
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả cập nhật thông tin item sản phẩm thành công và gửi kết quả về view
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void updateItemProductSuccess() {
         mIActivityFoodUpdateView.updateItemProductSuccess();
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả xóa item product thành công và gửi kết quả về view
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void deleteItemProductMenuSuccess() {
+        mIActivityFoodUpdateView.deleteItemProductMenuSuccess();
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả cập nhật thông tin sản phẩm thành công và gửi về view
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void updateItemProducrMenuSuccess() {
+        mIActivityFoodUpdateView.updateItemProductMenuSuccess();
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả thêm mới thông tin sản phẩm thành công và gửi về view
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void addNewFoodMenuSuccess() {
+        mIActivityFoodUpdateView.addNewFoodMenuSuccess();
     }
 
     /**

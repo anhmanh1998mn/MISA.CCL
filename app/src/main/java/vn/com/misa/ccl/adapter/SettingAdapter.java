@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -33,6 +34,16 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     private int mLayout;
 
     private List<Setting> mListSetting;
+
+    private IOnCLickViewListener mIOnCLickViewListener;
+
+    public IOnCLickViewListener getmIOnCLickViewListener() {
+        return mIOnCLickViewListener;
+    }
+
+    public void setmIOnCLickViewListener(IOnCLickViewListener mIOnCLickViewListener) {
+        this.mIOnCLickViewListener = mIOnCLickViewListener;
+    }
 
     public SettingAdapter(Activity mContext, int mLayout, List<Setting> mListSetting) {
         this.mContext = mContext;
@@ -60,6 +71,13 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
             Drawable drawableLeft = mContext.getResources().getDrawable(mListSetting.get(position).getIconSetting());
             holder.tvSettingName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
             holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
+
+            holder.clItemSetting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mIOnCLickViewListener.onCLickListener(mListSetting.get(position).getSettingName());
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,14 +93,21 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
         private View line;
 
+        private ConstraintLayout clItemSetting;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             try {
                 tvSettingName = itemView.findViewById(R.id.tvSettingName);
                 line = itemView.findViewById(R.id.line);
+                clItemSetting=itemView.findViewById(R.id.clItemSetting);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public interface IOnCLickViewListener{
+        public void onCLickListener(String settingName);
     }
 }

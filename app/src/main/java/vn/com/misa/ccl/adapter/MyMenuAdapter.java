@@ -2,13 +2,9 @@ package vn.com.misa.ccl.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,38 +12,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Random;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate;
 
-/**
- * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách thức hiển thị dữ liệu ProductCategory lên view
- * <p>
- * ‐ {@link ProductCategory}
- * <p>
- * ‐ @created_by cvmanh on 01/19/2021
- */
+public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder> {
 
-public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategoryAdapter.ViewHolder> {
     private Activity mContext;
 
     private int mLayout;
 
-    private List<ProductCategory> mListProductCategory;
+    private List<Product> mListProduct;
 
-    public ProductCategoryAdapter(Activity mContext, int mLayout, List<ProductCategory> mListProductCategory) {
+    public MyMenuAdapter(Activity mContext, int mLayout, List<Product> mListProduct) {
         this.mContext = mContext;
         this.mLayout = mLayout;
-        this.mListProductCategory = mListProductCategory;
+        this.mListProduct = mListProduct;
     }
 
     @NonNull
@@ -60,20 +47,20 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProductCategory.get(position).getmProduct().getmProductImage().getmImage(), 0,
-                    mListProductCategory.get(position).getmProduct().getmProductImage().getmImage().length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(), 0,
+                    mListProduct.get(position).getmProductImage().getmImage().length);
             holder.ivItemMenu.setImageBitmap(bitmap);
-            holder.tvFootName.setText(mListProductCategory.get(position).getmProduct().getmProductName());
+            holder.tvFootName.setText(mListProduct.get(position).getmProductName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getmProduct().getmProductPrice())));
-            holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getmProduct().getmColor().getColorName()));
+            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProduct.get(position).getmProductPrice())));
+            holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityFoodUpdate.class);
-                    ProductCategory productCategory = mListProductCategory.get(position);
-                    intent.putExtra("TypeIntent","Setup");
-                    intent.putExtra("Object", productCategory);
+                    Product product = mListProduct.get(position);
+                    intent.putExtra("TypeIntent","Menu");
+                    intent.putExtra("Object", product);
                     mContext.startActivity(intent);
                 }
             });
@@ -84,7 +71,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
     @Override
     public int getItemCount() {
-        return mListProductCategory.size();
+        return mListProduct.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -23,6 +23,14 @@ public interface IActivityFoodUpdate {
 
         public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID,
                                       int colorID);
+
+        public void deleteItemProductMenu(Activity activity, int productID);
+
+        public void updateItemProductMenu(Activity activity, int productId, String productName, float productPrice, int imageID, int unitID,
+                                          int colorID);
+
+        public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID,
+                                   int colorID);
     }
 
     public interface IActivityFoodUpdateView {
@@ -40,6 +48,12 @@ public interface IActivityFoodUpdate {
         public void removeProductItemSuccess();
 
         public void updateItemProductSuccess();
+
+        public void deleteItemProductMenuSuccess();
+
+        public void updateItemProductMenuSuccess();
+
+        public void addNewFoodMenuSuccess();
 
         public void onFailed();
     }

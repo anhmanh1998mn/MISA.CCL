@@ -30,12 +30,15 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.CaculateAdapter;
 import vn.com.misa.ccl.adapter.ColorAdapter;
 import vn.com.misa.ccl.adapter.ProductImageAdapter;
+import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.model.ActivityRestaurantMenuModel;
 import vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 import vn.com.misa.ccl.util.Common;
+import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
+import vn.com.misa.ccl.view.rmenu.FragmentMenu;
 
 /**
  * ‐ Mục đích Class thực hiện các công việc trong ActivityFoodUpdate
@@ -49,7 +52,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private EditText etFoodName;
 
-    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter;
+    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName;
 
     private ImageView ivFoodImage, ivColor, ivClose;
 
@@ -75,11 +78,15 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private CaculateAdapter mCacucateAdapter;
 
-    private Button btnDelete, btnSave;
+    private Button btnDelete, btnSave, btnAddnewProduct;
 
-    private int mProductID, mColorID, mImageID, mUnitID;
+    private int mProductID, mColorID = 1, mImageID = 1, mUnitID = 1;
 
     private float mPriceOut;
+
+    private Product mProduct;
+
+    private String mTypeIntent;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -103,16 +110,36 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     private void receiveProductData() {
         try {
             Intent intent = getIntent();
-            mProductCategory = (ProductCategory) intent.getSerializableExtra("Object");
-            mProductID = mProductCategory.getmProduct().getmProductID();
-            etFoodName.setText(mProductCategory.getmProduct().getmProductName());
-            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProductCategory.getmProduct().getmProductPrice())));
-            tvFoodUnit.setText(mProductCategory.getmProduct().getmUnit().getmUnitName());
-            ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProductCategory.getmProduct().getmProductImage().getmImage(),
-                    0, mProductCategory.getmProduct().getmProductImage().getmImage().length));
-            cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
-            cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
+            mTypeIntent = intent.getStringExtra("TypeIntent");
+            if (intent.getStringExtra("TypeIntent").equals("Setup")) {
+                mProductCategory = (ProductCategory) intent.getSerializableExtra("Object");
+                mProductID = mProductCategory.getmProduct().getmProductID();
+                etFoodName.setText(mProductCategory.getmProduct().getmProductName());
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProductCategory.getmProduct().getmProductPrice())));
+                tvFoodUnit.setText(mProductCategory.getmProduct().getmUnit().getmUnitName());
+                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProductCategory.getmProduct().getmProductImage().getmImage(),
+                        0, mProductCategory.getmProduct().getmProductImage().getmImage().length));
+                cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
+                cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
+                return;
+            } else if (mTypeIntent.equals("Menu")) {
+                mProduct = (Product) intent.getSerializableExtra("Object");
+                mProductID = mProduct.getmProductID();
+                etFoodName.setText(mProduct.getmProductName());
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProduct.getmProductPrice())));
+                tvFoodUnit.setText(mProduct.getmUnit().getmUnitName());
+                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProduct.getmProductImage().getmImage(),
+                        0, mProduct.getmProductImage().getmImage().length));
+                cvImage.getBackground().setTint(Color.parseColor(mProduct.getmColor().getColorName()));
+                cvColor.getBackground().setTint(Color.parseColor(mProduct.getmColor().getColorName()));
+            } else {
+                btnDelete.setVisibility(View.GONE);
+                btnSave.setVisibility(View.GONE);
+                btnAddnewProduct.setVisibility(View.VISIBLE);
+                tvSetupName.setText(getResources().getString(R.string.add_new_product));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,6 +180,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             ivColor = findViewById(R.id.ivColor);
             btnDelete = findViewById(R.id.btnDelete);
             btnSave = findViewById(R.id.btnSave);
+            tvSetupName = findViewById(R.id.tvSetupName);
+            btnAddnewProduct = findViewById(R.id.btnAddnewProduct);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,6 +201,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             tvFoodPrice.setOnClickListener(this);
             btnDelete.setOnClickListener(this);
             btnSave.setOnClickListener(this);
+            btnAddnewProduct.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,18 +239,40 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 }
                 case R.id.btnDelete: {
                     mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-                    mActivityFoodUpdatePresenter.removeItemProduct(mProductID);
+                    if (mTypeIntent.equals("Setup")) {
+                        mActivityFoodUpdatePresenter.removeItemProduct(mProductID);
+                        return;
+                    }
+                    mActivityFoodUpdatePresenter.deleteItemProductMenu(this, mProductID);
                     break;
                 }
                 case R.id.btnSave: {
                     SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
                     if (sharedPreferences != null) {
                         mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+                    } else {
+                        mUnitID = 1;
                     }
                     mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-                    mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                    if (mTypeIntent.equals("Setup")) {
+                        mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                                mPriceOut, mImageID, mUnitID, mColorID);
+                        return;
+                    }
+                    mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
                             mPriceOut, mImageID, mUnitID, mColorID);
-                    finish();
+                    break;
+                }
+                case R.id.btnAddnewProduct: {
+                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+                    if (sharedPreferences != null) {
+                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+                    } else {
+                        mUnitID = 1;
+                    }
+                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+                    mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
+                            mPriceOut, mImageID, mUnitID, mColorID);
                     break;
                 }
             }
@@ -381,9 +433,49 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         finish();
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả sửa thông tin product thành công
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
     @Override
     public void updateItemProductSuccess() {
         finish();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả xóa đồ trong menu thành công và hiện thông báo cho người dùng
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void deleteItemProductMenuSuccess() {
+//        startActivity(new Intent(this, ActivityRestaurantManage.class));
+        finish();
+        Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả sửa đồ trong menu thành công và hiện thông báo cho người dùng
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void updateItemProductMenuSuccess() {
+//        startActivity(new Intent(this, ActivityRestaurantManage.class));
+        finish();
+        Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Mục đích method thực hiện việc thêm mới món ăn thành công và hiện thông báo cho người dùng
+     *
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void addNewFoodMenuSuccess() {
+        finish();
+        Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
     }
 
     /**

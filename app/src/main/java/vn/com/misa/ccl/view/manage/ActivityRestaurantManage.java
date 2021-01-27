@@ -21,10 +21,13 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.SettingAdapter;
+import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
 import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate;
+import vn.com.misa.ccl.view.rmenu.FragmentMenu;
 
 /**
  * ‐ Mục đích Class thực hiện những công việc chứa các fragment quản lý cửa hàng
@@ -34,13 +37,14 @@ import vn.com.misa.ccl.view.order.FragmentListOrder;
  * ‐ @created_by cvmanh on 01/25/2021
  */
 
-public class ActivityRestaurantManage extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantManage.IActivityManageView {
+public class ActivityRestaurantManage extends AppCompatActivity implements View.OnClickListener, IActivityRestaurantManage.IActivityManageView,
+        SettingAdapter.IOnCLickViewListener {
 
     private Toolbar tbRestaurantManage;
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu, tvAdd;
+    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu;
 
     private ImageView ivUser;
 
@@ -79,6 +83,8 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             ivUser.setClipToOutline(true);
             rcvMenu = findViewById(R.id.rcvMenu);
             tvAdd = findViewById(R.id.tvAdd);
+            tvSetupName = findViewById(R.id.tvSetupName);
+            tvAddMenu = findViewById(R.id.tvAddMenu);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,6 +113,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         try {
             tvMenu.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
+            tvAddMenu.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,6 +136,12 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                 case R.id.tvAdd: {
                     Intent intent = new Intent(this, ActivityOrder.class);
                     intent.putExtra("ORDER_ID", -1);
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.tvAddMenu: {
+                    Intent intent = new Intent(this, ActivityFoodUpdate.class);
+                    intent.putExtra("TypeIntent", "AddNewProduct");
                     startActivity(intent);
                     break;
                 }
@@ -183,6 +196,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             rcvMenu.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             rcvMenu.setAdapter(mSettingAdapter);
             mSettingAdapter.notifyDataSetChanged();
+            mSettingAdapter.setmIOnCLickViewListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -196,5 +210,36 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
     @Override
     public void onFailed() {
         Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý các công việc khi người dùng click vào item trong drawerLayout
+     *
+     * @param settingName tên item người dùng click trong drawerLayout
+     * @created_by cvmanh on 01/27/2021
+     */
+    @Override
+    public void onCLickListener(String settingName) {
+        switch (settingName) {
+            case "Bán hàng": {
+                addFragment(new FragmentListOrder());
+                dlRestaurantManage.closeDrawer(GravityCompat.START);
+                tvSetupName.setText(getResources().getString(R.string.sell));
+                tvAddMenu.setVisibility(View.GONE);
+                tvAdd.setVisibility(View.VISIBLE);
+                break;
+            }
+            case "Thực đơn": {
+                addFragment(new FragmentMenu());
+                dlRestaurantManage.closeDrawer(GravityCompat.START);
+                tvSetupName.setText(getResources().getString(R.string.menu));
+                tvAddMenu.setVisibility(View.VISIBLE);
+                tvAdd.setVisibility(View.GONE);
+                break;
+            }
+            case "Báo cáo": {
+                break;
+            }
+        }
     }
 }

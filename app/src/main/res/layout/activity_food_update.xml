@@ -62,14 +62,14 @@
             android:text="@string/food_name" />
 
         <EditText
+            android:hint="@string/enter_food_name"
             android:id="@+id/etFoodName"
             style="@style/Theme.FontText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
             android:background="@null"
-            android:gravity="right"
-            android:text="@string/food_name" />
+            android:gravity="right" />
     </LinearLayout>
 
     <View
@@ -104,7 +104,7 @@
             android:drawableRight="@drawable/ic_foot_menu"
             android:drawablePadding="@dimen/margin_small"
             android:gravity="right"
-            android:text="@string/food_name" />
+            android:text="@string/caculator_0" />
     </LinearLayout>
 
     <View
@@ -139,7 +139,7 @@
             android:drawableRight="@drawable/ic_foot_menu"
             android:drawablePadding="@dimen/margin_small"
             android:gravity="right"
-            android:text="@string/food_name" />
+            android:text="Bao" />
     </LinearLayout>
 
     <View
@@ -249,6 +249,17 @@
         android:id="@+id/btnSave"
         style="@style/Theme.FontButton"
         android:layout_width="180dp"
+        android:layout_height="@dimen/height_next"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnDelete"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btnAddnewProduct"
+        style="@style/Theme.FontButton"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/height_next"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
