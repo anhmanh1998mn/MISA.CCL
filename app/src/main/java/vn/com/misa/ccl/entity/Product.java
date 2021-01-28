@@ -28,6 +28,12 @@ public class Product implements Serializable {
 
     private int quantity;
 
+    public Product(int mProductID, String mProductName, Unit mUnit) {
+        this.mProductID = mProductID;
+        this.mProductName = mProductName;
+        this.mUnit = mUnit;
+    }
+
     public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus) {
         this.mProductID = mProductID;
         this.mProductName = mProductName;
