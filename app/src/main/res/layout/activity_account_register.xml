@@ -47,7 +47,7 @@
         style="@style/Theme.FontText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/margin_top"
         android:text="@string/phone_email_account" />
 
     <EditText

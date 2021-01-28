@@ -51,15 +51,6 @@ public class ActivityRestaurantMenuPresenter implements IActivityRestaurantMenu.
     }
 
     /**
-     * Mục đích method thực hiện việc gọi model xử lý xóa item trong menu
-     *
-     * @param productID Mã sản phẩm
-     * @param listProduct Danh sách sản phẩm
-     *
-     * @created_by cvmanh on 01/26/2021
-     */
-
-    /**
      * Mục đích method thực hiện việc nhân dữ liệu danh sách Product trả về và gửi danh sách đến view
      *
      * @param listProductCategory Danh sách sản phẩm

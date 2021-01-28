@@ -29,7 +29,6 @@
         style="@style/Theme.FontText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dfsdfsdf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/glOne"
         app:layout_constraintTop_toTopOf="parent" />

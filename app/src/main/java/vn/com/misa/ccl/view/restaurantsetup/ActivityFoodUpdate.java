@@ -52,8 +52,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private EditText etFoodName;
 
-    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName,tvCloseFoodImage,
-            tvColorClose,tvNext;
+    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName, tvCloseFoodImage,
+            tvColorClose, tvNext;
 
     private ImageView ivFoodImage, ivColor, ivClose;
 
@@ -183,7 +183,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             btnSave = findViewById(R.id.btnSave);
             tvSetupName = findViewById(R.id.tvSetupName);
             btnAddnewProduct = findViewById(R.id.btnAddnewProduct);
-            tvNext=findViewById(R.id.tvNext);
+            tvNext = findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -280,19 +280,19 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 //                            mPriceOut, mImageID, mUnitID, mColorID);
                     break;
                 }
-                case R.id.ivClose:{
+                case R.id.ivClose: {
                     mDialogCaculate.dismiss();
                     break;
                 }
-                case R.id.tvCloseFoodImage:{
+                case R.id.tvCloseFoodImage: {
                     mDialogImage.dismiss();
                     break;
                 }
-                case R.id.tvColorClose:{
+                case R.id.tvColorClose: {
                     mDialogColor.dismiss();
                     break;
                 }
-                case R.id.tvNext:{
+                case R.id.tvNext: {
                     updateProductInfomation();
                     break;
                 }
@@ -302,7 +302,12 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void addNewProductInfomation(){
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý thêm mới thông tin sản phẩm
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void addNewProductInfomation() {
         SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
         if (sharedPreferences != null) {
             mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
@@ -314,7 +319,12 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 mPriceOut, mImageID, mUnitID, mColorID);
     }
 
-    private void updateProductInfomation(){
+    /**
+     * Mục đích method thực hiện gọi presenter xử lý cập nhật thông tin sản phẩm
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void updateProductInfomation() {
         SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
         if (sharedPreferences != null) {
             mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
@@ -376,7 +386,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             llListColor.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadListColor(this);
-            tvColorClose=mDialogColor.findViewById(R.id.tvColorClose);
+            tvColorClose = mDialogColor.findViewById(R.id.tvColorClose);
             tvColorClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -580,7 +590,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             llListImage.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadProductImage(this);
-            tvCloseFoodImage=mDialogImage.findViewById(R.id.tvCloseFoodImage);
+            tvCloseFoodImage = mDialogImage.findViewById(R.id.tvCloseFoodImage);
             tvCloseFoodImage.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();

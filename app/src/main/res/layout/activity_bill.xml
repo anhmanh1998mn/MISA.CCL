@@ -49,7 +49,7 @@
         android:id="@+id/clContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_smalll"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/tbBill">
 
@@ -58,7 +58,7 @@
             style="@style/Theme.TextWhiteLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin"
             android:text="@string/bill_order"
             android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -91,7 +91,7 @@
             style="@style/Theme.TextColorMarginLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/margin"
             android:text="@string/table_name"
             android:textStyle="normal"
             app:layout_constraintLeft_toRightOf="@+id/tvTable"
@@ -111,7 +111,7 @@
             style="@style/Theme.TextColorMarginLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="@dimen/margin_left_small"
             android:text="@string/table_name"
             android:textStyle="normal"
             app:layout_constraintLeft_toRightOf="@+id/tvDate"
@@ -121,25 +121,25 @@
             android:id="@+id/vLineTop"
             style="@style/Theme.VerticalLine"
             android:layout_width="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
+            android:layout_marginTop="@dimen/margin_smalll"
+            android:layout_marginRight="@dimen/margin_smalll"
             app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
         <View
             android:id="@+id/vLeft"
-            android:layout_width="1px"
-            android:layout_height="45dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="@dimen/height_line"
+            android:layout_height="@dimen/height_largee"
+            android:layout_marginLeft="@dimen/margin_smalll"
             android:background="@color/grey"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vLineTop" />
 
         <View
             android:id="@+id/vRight"
-            android:layout_width="1px"
-            android:layout_height="45dp"
-            android:layout_marginRight="8dp"
+            android:layout_width="@dimen/height_line"
+            android:layout_height="@dimen/height_largee"
+            android:layout_marginRight="@dimen/margin_smalll"
             android:background="@color/grey"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vLineTop" />
@@ -148,18 +148,18 @@
             android:id="@+id/vBottom"
             style="@style/Theme.VerticalLine"
             android:layout_width="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
+            android:layout_marginRight="@dimen/margin_smalll"
             app:layout_constraintTop_toBottomOf="@+id/vRight" />
 
         <TextView
             android:id="@+id/tvProductName"
             style="@style/Theme.TextColor"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/height_largee"
             android:gravity="center"
             android:text="@string/product_name"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/vLeft"
             app:layout_constraintRight_toLeftOf="@+id/guidelineOne"
@@ -169,10 +169,10 @@
             android:id="@+id/tvAmount"
             style="@style/Theme.TextColor"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/height_largee"
             android:gravity="center"
             android:text="@string/amount"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/guidelineOne"
             app:layout_constraintRight_toLeftOf="@+id/guidelineTwo"
@@ -182,10 +182,10 @@
             android:id="@+id/tvUnitPrice"
             style="@style/Theme.TextColor"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/height_largee"
             android:gravity="center"
             android:text="@string/unit_price"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/guidelineTwo"
             app:layout_constraintRight_toLeftOf="@+id/guidelineThree"
@@ -195,11 +195,11 @@
             android:id="@+id/tvTotalMoney"
             style="@style/Theme.TextColor"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginRight="4dp"
+            android:layout_height="@dimen/height_largee"
+            android:layout_marginRight="@dimen/margin_small"
             android:gravity="center"
             android:text="@string/total_money"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintRight_toLeftOf="@+id/vRight"
             app:layout_constraintTop_toBottomOf="@+id/vLineTop" />
@@ -253,9 +253,9 @@
             android:id="@+id/vLineTwo"
             style="@style/Theme.VerticalLine"
             android:layout_width="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
+            android:layout_marginTop="@dimen/margin_smalll"
+            android:layout_marginRight="@dimen/margin_smalll"
             app:layout_constraintTop_toBottomOf="@+id/tvTotalPrice" />
 
         <TextView
@@ -265,20 +265,19 @@
             android:layout_height="wrap_content"
             android:text="@string/amount_in"
             android:textColor="@color/purple_500"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="normal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vLineTwo" />
 
         <TextView
-
             android:id="@+id/tvMoneyIn"
             style="@style/Theme.TextColorMarginLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/amount_in"
             android:textColor="@color/purple_500"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:textStyle="normal"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vLineTwo" />
@@ -287,9 +286,9 @@
             android:id="@+id/vLineThree"
             style="@style/Theme.VerticalLine"
             android:layout_width="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
+            android:layout_marginTop="@dimen/margin_smalll"
+            android:layout_marginRight="@dimen/margin_smalll"
             app:layout_constraintTop_toBottomOf="@+id/tvAmountIn" />
 
         <TextView
@@ -314,7 +313,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/height_small"
             android:background="@color/grey_bill"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_bill_order"
@@ -325,7 +324,7 @@
         android:id="@+id/btnSuccess"
         style="@style/Theme.FontButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/size_largee"
         android:text="@string/success"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

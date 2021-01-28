@@ -100,14 +100,14 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
             try {
                 tvSettingName = itemView.findViewById(R.id.tvSettingName);
                 line = itemView.findViewById(R.id.line);
-                clItemSetting=itemView.findViewById(R.id.clItemSetting);
+                clItemSetting = itemView.findViewById(R.id.clItemSetting);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public interface IOnCLickViewListener{
+    public interface IOnCLickViewListener {
         public void onCLickListener(String settingName);
     }
 }

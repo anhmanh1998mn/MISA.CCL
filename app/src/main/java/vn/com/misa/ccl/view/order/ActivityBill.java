@@ -60,7 +60,7 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
     private int mOrderID;
 
     private TextView tvResultCaculate, tvItemSeven, tvItemEight, tvItemNine, tvItemFour, tvItemFive, tvItemSix, tvItemClear,
-            tvItemOne, tvItemTwo, tvItemThree, tvItemDot, tvItemZero, tvItemZeroo, tvSuccess,tvBack,tvNext;
+            tvItemOne, tvItemTwo, tvItemThree, tvItemDot, tvItemZero, tvItemZeroo, tvSuccess, tvBack, tvNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +105,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
             tvMoneyIn = findViewById(R.id.tvMoneyIn);
             tvMoneyOut = findViewById(R.id.tvMoneyOut);
             btnSuccess = findViewById(R.id.btnSuccess);
-            tvBack=findViewById(R.id.tvBack);
-            tvNext=findViewById(R.id.tvNext);
+            tvBack = findViewById(R.id.tvBack);
+            tvNext = findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,6 +185,11 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         }
     }
 
+    /**
+     * Mục đích method thực hiện nhận kết quả cập nhật trạng thái đơn hàng thành công và xử lý kết quả
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void updateOrderStatusSuccess() {
         try {
@@ -329,11 +334,11 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
                     mActivityBillPresenter.updateOrderStatus(this, mOrderID);
                     break;
                 }
-                case R.id.tvBack:{
+                case R.id.tvBack: {
                     finish();
                     break;
                 }
-                case R.id.tvNext:{
+                case R.id.tvNext: {
                     mActivityBillPresenter = new ActivityBillPresenter(this);
                     mActivityBillPresenter.updateOrderStatus(this, mOrderID);
                 }

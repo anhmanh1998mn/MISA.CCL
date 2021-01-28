@@ -10,7 +10,7 @@
         app:layout_constraintTop_toTopOf="parent"
         style="@style/Theme.FontTextLarge"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/height_largee"
         android:text="@string/time" />
     <FrameLayout
         android:layout_width="match_parent"

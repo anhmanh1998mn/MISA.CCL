@@ -21,9 +21,9 @@
         android:id="@+id/llAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginLeft="@dimen/margin_left_smalll"
+        android:layout_marginTop="@dimen/margin_top_large"
+        android:layout_marginRight="@dimen/margin_left_smalll"
         android:background="@drawable/view_login"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,11 +42,9 @@
                 android:hint="@string/phone_email_account" />
 
             <ImageView
+                style="@style/Theme.Icon"
                 android:id="@+id/ivTextClearUserName"
-                android:layout_width="@dimen/notification"
-                android:layout_height="@dimen/notification"
                 android:layout_gravity="center|right"
-                android:layout_marginRight="@dimen/notification"
                 android:src="@drawable/ic_close"
                 android:visibility="gone"
                 app:tint="@color/grey" />
@@ -71,11 +69,8 @@
                 android:inputType="textPassword" />
 
             <ImageView
+                style="@style/Theme.Icon"
                 android:id="@+id/ivTextClearPassword"
-                android:layout_width="@dimen/notification"
-                android:layout_height="@dimen/notification"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="@dimen/notification"
                 android:src="@drawable/ic_close"
                 android:visibility="gone"
                 app:tint="@color/grey" />

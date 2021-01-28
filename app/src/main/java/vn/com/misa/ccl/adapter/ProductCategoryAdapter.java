@@ -72,7 +72,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityFoodUpdate.class);
                     ProductCategory productCategory = mListProductCategory.get(position);
-                    intent.putExtra("TypeIntent","Setup");
+                    intent.putExtra("TypeIntent", "Setup");
                     intent.putExtra("Object", productCategory);
                     mContext.startActivity(intent);
                 }

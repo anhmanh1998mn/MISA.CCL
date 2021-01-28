@@ -17,7 +17,7 @@
             style="@style/Theme.TextWhiteSmall"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
             android:gravity="left|center"
             android:text="@string/enter_table_name"
             android:textSize="20sp" />
@@ -36,7 +36,7 @@
         style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="@dimen/padding_small"
         android:orientation="horizontal"
         android:weightSum="6"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,7 +47,7 @@
             style="@style/Theme.TextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="@dimen/margin_smalll"
             android:layout_weight="3.97"
             android:background="@drawable/view_enter_phone"
             android:gravity="right|center"
@@ -69,8 +69,8 @@
 
             <ImageView
                 android:id="@+id/ivBackKeyboard"
-                android:layout_width="45dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/height_largee"
+                android:layout_height="@dimen/size_larg"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_back_keyboard" />
         </FrameLayout>
@@ -214,7 +214,7 @@
         style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="@dimen/padding_small"
         android:orientation="horizontal"
         android:weightSum="6"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -232,7 +232,7 @@
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:layout_weight="4.06"
             android:background="@color/purple_500"
             android:text="@string/success" />
@@ -242,7 +242,7 @@
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:layout_weight="4.06"
             android:background="@color/purple_500"
             android:text="@string/success"

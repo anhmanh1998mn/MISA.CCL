@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="8dp"
-    app:cardCornerRadius="4dp"
+    android:padding="@dimen/margin_smalll"
+    app:cardCornerRadius="@dimen/margin_small"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="@dimen/margin_smalll"
+        android:paddingBottom="@dimen/margin_smalll"
         android:layout_height="match_parent">
         <LinearLayout
             style="@style/Theme.EffectClick"
@@ -17,17 +17,17 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/size_lar">
             <androidx.cardview.widget.CardView
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/margin_smalll"
                 android:layout_gravity="center"
                 app:layout_constraintTop_toBottomOf="@+id/vLineThree"
                 android:id="@+id/cvImageThisMonth"
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/height_largee"
                 android:backgroundTint="@color/orange"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne">
 
@@ -40,8 +40,8 @@
                     <ImageView
                         android:scaleType="centerCrop"
                         android:id="@+id/ivItemThisMonth"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_calendar_yesterday"
                         app:layout_constraintRight_toLeftOf="@id/glOne" />
                 </LinearLayout>
@@ -68,7 +68,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintGuide_percent="0.14" />
         <View
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/left_small"
             android:id="@+id/lLineOne"
             app:layout_constraintLeft_toRightOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/llLastDay"
@@ -82,16 +82,16 @@
             android:weightSum="9"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/size_lar">
             <androidx.cardview.widget.CardView
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/margin_smalll"
                 app:layout_constraintTop_toBottomOf="@+id/vLineThree"
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
                 android:layout_gravity="center"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/height_largee"
                 android:backgroundTint="@color/light_blue"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne">
 
@@ -103,8 +103,8 @@
 
                     <ImageView
                         android:scaleType="centerCrop"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_calendar_today"
                         app:layout_constraintRight_toLeftOf="@id/glOne" />
                 </LinearLayout>
@@ -124,7 +124,7 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <View
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/left_small"
             android:id="@+id/vLineTwo"
             app:layout_constraintLeft_toRightOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/llThisDay"
@@ -137,16 +137,16 @@
             android:weightSum="9"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/size_lar">
             <androidx.cardview.widget.CardView
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/margin_smalll"
                 app:layout_constraintTop_toBottomOf="@+id/vLineThree"
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
                 android:layout_gravity="center"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/height_largee"
                 android:backgroundTint="@color/green_light"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne">
 
@@ -158,8 +158,8 @@
 
                     <ImageView
                         android:scaleType="centerCrop"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_calendar_week"
                         app:layout_constraintRight_toLeftOf="@id/glOne" />
                 </LinearLayout>
@@ -179,7 +179,7 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <View
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/left_small"
             android:id="@+id/vLineThree"
             app:layout_constraintLeft_toRightOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/llThisWeek"
@@ -193,16 +193,16 @@
             android:weightSum="9"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/size_lar">
             <androidx.cardview.widget.CardView
                 app:layout_constraintTop_toBottomOf="@+id/vLineThree"
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/margin_smalll"
                 android:layout_gravity="center"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/height_largee"
                 android:backgroundTint="@color/red"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne">
 
@@ -214,8 +214,8 @@
 
                     <ImageView
                         android:scaleType="centerCrop"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_calendar_month"
                         app:layout_constraintRight_toLeftOf="@id/glOne" />
                 </LinearLayout>
@@ -235,7 +235,7 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <View
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/left_small"
             android:id="@+id/vLineFour"
             app:layout_constraintLeft_toRightOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/llThisMonth"
@@ -249,16 +249,16 @@
             android:weightSum="9"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/size_lar">
             <androidx.cardview.widget.CardView
                 app:layout_constraintTop_toBottomOf="@+id/vLineThree"
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/margin_smalll"
                 android:layout_gravity="center"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/height_largee"
                 android:backgroundTint="@color/teal_200"
-                app:cardCornerRadius="100dp"
+                app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne">
 
@@ -270,8 +270,8 @@
 
                     <ImageView
                         android:scaleType="centerCrop"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
                         android:src="@drawable/ic_calendar_year"
                         app:layout_constraintRight_toLeftOf="@id/glOne" />
                 </LinearLayout>

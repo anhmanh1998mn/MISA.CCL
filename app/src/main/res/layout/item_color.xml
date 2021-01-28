@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="70dp"
-    android:layout_height="70dp"
+    android:layout_width="@dimen/width_height_large"
+    android:layout_height="@dimen/width_height_large"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -12,7 +12,7 @@
         android:layout_width="@dimen/height_smal"
         android:layout_height="@dimen/height_smal"
         android:backgroundTint="@color/purple_500"
-        app:cardCornerRadius="100dp">
+        app:cardCornerRadius="@dimen/size_maxx">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/ivColor"
                 android:layout_width="@dimen/size_large"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/size_large"
                 android:layout_gravity="center"
                 app:layout_constraintRight_toLeftOf="@id/glOne" />
 

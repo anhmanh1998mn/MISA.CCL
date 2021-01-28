@@ -99,7 +99,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
     /**
      * Mục đích method thực hiện việc show, hide icon clear text khi có sự kiện focus vào view
      *

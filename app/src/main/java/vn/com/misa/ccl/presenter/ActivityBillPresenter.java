@@ -52,6 +52,13 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
         mActivityBillModel.processCaculator(activity, resultProcess, nameClick, amount);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý cập nhật trạng thái order
+     *
+     * @param activity instance activity
+     * @param orderID  mã order
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void updateOrderStatus(Activity activity, int orderID) {
         mActivityBillModel.updateOrderStatus(activity, orderID);
@@ -90,6 +97,11 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
         mIActivityBillView.resultMoneyOutSuccess(amount);
     }
 
+    /**
+     * Mục đích method thực hiện việc nhận kết quả cập nhật trạng thái order thành công và gửi kết quả về view
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void updateOrderStatusSuccess() {
         mIActivityBillView.updateOrderStatusSuccess();

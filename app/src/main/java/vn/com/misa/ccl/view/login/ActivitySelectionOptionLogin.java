@@ -73,9 +73,14 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
 
     }
 
+    /**
+     * Mục đích method thực hiện kiểm tra xem từ màn hình nào chuyển tới
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     private void receiveTypeClick() {
-        Intent intent=getIntent();
-        mTypeClick=intent.getStringExtra("TypeIntent");
+        Intent intent = getIntent();
+        mTypeClick = intent.getStringExtra("TypeIntent");
     }
 
     /**
@@ -182,9 +187,16 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         }
     }
 
-    private void checkIntentScreen(){
-        if(mTypeClick.equals("ActivityManage")){
-            Intent intent=new Intent(this, ActivityRestaurantManage.class);
+    /**
+     * Mục đích method thực hiện việc kiểm tra xem màn hình truyền tới là gì và xử lý
+     * Nếu từ ActivityRestaurantMange thì quay lại activity đó
+     * Ngược lại, chuyển sang activityRestaurantType
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void checkIntentScreen() {
+        if (mTypeClick.equals("ActivityManage")) {
+            Intent intent = new Intent(this, ActivityRestaurantManage.class);
             startActivity(intent);
             finish();
             return;
@@ -237,6 +249,12 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý khi kết nối thất bại
+     *
+     * @param connectionResult kết quả kết nối
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

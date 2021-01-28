@@ -48,7 +48,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
                     android:drawableTop="@drawable/ic_plus"
-                    android:paddingTop="16dp" />
+                    android:paddingTop="@dimen/margin" />
                 <TextView
                     style="@style/Theme.EffectClick"
                     android:visibility="gone"
@@ -57,14 +57,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
                     android:drawableTop="@drawable/ic_plus"
-                    android:paddingTop="16dp" />
+                    android:paddingTop="@dimen/margin" />
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/tvVisible"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
-                    android:paddingTop="16dp" />
+                    android:paddingTop="@dimen/margin" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -87,16 +87,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMenu"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"
+                android:layout_height="@dimen/contraint_large"
                 android:background="@drawable/bg_nav_header"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/ivUser"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_width="@dimen/size_max"
+                    android:layout_height="@dimen/size_max"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:background="@drawable/view_logo"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_avatar"

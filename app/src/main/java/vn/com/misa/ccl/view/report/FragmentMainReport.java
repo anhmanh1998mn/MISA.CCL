@@ -1,5 +1,6 @@
 package vn.com.misa.ccl.view.report;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,12 @@ import androidx.fragment.app.FragmentTransaction;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
+/**
+ * ‐ Mục đích Class thực hiện việc chứa các fragment thống kê
+ * <p>
+ * ‐ @created_by cvmanh on 01/28/2021
+ */
+
 public class FragmentMainReport extends Fragment implements View.OnClickListener {
 
     private LinearLayout llReportHeader;
@@ -26,15 +33,15 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     private ConstraintLayout clDialogMainReport;
 
-    private TextView tvTimeNew,tvTimeThisWeek,tvTimeLastWeek,tvTimeThisMonth,tvTimeLastMonth,
-            tvTimeThisYear,tvTimeLastYear,tvTimeOther;
+    private TextView tvTimeNew, tvTimeThisWeek, tvTimeLastWeek, tvTimeThisMonth, tvTimeLastMonth,
+            tvTimeThisYear, tvTimeLastYear, tvTimeOther;
 
-    private ImageView ivTick,ivTickTwo,ivTickThree,ivTickFour,ivTickFive,ivTickSix,ivTickSeven,ivTickEight;
+    private ImageView ivTick, ivTickTwo, ivTickThree, ivTickFour, ivTickFive, ivTickSix, ivTickSeven, ivTickEight;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_main_report,container,false);
+        View view = inflater.inflate(R.layout.fragment_main_report, container, false);
 
         initView(view);
 
@@ -45,22 +52,39 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         return view;
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view
+     *
+     * @param view view
+     * @created_by cvmanh on 01/28/2021
+     */
     private void initView(View view) {
-        llReportHeader=view.findViewById(R.id.llReportHeader);
+        llReportHeader = view.findViewById(R.id.llReportHeader);
     }
 
-    private void onViewClickListener(){
+    /**
+     * Mục đích method thực hiện việc lắng nghe các xự kiện view click
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void onViewClickListener() {
         llReportHeader.setOnClickListener(this);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi xử lý các công việc theo view click
+     *
+     * @param view view
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.llReportHeader:{
+        switch (view.getId()) {
+            case R.id.llReportHeader: {
                 showDialogTimeOption();
                 break;
             }
-            case R.id.tvTimeNew:{
+            case R.id.tvTimeNew: {
                 ivTick.setVisibility(View.VISIBLE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -72,7 +96,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeThisWeek:{
+            case R.id.tvTimeThisWeek: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.VISIBLE);
                 ivTickThree.setVisibility(View.GONE);
@@ -85,7 +109,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 replaceFragment(new FragmentReportTimeRecently());
                 break;
             }
-            case R.id.tvTimeLastWeek:{
+            case R.id.tvTimeLastWeek: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.VISIBLE);
@@ -97,7 +121,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeThisMonth:{
+            case R.id.tvTimeThisMonth: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -109,7 +133,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeLastMonth:{
+            case R.id.tvTimeLastMonth: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -121,7 +145,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeThisYear:{
+            case R.id.tvTimeThisYear: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -133,7 +157,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeLastYear:{
+            case R.id.tvTimeLastYear: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -145,7 +169,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mDialogTimeOption.dismiss();
                 break;
             }
-            case R.id.tvTimeOther:{
+            case R.id.tvTimeOther: {
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -160,37 +184,53 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc hiển thị dialog lựa chọn thời gian thống kê
+     *
+     * @return giải thích hàm này trả về
+     * @created_by cvmanh on 01/28/2021
+     */
     private void showDialogTimeOption() {
-        mDialogTimeOption=new Dialog(getContext());
+        mDialogTimeOption = new Dialog(getContext());
         mDialogTimeOption.setContentView(R.layout.dialog_main_report);
         mDialogTimeOption.show();
         initViewDialog();
         onCLickViewDialogListener();
     }
 
+    /**
+     * Mục đích method thực hiện việc khởi tạo các view trong dialog
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     private void initViewDialog() {
-        clDialogMainReport=mDialogTimeOption.findViewById(R.id.clDialogMainReport);
-        clDialogMainReport.getLayoutParams().width= AndroidDeviceHelper.getWitdhScreen(getContext())-100;
+        clDialogMainReport = mDialogTimeOption.findViewById(R.id.clDialogMainReport);
+        clDialogMainReport.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
         clDialogMainReport.requestLayout();
-        tvTimeNew=mDialogTimeOption.findViewById(R.id.tvTimeNew);
-        ivTick=mDialogTimeOption.findViewById(R.id.ivTick);
-        tvTimeThisWeek=mDialogTimeOption.findViewById(R.id.tvTimeThisWeek);
-        ivTickTwo=mDialogTimeOption.findViewById(R.id.ivTickTwo);
-        tvTimeLastWeek=mDialogTimeOption.findViewById(R.id.tvTimeLastWeek);
-        ivTickThree=mDialogTimeOption.findViewById(R.id.ivTickThree);
-        tvTimeThisMonth=mDialogTimeOption.findViewById(R.id.tvTimeThisMonth);
-        ivTickFour=mDialogTimeOption.findViewById(R.id.ivTickFour);
-        tvTimeLastMonth=mDialogTimeOption.findViewById(R.id.tvTimeLastMonth);
-        ivTickFive=mDialogTimeOption.findViewById(R.id.ivTickFive);
-        tvTimeThisYear=mDialogTimeOption.findViewById(R.id.tvTimeThisYear);
-        ivTickSix=mDialogTimeOption.findViewById(R.id.ivTickSix);
-        tvTimeLastYear=mDialogTimeOption.findViewById(R.id.tvTimeLastYear);
-        ivTickSeven=mDialogTimeOption.findViewById(R.id.ivTickSeven);
-        tvTimeOther=mDialogTimeOption.findViewById(R.id.tvTimeOther);
-        ivTickEight=mDialogTimeOption.findViewById(R.id.ivTickEight);
+        tvTimeNew = mDialogTimeOption.findViewById(R.id.tvTimeNew);
+        ivTick = mDialogTimeOption.findViewById(R.id.ivTick);
+        tvTimeThisWeek = mDialogTimeOption.findViewById(R.id.tvTimeThisWeek);
+        ivTickTwo = mDialogTimeOption.findViewById(R.id.ivTickTwo);
+        tvTimeLastWeek = mDialogTimeOption.findViewById(R.id.tvTimeLastWeek);
+        ivTickThree = mDialogTimeOption.findViewById(R.id.ivTickThree);
+        tvTimeThisMonth = mDialogTimeOption.findViewById(R.id.tvTimeThisMonth);
+        ivTickFour = mDialogTimeOption.findViewById(R.id.ivTickFour);
+        tvTimeLastMonth = mDialogTimeOption.findViewById(R.id.tvTimeLastMonth);
+        ivTickFive = mDialogTimeOption.findViewById(R.id.ivTickFive);
+        tvTimeThisYear = mDialogTimeOption.findViewById(R.id.tvTimeThisYear);
+        ivTickSix = mDialogTimeOption.findViewById(R.id.ivTickSix);
+        tvTimeLastYear = mDialogTimeOption.findViewById(R.id.tvTimeLastYear);
+        ivTickSeven = mDialogTimeOption.findViewById(R.id.ivTickSeven);
+        tvTimeOther = mDialogTimeOption.findViewById(R.id.tvTimeOther);
+        ivTickEight = mDialogTimeOption.findViewById(R.id.ivTickEight);
     }
 
-    private void onCLickViewDialogListener(){
+    /**
+     * Mục đích method thực hiện việc lắng nghe các xự kiện view click từ dialog
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void onCLickViewDialogListener() {
         tvTimeNew.setOnClickListener(this);
         tvTimeThisWeek.setOnClickListener(this);
         tvTimeLastWeek.setOnClickListener(this);
@@ -201,9 +241,15 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         tvTimeOther.setOnClickListener(this);
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentTransaction transaction=getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frmMainReportContent,fragment);
+    /**
+     * Mục đích method thực hiện việc thay thế fragment
+     *
+     * @param fragment fragment
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frmMainReportContent, fragment);
         transaction.commit();
     }
 }

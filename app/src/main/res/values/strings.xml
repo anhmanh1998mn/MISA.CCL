@@ -107,4 +107,6 @@
     <string name="time_last_day">Hôm qua</string>
     <string name="time_this_day">Hôm nay</string>
     <string name="report_with_food">Doanh thu theo mặt hàng</string>
+    <string name="unit_name_default">Bao</string>
+    <string name="stop_sell">Ngừng bán</string>
 </resources>

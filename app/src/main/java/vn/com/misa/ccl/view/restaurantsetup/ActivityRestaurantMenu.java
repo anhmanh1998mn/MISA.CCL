@@ -231,6 +231,11 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         super.onRestart();
     }
 
+    /**
+     * Mục đích method thực hiện việc cập nhật lại adapter
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     protected void onResume() {
         mProductAdapter.notifyDataSetChanged();

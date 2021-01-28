@@ -71,6 +71,11 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         return view;
     }
 
+    /**
+     * Mục đích method thực hiện cập nhật lại dữ liệu trên view
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     @Override
     public void onResume() {
         getListOrder();
@@ -103,7 +108,6 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         }
     }
 
-
     /**
      * Mục đích method thực hiện việc khởi tạo các view
      *
@@ -135,6 +139,11 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
         }
     }
 
+    /**
+     * Mục đích method thực hiện gọi presenter xử lý lấy danh sách order
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
     private void getListOrder() {
         try {
             mFragmentListOrderPresenter = new FragmentListOrderPresenter(this);

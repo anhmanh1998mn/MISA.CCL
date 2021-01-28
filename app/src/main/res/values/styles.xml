@@ -8,99 +8,99 @@
     <style name="Theme.TextWhiteLarge" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:drawablePadding">9dp</item>
+        <item name="android:drawablePadding">@dimen/padding_normal</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/font_shop_type</item>
 
     </style>
 
     <style name="Theme.TextWhiteSmall" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
-        <item name="android:layout_marginLeft">9dp</item>
+        <item name="android:layout_marginLeft">@dimen/padding_normal</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
     <style name="Theme.FontButtonn" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="android:gravity">left|center</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:layout_gravity">center|left</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/view_item_caculate</item>
-        <item name="android:drawablePadding">8dp</item>
-        <item name="android:paddingLeft">30dp</item>
+        <item name="android:drawablePadding">@dimen/margin_smalll</item>
+        <item name="android:paddingLeft">@dimen/size_larg</item>
     </style>
 
     <style name="Theme.IconMargin" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_margin">9dp</item>
+        <item name="android:layout_margin">@dimen/padding_normal</item>
     </style>
 
     <style name="Theme.ConfirmAccount" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center|right</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:layout_margin">8dp</item>
-        <item name="android:paddingRight">140dp</item>
+        <item name="android:textSize">@dimen/font_shop_type</item>
+        <item name="android:layout_margin">@dimen/margin_smalll</item>
+        <item name="android:paddingRight">@dimen/padding_max</item>
     </style>
 
     <style name="Theme.FontButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:textSize">@dimen/font_shop_type</item>
+        <item name="android:layout_margin">@dimen/margin_smalll</item>
     </style>
 
     <style name="Theme.FontTextUser" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_smalll</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">120dp</item>
-        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_width">@dimen/with_text_large</item>
+        <item name="android:layout_height">@dimen/size_large</item>
     </style>
 
     <style name="Theme.FontButtonColor" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center|left</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_smalll</item>
+        <item name="android:layout_marginRight">@dimen/margin_smalll</item>
         <item name="backgroundTint">@color/green</item>
         <item name="textAllCaps">false</item>
-        <item name="android:layout_height">55dp</item>
-        <item name="android:drawablePadding">8dp</item>
+        <item name="android:layout_height">@dimen/height_lare</item>
+        <item name="android:drawablePadding">@dimen/margin_smalll</item>
     </style>
 
     <style name="Theme.FontTextTime" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center|left</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginLeft">@dimen/margin_smalll</item>
+        <item name="android:layout_marginRight">@dimen/margin_smalll</item>
+        <item name="android:drawablePadding">@dimen/margin_smalll</item>
     </style>
 
     <style name="Theme.FontTextMoney" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/dark_blue</item>
         <item name="android:gravity">center|right</item>
         <item name="drawableTint">@color/grey</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginRight">@dimen/margin_smalll</item>
+        <item name="android:drawablePadding">@dimen/margin_smalll</item>
         <item name="android:drawableRight">@drawable/ic_foot_menu</item>
     </style>
 
     <style name="Theme.TextColor" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/max_font</item>
     </style>
 
     <style name="Theme.TextColorMarginLeft" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginLeft">@dimen/margin_smalll</item>
+        <item name="android:layout_marginRight">@dimen/margin_smalll</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
     </style>
 
     <style name="Theme.EffectClick" parent="Widget.AppCompat.TextView">
@@ -112,7 +112,7 @@
     <style name="Theme.FontTextColor" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
         <item name="drawableTint">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:focusable">true</item>
@@ -122,7 +122,7 @@
     <style name="Theme.FontTextLarge" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/font_shop_type</item>
         <item name="drawableTint">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:focusable">true</item>
@@ -131,11 +131,11 @@
 
     <style name="Theme.FontTextReport" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">@dimen/margin_smalll</item>
+        <item name="android:paddingRight">@dimen/margin_smalll</item>
         <item name="android:gravity">center|left</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
+        <item name="android:layout_height">@dimen/height_largee</item>
         <item name="drawableTint">@color/purple_500</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:focusable">true</item>
@@ -148,21 +148,21 @@
 
     <style name="Theme.FontText" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:layout_marginLeft">@dimen/margin_right_small</item>
+        <item name="android:layout_marginRight">@dimen/margin_right_small</item>
     </style>
 
     <style name="Theme.TextUser" parent="Widget.AppCompat.EditText">
         <item name="drawableTint">@color/grey</item>
-        <item name="android:paddingLeft">25dp</item>
-        <item name="android:drawablePadding">16dp</item>
+        <item name="android:paddingLeft">@dimen/icon_size_small</item>
+        <item name="android:drawablePadding">@dimen/margin</item>
         <item name="android:background">@null</item>
     </style>
 
     <style name="Theme.ClickState" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/view_item_caculate</item>
@@ -170,42 +170,49 @@
 
     <style name="Theme.VerticalLine" parent="Widget.AppCompat.TextView">
         <item name="android:background">@color/grey</item>
-        <item name="android:layout_height">1px</item>
+        <item name="android:layout_height">@dimen/height_line</item>
     </style>
 
     <style name="Theme.FontCaculate" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/view_item_caculate</item>
-        <item name="android:layout_marginLeft">4dp</item>
-        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_small</item>
+        <item name="android:layout_marginRight">@dimen/margin_small</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">@dimen/size_lar</item>
     </style>
 
     <style name="Theme.FontCaculateBill" parent="Widget.AppCompat.TextView">
         <item name="android:clickable">true</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/view_caculate_bill</item>
-        <item name="android:layout_marginLeft">4dp</item>
-        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginLeft">@dimen/margin_small</item>
+        <item name="android:layout_marginRight">@dimen/margin_small</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">@dimen/size_lar</item>
     </style>
 
     <style name="Theme.ViewMargin" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_smalll</item>
+        <item name="android:layout_marginLeft">@dimen/margin_smalll</item>
+        <item name="android:layout_marginTop">@dimen/margin_smalll</item>
     </style>
 
     <style name="Theme.SmallText" parent="Widget.AppCompat.TextView">
-        <item name="android:drawablePadding">8dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:drawablePadding">@dimen/margin_smalll</item>
+        <item name="android:layout_marginTop">@dimen/margin_smalll</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="Theme.Icon" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">@dimen/text_size_small</item>
+        <item name="android:layout_height">@dimen/font_size_large</item>
+        <item name="android:layout_gravity">center|right</item>
+        <item name="android:layout_marginRight">@dimen/margin</item>
     </style>
 </resources>

@@ -4,14 +4,14 @@
     android:id="@+id/clFoodSelect"
     style="@style/Theme.EffectClick"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="@dimen/width_height_large">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImage"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/height_lare"
+        android:layout_height="@dimen/height_lare"
         android:backgroundTint="@color/greenn"
-        app:cardCornerRadius="100dp"
+        app:cardCornerRadius="@dimen/size_maxx"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/glOne"
@@ -68,8 +68,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvRemove"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/height_largee"
+        android:layout_height="@dimen/height_largee"
         android:backgroundTint="@color/white"
         android:clickable="true"
         android:focusable="true"
@@ -87,8 +87,8 @@
 
             <ImageView
                 android:id="@+id/ivRemove"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:src="@drawable/ic_remove" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -102,8 +102,8 @@
 
     <TextView
         android:id="@+id/tvQuantity"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/height_largee"
+        android:layout_height="@dimen/height_largee"
         android:background="@drawable/view_login"
         android:gravity="center"
         android:text="1"
@@ -121,12 +121,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAdd"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/height_largee"
+        android:layout_height="@dimen/height_largee"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        app:cardCornerRadius="100dp"
+        app:cardCornerRadius="@dimen/size_maxx"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/glFour"
         app:layout_constraintTop_toTopOf="parent">
@@ -139,8 +139,8 @@
 
             <ImageView
                 android:id="@+id/ivAdd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
                 android:src="@drawable/ic_plus"
                 app:tint="@color/greenn" />
         </LinearLayout>

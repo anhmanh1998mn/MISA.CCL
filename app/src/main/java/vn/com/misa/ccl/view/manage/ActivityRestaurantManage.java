@@ -47,7 +47,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu,tvVisible,tvLogin,tvRegister;
+    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu, tvVisible, tvLogin, tvRegister;
 
     private ImageView ivUser;
 
@@ -88,9 +88,9 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvAdd = findViewById(R.id.tvAdd);
             tvSetupName = findViewById(R.id.tvSetupName);
             tvAddMenu = findViewById(R.id.tvAddMenu);
-            tvVisible=findViewById(R.id.tvVisible);
-            tvLogin=findViewById(R.id.tvLogin);
-            tvRegister=findViewById(R.id.tvRegister);
+            tvVisible = findViewById(R.id.tvVisible);
+            tvLogin = findViewById(R.id.tvLogin);
+            tvRegister = findViewById(R.id.tvRegister);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,13 +153,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     startActivity(intent);
                     break;
                 }
-                case R.id.tvLogin:{
+                case R.id.tvLogin: {
                     Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
                     intent.putExtra("TypeIntent", "ActivityManage");
                     startActivity(intent);
                     break;
                 }
-                case R.id.tvRegister:{
+                case R.id.tvRegister: {
                     startActivity(new Intent(this, ActivityAccountRegister.class));
                     break;
                 }

@@ -54,16 +54,16 @@
         android:layout_weight="0.6"
         android:layout_height="0dp"/>
     <androidx.cardview.widget.CardView
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_smalll"
         android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <com.github.mikephil.charting.charts.PieChart
             android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_smalll"
             android:id="@+id/pcReportFood"
-            android:layout_height="160dp"/>
+            android:layout_height="@dimen/margin_top_large"/>
     </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:background="@color/white"

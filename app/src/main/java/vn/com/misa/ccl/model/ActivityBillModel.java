@@ -220,7 +220,6 @@ public class ActivityBillModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -247,6 +246,13 @@ public class ActivityBillModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý cập nhật thông tin order, 2: trạng thái đã thu tiền
+     *
+     * @param activity instance activity
+     * @param orderID  mã order
+     * @created_by cvmanh on 01/28/2021
+     */
     public void updateOrderStatus(Activity activity, int orderID) {
         try {
             mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);

@@ -9,7 +9,7 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="@dimen/height_line"
         android:background="@color/grey"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,10 +18,10 @@
         android:id="@+id/tvSettingName"
         style="@style/Theme.FontText"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:drawablePadding="12dp"
+        android:layout_height="@dimen/size_text_normal"
+        android:drawablePadding="@dimen/padding_small"
         android:gravity="center|left"
-        android:paddingLeft="12dp"
+        android:paddingLeft="@dimen/padding_small"
         app:layout_constraintTop_toBottomOf="@+id/line" />
 
 

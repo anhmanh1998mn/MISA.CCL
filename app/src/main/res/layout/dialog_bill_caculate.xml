@@ -10,17 +10,17 @@
         style="@style/Theme.TextWhiteSmall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_lare"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="@dimen/margin_smalll"
         android:gravity="right|center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/font_shop_type"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clCaculate"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="@dimen/max_size"
         android:background="@color/grey_bill"
         app:layout_constraintTop_toBottomOf="@+id/tvResultCaculate">
 
@@ -72,8 +72,8 @@
 
                 <ImageView
                     android:id="@+id/ivBackKeyboard"
-                    android:layout_width="45dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/height_largee"
+                    android:layout_height="@dimen/size_larg"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_back_keyboard" />
             </FrameLayout>
@@ -164,7 +164,7 @@
             style="@style/Theme.ViewMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="@dimen/padding_small"
             android:orientation="horizontal"
             android:weightSum="4"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -189,7 +189,7 @@
                 style="@style/Theme.FontTextColor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="@dimen/margin_small"
                 android:layout_weight="2.04"
                 android:background="@color/purple_500"
                 android:text="@string/accept" />
@@ -212,7 +212,7 @@
         style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="@dimen/padding_small"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -227,14 +227,14 @@
             android:background="@color/greenn"
             android:text="@string/ten_money"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/font_size_large" />
 
         <TextView
             android:id="@+id/tvMonetTwo"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:layout_weight="1"
             android:background="@color/greenn"
             android:text="11.000" />
@@ -246,7 +246,7 @@
         style="@style/Theme.ViewMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="@dimen/padding_small"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -259,19 +259,17 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@color/greenn"
-            android:text="20.000"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/font_size_large" />
 
         <TextView
             android:id="@+id/tvMonetFive"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="@dimen/margin_small"
             android:layout_weight="1"
-            android:background="@color/greenn"
-            android:text="50.000" />
+            android:background="@color/greenn" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

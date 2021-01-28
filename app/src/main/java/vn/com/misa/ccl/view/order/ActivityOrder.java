@@ -65,7 +65,7 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
 
     private TextView tvTotalAmount, tvSave, tvSelectTable, tvPeopeNumber, tvSuccess, tvDialogTittle,
             tvResult, tvItemDown, tvItemUp, tvItemClear, tvItemSeven, tvItemEight, tvItemNine, tvItemFour,
-            tvItemFive, tvItemSix, tvItemOne, tvItemTwo, tvItemThree, tvItemZero, tvSuccesss,tvBack,tvNext;
+            tvItemFive, tvItemSix, tvItemOne, tvItemTwo, tvItemThree, tvItemZero, tvSuccesss, tvBack, tvNext;
 
     private ImageView ivBackKeyboard;
 
@@ -122,8 +122,8 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
             tvSelectTable = findViewById(R.id.tvSelectTable);
             tvPeopeNumber = findViewById(R.id.tvPeopeNumber);
             btnMoney = findViewById(R.id.btnMoney);
-            tvBack=findViewById(R.id.tvBack);
-            tvNext=findViewById(R.id.tvNext);
+            tvBack = findViewById(R.id.tvBack);
+            tvNext = findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -424,11 +424,11 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                     tvPeopeNumber.setText(mResultSelect);
                     break;
                 }
-                case R.id.tvBack:{
+                case R.id.tvBack: {
                     finish();
                     break;
                 }
-                case R.id.tvNext:{
+                case R.id.tvNext: {
                     if (mOrderID == -1) {
                         mActivityOrderPresenter = new ActivityOrderPresenter(this);
                         mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, MCLICK_BUTTON_MONEY);

@@ -344,6 +344,12 @@ public class ActivityFoodUpdateModel {
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc xử lý kết quả thao tác +,- trên máy tính
+     *
+     * @param textInput Kết quả hiển thị
+     * @created_by cvmanh on 01/28/2021
+     */
     private void resultCaculatorProcessSuccess(String textInput) {
         try {
             addOperation(textInput);

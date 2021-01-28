@@ -13,9 +13,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="@dimen/height_largee">
         <TextView
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="@dimen/margin_smalll"
             android:gravity="center"
             style="@style/Theme.TextColor"
             android:text="@string/time"
@@ -23,10 +23,10 @@
             android:layout_weight="1"
             android:layout_height="match_parent"/>
         <TextView
-            android:drawablePadding="8dp"
+            android:drawablePadding="@dimen/margin_smalll"
             android:drawableRight="@drawable/ic_down_arrow"
             android:gravity="center|right"
-            android:paddingRight="8dp"
+            android:paddingRight="@dimen/margin_smalll"
             style="@style/Theme.TextColor"
             android:text="@string/time_new"
             android:layout_width="0dp"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_smalll"
         android:id="@+id/frmMainReportContent"
         app:layout_constraintTop_toBottomOf="@+id/llReportHeader"
         android:layout_width="match_parent"
