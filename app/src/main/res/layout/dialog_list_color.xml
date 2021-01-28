@@ -13,6 +13,8 @@
         android:layout_margin="@dimen/margin_login" />
 
     <TextView
+        android:layout_marginBottom="16dp"
+        android:id="@+id/tvColorClose"
         style="@style/Theme.FontText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

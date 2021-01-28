@@ -25,8 +25,18 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
     }
 
     @Override
+    public void getListProductReportLastDay(Activity activity) {
+        mActivityReportWithDayModel.getListProductReportLastDay(activity);
+    }
+
+    @Override
     public void getListproductReportSuccess(List<OrderDetail> listProductReport) {
         mIActivityReportWithDayView.getListProductThisDaySuccess(listProductReport);
+    }
+
+    @Override
+    public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport) {
+        mIActivityReportWithDayView.getListproductReportLastDaySuccess(listProductReport);
     }
 
     @Override

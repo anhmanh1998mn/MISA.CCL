@@ -24,6 +24,8 @@ import vn.com.misa.ccl.adapter.SettingAdapter;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
+import vn.com.misa.ccl.view.login.ActivityAccountRegister;
+import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.view.order.ActivityOrder;
 import vn.com.misa.ccl.view.order.FragmentListOrder;
 import vn.com.misa.ccl.view.report.FragmentMainReport;
@@ -45,7 +47,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu,tvVisible;
+    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu,tvVisible,tvLogin,tvRegister;
 
     private ImageView ivUser;
 
@@ -87,6 +89,8 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvSetupName = findViewById(R.id.tvSetupName);
             tvAddMenu = findViewById(R.id.tvAddMenu);
             tvVisible=findViewById(R.id.tvVisible);
+            tvLogin=findViewById(R.id.tvLogin);
+            tvRegister=findViewById(R.id.tvRegister);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,6 +120,8 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvMenu.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
             tvAddMenu.setOnClickListener(this);
+            tvLogin.setOnClickListener(this);
+            tvRegister.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -145,6 +151,16 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     Intent intent = new Intent(this, ActivityFoodUpdate.class);
                     intent.putExtra("TypeIntent", "AddNewProduct");
                     startActivity(intent);
+                    break;
+                }
+                case R.id.tvLogin:{
+                    Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                    intent.putExtra("TypeIntent", "ActivityManage");
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.tvRegister:{
+                    startActivity(new Intent(this, ActivityAccountRegister.class));
                     break;
                 }
             }

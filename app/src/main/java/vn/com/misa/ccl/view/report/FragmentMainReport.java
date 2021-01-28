@@ -69,6 +69,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeThisWeek:{
@@ -80,6 +81,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
+                replaceFragment(new FragmentReportTimeRecently());
                 break;
             }
             case R.id.tvTimeLastWeek:{
@@ -91,6 +94,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeThisMonth:{
@@ -102,6 +106,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeLastMonth:{
@@ -113,6 +118,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeThisYear:{
@@ -124,6 +130,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.VISIBLE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeLastYear:{
@@ -135,6 +142,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.VISIBLE);
                 ivTickEight.setVisibility(View.GONE);
+                mDialogTimeOption.dismiss();
                 break;
             }
             case R.id.tvTimeOther:{
@@ -146,6 +154,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.VISIBLE);
+                mDialogTimeOption.dismiss();
                 break;
             }
         }

@@ -47,6 +47,7 @@ public class SplashActivity extends AppCompatActivity {
                     checkData();
                     if (checkData()) {
                         startActivity(new Intent(SplashActivity.this, ActivityRestaurantManage.class));
+                        finish();
                         return;
                     }
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));

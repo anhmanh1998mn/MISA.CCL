@@ -60,7 +60,7 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
     private int mOrderID;
 
     private TextView tvResultCaculate, tvItemSeven, tvItemEight, tvItemNine, tvItemFour, tvItemFive, tvItemSix, tvItemClear,
-            tvItemOne, tvItemTwo, tvItemThree, tvItemDot, tvItemZero, tvItemZeroo, tvSuccess;
+            tvItemOne, tvItemTwo, tvItemThree, tvItemDot, tvItemZero, tvItemZeroo, tvSuccess,tvBack,tvNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +105,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
             tvMoneyIn = findViewById(R.id.tvMoneyIn);
             tvMoneyOut = findViewById(R.id.tvMoneyOut);
             btnSuccess = findViewById(R.id.btnSuccess);
+            tvBack=findViewById(R.id.tvBack);
+            tvNext=findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,6 +215,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
         try {
             tvMoneyIn.setOnClickListener(this);
             btnSuccess.setOnClickListener(this);
+            tvBack.setOnClickListener(this);
+            tvNext.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -324,6 +328,14 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
                     mActivityBillPresenter = new ActivityBillPresenter(this);
                     mActivityBillPresenter.updateOrderStatus(this, mOrderID);
                     break;
+                }
+                case R.id.tvBack:{
+                    finish();
+                    break;
+                }
+                case R.id.tvNext:{
+                    mActivityBillPresenter = new ActivityBillPresenter(this);
+                    mActivityBillPresenter.updateOrderStatus(this, mOrderID);
                 }
             }
         } catch (Exception e) {

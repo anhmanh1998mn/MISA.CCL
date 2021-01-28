@@ -52,7 +52,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private EditText etFoodName;
 
-    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName;
+    private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName,tvCloseFoodImage,
+            tvColorClose,tvNext;
 
     private ImageView ivFoodImage, ivColor, ivClose;
 
@@ -182,6 +183,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             btnSave = findViewById(R.id.btnSave);
             tvSetupName = findViewById(R.id.tvSetupName);
             btnAddnewProduct = findViewById(R.id.btnAddnewProduct);
+            tvNext=findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,6 +204,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             btnDelete.setOnClickListener(this);
             btnSave.setOnClickListener(this);
             btnAddnewProduct.setOnClickListener(this);
+            tvNext.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -247,38 +250,85 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 case R.id.btnSave: {
-                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-                    if (sharedPreferences != null) {
-                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-                    } else {
-                        mUnitID = 1;
-                    }
-                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-                    if (mTypeIntent.equals("Setup")) {
-                        mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
-                                mPriceOut, mImageID, mUnitID, mColorID);
-                        return;
-                    }
-                    mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-                            mPriceOut, mImageID, mUnitID, mColorID);
+//                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+//                    if (sharedPreferences != null) {
+//                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+//                    } else {
+//                        mUnitID = 1;
+//                    }
+//                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+//                    if (mTypeIntent.equals("Setup")) {
+//                        mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+//                                mPriceOut, mImageID, mUnitID, mColorID);
+//                        return;
+//                    }
+//                    mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
+//                            mPriceOut, mImageID, mUnitID, mColorID);
+                    updateProductInfomation();
                     break;
                 }
                 case R.id.btnAddnewProduct: {
-                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-                    if (sharedPreferences != null) {
-                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-                    } else {
-                        mUnitID = 1;
-                    }
-                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-                    mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
-                            mPriceOut, mImageID, mUnitID, mColorID);
+                    addNewProductInfomation();
+//                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+//                    if (sharedPreferences != null) {
+//                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+//                    } else {
+//                        mUnitID = 1;
+//                    }
+//                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+//                    mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
+//                            mPriceOut, mImageID, mUnitID, mColorID);
+                    break;
+                }
+                case R.id.ivClose:{
+                    mDialogCaculate.dismiss();
+                    break;
+                }
+                case R.id.tvCloseFoodImage:{
+                    mDialogImage.dismiss();
+                    break;
+                }
+                case R.id.tvColorClose:{
+                    mDialogColor.dismiss();
+                    break;
+                }
+                case R.id.tvNext:{
+                    updateProductInfomation();
                     break;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void addNewProductInfomation(){
+        SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+        if (sharedPreferences != null) {
+            mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+        } else {
+            mUnitID = 1;
+        }
+        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+        mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
+                mPriceOut, mImageID, mUnitID, mColorID);
+    }
+
+    private void updateProductInfomation(){
+        SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+        if (sharedPreferences != null) {
+            mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+        } else {
+            mUnitID = 1;
+        }
+        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+        if (mTypeIntent.equals("Setup")) {
+            mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                    mPriceOut, mImageID, mUnitID, mColorID);
+            return;
+        }
+        mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
+                mPriceOut, mImageID, mUnitID, mColorID);
     }
 
     /**
@@ -303,6 +353,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             mActivityFoodUpdatePresenter.loadCaculating(this);
             tvPriceEnter = mDialogCaculate.findViewById(R.id.tvPriceEnter);
             ivClose = mDialogCaculate.findViewById(R.id.ivClose);
+            ivClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -325,6 +376,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             llListColor.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadListColor(this);
+            tvColorClose=mDialogColor.findViewById(R.id.tvColorClose);
+            tvColorClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -527,6 +580,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             llListImage.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadProductImage(this);
+            tvCloseFoodImage=mDialogImage.findViewById(R.id.tvCloseFoodImage);
+            tvCloseFoodImage.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

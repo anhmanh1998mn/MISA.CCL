@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -39,6 +42,8 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private List<OrderDetail> mListProductReport;
 
+    private TextView tvBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +55,41 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
         receiveAmount();
 
-        getListProductReport();
+        onViewClickListener();
 
-        showPieChart();
+//        getListProductReport();
+//
+//        showPieChart();
 
 
     }
 
+    private void onViewClickListener() {
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     private void receiveAmount() {
         Intent intent=getIntent();
+        if(intent.getIntExtra("REPORT_TYPE",-1)==2){
+            mAmount=intent.getStringExtra("AMOUNT");
+            getListProductReport();
+
+//            showPieChart();
+            return;
+        }
         mAmount=intent.getStringExtra("AMOUNT");
+        getListProductReportLastDay();
+//        showPieChart();
+    }
+
+    private void getListProductReportLastDay() {
+        mActivityReportWithDayPresenter=new ActivityReportWithDayPresenter(this);
+        mActivityReportWithDayPresenter.getListProductReportLastDay(this);
     }
 
     private void initActionBar() {
@@ -70,6 +100,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private void initView() {
         pcReportFood =findViewById(R.id.pcReportFood);
         rcvFoodReport=findViewById(R.id.rcvFoodReport);
+        tvBack=findViewById(R.id.tvBack);
     }
 
     private void showPieChart(){
@@ -98,7 +129,9 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private ArrayList<PieEntry> dataValues(){
         ArrayList<PieEntry>daVal=new ArrayList<>();
         for(int i=0;i<mListProductReport.size();i++){
-            daVal.add(new PieEntry(mListProductReport.get(i).getmProductPriceOut(),""));
+            if(i<6){
+                daVal.add(new PieEntry(mListProductReport.get(i).getmProductPriceOut(),""));
+            }
         }
 //        daVal.add(new PieEntry(Integer.parseInt("450000"),"Tiền Bán"));
 //        daVal.add(new PieEntry(Integer.parseInt("150000"),"Tiền Nhập"));
@@ -117,10 +150,21 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
         rcvFoodReport.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         rcvFoodReport.setAdapter(mReportWithDayAdapter);
         mReportWithDayAdapter.notifyDataSetChanged();
+        showPieChart();
+    }
+
+    @Override
+    public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport) {
+        mListProductReport=listProductReport;
+        mReportWithDayAdapter=new ReportWithDayAdapter(this,R.layout.item_report_with_day,mListProductReport);
+        rcvFoodReport.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        rcvFoodReport.setAdapter(mReportWithDayAdapter);
+        mReportWithDayAdapter.notifyDataSetChanged();
+        showPieChart();
     }
 
     @Override
     public void onFailed() {
-
+        Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 }

@@ -47,7 +47,7 @@ public class ActivityReportWithDayModel {
                 DatabaseInfomation.COLUMN_ORDER_ID+"="+DatabaseInfomation.TABLE_ORDERS+"."+
                 DatabaseInfomation.COLUMN_ORDER_ID+" AND DATE("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")=" +
                 "DATE('"+mListDateTimeSplit[0]+"-"+mListDateTimeSplit[1]+"-"+mListDateTimeSplit[2]+"') " +
-                "GROUP BY "+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUMN_MYPRODUCT_ID+"",null);
+                "GROUP BY "+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUMN_MYPRODUCT_ID+" ORDER BY TotalAmount DESC",null);
         for(int i=0;i<cursor.getCount();i++){
             cursor.moveToPosition(i);
             mListProductWithDay.add(new OrderDetail(
@@ -66,8 +66,50 @@ public class ActivityReportWithDayModel {
                             cursor.getFloat(cursor.getColumnIndex("TotalAmount"))));
         }
         Log.d("ReportProductSize",cursor.getCount()+"");
-        if(cursor!=null){
+        if(cursor.getCount()>0){
             mIActivityReportWithDayModel.getListproductReportSuccess(mListProductWithDay);
+            return;
+        }
+        mIActivityReportWithDayModel.onFailed();
+    }
+
+    public void getListProductReportLastDay(Activity activity) {
+        splitDateTime();
+        mSqliteDatabase= DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+        mListProductWithDay=new ArrayList<>();
+        Cursor cursor=mSqliteDatabase.rawQuery("SELECT *,SUM("+DatabaseInfomation.COLUMN_QUANTITY+"*" +
+                ""+DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT+") as TotalAmount," +
+                "SUM("+DatabaseInfomation.COLUMN_QUANTITY+") as TotalQuantity FROM "+DatabaseInfomation.TABLE_MYPRODUCTS+","+
+                DatabaseInfomation.TABLE_ORDERS+","+DatabaseInfomation.TABLE_ORDER_DETAIL+","+
+                DatabaseInfomation.TABLE_UNITS+" WHERE "+DatabaseInfomation.TABLE_MYPRODUCTS+"."+
+                DatabaseInfomation.COLUMN_UNIT_ID+"="+DatabaseInfomation.TABLE_UNITS+"."+
+                DatabaseInfomation.COLUMN_UNIT_ID+" AND "+DatabaseInfomation.TABLE_MYPRODUCTS+"."+
+                DatabaseInfomation.COLUMN_MYPRODUCT_ID+"="+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+
+                DatabaseInfomation.COLUMN_MYPRODUCT_ID+" AND "+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+
+                DatabaseInfomation.COLUMN_ORDER_ID+"="+DatabaseInfomation.TABLE_ORDERS+"."+
+                DatabaseInfomation.COLUMN_ORDER_ID+" AND DATE("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")=" +
+                "DATE('"+mListDateTimeSplit[0]+"-"+mListDateTimeSplit[1]+"-"+mListDateTimeSplit[2]+"','-1 day') " +
+                "GROUP BY "+DatabaseInfomation.TABLE_ORDER_DETAIL+"."+DatabaseInfomation.COLUMN_MYPRODUCT_ID+" ORDER BY TotalAmount DESC",null);
+        for(int i=0;i<cursor.getCount();i++){
+            cursor.moveToPosition(i);
+            mListProductWithDay.add(new OrderDetail(
+                    cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_DETAIL_ID)),
+                    new Order(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_ID)),
+                            cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_STATUS)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TABLE_NAME)),
+                            cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_TOTAL_PEOPLE)),
+                            cursor.getFloat(cursor.getColumnIndex(DatabaseInfomation.COLUM_ORDER_AMOUNT))),
+                    new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_PRODUCT_NAME)),
+                            new Unit(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_ID)),
+                                    cursor.getString(cursor.getColumnIndex(DatabaseInfomation.COLUMN_UNIT_NAME)))),
+                    cursor.getInt(cursor.getColumnIndex("TotalQuantity")),
+                    cursor.getFloat(cursor.getColumnIndex("TotalAmount"))));
+        }
+        Log.d("ReportProductSize",cursor.getCount()+"");
+        if(cursor.getCount()>0){
+            mIActivityReportWithDayModel.getListproductReportLastDaySuccess(mListProductWithDay);
             return;
         }
         mIActivityReportWithDayModel.onFailed();
@@ -86,6 +128,8 @@ public class ActivityReportWithDayModel {
 
     public interface IActivityReportWithDayModel{
         public void getListproductReportSuccess(List<OrderDetail> listProductReport);
+
+        public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport);
 
         public void onFailed();
     }

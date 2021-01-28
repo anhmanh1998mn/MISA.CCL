@@ -100,6 +100,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
 
     private void onViewClickListener(){
         llThisDay.setOnClickListener(this);
+        llLastDay.setOnClickListener(this);
     }
 
     @Override
@@ -108,6 +109,14 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
             case R.id.llThisDay:{
                 Intent intent=new Intent(getContext(), ActivityReportWithDay.class);
                 intent.putExtra("AMOUNT",tvTimeThisDay.getText().toString());
+                intent.putExtra("REPORT_TYPE",2);
+                startActivity(intent);
+                break;
+            }
+            case R.id.llLastDay:{
+                Intent intent=new Intent(getContext(), ActivityReportWithDay.class);
+                intent.putExtra("AMOUNT",tvTimeLastDay.getText().toString());
+                intent.putExtra("REPORT_TYPE",1);
                 startActivity(intent);
                 break;
             }

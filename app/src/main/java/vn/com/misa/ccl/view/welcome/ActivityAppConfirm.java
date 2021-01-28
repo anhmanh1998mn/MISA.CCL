@@ -86,7 +86,10 @@ public class ActivityAppConfirm extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 case R.id.tvAppOverViewNext: {
-                    startActivity(new Intent(this, ActivitySelectionOptionLogin.class));
+                    Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                    intent.putExtra("TypeIntent", "ActivitySetup");
+                    startActivity(intent);
+//                    startActivity(new Intent(this, ActivitySelectionOptionLogin.class));
                     break;
                 }
             }

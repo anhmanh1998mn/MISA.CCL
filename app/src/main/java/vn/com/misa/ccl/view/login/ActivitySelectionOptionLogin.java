@@ -26,6 +26,8 @@ import java.util.Arrays;
 
 import vn.com.misa.ccl.presenter.SignInPresenter;
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
 
 /**
  * ‐ Mục đích Class thực hiện show các lựa chọn đăng nhập vào ứng dụng
@@ -52,6 +54,8 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
 
     private SignInPresenter mSignInPresenter;
 
+    private String mTypeClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +63,19 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
 
         initView();
 
+        receiveTypeClick();
+
         onCLickViewListener();
 
         setLoginFacebook();
 
         setLoginGoogle();
 
+    }
+
+    private void receiveTypeClick() {
+        Intent intent=getIntent();
+        mTypeClick=intent.getStringExtra("TypeIntent");
     }
 
     /**
@@ -118,6 +129,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
                 }
                 case R.id.btnLoginNext: {
                     startActivity(new Intent(this, ActivityLogin.class));
+                    break;
                 }
             }
         } catch (Exception e) {
@@ -168,6 +180,17 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void checkIntentScreen(){
+        if(mTypeClick.equals("ActivityManage")){
+            Intent intent=new Intent(this, ActivityRestaurantManage.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        startActivity(new Intent(this, ActivityRestaurantType.class));
+        finish();
     }
 
     /**
@@ -228,7 +251,10 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
         try {
             if (result.isSuccess()) {
                 GoogleSignInAccount accountProfile = result.getSignInAccount();
-                Toast.makeText(this, accountProfile.getEmail().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, accountProfile.getEmail().toString(), Toast.LENGTH_SHORT).show();
+//                Intent intent=new Intent(this, ActivityRestaurantManage.class);
+//                startActivity(intent);
+                checkIntentScreen();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -253,6 +279,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      */
     @Override
     public void signInFacebookSuccessfull(String mailName) {
-        Toast.makeText(this, mailName, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, mailName, Toast.LENGTH_SHORT).show();
+        checkIntentScreen();
     }
 }
