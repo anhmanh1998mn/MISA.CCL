@@ -13,6 +13,8 @@ public interface IActivityReportWithDay {
 
         public void getListProductReportLastDay(Activity activity);
 
+        public void getReportTimeDay(Activity activity,String dayName);
+
     }
 
     public interface IActivityReportWithDayView{

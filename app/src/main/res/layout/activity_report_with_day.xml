@@ -46,6 +46,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
+        android:id="@+id/tvTime"
         android:background="@color/white"
         android:gravity="center"
         style="@style/Theme.TextColor"

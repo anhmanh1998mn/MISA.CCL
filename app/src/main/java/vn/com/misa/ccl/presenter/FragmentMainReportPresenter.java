@@ -5,6 +5,7 @@ import android.app.Activity;
 import java.util.List;
 
 import vn.com.misa.ccl.entity.OrderDetail;
+import vn.com.misa.ccl.entity.Report;
 import vn.com.misa.ccl.model.FragmentMainReportModel;
 import vn.com.misa.ccl.view.report.IFragmmentMainReport;
 
@@ -24,13 +25,33 @@ public class FragmentMainReportPresenter implements IFragmmentMainReport.IFragme
     }
 
     @Override
-    public void getReportLineChart(Activity activity) {
-        mFragmentMainReportModel.getReportLineChart(activity);
+    public void getReportLineChart(Activity activity,String typeClick) {
+        mFragmentMainReportModel.getReportLineChart(activity,typeClick);
+    }
+
+    @Override
+    public void getReportLineChartWithMonth(Activity activity, String typeClick) {
+        mFragmentMainReportModel.getReportLineChartWithMonth(activity,typeClick);
     }
 
     @Override
     public void getListReportWithPeroid(List<OrderDetail> listReportProduct, float sumAllMoney) {
         mIFragmentMainReportView.getListProductReportWithPeroid(listReportProduct,sumAllMoney);
+    }
+
+    @Override
+    public void getReportTimeWeekSuccess(List<Report> listReportWeek) {
+        mIFragmentMainReportView.getReportTimeWeekSuccess(listReportWeek);
+    }
+
+    @Override
+    public void getReportTimeMonthSuccess(List<Report> listReportWeek) {
+        mIFragmentMainReportView.getReportTimeMonthSuccess(listReportWeek);
+    }
+
+    @Override
+    public void getReportDataNull() {
+        mIFragmentMainReportView.getReportDataNull();
     }
 
     @Override

@@ -50,6 +50,11 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
         mActivityReportWithDayModel.getListProductReportLastDay(activity);
     }
 
+    @Override
+    public void getReportTimeDay(Activity activity,String dayName) {
+        mActivityReportWithDayModel.getReportTimeDay(activity,dayName);
+    }
+
     /**
      * Mục đích method thực hiện việc nhận kết quả thống kê theo ngày hiện tại và gửi kết quả tới view
      *

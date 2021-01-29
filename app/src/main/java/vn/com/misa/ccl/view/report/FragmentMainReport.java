@@ -25,11 +25,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,8 +43,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.adapter.ReportMoreAdapter;
 import vn.com.misa.ccl.adapter.ReportWithDayAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
+import vn.com.misa.ccl.entity.Report;
 import vn.com.misa.ccl.presenter.FragmentMainReportPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 import vn.com.misa.ccl.view.report.day.ActivityReportWithDay;
@@ -70,7 +78,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     private CardView cvChart;
 
-    private RecyclerView rcvFoodReport;
+    private RecyclerView rcvFoodReport,rcvFoodReportLineChar;
 
     private FrameLayout frmMainReportContent;
 
@@ -82,7 +90,13 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     private float mTotalMoneyDay;
 
-    private LinearLayout llReportNull;
+    private LinearLayout llReportNull,llReportLine;
+
+    private ReportMoreAdapter mReportMoreAdapter;
+
+    private List<Report> mListReport;
+
+    private LineChart lcReportFoodLineChart;
 
     @Nullable
     @Override
@@ -112,6 +126,9 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         pcReportFood=view.findViewById(R.id.pcReportFood);
         llReportNull=view.findViewById(R.id.llReportNull);
         tvOptionReport=view.findViewById(R.id.tvOptionReport);
+        rcvFoodReportLineChar=view.findViewById(R.id.rcvFoodReportLineChar);
+        llReportLine=view.findViewById(R.id.llReportLine);
+        lcReportFoodLineChart=view.findViewById(R.id.lcReportFoodLineChart);
     }
 
     /**
@@ -149,6 +166,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 cvChart.setVisibility(View.GONE);
                 frmMainReportContent.setVisibility(View.VISIBLE);
                 llReportNull.setVisibility(View.GONE);
+                llReportLine.setVisibility(View.GONE);
                 tvOptionReport.setText(getResources().getString(R.string.time_new));
                 mDialogTimeOption.dismiss();
                 break;
@@ -162,14 +180,22 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickSix.setVisibility(View.GONE);
                 ivTickSeven.setVisibility(View.GONE);
                 ivTickEight.setVisibility(View.GONE);
+                llReportLine.setVisibility(View.VISIBLE);
+                llReportNull.setVisibility(View.GONE);
                 tvOptionReport.setText(getResources().getString(R.string.time_this_week));
+                rcvFoodReport.setVisibility(View.GONE);
+                frmMainReportContent.setVisibility(View.GONE);
                 mDialogTimeOption.dismiss();
                 replaceFragment(new FragmentReportTimeRecently());
                 mFragmentMainReportPresenter=new FragmentMainReportPresenter(this);
-                mFragmentMainReportPresenter.getReportLineChart(getActivity());
+                mFragmentMainReportPresenter.getReportLineChart(getActivity(),"ThisWeek");
                 break;
             }
             case R.id.tvTimeLastWeek: {
+                llReportLine.setVisibility(View.VISIBLE);
+                llReportNull.setVisibility(View.GONE);
+                rcvFoodReport.setVisibility(View.GONE);
+                frmMainReportContent.setVisibility(View.GONE);
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.VISIBLE);
@@ -180,9 +206,15 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickEight.setVisibility(View.GONE);
                 tvOptionReport.setText(getResources().getString(R.string.time_last_week));
                 mDialogTimeOption.dismiss();
+                mFragmentMainReportPresenter=new FragmentMainReportPresenter(this);
+                mFragmentMainReportPresenter.getReportLineChart(getActivity(),"LastWeek");
                 break;
             }
             case R.id.tvTimeThisMonth: {
+                llReportLine.setVisibility(View.VISIBLE);
+                llReportNull.setVisibility(View.GONE);
+                rcvFoodReport.setVisibility(View.GONE);
+                frmMainReportContent.setVisibility(View.GONE);
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -193,9 +225,15 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickEight.setVisibility(View.GONE);
                 tvOptionReport.setText(getResources().getString(R.string.time_this_month));
                 mDialogTimeOption.dismiss();
+                mFragmentMainReportPresenter=new FragmentMainReportPresenter(this);
+                mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(),"ThisMonth");
                 break;
             }
             case R.id.tvTimeLastMonth: {
+                llReportLine.setVisibility(View.VISIBLE);
+                llReportNull.setVisibility(View.GONE);
+                rcvFoodReport.setVisibility(View.GONE);
+                frmMainReportContent.setVisibility(View.GONE);
                 ivTick.setVisibility(View.GONE);
                 ivTickTwo.setVisibility(View.GONE);
                 ivTickThree.setVisibility(View.GONE);
@@ -206,6 +244,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 ivTickEight.setVisibility(View.GONE);
                 tvOptionReport.setText(getResources().getString(R.string.time_last_mont));
                 mDialogTimeOption.dismiss();
+                mFragmentMainReportPresenter=new FragmentMainReportPresenter(this);
+                mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(),"LastMonth");
                 break;
             }
             case R.id.tvTimeThisYear: {
@@ -261,11 +301,6 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 break;
             }
             case R.id.tvAccept:{
-//                Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
-//                intent.putExtra("REPORT_TYPE", 3);
-//                intent.putExtra("START_DAY", tvStartDay.getText().toString());
-//                intent.putExtra("END_DAY", tvEndDay.getText().toString());
-//                startActivity(intent);
                 mFragmentMainReportPresenter=new FragmentMainReportPresenter(this);
                 mFragmentMainReportPresenter.getListProductReportPeriod(getActivity(),tvStartDay.getText().toString(),
                         tvEndDay.getText().toString());
@@ -418,6 +453,35 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         showPieChart();
     }
 
+    @Override
+    public void getReportTimeWeekSuccess(List<Report> listReportWeek) {
+        mListReport=listReportWeek;
+        mReportMoreAdapter=new ReportMoreAdapter(getActivity(),R.layout.item_report_week_month_year,listReportWeek);
+        rcvFoodReportLineChar.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rcvFoodReportLineChar.setAdapter(mReportMoreAdapter);
+        mReportMoreAdapter.notifyDataSetChanged();
+        showReportByLineChart();
+    }
+
+    @Override
+    public void getReportTimeMonthSuccess(List<Report> listReportWeek) {
+        mListReport=listReportWeek;
+        mReportMoreAdapter=new ReportMoreAdapter(getActivity(),R.layout.item_report_week_month_year,listReportWeek);
+        rcvFoodReportLineChar.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rcvFoodReportLineChar.setAdapter(mReportMoreAdapter);
+        mReportMoreAdapter.notifyDataSetChanged();
+        showReportByLineChart();
+    }
+
+    @Override
+    public void getReportDataNull() {
+        llReportNull.setVisibility(View.VISIBLE);
+        rcvFoodReport.setVisibility(View.GONE);
+        cvChart.setVisibility(View.GONE);
+        frmMainReportContent.setVisibility(View.GONE);
+        llReportLine.setVisibility(View.GONE);
+    }
+
     private String formatDatePeroid(){
         String[] startDay=tvStartDay.getText().toString().split("-");
         String[] endDay=tvEndDay.getText().toString().split("-");
@@ -426,7 +490,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     @Override
     public void onFailed() {
-        mDialogReportTimeOrther.dismiss();
+            mDialogReportTimeOrther.dismiss();
         llReportNull.setVisibility(View.VISIBLE);
         rcvFoodReport.setVisibility(View.GONE);
         cvChart.setVisibility(View.GONE);
@@ -481,5 +545,30 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             }
         }
         return daVal;
+    }
+
+    private void showReportByLineChart(){
+        LineDataSet lineDataSet=new LineDataSet(dataValueLine(),"");
+        ArrayList<ILineDataSet> dataSets=new ArrayList<>();
+        dataSets.add(lineDataSet);
+        LineData lineData=new LineData(dataSets);
+        lcReportFoodLineChart.setData(lineData);
+
+        // set đường vẽ và hình tròn màu xanh
+        lineDataSet.setColor(getResources().getColor(R.color.green_light));
+        lineDataSet.setCircleColor(getResources().getColor(R.color.green_light));
+        lcReportFoodLineChart.getLegend().setEnabled(false);// ẩn ghi chú
+        lcReportFoodLineChart.getDescription().setEnabled(false);// ẩn label
+        lcReportFoodLineChart.animateXY(1400,1400);// set animation
+        lineDataSet.setDrawCircleHole(false);// hình tròn đặc
+        lcReportFoodLineChart.invalidate();
+    }
+
+    private ArrayList<Entry> dataValueLine(){
+        ArrayList<Entry> dataValue=new ArrayList<>();
+        for(int i=0;i<mListReport.size();i++){
+            dataValue.add(new Entry(i,mListReport.get(i).getTotalMoney()/1000));
+        }
+        return dataValue;
     }
 }

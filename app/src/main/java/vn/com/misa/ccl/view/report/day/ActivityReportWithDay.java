@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private RecyclerView rcvFoodReport;
 
-    private String mAmount="",mStartDay,mEndDay;
+    private String mAmount = "", mStartDay, mEndDay,mDayName;
 
     private ActivityReportWithDayPresenter mActivityReportWithDayPresenter;
 
@@ -53,7 +54,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private List<OrderDetail> mListProductReport;
 
-    private TextView tvBack;
+    private TextView tvBack,tvTime;
 
     private float mTotalMoneyDay;
 
@@ -90,6 +91,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     /**
      * Mục đích method thực hiện kiểm tra thống kê theo tháng hay năm
      * Nếu getIntent=2: Thống kê doanh thu theo sản phẩm theo ngày hiện tại
+     * Nếu getIntent=3: Thống kê doanh thu theo sản phẩm theo ngày của tuần
      * Ngược lại, =1: thóng kê doanh thu theo sản phẩm theo ngày hiện tại -1 ngày
      *
      * @created_by cvmanh on 01/28/2021
@@ -98,15 +100,27 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
         Intent intent = getIntent();
         if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
             mAmount = intent.getStringExtra("AMOUNT");
-            mTotalMoneyDay=intent.getFloatExtra("AMOUNT_FLOAT",-1);
+            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+            tvTime.setText("Hôm nay");
             getListProductReport();
-return;
-        }
+
+        }else if(intent.getIntExtra("REPORT_TYPE", -1) == 1){
             mAmount = intent.getStringExtra("AMOUNT");
-            mTotalMoneyDay=intent.getFloatExtra("AMOUNT_FLOAT",-1);
+            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+            tvTime.setText("Hôm qua");
             getListProductReportLastDay();
+        }else {
+            mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT",-1));
+            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+            mDayName=intent.getStringExtra("DAY_NAME");
+            tvTime.setText(intent.getStringExtra("DAY_OF_WEEK")+" ("+mDayName+")");
+            getReportTimeDay();
+        }
+    }
 
-
+    private void getReportTimeDay() {
+        mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
+        mActivityReportWithDayPresenter.getReportTimeDay(this,mDayName);
     }
 
 
@@ -140,6 +154,7 @@ return;
         pcReportFood = findViewById(R.id.pcReportFood);
         rcvFoodReport = findViewById(R.id.rcvFoodReport);
         tvBack = findViewById(R.id.tvBack);
+        tvTime=findViewById(R.id.tvTime);
     }
 
     /**
@@ -176,7 +191,7 @@ return;
         // enable rotation of the chart by touch
         pcReportFood.setRotationEnabled(false);
         pcReportFood.getLegend().setEnabled(false); // ẩn ghi chú
-        pcReportFood.animateXY(1400,1400); // set animation
+        pcReportFood.animateXY(1400, 1400); // set animation
     }
 
     /**
@@ -190,9 +205,9 @@ return;
         ArrayList<PieEntry> daVal = new ArrayList<>();
         for (int i = 0; i < mListProductReport.size(); i++) {
             if (i < 7) {
-                daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut()/mTotalMoneyDay)*100, "%"));
-                float a=(mListProductReport.get(i).getmProductPriceOut());
-                Log.d("aaaaa",a+"");
+                daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
+                float a = (mListProductReport.get(i).getmProductPriceOut());
+                Log.d("aaaaa", a + "");
             }
         }
         return daVal;
