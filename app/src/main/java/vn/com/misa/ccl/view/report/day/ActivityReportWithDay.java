@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private RecyclerView rcvFoodReport;
 
-    private String mAmount;
+    private String mAmount="",mStartDay,mEndDay;
 
     private ActivityReportWithDayPresenter mActivityReportWithDayPresenter;
 
@@ -52,6 +54,8 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private List<OrderDetail> mListProductReport;
 
     private TextView tvBack;
+
+    private float mTotalMoneyDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +98,17 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
         Intent intent = getIntent();
         if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
             mAmount = intent.getStringExtra("AMOUNT");
+            mTotalMoneyDay=intent.getFloatExtra("AMOUNT_FLOAT",-1);
             getListProductReport();
-            return;
+return;
         }
-        mAmount = intent.getStringExtra("AMOUNT");
-        getListProductReportLastDay();
+            mAmount = intent.getStringExtra("AMOUNT");
+            mTotalMoneyDay=intent.getFloatExtra("AMOUNT_FLOAT",-1);
+            getListProductReportLastDay();
+
+
     }
+
 
     /**
      * Mục đích method thực hiện việc gọi presenter xử lý lấy danh sách thống kê theo sản phẩm
@@ -142,24 +151,32 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private void showPieChart() {
         int[] colorPie = new int[]{getResources().getColor(R.color.light_bluee), getResources().getColor(R.color.green_light),
                 getResources().getColor(R.color.red), getResources().getColor(R.color.orange),
-                getResources().getColor(R.color.dark_blue), getResources().getColor(R.color.dark_blue_face)};
+                getResources().getColor(R.color.dark_blue), getResources().getColor(R.color.dark_blue_face),
+                getResources().getColor(R.color.light_grey)};
         PieDataSet pieDataSet = new PieDataSet(dataValues(), "");
         pieDataSet.setColors(colorPie);
         pieDataSet.setSliceSpace(1f); // set khoảng trắng phân cách giữa các vùng
+        pieDataSet.setValueLinePart1Length(0.1f); // set độ dài thanh sổ chỉ data
+        pieDataSet.setValueLinePart2Length(0.6f);
+
         // đặt giá trị ra bên ngoài
         pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         PieData pieData = new PieData(pieDataSet);
+        pieDataSet.setValueFormatter(new PercentFormatter(pcReportFood)); // set % cho data
+        pieData.setValueTextSize(14);
+        pieData.setValueTextColor(Color.GRAY);
         pcReportFood.setData(pieData);
         pcReportFood.invalidate();
         pcReportFood.setCenterTextSize(18);
         pcReportFood.setCenterText("Tổng \n doanh thu \n" + mAmount);
-        pcReportFood.setHoleRadius(80);
+        pcReportFood.setHoleRadius(75);
         pcReportFood.getDescription().setEnabled(false);// set gone label
+        pcReportFood.setUsePercentValues(true); // set % cho data
         // enable rotation of the chart by touch
         pcReportFood.setRotationEnabled(false);
         pcReportFood.getLegend().setEnabled(false); // ẩn ghi chú
-        pcReportFood.animateY(1400, Easing.EaseInOutQuad); // set animation
+        pcReportFood.animateXY(1400,1400); // set animation
     }
 
     /**
@@ -172,8 +189,10 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private ArrayList<PieEntry> dataValues() {
         ArrayList<PieEntry> daVal = new ArrayList<>();
         for (int i = 0; i < mListProductReport.size(); i++) {
-            if (i < 6) {
-                daVal.add(new PieEntry(mListProductReport.get(i).getmProductPriceOut(), ""));
+            if (i < 7) {
+                daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut()/mTotalMoneyDay)*100, "%"));
+                float a=(mListProductReport.get(i).getmProductPriceOut());
+                Log.d("aaaaa",a+"");
             }
         }
         return daVal;
@@ -214,7 +233,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     @Override
-    public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport) {
+    public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport) {
         mListProductReport = listProductReport;
         mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, mListProductReport);
         rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));

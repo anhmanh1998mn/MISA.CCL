@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/clReportTimeOrther"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvTimeHeader"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Theme.FontTextLarge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_largee"
+        android:text="@string/time" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clStartDay"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader"
+        android:layout_height="45dp">
+        <TextView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="wrap_content"
+            android:text="@string/from_day" />
+        <TextView
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/grey"
+            android:drawableRight="@drawable/ic_foot_menu"
+            android:id="@+id/tvStartDay"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="wrap_content"
+            android:text="@string/from_day" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/vLine"
+        app:layout_constraintTop_toBottomOf="@+id/clStartDay"
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clEndDay"
+        app:layout_constraintTop_toBottomOf="@+id/vLine"
+        android:layout_height="45dp">
+        <TextView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="wrap_content"
+            android:text="@string/end_day" />
+        <TextView
+            android:id="@+id/tvEndDay"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Theme.FontTextReport"
+            android:layout_width="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/grey"
+            android:drawableRight="@drawable/ic_foot_menu"
+            android:text="@string/end_day" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/clEndDay"
+        android:layout_height="55dp">
+        <TextView
+            android:layout_marginRight="16dp"
+            app:layout_constraintRight_toLeftOf="@+id/tvAccept"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/red"
+            android:id="@+id/tvCancel"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="100dp"
+            android:textAllCaps="true"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:background="@color/white"
+            android:text="@string/cancle" />
+        <TextView
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tvAccept"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:background="@color/purple_500"
+            android:text="@string/success" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,7 +82,7 @@ public class ActivityReportWithDayModel {
         }
         Log.d("ReportProductSize", cursor.getCount() + "");
         if (cursor.getCount() > 0) {
-            mIActivityReportWithDayModel.getListproductReportSuccess(mListProductWithDay);
+            mIActivityReportWithDayModel.getListProductReportSuccess(mListProductWithDay);
             return;
         }
         mIActivityReportWithDayModel.onFailed();
@@ -128,13 +128,15 @@ public class ActivityReportWithDayModel {
                     cursor.getInt(cursor.getColumnIndex("TotalQuantity")),
                     cursor.getFloat(cursor.getColumnIndex("TotalAmount"))));
         }
-        Log.d("ReportProductSize", cursor.getCount() + "");
+//        Log.d("ReportProductSize", cursor.getCount() + "");
+
         if (cursor.getCount() > 0) {
-            mIActivityReportWithDayModel.getListproductReportLastDaySuccess(mListProductWithDay);
+            mIActivityReportWithDayModel.getListProductReportLastDaySuccess(mListProductWithDay);
             return;
         }
         mIActivityReportWithDayModel.onFailed();
     }
+
 
     /**
      * Mục đích method thực hiện việc cắt chuổi ngăn cách với dâu "-" và lưu vàng mảng
@@ -153,9 +155,9 @@ public class ActivityReportWithDayModel {
     }
 
     public interface IActivityReportWithDayModel {
-        public void getListproductReportSuccess(List<OrderDetail> listProductReport);
+        public void getListProductReportSuccess(List<OrderDetail> listProductReport);
 
-        public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport);
+        public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport);
 
         public void onFailed();
     }

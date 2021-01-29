@@ -34,6 +34,8 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
 
     private TextView tvTimeThisYear, tvTimeThisMonth, tvTimeThisWeek, tvTimeThisDay, tvTimeLastDay;
 
+    private float mTotalMoneyThisDay,mTotalMoneyLastDay;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -88,12 +90,15 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      * @created_by cvmanh on 01/28/2021
      */
     @Override
-    public void processReportTImeRecentlySuccess(String amountYear, String amountMonth, String amountThisDay, String amountLastDay, String amountThisWeek) {
+    public void processReportTImeRecentlySuccess(String amountYear, String amountMonth, String amountThisDay, String amountLastDay, String amountThisWeek,
+                                                 float totalMoneyThisDay,float totalMoneyLastDay) {
         tvTimeThisYear.setText(amountYear);
         tvTimeThisMonth.setText(amountMonth);
         tvTimeThisDay.setText(amountThisDay);
         tvTimeLastDay.setText(amountLastDay);
         tvTimeThisWeek.setText(amountThisWeek);
+        mTotalMoneyThisDay=totalMoneyThisDay;
+        mTotalMoneyLastDay=totalMoneyLastDay;
     }
 
     /**
@@ -118,6 +123,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
             case R.id.llThisDay: {
                 Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
                 intent.putExtra("AMOUNT", tvTimeThisDay.getText().toString());
+                intent.putExtra("AMOUNT_FLOAT", mTotalMoneyThisDay);
                 intent.putExtra("REPORT_TYPE", 2);
                 startActivity(intent);
                 break;
@@ -125,6 +131,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
             case R.id.llLastDay: {
                 Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
                 intent.putExtra("AMOUNT", tvTimeLastDay.getText().toString());
+                intent.putExtra("AMOUNT_FLOAT", mTotalMoneyLastDay);
                 intent.putExtra("REPORT_TYPE", 1);
                 startActivity(intent);
                 break;

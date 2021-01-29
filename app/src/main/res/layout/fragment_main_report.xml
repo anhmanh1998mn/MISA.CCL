@@ -23,6 +23,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"/>
         <TextView
+            android:id="@+id/tvOptionReport"
             android:drawablePadding="@dimen/margin_smalll"
             android:drawableRight="@drawable/ic_down_arrow"
             android:gravity="center|right"
@@ -41,5 +42,75 @@
         app:layout_constraintTop_toBottomOf="@+id/llReportHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/cvChart"
+        app:layout_constraintTop_toBottomOf="@+id/frmMainReportContent"
+        android:layout_margin="@dimen/margin_smalll"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <com.github.mikephil.charting.charts.PieChart
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/pcReportFood"
+            android:layout_height="@dimen/margin_top_large"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/cvChart"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:id="@+id/rcvFoodReport"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llReportNull"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/rcvFoodReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_bar_graph"
+            android:layout_width="45dp"
+            android:layout_height="60dp"/>
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Báo cáo doanh thu không có số liệu"
+            style="@style/Theme.TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/llReportNull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/frmMainReportContent"
+            android:layout_margin="@dimen/margin_smalll"
+            android:layout_width="match_parent"
+            android:layout_height="170dp">
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/pcReportFoodLineChart"
+                android:layout_height="@dimen/margin_top_large"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/cvChart"
+            android:background="@color/white"
+            android:layout_marginTop="8dp"
+            android:id="@+id/rcvFoodReportLineChar"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

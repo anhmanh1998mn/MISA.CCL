@@ -109,4 +109,6 @@
     <string name="report_with_food">Doanh thu theo mặt hàng</string>
     <string name="unit_name_default">Bao</string>
     <string name="stop_sell">Ngừng bán</string>
+    <string name="from_day">Từ ngày</string>
+    <string name="end_day">Đến ngày</string>
 </resources>

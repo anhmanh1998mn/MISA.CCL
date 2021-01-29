@@ -33,7 +33,9 @@ public class FragmentReportTimeRecentlyModel {
 
     private String[] mListDateTimeSplit;
 
-    private String formatMoney, formatMoneyMonth, formatMoneyThisDay, formatMoneyLastDay, formatMoneyThisWeek;
+    private String mFormatMoney, mFormatMoneyMonth, mFormatMoneyThisDay, mFormatMoneyLastDay, mFormatMoneyThisWeek;
+
+    private Float  mAmountThisDay, mAmountLastDay;
 
     /**
      * Mục đích method thực hiện việc xử lý thống kê doanh thu và trả kết quả về presenter
@@ -56,71 +58,8 @@ public class FragmentReportTimeRecentlyModel {
 
         reportWithThisWeek();
 
-//        Cursor cursor=mSqliteDatabase.rawQuery("SELECT strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+") as Nam," +
-//                "strftime('%m',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+") as Thang" +
-//                ",SUM("+DatabaseInfomation.COLUM_ORDER_AMOUNT+") as Tong FROM "+DatabaseInfomation.TABLE_ORDERS+" " +
-//                "WHERE strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")='"+mListDateTimeSplit[0]+"' AND "+
-//                DatabaseInfomation.COLUMN_ORDER_STATUS+"=2" +
-//
-//                " GROUP BY strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")",null);
-//        for(int i=0;i<cursor.getCount();i++){
-//            cursor.moveToPosition(i);
-//            formatMoney=(decimalFormat.format((cursor.getFloat(cursor.getColumnIndex("Tong")))));
-//        }
-
-//        Cursor cursor1=mSqliteDatabase.rawQuery("SELECT strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+") as Nam," +
-//                "strftime('%m',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+") as Thang" +
-//                ",SUM("+DatabaseInfomation.COLUM_ORDER_AMOUNT+") as Tong FROM "+DatabaseInfomation.TABLE_ORDERS+" " +
-//                "WHERE strftime('%m',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")='"+mListDateTimeSplit[1]+"' AND " +
-//                "strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")='"+mListDateTimeSplit[0]+"' AND "+
-//                DatabaseInfomation.COLUMN_ORDER_STATUS+"=2" +
-//
-//                " GROUP BY strftime('%m',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")",null);
-//        for(int i=0;i<cursor1.getCount();i++){
-//            cursor1.moveToPosition(i);
-//            formatMoneyMonth=(decimalFormat.format((cursor1.getFloat(cursor1.getColumnIndex("Tong")))));
-//        }
-
-//        Cursor cursor2=mSqliteDatabase.rawQuery("SELECT ("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")" +
-//                ",SUM("+DatabaseInfomation.COLUM_ORDER_AMOUNT+") as Tong " +
-//                "FROM "+DatabaseInfomation.TABLE_ORDERS+" WHERE DATE("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")=" +
-//                "DATE('"+mListDateTimeSplit[0]+"-"+mListDateTimeSplit[1]+"-"+mListDateTimeSplit[2]+"') AND "+
-//                DatabaseInfomation.COLUMN_ORDER_STATUS+"=2" +
-//                " GROUP BY "+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+"",null);
-//        for(int i=0;i<cursor2.getCount();i++){
-//            cursor2.moveToPosition(i);
-//            float amount=cursor2.getFloat(cursor2.getColumnIndex("Tong"));
-//            Log.d("Date",amount+"");
-//            formatMoneyThisDay=decimalFormat.format(amount);
-//        }
-
-//        Cursor cursor3=mSqliteDatabase.rawQuery("SELECT ("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")" +
-//                ",SUM("+DatabaseInfomation.COLUM_ORDER_AMOUNT+") as Tong " +
-//                "FROM "+DatabaseInfomation.TABLE_ORDERS+" WHERE DATE("+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")=" +
-//                "DATE('"+mListDateTimeSplit[0]+"-"+mListDateTimeSplit[1]+"-"+mListDateTimeSplit[2]+"','-1 day') AND "+
-//                DatabaseInfomation.COLUMN_ORDER_STATUS+"=2" +
-//                " GROUP BY "+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+"",null);
-//        for(int i=0;i<cursor3.getCount();i++){
-//            cursor3.moveToPosition(i);
-//            float amount=cursor3.getFloat(cursor3.getColumnIndex("Tong"));
-//            formatMoneyLastDay=decimalFormat.format(amount);
-//        }
-
-//        Cursor cursor4=mSqliteDatabase.rawQuery("SELECT strftime('%W',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+") as Tuan, " +
-//                "SUM("+DatabaseInfomation.COLUM_ORDER_AMOUNT+") as Tong FROM "+DatabaseInfomation.TABLE_ORDERS+" " +
-//                " WHERE strftime('%W',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")=strftime('%W','now') AND " +
-//                "strftime('%Y',"+DatabaseInfomation.COLUMN_ORDER_CREATED_AT+")='"
-//                +mListDateTimeSplit[0]+"' AND "+DatabaseInfomation.COLUMN_ORDER_STATUS+"=2",null);
-//        for(int i=0;i<cursor4.getCount();i++){
-//            cursor4.moveToPosition(i);
-//            float amount=cursor4.getFloat(cursor4.getColumnIndex("Tong"));
-//            formatMoneyThisWeek=decimalFormat.format(amount);
-////            String amount=cursor4.getString(cursor4.getColumnIndex("Tuan"));
-////            Log.d("Tuan",amount);
-//        }
-
-        mIFragmentReportTimeRecentlyModel.processReportTimeRecentlySuccess(formatMoney, formatMoneyMonth, formatMoneyThisDay,
-                formatMoneyLastDay, formatMoneyThisWeek);
+        mIFragmentReportTimeRecentlyModel.processReportTimeRecentlySuccess(mFormatMoney, mFormatMoneyMonth, mFormatMoneyThisDay,
+                mFormatMoneyLastDay, mFormatMoneyThisWeek,mAmountThisDay,mAmountLastDay);
     }
 
     /**
@@ -139,7 +78,7 @@ public class FragmentReportTimeRecentlyModel {
                 " GROUP BY strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
-            formatMoney = (decimalFormat.format((cursor.getFloat(cursor.getColumnIndex("Tong")))));
+            mFormatMoney = (decimalFormat.format((cursor.getFloat(cursor.getColumnIndex("Tong")))));
         }
     }
 
@@ -160,7 +99,7 @@ public class FragmentReportTimeRecentlyModel {
                 " GROUP BY strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
         for (int i = 0; i < cursor1.getCount(); i++) {
             cursor1.moveToPosition(i);
-            formatMoneyMonth = (decimalFormat.format((cursor1.getFloat(cursor1.getColumnIndex("Tong")))));
+            mFormatMoneyMonth = (decimalFormat.format((cursor1.getFloat(cursor1.getColumnIndex("Tong")))));
         }
     }
 
@@ -181,7 +120,8 @@ public class FragmentReportTimeRecentlyModel {
             cursor2.moveToPosition(i);
             float amount = cursor2.getFloat(cursor2.getColumnIndex("Tong"));
             Log.d("Date", amount + "");
-            formatMoneyThisDay = decimalFormat.format(amount);
+            mFormatMoneyThisDay = decimalFormat.format(amount);
+            mAmountThisDay=amount;
         }
     }
 
@@ -201,7 +141,8 @@ public class FragmentReportTimeRecentlyModel {
         for (int i = 0; i < cursor3.getCount(); i++) {
             cursor3.moveToPosition(i);
             float amount = cursor3.getFloat(cursor3.getColumnIndex("Tong"));
-            formatMoneyLastDay = decimalFormat.format(amount);
+            mFormatMoneyLastDay = decimalFormat.format(amount);
+            mAmountLastDay=amount;
         }
 
     }
@@ -221,7 +162,7 @@ public class FragmentReportTimeRecentlyModel {
         for (int i = 0; i < cursor4.getCount(); i++) {
             cursor4.moveToPosition(i);
             float amount = cursor4.getFloat(cursor4.getColumnIndex("Tong"));
-            formatMoneyThisWeek = decimalFormat.format(amount);
+            mFormatMoneyThisWeek = decimalFormat.format(amount);
 //            String amount=cursor4.getString(cursor4.getColumnIndex("Tuan"));
 //            Log.d("Tuan",amount);
         }
@@ -245,6 +186,7 @@ public class FragmentReportTimeRecentlyModel {
 
     public interface IFragmentReportTimeRecentlyModel {
         public void processReportTimeRecentlySuccess(String amountYear, String amountMonth,
-                                                     String amountThisDay, String amountLastDay, String amountThisWeek);
+                                                     String amountThisDay, String amountLastDay, String amountThisWeek,
+                                                     float totalMoneyThisDay,float totalMoneyLastDay);
     }
 }

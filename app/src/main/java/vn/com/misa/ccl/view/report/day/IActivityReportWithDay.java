@@ -12,12 +12,13 @@ public interface IActivityReportWithDay {
         public void getListProductThisDay(Activity activity);
 
         public void getListProductReportLastDay(Activity activity);
+
     }
 
     public interface IActivityReportWithDayView{
         public void getListProductThisDaySuccess(List<OrderDetail> listOrderDetail);
 
-        public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport);
+        public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport);
 
         public void onFailed();
     }

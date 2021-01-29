@@ -47,8 +47,9 @@ public class FragmentReportTimeRecentlyPresenter implements IFragmentReportTimeR
      */
     @Override
     public void processReportTimeRecentlySuccess(String amountYear, String amountMonth,
-                                                 String amountThisDay, String amountLastDay, String amountThisWeek) {
+                                                 String amountThisDay, String amountLastDay, String amountThisWeek,
+                                                 float totalMoneyThisDay,float totalMoneyLastDay) {
         mIFragmentReportTimeRecentlyView.processReportTImeRecentlySuccess(amountYear, amountMonth,
-                amountThisDay, amountLastDay, amountThisWeek);
+                amountThisDay, amountLastDay, amountThisWeek,totalMoneyThisDay,totalMoneyLastDay);
     }
 }

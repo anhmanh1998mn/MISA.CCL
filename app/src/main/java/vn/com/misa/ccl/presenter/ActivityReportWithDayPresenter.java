@@ -57,7 +57,7 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
      * @created_by cvmanh on 01/28/2021
      */
     @Override
-    public void getListproductReportSuccess(List<OrderDetail> listProductReport) {
+    public void getListProductReportSuccess(List<OrderDetail> listProductReport) {
         mIActivityReportWithDayView.getListProductThisDaySuccess(listProductReport);
     }
 
@@ -68,8 +68,8 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
      * @created_by cvmanh on 01/28/2021
      */
     @Override
-    public void getListproductReportLastDaySuccess(List<OrderDetail> listProductReport) {
-        mIActivityReportWithDayView.getListproductReportLastDaySuccess(listProductReport);
+    public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport) {
+        mIActivityReportWithDayView.getListProductReportLastDaySuccess(listProductReport);
     }
 
     /**

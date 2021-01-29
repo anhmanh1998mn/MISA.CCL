@@ -9,7 +9,7 @@ public interface IFragmentReportTimeRecently {
     }
 
     public interface IFragmentReportTimeRecentlyView{
-        public void processReportTImeRecentlySuccess(String amountYear,String amountMonth,String amountThisDay,String amountLastDay,String amountThisWeek);
+        public void processReportTImeRecentlySuccess(String amountYear,String amountMonth,String amountThisDay,String amountLastDay,String amountThisWeek,float totalMoneyThisDay,float totalMoneyLastDay);
 
     }
 }
