@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MISACCL">
-        <activity android:name=".view.report.day.ActivityReportWithDay"></activity>
+        <activity android:name=".view.infomationapp.ActivityRemoveData"></activity>
+        <activity android:name=".view.infomationapp.ActivityApplicationInfomation" />
+        <activity android:name=".view.report.day.ActivityReportWithDay" />
         <activity android:name=".view.order.ActivityBill" />
         <activity android:name=".view.order.ActivityOrder" />
         <activity android:name=".view.manage.ActivityRestaurantManage" />

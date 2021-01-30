@@ -35,7 +35,7 @@ public class FragmentReportTimeRecentlyModel {
 
     private String mFormatMoney, mFormatMoneyMonth, mFormatMoneyThisDay, mFormatMoneyLastDay, mFormatMoneyThisWeek;
 
-    private Float mAmountThisDay, mAmountLastDay;
+    private Float mAmountThisDay = 0f, mAmountLastDay = 0f;
 
     /**
      * Mục đích method thực hiện việc xử lý thống kê doanh thu và trả kết quả về presenter

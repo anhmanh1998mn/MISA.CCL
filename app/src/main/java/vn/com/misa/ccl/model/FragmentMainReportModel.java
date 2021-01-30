@@ -129,7 +129,7 @@ public class FragmentMainReportModel {
                         "strftime('%w'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thu," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
                         DatabaseInfomation.COLUMN_ORDER_CREATED_AT + " FROM " + DatabaseInfomation.TABLE_ORDERS + " " +
-                        " WHERE strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")=(strftime('%W','now')-1) AND " +
+                        " WHERE strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")=(strftime('%W','now','-7 days')) AND " +
                         "strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")='"
                         + mListDateTimeSplit[0] + "' AND " + DatabaseInfomation.COLUMN_ORDER_STATUS + "=2 " +
                         "GROUP BY strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);

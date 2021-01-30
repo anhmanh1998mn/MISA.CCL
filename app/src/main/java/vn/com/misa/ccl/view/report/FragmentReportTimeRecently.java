@@ -36,6 +36,16 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
 
     private float mTotalMoneyThisDay, mTotalMoneyLastDay;
 
+    private IOnSelectionViewListener mIOnSelectionViewListener;
+
+    public IOnSelectionViewListener getmIOnSelectionViewListener() {
+        return mIOnSelectionViewListener;
+    }
+
+    public void setmIOnSelectionViewListener(IOnSelectionViewListener mIOnSelectionViewListener) {
+        this.mIOnSelectionViewListener = mIOnSelectionViewListener;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,9 +89,11 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      * @created_by cvmanh on 01/28/2021
      */
     private void processReport() {
+
         try {
             mReportTimeRecently = new FragmentReportTimeRecentlyPresenter(this);
             mReportTimeRecently.processReport(getActivity());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,6 +112,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
     @Override
     public void processReportTImeRecentlySuccess(String amountYear, String amountMonth, String amountThisDay, String amountLastDay, String amountThisWeek,
                                                  float totalMoneyThisDay, float totalMoneyLastDay) {
+
         try {
             tvTimeThisYear.setText(amountYear);
             tvTimeThisMonth.setText(amountMonth);
@@ -111,6 +124,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -122,6 +136,9 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
         try {
             llThisDay.setOnClickListener(this);
             llLastDay.setOnClickListener(this);
+            llThisWeek.setOnClickListener(this);
+            llThisMonth.setOnClickListener(this);
+            llThisYear.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,9 +170,25 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
                     startActivity(intent);
                     break;
                 }
+                case R.id.llThisWeek: {
+                    mIOnSelectionViewListener.onSelectThisWeekListener("ThisWeek");
+                    break;
+                }
+                case R.id.llThisMonth: {
+                    mIOnSelectionViewListener.onSelectThisWeekListener("ThisMonth");
+                    break;
+                }
+                case R.id.llThisYear: {
+                    mIOnSelectionViewListener.onSelectThisWeekListener("ThisYear");
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public interface IOnSelectionViewListener {
+        public void onSelectThisWeekListener(String typeClick);
     }
 }

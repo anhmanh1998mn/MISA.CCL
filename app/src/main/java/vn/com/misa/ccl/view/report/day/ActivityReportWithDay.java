@@ -119,7 +119,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
                 mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
                 mDayName = intent.getStringExtra("DAY_NAME");
-                tvTime.setText(intent.getStringExtra("DAY_OF_WEEK") + " (" + mDayName + ")");
+                tvTime.setText(intent.getStringExtra("DAY_OF_WEEK") + " (" + splitDate(mDayName) + ")");
                 getReportTimeDay();
             } else {
                 mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));
@@ -133,6 +133,18 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc định đạng ngày tháng theo dd/MM/yyyy
+     *
+     * @param inputDate Ngày tháng truyền vào
+     * @return trả về ngày đã được định đạng theo định đạng dd/MM/yyy
+     * @created_by cvmanh on 01/30/2021
+     */
+    private String splitDate(String inputDate) {
+        String[] arraySplitDate = inputDate.split("-");
+        return arraySplitDate[2] + "/" + arraySplitDate[1] + "/" + arraySplitDate[0];
     }
 
     /**

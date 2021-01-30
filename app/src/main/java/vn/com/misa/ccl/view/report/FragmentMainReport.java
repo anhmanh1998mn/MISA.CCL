@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,7 +59,8 @@ import vn.com.misa.ccl.view.report.day.ActivityReportWithDay;
  * ‐ @created_by cvmanh on 01/28/2021
  */
 
-public class FragmentMainReport extends Fragment implements View.OnClickListener, IFragmmentMainReport.IFragmentMainReportView {
+public class FragmentMainReport extends Fragment implements View.OnClickListener, IFragmmentMainReport.IFragmentMainReportView,
+        FragmentReportTimeRecently.IOnSelectionViewListener {
 
     private LinearLayout llReportHeader;
 
@@ -110,7 +112,10 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
         onViewClickListener();
 
-        replaceFragment(new FragmentReportTimeRecently());
+//        replaceFragment(new FragmentReportTimeRecently());
+        FragmentReportTimeRecently fragmentReportTimeRecently = new FragmentReportTimeRecently();
+        replaceFragment(fragmentReportTimeRecently);
+        fragmentReportTimeRecently.setmIOnSelectionViewListener(this);
 
         return view;
     }
@@ -875,5 +880,38 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận xự kiện click từ FragmentReportTimeRecently và xử lý
+     *
+     * @param typeClick loại view click. Nêu typeClick=ThisWeek: gọi presenter xử lý thống kê theo tuần hiện tại
+     *                  Nếu typeClick=ThisMonth: gọi presenter xử lý thống kê theo tháng hiện tại
+     *                  Nếu typeClick=ThisYear: gọi presenter xử lý thống kê theo năm hiện tại
+     * @created_by cvmanh on 01/30/2021
+     */
+    @Override
+    public void onSelectThisWeekListener(String typeClick) {
+        try {
+            mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
+            if (typeClick.equals("ThisWeek")) {
+                mFragmentMainReportPresenter.getReportLineChart(getActivity(), "ThisWeek");
+                llReportLine.setVisibility(View.VISIBLE);
+                frmMainReportContent.setVisibility(View.GONE);
+                tvOptionReport.setText("Tuần này");
+            } else if (typeClick.equals("ThisMonth")) {
+                mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(), "ThisMonth");
+                llReportLine.setVisibility(View.VISIBLE);
+                frmMainReportContent.setVisibility(View.GONE);
+                tvOptionReport.setText("Tháng này");
+            } else {
+                mFragmentMainReportPresenter.getReportLineChartWithYear(getActivity(), "ThisYear");
+                llReportLine.setVisibility(View.VISIBLE);
+                frmMainReportContent.setVisibility(View.GONE);
+                tvOptionReport.setText("Năm nay");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

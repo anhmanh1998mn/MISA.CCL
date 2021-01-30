@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,8 @@ import vn.com.misa.ccl.adapter.SettingAdapter;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
+import vn.com.misa.ccl.view.infomationapp.ActivityApplicationInfomation;
+import vn.com.misa.ccl.view.infomationapp.ActivityRemoveData;
 import vn.com.misa.ccl.view.login.ActivityAccountRegister;
 import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.view.order.ActivityOrder;
@@ -265,6 +268,29 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     tvAddMenu.setVisibility(View.GONE);
                     tvAdd.setVisibility(View.GONE);
                     tvVisible.setVisibility(View.VISIBLE);
+                    break;
+                }
+                case "Giới thiệu cho bạn": {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_TEXT, (getResources().getString(R.string.share_with_fiend)));
+                    intent.setType("text/plain");
+                    startActivity(Intent.createChooser(intent, ""));
+                    break;
+                }
+                case "Thông tin sản phẩm": {
+                    startActivity(new Intent(this, ActivityApplicationInfomation.class));
+                    break;
+                }
+                case "Thiết lập": {
+                    Intent intent = new Intent(this, ActivityRemoveData.class);
+                    intent.putExtra("SETTING_INTENT", 1);//2: thiết lập
+                    startActivity(intent);
+                    break;
+                }
+                case "Đồng bộ dữ liệu": {
+                    Intent intent = new Intent(this, ActivityRemoveData.class);
+                    intent.putExtra("SETTING_INTENT", 2);//2: đồng bộ dữ liệu
+                    startActivity(intent);
                     break;
                 }
             }

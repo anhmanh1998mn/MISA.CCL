@@ -96,9 +96,9 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
      * @created_by cvmanh on 01/27/2021
      */
     @Override
-    public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
+    public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID, byte[] imageSelect, String keyColor) {
         mActivityFoodUpdateModel.updateItemProduct(productId, productName, productPrice,
-                imageID, unitID, colorID);
+                imageID, unitID, colorID, imageSelect, keyColor);
     }
 
     /**
@@ -144,6 +144,18 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
     @Override
     public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID, int colorID) {
         mActivityFoodUpdateModel.addNewFoodMenu(activity, productName, productPrice, imageID, unitID, colorID);
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý ngừng bán sản phẩm
+     *
+     * @param activity  instance activity
+     * @param productID mã sản phẩm
+     * @created_by cvmanh on 01/31/2021
+     */
+    @Override
+    public void stopSellProduct(Activity activity, int productID) {
+        mActivityFoodUpdateModel.stopSellProduct(activity, productID);
     }
 
     /**

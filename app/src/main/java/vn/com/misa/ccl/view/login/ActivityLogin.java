@@ -29,7 +29,9 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     private TextView tvForgotPassword;
 
-    private ImageView ivTextClearUserName, ivTextClearPassword;
+    private ImageView ivTextClearUserName, ivTextClearPassword, ivBack, ivClose;
+
+    private Dialog mDialogForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             tvForgotPassword = findViewById(R.id.tvForgotPassword);
             ivTextClearUserName = findViewById(R.id.ivTextClearUserName);
             ivTextClearPassword = findViewById(R.id.ivTextClearPassword);
+            ivBack = findViewById(R.id.ivBack);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +73,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         try {
             ivAppInformation.setOnClickListener(this);
             tvForgotPassword.setOnClickListener(this);
+            ivBack.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,6 +95,14 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                 }
                 case R.id.tvForgotPassword: {
                     showDialogForgotPassword();
+                    break;
+                }
+                case R.id.ivBack: {
+                    finish();
+                    break;
+                }
+                case R.id.ivClose: {
+                    mDialogForgotPassword.dismiss();
                     break;
                 }
             }
@@ -132,14 +144,16 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     private void showDialogForgotPassword() {
         try {
-            Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_forgot_password);
-            dialog.closeOptionsMenu();
-            dialog.setCanceledOnTouchOutside(false);
-            ConstraintLayout clForgotPassword = dialog.findViewById(R.id.clForgotPassword);
+            mDialogForgotPassword = new Dialog(this);
+            mDialogForgotPassword.setContentView(R.layout.dialog_forgot_password);
+            mDialogForgotPassword.closeOptionsMenu();
+            mDialogForgotPassword.setCanceledOnTouchOutside(false);
+            ConstraintLayout clForgotPassword = mDialogForgotPassword.findViewById(R.id.clForgotPassword);
             clForgotPassword.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 80;
             clForgotPassword.requestLayout();
-            dialog.show();
+            mDialogForgotPassword.show();
+            ivClose = mDialogForgotPassword.findViewById(R.id.ivClose);
+            ivClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ public interface IActivityFoodUpdate {
         public void removeItemProduct(int productID);
 
         public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID,
-                                      int colorID);
+                                      int colorID,byte[] imageSelect,String keyColor);
 
         public void deleteItemProductMenu(Activity activity, int productID);
 
@@ -31,6 +31,8 @@ public interface IActivityFoodUpdate {
 
         public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID,
                                    int colorID);
+
+        public void stopSellProduct(Activity activity,int productID);
     }
 
     public interface IActivityFoodUpdateView {

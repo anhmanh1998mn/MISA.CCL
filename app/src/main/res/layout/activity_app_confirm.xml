@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next"
             android:drawableRight="@drawable/ic_next"
+            android:paddingRight="@dimen/contraint_large"
             android:text="@string/confirm_next" />
     </LinearLayout>
 

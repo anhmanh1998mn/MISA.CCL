@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -87,7 +88,11 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private Product mProduct;
 
-    private String mTypeIntent;
+    private String mTypeIntent, mProductName, mKeyColor, mUnitName;
+
+    private CheckBox cbStopSell;
+
+    private byte[] mProductImage;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -112,9 +117,13 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         try {
             Intent intent = getIntent();
             mTypeIntent = intent.getStringExtra("TypeIntent");
-            if (intent.getStringExtra("TypeIntent").equals("Setup")) {
+            if (mTypeIntent.equals("Setup")) {
                 mProductCategory = (ProductCategory) intent.getSerializableExtra("Object");
                 mProductID = mProductCategory.getmProduct().getmProductID();
+                mImageID = mProductCategory.getmProduct().getmProductImage().getmProductImageID();
+                mColorID = mProductCategory.getmProduct().getmColor().getColorID();
+                mUnitID = mProductCategory.getmProduct().getmUnit().getmUnitID();
+                mPriceOut = mProductCategory.getmProduct().getmProductPrice();
                 etFoodName.setText(mProductCategory.getmProduct().getmProductName());
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProductCategory.getmProduct().getmProductPrice())));
@@ -123,13 +132,30 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                         0, mProductCategory.getmProduct().getmProductImage().getmImage().length));
                 cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
                 cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
-                return;
+                cbStopSell.setVisibility(View.GONE);
+                mProductImage = mProductCategory.getmProduct().getmProductImage().getmImage();
+                mKeyColor = mProductCategory.getmProduct().getmColor().getColorName();
+
             } else if (mTypeIntent.equals("Menu")) {
                 mProduct = (Product) intent.getSerializableExtra("Object");
                 mProductID = mProduct.getmProductID();
                 etFoodName.setText(mProduct.getmProductName());
+                mProductName = mProduct.getmProductName();
+                etFoodName.setTag(mProductName);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProduct.getmProductPrice())));
+                mPriceOut = mProduct.getmProductPrice();
+                tvFoodPrice.setTag(mPriceOut);
+                mImageID = mProduct.getmProductImage().getmProductImageID();
+                mColorID = mProduct.getmColor().getColorID();
+                mProductImage = mProduct.getmProductImage().getmImage();
+                mKeyColor = mProduct.getmColor().getColorName();
+                mUnitID = mProduct.getmUnit().getmUnitID();
+                if (mProduct.getmProductStatus() == 2) {
+                    cbStopSell.setChecked(true);
+                } else {
+                    cbStopSell.setChecked(false);
+                }
                 tvFoodUnit.setText(mProduct.getmUnit().getmUnitName());
                 ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProduct.getmProductImage().getmImage(),
                         0, mProduct.getmProductImage().getmImage().length));
@@ -184,6 +210,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             tvSetupName = findViewById(R.id.tvSetupName);
             btnAddnewProduct = findViewById(R.id.btnAddnewProduct);
             tvNext = findViewById(R.id.tvNext);
+            cbStopSell = findViewById(R.id.cbStopSell);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -250,34 +277,11 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 case R.id.btnSave: {
-//                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-//                    if (sharedPreferences != null) {
-//                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-//                    } else {
-//                        mUnitID = 1;
-//                    }
-//                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-//                    if (mTypeIntent.equals("Setup")) {
-//                        mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
-//                                mPriceOut, mImageID, mUnitID, mColorID);
-//                        return;
-//                    }
-//                    mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-//                            mPriceOut, mImageID, mUnitID, mColorID);
                     updateProductInfomation();
                     break;
                 }
                 case R.id.btnAddnewProduct: {
                     addNewProductInfomation();
-//                    SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-//                    if (sharedPreferences != null) {
-//                        mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-//                    } else {
-//                        mUnitID = 1;
-//                    }
-//                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-//                    mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
-//                            mPriceOut, mImageID, mUnitID, mColorID);
                     break;
                 }
                 case R.id.ivClose: {
@@ -333,17 +337,23 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
             if (sharedPreferences != null) {
                 mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-            } else {
-                mUnitID = 1;
             }
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-            if (mTypeIntent.equals("Setup")) {
-                mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
-                        mPriceOut, mImageID, mUnitID, mColorID);
+            if (cbStopSell.isChecked()) {
+                mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
                 return;
             }
-            mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-                    mPriceOut, mImageID, mUnitID, mColorID);
+            if (mTypeIntent.equals("Setup")) {
+                mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                        mPriceOut, mImageID, mUnitID, mColorID, mProductImage, mKeyColor);
+
+            } else if (mTypeIntent.equals("Menu")) {
+                mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
+                        mPriceOut, mImageID, mUnitID, mColorID);
+            } else {
+                addNewProductInfomation();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -578,6 +588,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     public void onClickListener(String keyColor, int colorID) {
         try {
             mColorID = colorID;
+            mKeyColor = keyColor;
             mDialogColor.dismiss();
             cvImage.getBackground().setTint(Color.parseColor(keyColor));
             cvColor.getBackground().setTint(Color.parseColor(keyColor));
@@ -621,6 +632,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     public void selectionItem(byte[] productImage, int imageID) {
         try {
             mImageID = imageID;
+            mProductImage = productImage;
             mDialogImage.dismiss();
             ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(productImage,
                     0, productImage.length));

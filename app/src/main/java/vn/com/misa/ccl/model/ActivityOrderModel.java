@@ -73,7 +73,8 @@ public class ActivityOrderModel {
                     + DatabaseInfomation.COLUMN_COLOR_ID + " AND "
                     + DatabaseInfomation.TABLE_PRODUCT_IMAGES + "."
                     + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + "="
-                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + "", null);
+                    + DatabaseInfomation.TABLE_MYPRODUCTS + "." + DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID + " AND " +
+                    DatabaseInfomation.COLUMN_PRODUCT_STATUS + "=1", null);
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
                 mListMenu.add(new Product(cursor.getInt(cursor.getColumnIndex(DatabaseInfomation.COLUMN_MYPRODUCT_ID)),

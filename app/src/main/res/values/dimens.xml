@@ -47,4 +47,5 @@
     <dimen name="max_font">18sp</dimen>
     <dimen name="height_maxx">170dp</dimen>
     <dimen name="sizee_max">520dp</dimen>
+    <dimen name="logo_sỉze">220dp</dimen>
 </resources>

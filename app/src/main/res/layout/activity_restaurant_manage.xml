@@ -42,29 +42,31 @@
                     android:text="@string/sell" />
 
                 <TextView
-                    style="@style/Theme.EffectClick"
                     android:id="@+id/tvAdd"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:drawableTop="@drawable/ic_plus"
-                    android:paddingTop="@dimen/margin" />
-                <TextView
                     style="@style/Theme.EffectClick"
-                    android:visibility="gone"
-                    android:id="@+id/tvAddMenu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
                     android:drawableTop="@drawable/ic_plus"
                     android:paddingTop="@dimen/margin" />
+
                 <TextView
-                    android:visibility="gone"
+                    android:id="@+id/tvAddMenu"
+                    style="@style/Theme.EffectClick"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:drawableTop="@drawable/ic_plus"
+                    android:paddingTop="@dimen/margin"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/tvVisible"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
-                    android:paddingTop="@dimen/margin" />
+                    android:paddingTop="@dimen/margin"
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -108,7 +110,7 @@
                 <TextView
                     android:id="@+id/tvLogin"
                     style="@style/Theme.FontTextUser"
-                    android:background="@color/dark_blue_face"
+                    android:background="@drawable/view_login_button"
                     android:text="@string/login"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/tvRegister"
@@ -117,7 +119,7 @@
                 <TextView
                     android:id="@+id/tvRegister"
                     style="@style/Theme.FontTextUser"
-                    android:background="@color/greenn"
+                    android:background="@drawable/view_register_button"
                     android:text="@string/register_account"
                     app:layout_constraintLeft_toRightOf="@+id/tvLogin"
                     app:layout_constraintRight_toRightOf="parent"

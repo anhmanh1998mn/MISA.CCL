@@ -111,4 +111,16 @@
     <string name="stop_sell">Ngừng bán</string>
     <string name="from_day">Từ ngày</string>
     <string name="end_day">Đến ngày</string>
+    <string name="share_with_fiend">Chào bạn. Hãy tải ngay CUKCUK Lite - ứng dụng bán hàng
+     miễn phí dành cho các quán nhỏ và quầy di động tại địa chỉ:\n <a>https://mily.vn/mxmwo8A</a>\n
+    Xem thông tin chi tiết tại website:\nwww.cukcuk.vn</string>
+    <string name="website"><b>Website</b>\nwww.cukcuk.vn</string>
+    <string name="copyright">Copyright © 2016 - 2021 <font color="#0072bb">MISA JSC</font></string>
+    <string name="view_misa">https://www.misa.vn/</string>
+    <string name="view_website_cukcuk">https://www.cukcuk.vn/</string>
+    <string name="view_support">https://help.cukcuk.vn/vi/ac/cukcuk-vn-lite</string>
+    <string name="setting_data"><font size="20">LẤY LẠI TOÀN BỘ DỮ LIỆU</font>\nChức năng này sẽ tiến hành <font color="red">xóa dữ liệu trên thiết bị của bạn</font>
+    và thay thế bằng dữ liệu trên máy chủ</string>
+    <string name="sync_now">ĐỒNG BỘ NGAY</string>
+    <string name="sync_end">Đồng bộ lần cuối: <b>02/02/2021 08:23 CH</b></string>
 </resources>

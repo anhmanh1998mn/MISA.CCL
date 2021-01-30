@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.infomationapp.ActivityRemoveData">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbSetting"
+        style="@style/Theme.BackgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvBack"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tvSettingName"
+                style="@style/Theme.FontTextLarge"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:text="@string/setting" />
+
+            <TextView
+                android:id="@+id/tvNext"
+                style="@style/Theme.FontTextColor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:paddingRight="@dimen/margin_login" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:id="@+id/tvComfirmRemove"
+        android:paddingLeft="@dimen/margin_smalll"
+        android:drawablePadding="@dimen/margin"
+        android:paddingRight="@dimen/margin_right_small"
+        android:gravity="center|left"
+        android:text="@string/setting_data"
+        android:drawableRight="@drawable/ic_foot_menu"
+        style="@style/Theme.EffectClick"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_maxx"/>
+    <View
+        style="@style/Theme.VerticalLine"
+        android:layout_width="match_parent"/>
+    <ImageView
+        android:id="@+id/ivSyncNow"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_banner_sync"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_sỉze"/>
+    <TextView
+        android:id="@+id/tvSyncDate"
+        android:padding="@dimen/margin_smalll"
+        android:textColor="@color/black"
+        android:text="@string/sync_end"
+        style="@style/Theme.FontTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnSyncNow"
+        style="@style/Theme.FontButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_largee"
+        android:text="@string/sync_now" />
+
+</LinearLayout>
