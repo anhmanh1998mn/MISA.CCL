@@ -93,18 +93,22 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/26/2021
      */
     private void getActionClick() {
-        Intent intent = getIntent();
-        mOrderID = intent.getIntExtra("ORDER_ID", -1);
-        if (intent.getIntExtra("ORDER_ID", -1) == -1) {
+        try {
+            Intent intent = getIntent();
+            mOrderID = intent.getIntExtra("ORDER_ID", -1);
+            if (intent.getIntExtra("ORDER_ID", -1) == -1) {
+                getListMenu();
+                return;
+            }
+            tvSelectTable.setText(intent.getStringExtra("TABLE_NAME"));
+            tvPeopeNumber.setText(String.valueOf(intent.getIntExtra("TOTAL_NUMBER", -1)));
+            mAmount = intent.getFloatExtra("AMOUNT", -1);
+            tvTotalAmount.setText(String.valueOf(mAmount));
             getListMenu();
-            return;
+            getListOrderDetailWithOrderID();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        tvSelectTable.setText(intent.getStringExtra("TABLE_NAME"));
-        tvPeopeNumber.setText(String.valueOf(intent.getIntExtra("TOTAL_NUMBER", -1)));
-        mAmount = intent.getFloatExtra("AMOUNT", -1);
-        tvTotalAmount.setText(String.valueOf(mAmount));
-        getListMenu();
-        getListOrderDetailWithOrderID();
     }
 
     /**
@@ -149,8 +153,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      * @created_by cvmanh on 01/26/2021
      */
     private void getListOrderDetailWithOrderID() {
-        mActivityOrderPresenter = new ActivityOrderPresenter(this);
-        mActivityOrderPresenter.getListOrderDetailWithOrderID(this, mOrderID);
+        try {
+            mActivityOrderPresenter = new ActivityOrderPresenter(this);
+            mActivityOrderPresenter.getListOrderDetailWithOrderID(this, mOrderID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -196,8 +204,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void addNewOrderSuccess() {
-        startActivity(new Intent(this, ActivityRestaurantManage.class));
-        finish();
+        try {
+            startActivity(new Intent(this, ActivityRestaurantManage.class));
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -226,9 +238,13 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void getListOrderDetailWithOrderID(List<OrderDetail> listOrderDetail) {
-        mListOrderDetail = listOrderDetail;
-        mActivityOrderPresenter = new ActivityOrderPresenter(this);
-        mActivityOrderPresenter.checkQuantityProductItem(mListOrderDetail, mListProduct);
+        try {
+            mListOrderDetail = listOrderDetail;
+            mActivityOrderPresenter = new ActivityOrderPresenter(this);
+            mActivityOrderPresenter.checkQuantityProductItem(mListOrderDetail, mListProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -238,8 +254,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void updateOrderSaveSuccess() {
-        startActivity(new Intent(this, ActivityRestaurantManage.class));
-        finish();
+        try {
+            startActivity(new Intent(this, ActivityRestaurantManage.class));
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -250,10 +270,14 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void updateOrderMoneySuccess(int orderID) {
-        Intent intent = new Intent(this, ActivityBill.class);
-        intent.putExtra(ORDER_ID, orderID);
-        startActivity(intent);
-        finish();
+        try {
+            Intent intent = new Intent(this, ActivityBill.class);
+            intent.putExtra(ORDER_ID, orderID);
+            startActivity(intent);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -264,8 +288,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     @Override
     public void checkQuantityOrderClickSuccess(List<Product> listPrduct) {
-        mListProduct = listPrduct;
-        mMenuAdapter.notifyDataSetChanged();
+        try {
+            mListProduct = listPrduct;
+            mMenuAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

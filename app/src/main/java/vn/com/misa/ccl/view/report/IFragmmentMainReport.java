@@ -14,6 +14,8 @@ public interface IFragmmentMainReport {
         public void getReportLineChart(Activity activity,String typeClick);
 
         public void getReportLineChartWithMonth(Activity activity, String typeClick);
+
+        public void getReportLineChartWithYear(Activity activity, String typeClick);
     }
 
     public interface IFragmentMainReportView{
@@ -22,6 +24,8 @@ public interface IFragmmentMainReport {
         public void getReportTimeWeekSuccess(List<Report> listReportWeek);
 
         public void getReportTimeMonthSuccess(List<Report> listReportWeek);
+
+        public void getReportTimeYearSuccess(List<Report> listReportWeek);
 
         public void getReportDataNull();
 

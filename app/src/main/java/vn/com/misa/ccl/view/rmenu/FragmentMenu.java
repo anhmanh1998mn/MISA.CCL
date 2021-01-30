@@ -64,7 +64,11 @@ public class FragmentMenu extends Fragment implements IFragmentMenu.IFragmentMen
      * @created_by cvmanh on 01/27/2021
      */
     private void initView(View view) {
-        rcvMenu = view.findViewById(R.id.rcvMenu);
+        try {
+            rcvMenu = view.findViewById(R.id.rcvMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -73,8 +77,12 @@ public class FragmentMenu extends Fragment implements IFragmentMenu.IFragmentMen
      * @created_by cvmanh on 01/27/2021
      */
     private void getListMenu() {
-        mFragmentMenuPresenter = new FragmentMenuPresenter(this);
-        mFragmentMenuPresenter.getListMenu(getActivity());
+        try {
+            mFragmentMenuPresenter = new FragmentMenuPresenter(this);
+            mFragmentMenuPresenter.getListMenu(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -85,11 +93,15 @@ public class FragmentMenu extends Fragment implements IFragmentMenu.IFragmentMen
      */
     @Override
     public void getListMenuSuccess(List<Product> listProduct) {
-        mListProduct = listProduct;
-        mMyMenuAdapter = new MyMenuAdapter(getActivity(), R.layout.item_restaurant_menu, mListProduct);
-        rcvMenu.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        rcvMenu.setAdapter(mMyMenuAdapter);
-        mMyMenuAdapter.notifyDataSetChanged();
+        try {
+            mListProduct = listProduct;
+            mMyMenuAdapter = new MyMenuAdapter(getActivity(), R.layout.item_restaurant_menu, mListProduct);
+            rcvMenu.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+            rcvMenu.setAdapter(mMyMenuAdapter);
+            mMyMenuAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

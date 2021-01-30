@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clItemReport"
     style="@style/Theme.EffectClick"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvDayName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"
-        android:text="@string/time_this_year"
         style="@style/Theme.FontTextTime"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"/>
+        android:layout_height="@dimen/height_largee"
+        android:text="@string/time_this_year"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tvTotalReport"
         style="@style/Theme.FontTextMoney"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"/>
+        android:layout_height="@dimen/height_largee"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
-        android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalReport"
         style="@style/Theme.VerticalLine"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_smalll"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalReport" />
 </androidx.constraintlayout.widget.ConstraintLayout>

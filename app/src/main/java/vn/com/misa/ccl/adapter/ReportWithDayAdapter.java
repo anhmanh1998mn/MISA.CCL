@@ -48,41 +48,45 @@ public class ReportWithDayAdapter extends RecyclerView.Adapter<ReportWithDayAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        switch (position) {
-            case 0: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.light_bluee)));
-                break;
+        try {
+            switch (position) {
+                case 0: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.light_bluee)));
+                    break;
+                }
+                case 1: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.green_light)));
+                    break;
+                }
+                case 2: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.red)));
+                    break;
+                }
+                case 3: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.orange)));
+                    break;
+                }
+                case 4: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.dark_blue)));
+                    break;
+                }
+                case 5: {
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.dark_blue_face)));
+                    break;
+                }
+                default:
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.light_grey)));
             }
-            case 1: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.green_light)));
-                break;
-            }
-            case 2: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.red)));
-                break;
-            }
-            case 3: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.orange)));
-                break;
-            }
-            case 4: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.dark_blue)));
-                break;
-            }
-            case 5: {
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.dark_blue_face)));
-                break;
-            }
-            default:
-                holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.light_grey)));
-        }
 
-        holder.tvImage.setText(String.valueOf(position + 1));
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvFootName.setText(mListReportWithDay.get(position).getmProduct().getmProductName());
-        holder.tvFootQuantity.setText(String.valueOf(mListReportWithDay.get(position).getmQuantity()));
-        holder.tvFootPrice.setText(decimalFormat.format(mListReportWithDay.get(position).getmProductPriceOut()));
-        holder.tvFootUnit.setText(mListReportWithDay.get(position).getmProduct().getmUnit().getmUnitName());
+            holder.tvImage.setText(String.valueOf(position + 1));
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+            holder.tvFootName.setText(mListReportWithDay.get(position).getmProduct().getmProductName());
+            holder.tvFootQuantity.setText(String.valueOf(mListReportWithDay.get(position).getmQuantity()));
+            holder.tvFootPrice.setText(decimalFormat.format(mListReportWithDay.get(position).getmProductPriceOut()));
+            holder.tvFootUnit.setText(mListReportWithDay.get(position).getmProduct().getmUnit().getmUnitName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -97,11 +101,15 @@ public class ReportWithDayAdapter extends RecyclerView.Adapter<ReportWithDayAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvImage = itemView.findViewById(R.id.tvImage);
-            tvFootName = itemView.findViewById(R.id.tvFootName);
-            tvFootQuantity = itemView.findViewById(R.id.tvFootQuantity);
-            tvFootPrice = itemView.findViewById(R.id.tvFootPrice);
-            tvFootUnit = itemView.findViewById(R.id.tvFootUnit);
+            try {
+                tvImage = itemView.findViewById(R.id.tvImage);
+                tvFootName = itemView.findViewById(R.id.tvFootName);
+                tvFootQuantity = itemView.findViewById(R.id.tvFootQuantity);
+                tvFootPrice = itemView.findViewById(R.id.tvFootPrice);
+                tvFootUnit = itemView.findViewById(R.id.tvFootUnit);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

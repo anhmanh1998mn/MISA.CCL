@@ -137,8 +137,12 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     @Override
     public void initMenuSuccess() {
-        dialogSetupSuccess.dismiss();
-        startActivity(new Intent(this, ActivityRestaurantManage.class));
+        try {
+            dialogSetupSuccess.dismiss();
+            startActivity(new Intent(this, ActivityRestaurantManage.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

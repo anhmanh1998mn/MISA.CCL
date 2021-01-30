@@ -1,95 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clReportTimeOrther"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/tvTimeHeader"
-        android:background="@color/purple_500"
-        app:layout_constraintTop_toTopOf="parent"
         style="@style/Theme.FontTextLarge"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_largee"
-        android:text="@string/time" />
+        android:background="@color/purple_500"
+        android:text="@string/time"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/clStartDay"
-        app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader"
-        android:layout_height="45dp">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_largee"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeHeader">
+
         <TextView
+            style="@style/Theme.FontTextReport"
+            android:layout_width="wrap_content"
+            android:text="@string/from_day"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/Theme.FontTextReport"
-            android:layout_width="wrap_content"
-            android:text="@string/from_day" />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/grey"
-            android:drawableRight="@drawable/ic_foot_menu"
             android:id="@+id/tvStartDay"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             style="@style/Theme.FontTextReport"
             android:layout_width="wrap_content"
-            android:text="@string/from_day" />
+            android:drawableRight="@drawable/ic_foot_menu"
+            android:drawablePadding="@dimen/margin_smalll"
+            android:drawableTint="@color/grey"
+            android:text="@string/from_day"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:id="@+id/vLine"
-        app:layout_constraintTop_toBottomOf="@+id/clStartDay"
         style="@style/Theme.VerticalLine"
-        android:layout_width="match_parent"/>
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/clStartDay" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clEndDay"
-        app:layout_constraintTop_toBottomOf="@+id/vLine"
-        android:layout_height="45dp">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_largee"
+        app:layout_constraintTop_toBottomOf="@+id/vLine">
+
         <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             style="@style/Theme.FontTextReport"
             android:layout_width="wrap_content"
-            android:text="@string/end_day" />
+            android:text="@string/end_day"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvEndDay"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             style="@style/Theme.FontTextReport"
             android:layout_width="wrap_content"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/grey"
             android:drawableRight="@drawable/ic_foot_menu"
-            android:text="@string/end_day" />
+            android:drawablePadding="@dimen/margin_smalll"
+            android:drawableTint="@color/grey"
+            android:text="@string/end_day"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="8dp"
+        android:layout_height="@dimen/height_lare"
         android:background="@color/light_grey"
-        app:layout_constraintTop_toBottomOf="@+id/clEndDay"
-        android:layout_height="55dp">
+        android:padding="@dimen/margin_smalll"
+        app:layout_constraintTop_toBottomOf="@+id/clEndDay">
+
         <TextView
-            android:layout_marginRight="16dp"
-            app:layout_constraintRight_toLeftOf="@+id/tvAccept"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/red"
             android:id="@+id/tvCancel"
             style="@style/Theme.FontTextColor"
-            android:layout_width="100dp"
-            android:textAllCaps="true"
+            android:layout_width="@dimen/size_maxx"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin"
             android:background="@color/white"
-            android:text="@string/cancle" />
+            android:text="@string/cancle"
+            android:textAllCaps="true"
+            android:textColor="@color/red"
+            app:layout_constraintRight_toLeftOf="@+id/tvAccept"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/tvAccept"
             style="@style/Theme.FontTextColor"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/size_maxx"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_smalll"
             android:background="@color/purple_500"
-            android:text="@string/success" />
+            android:text="@string/success"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

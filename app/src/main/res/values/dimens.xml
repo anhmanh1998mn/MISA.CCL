@@ -45,4 +45,6 @@
     <dimen name="padding_normal">9dp</dimen>
     <dimen name="padding_max">9dp</dimen>
     <dimen name="max_font">18sp</dimen>
+    <dimen name="height_maxx">170dp</dimen>
+    <dimen name="sizee_max">520dp</dimen>
 </resources>

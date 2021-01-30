@@ -238,34 +238,38 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
      */
     @Override
     public void onCLickListener(String settingName) {
-        switch (settingName) {
-            case "Bán hàng": {
-                addFragment(new FragmentListOrder());
-                dlRestaurantManage.closeDrawer(GravityCompat.START);
-                tvSetupName.setText(getResources().getString(R.string.sell));
-                tvAddMenu.setVisibility(View.GONE);
-                tvAdd.setVisibility(View.VISIBLE);
-                tvVisible.setVisibility(View.GONE);
-                break;
+        try {
+            switch (settingName) {
+                case "Bán hàng": {
+                    addFragment(new FragmentListOrder());
+                    dlRestaurantManage.closeDrawer(GravityCompat.START);
+                    tvSetupName.setText(getResources().getString(R.string.sell));
+                    tvAddMenu.setVisibility(View.GONE);
+                    tvAdd.setVisibility(View.VISIBLE);
+                    tvVisible.setVisibility(View.GONE);
+                    break;
+                }
+                case "Thực đơn": {
+                    addFragment(new FragmentMenu());
+                    dlRestaurantManage.closeDrawer(GravityCompat.START);
+                    tvSetupName.setText(getResources().getString(R.string.menu));
+                    tvAddMenu.setVisibility(View.VISIBLE);
+                    tvAdd.setVisibility(View.GONE);
+                    tvVisible.setVisibility(View.GONE);
+                    break;
+                }
+                case "Báo cáo": {
+                    addFragment(new FragmentMainReport());
+                    dlRestaurantManage.closeDrawer(GravityCompat.START);
+                    tvSetupName.setText(getResources().getString(R.string.main_report));
+                    tvAddMenu.setVisibility(View.GONE);
+                    tvAdd.setVisibility(View.GONE);
+                    tvVisible.setVisibility(View.VISIBLE);
+                    break;
+                }
             }
-            case "Thực đơn": {
-                addFragment(new FragmentMenu());
-                dlRestaurantManage.closeDrawer(GravityCompat.START);
-                tvSetupName.setText(getResources().getString(R.string.menu));
-                tvAddMenu.setVisibility(View.VISIBLE);
-                tvAdd.setVisibility(View.GONE);
-                tvVisible.setVisibility(View.GONE);
-                break;
-            }
-            case "Báo cáo": {
-                addFragment(new FragmentMainReport());
-                dlRestaurantManage.closeDrawer(GravityCompat.START);
-                tvSetupName.setText(getResources().getString(R.string.main_report));
-                tvAddMenu.setVisibility(View.GONE);
-                tvAdd.setVisibility(View.GONE);
-                tvVisible.setVisibility(View.VISIBLE);
-                break;
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

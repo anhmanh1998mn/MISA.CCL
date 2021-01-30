@@ -63,14 +63,14 @@
             android:text="@string/food_name" />
 
         <EditText
-            android:hint="@string/enter_food_name"
             android:id="@+id/etFoodName"
             style="@style/Theme.FontText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
             android:background="@null"
-            android:gravity="right" />
+            android:gravity="right"
+            android:hint="@string/enter_food_name" />
     </LinearLayout>
 
     <View
@@ -257,12 +257,12 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:visibility="gone"
         android:id="@+id/btnAddnewProduct"
         style="@style/Theme.FontButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_next"
         android:text="@string/save"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btnDelete"
         app:layout_constraintRight_toRightOf="parent" />

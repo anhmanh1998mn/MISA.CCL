@@ -19,19 +19,22 @@ import vn.com.misa.ccl.entity.Report;
 import vn.com.misa.ccl.view.report.day.ActivityReportWithDay;
 
 /**
- * ‐ Mục đích Class thực hiện việc khởi tạo, quy định dữ liệu và cách hiển thị lên view
+ * ‐ Mục đích Class thực hiện khởi tạo, quy định dữ liệu và cách thức hiển thị trên view
+ * <p>
+ * ‐ {@link ActivityReportWithDay}
  * <p>
  * ‐ @created_by cvmanh on 01/30/2021
  */
 
-public class ReportMoreAdapter extends RecyclerView.Adapter<ReportMoreAdapter.ViewHolder> {
+public class ReportWithYearAdapter extends RecyclerView.Adapter<ReportWithYearAdapter.ViewHolder> {
+
     private Activity mContext;
 
     private int mLayout;
 
     private List<Report> mListReport;
 
-    public ReportMoreAdapter(Activity mContext, int mLayout, List<Report> mListReport) {
+    public ReportWithYearAdapter(Activity mContext, int mLayout, List<Report> mListReport) {
         this.mContext = mContext;
         this.mLayout = mLayout;
         this.mListReport = mListReport;
@@ -47,21 +50,18 @@ public class ReportMoreAdapter extends RecyclerView.Adapter<ReportMoreAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            holder.tvDayName.setText(mListReport.get(position).getDayOfWeek());
+            holder.tvDayName.setText("Tháng " + mListReport.get(position).getDayOfWeek());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             holder.tvTotalReport.setText(decimalFormat.format(mListReport.get(position).getTotalMoney()));
             holder.clItemReport.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mListReport.get(position).getTotalMoney() > 0) {
-                        Intent intent = new Intent(mContext, ActivityReportWithDay.class);
-                        intent.putExtra("REPORT_TYPE", 3);
-                        intent.putExtra("AMOUNT_FLOAT", mListReport.get(position).getTotalMoney());
-                        intent.putExtra("DAY_NAME", mListReport.get(position).getDayOfMonth());
-                        intent.putExtra("DAY_OF_WEEK", mListReport.get(position).getDayOfWeek());
-                        mContext.startActivity(intent);
-                        return;
-                    }
+                    Intent intent = new Intent(mContext, ActivityReportWithDay.class);
+                    intent.putExtra("REPORT_TYPE", 4);// 4: item thống kê theo năm
+                    intent.putExtra("AMOUNT_FLOAT", mListReport.get(position).getTotalMoney());
+                    intent.putExtra("YEAR_NAME", mListReport.get(position).getDayOfMonth());
+                    intent.putExtra("MONTH_NAME", mListReport.get(position).getDayOfWeek());
+                    mContext.startActivity(intent);
                 }
             });
         } catch (Exception e) {
@@ -82,6 +82,7 @@ public class ReportMoreAdapter extends RecyclerView.Adapter<ReportMoreAdapter.Vi
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             try {
                 tvTotalReport = itemView.findViewById(R.id.tvTotalReport);
                 tvDayName = itemView.findViewById(R.id.tvDayName);

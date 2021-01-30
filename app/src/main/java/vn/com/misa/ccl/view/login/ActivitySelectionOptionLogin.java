@@ -79,8 +79,12 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/28/2021
      */
     private void receiveTypeClick() {
-        Intent intent = getIntent();
-        mTypeClick = intent.getStringExtra("TypeIntent");
+        try {
+            Intent intent = getIntent();
+            mTypeClick = intent.getStringExtra("TypeIntent");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -195,14 +199,18 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      * @created_by cvmanh on 01/28/2021
      */
     private void checkIntentScreen() {
-        if (mTypeClick.equals("ActivityManage")) {
-            Intent intent = new Intent(this, ActivityRestaurantManage.class);
-            startActivity(intent);
+        try {
+            if (mTypeClick.equals("ActivityManage")) {
+                Intent intent = new Intent(this, ActivityRestaurantManage.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+            startActivity(new Intent(this, ActivityRestaurantType.class));
             finish();
-            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        startActivity(new Intent(this, ActivityRestaurantType.class));
-        finish();
     }
 
     /**

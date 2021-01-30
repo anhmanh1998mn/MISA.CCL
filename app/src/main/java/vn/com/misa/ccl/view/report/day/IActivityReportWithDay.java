@@ -15,12 +15,16 @@ public interface IActivityReportWithDay {
 
         public void getReportTimeDay(Activity activity,String dayName);
 
+        public void getReportTimeYear(Activity activity,String startDay,String endDay);
+
     }
 
     public interface IActivityReportWithDayView{
         public void getListProductThisDaySuccess(List<OrderDetail> listOrderDetail);
 
         public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport);
+
+        public void getReportYearSuccess(List<OrderDetail> listReportYear);
 
         public void onFailed();
     }

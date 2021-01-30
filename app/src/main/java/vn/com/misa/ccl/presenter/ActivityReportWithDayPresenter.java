@@ -50,9 +50,29 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
         mActivityReportWithDayModel.getListProductReportLastDay(activity);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi model sử lý thống kê theo ngày
+     *
+     * @param activity instance activity
+     * @param dayName  ngày thống kê
+     * @created_by cvmanh on 01/30/2021
+     */
     @Override
-    public void getReportTimeDay(Activity activity,String dayName) {
-        mActivityReportWithDayModel.getReportTimeDay(activity,dayName);
+    public void getReportTimeDay(Activity activity, String dayName) {
+        mActivityReportWithDayModel.getReportTimeDay(activity, dayName);
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý thống kê theo năm
+     *
+     * @param activity instance activity
+     * @param startDay ngày bắt đầu của tháng
+     * @param endDay   ngày kết thúc của tháng
+     * @created_by cvmanh on 01/30/2021
+     */
+    @Override
+    public void getReportTimeYear(Activity activity, String startDay, String endDay) {
+        mActivityReportWithDayModel.getReportTimeYear(activity, startDay, endDay);
     }
 
     /**
@@ -75,6 +95,17 @@ public class ActivityReportWithDayPresenter implements IActivityReportWithDay.IA
     @Override
     public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport) {
         mIActivityReportWithDayView.getListProductReportLastDaySuccess(listProductReport);
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả thống kê thành công từ model và trả kết quả về view
+     *
+     * @param listReportYear danh sách thống kê theo năm
+     * @created_by cvmanh on 01/30/2021
+     */
+    @Override
+    public void getListReportWithPeroidSuccess(List<OrderDetail> listReportYear) {
+        mIActivityReportWithDayView.getReportYearSuccess(listReportYear);
     }
 
     /**

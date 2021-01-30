@@ -308,15 +308,19 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      * @created_by cvmanh on 01/28/2021
      */
     private void addNewProductInfomation() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-        if (sharedPreferences != null) {
-            mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-        } else {
-            mUnitID = 1;
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+            if (sharedPreferences != null) {
+                mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+            } else {
+                mUnitID = 1;
+            }
+            mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+            mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
+                    mPriceOut, mImageID, mUnitID, mColorID);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-        mActivityFoodUpdatePresenter.addNewFoodMenu(this, etFoodName.getText().toString(),
-                mPriceOut, mImageID, mUnitID, mColorID);
     }
 
     /**
@@ -325,20 +329,24 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      * @created_by cvmanh on 01/28/2021
      */
     private void updateProductInfomation() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
-        if (sharedPreferences != null) {
-            mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
-        } else {
-            mUnitID = 1;
-        }
-        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-        if (mTypeIntent.equals("Setup")) {
-            mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("UnitSelection", MODE_PRIVATE);
+            if (sharedPreferences != null) {
+                mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
+            } else {
+                mUnitID = 1;
+            }
+            mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+            if (mTypeIntent.equals("Setup")) {
+                mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                        mPriceOut, mImageID, mUnitID, mColorID);
+                return;
+            }
+            mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
                     mPriceOut, mImageID, mUnitID, mColorID);
-            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-                mPriceOut, mImageID, mUnitID, mColorID);
     }
 
     /**
@@ -513,9 +521,12 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void deleteItemProductMenuSuccess() {
-//        startActivity(new Intent(this, ActivityRestaurantManage.class));
-        finish();
-        Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+        try {
+            finish();
+            Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -525,9 +536,12 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void updateItemProductMenuSuccess() {
-//        startActivity(new Intent(this, ActivityRestaurantManage.class));
-        finish();
-        Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+        try {
+            finish();
+            Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -42,8 +42,8 @@
                 android:hint="@string/phone_email_account" />
 
             <ImageView
-                style="@style/Theme.Icon"
                 android:id="@+id/ivTextClearUserName"
+                style="@style/Theme.Icon"
                 android:layout_gravity="center|right"
                 android:src="@drawable/ic_close"
                 android:visibility="gone"
@@ -69,8 +69,8 @@
                 android:inputType="textPassword" />
 
             <ImageView
-                style="@style/Theme.Icon"
                 android:id="@+id/ivTextClearPassword"
+                style="@style/Theme.Icon"
                 android:src="@drawable/ic_close"
                 android:visibility="gone"
                 app:tint="@color/grey" />

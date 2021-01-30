@@ -485,14 +485,18 @@ public class ActivityFoodUpdateModel {
      * @created_by cvmanh on 01/27/2021
      */
     public void deleteItemProductMenu(Activity activity, int productID) {
-        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        long result = mSqliteDatabase.delete(DatabaseInfomation.TABLE_MYPRODUCTS, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
-                new String[]{String.valueOf(productID)});
-        if (result > 0) {
-            mIResultActivityFoodUpdate.deleteItemProductMenuSuccess();
-            return;
+        try {
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            long result = mSqliteDatabase.delete(DatabaseInfomation.TABLE_MYPRODUCTS, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
+                    new String[]{String.valueOf(productID)});
+            if (result > 0) {
+                mIResultActivityFoodUpdate.deleteItemProductMenuSuccess();
+                return;
+            }
+            mIResultActivityFoodUpdate.onFailed();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mIResultActivityFoodUpdate.onFailed();
     }
 
     /**
@@ -508,21 +512,25 @@ public class ActivityFoodUpdateModel {
      * @created_by cvmanh on 01/27/2021
      */
     public void updateItemProductMenu(Activity activity, int productId, String productName, float productPrice, int imageID, int unitID, int colorID) {
-        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
-        contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
-        contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
-        long result = mSqliteDatabase.update(DatabaseInfomation.TABLE_MYPRODUCTS,
-                contentValues, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
-                new String[]{String.valueOf(productId)});
-        if (result > 0) {
-            mIResultActivityFoodUpdate.updateItemProducrMenuSuccess();
-            return;
+        try {
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
+            contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
+            contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
+            long result = mSqliteDatabase.update(DatabaseInfomation.TABLE_MYPRODUCTS,
+                    contentValues, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
+                    new String[]{String.valueOf(productId)});
+            if (result > 0) {
+                mIResultActivityFoodUpdate.updateItemProducrMenuSuccess();
+                return;
+            }
+            mIResultActivityFoodUpdate.onFailed();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mIResultActivityFoodUpdate.onFailed();
     }
 
     /**
@@ -537,20 +545,24 @@ public class ActivityFoodUpdateModel {
      * @created_by cvmanh on 01/27/2021
      */
     public void addNewFoodMenu(Activity activity, String productName, float productPrice, int imageID, int unitID, int colorID) {
-        mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
-        contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
-        contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, 1);
-        contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
-        long result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
-        if (result > 0) {
-            mIResultActivityFoodUpdate.addNewFoodMenuSuccess();
-            return;
+        try {
+            mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, productPrice);
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, imageID);
+            contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, unitID);
+            contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, 1);
+            contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, colorID);
+            long result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
+            if (result > 0) {
+                mIResultActivityFoodUpdate.addNewFoodMenuSuccess();
+                return;
+            }
+            mIResultActivityFoodUpdate.onFailed();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mIResultActivityFoodUpdate.onFailed();
     }
 
     public interface IResultActivityFoodUpdate {

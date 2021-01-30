@@ -46,7 +46,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private RecyclerView rcvFoodReport;
 
-    private String mAmount = "", mStartDay, mEndDay,mDayName;
+    private String mAmount = "", mStartDay, mEndDay, mDayName;
 
     private ActivityReportWithDayPresenter mActivityReportWithDayPresenter;
 
@@ -54,7 +54,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private List<OrderDetail> mListProductReport;
 
-    private TextView tvBack,tvTime;
+    private TextView tvBack, tvTime;
 
     private float mTotalMoneyDay;
 
@@ -80,49 +80,88 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void onViewClickListener() {
-        tvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        try {
+            tvBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Mục đích method thực hiện kiểm tra thống kê theo tháng hay năm
-     * Nếu getIntent=2: Thống kê doanh thu theo sản phẩm theo ngày hiện tại
-     * Nếu getIntent=3: Thống kê doanh thu theo sản phẩm theo ngày của tuần
-     * Ngược lại, =1: thóng kê doanh thu theo sản phẩm theo ngày hiện tại -1 ngày
+     * Nếu loại dữ liệu nhận=2: Thống kê doanh thu theo sản phẩm theo ngày hiện tại
+     * Nếu loại dữ liệu nhận=3: Thống kê doanh thu theo sản phẩm theo ngày của tuần
+     * Nếu loại dữ liệu nhận =1: thóng kê doanh thu theo sản phẩm theo ngày hiện tại -1 ngày
+     * Nếu loại dữ liệu nhận =4: thóng kê doanh thu theo sản phẩm theo tháng của năm
      *
      * @created_by cvmanh on 01/28/2021
      */
     private void receiveAmount() {
-        Intent intent = getIntent();
-        if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
-            mAmount = intent.getStringExtra("AMOUNT");
-            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
-            tvTime.setText("Hôm nay");
-            getListProductReport();
+        try {
+            Intent intent = getIntent();
+            if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
+                mAmount = intent.getStringExtra("AMOUNT");
+                mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+                tvTime.setText("Hôm nay");
+                getListProductReport();
 
-        }else if(intent.getIntExtra("REPORT_TYPE", -1) == 1){
-            mAmount = intent.getStringExtra("AMOUNT");
-            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
-            tvTime.setText("Hôm qua");
-            getListProductReportLastDay();
-        }else {
-            mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT",-1));
-            mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
-            mDayName=intent.getStringExtra("DAY_NAME");
-            tvTime.setText(intent.getStringExtra("DAY_OF_WEEK")+" ("+mDayName+")");
-            getReportTimeDay();
+            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 1) {
+                mAmount = intent.getStringExtra("AMOUNT");
+                mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+                tvTime.setText("Hôm qua");
+                getListProductReportLastDay();
+            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 3) {
+                mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));
+                mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+                mDayName = intent.getStringExtra("DAY_NAME");
+                tvTime.setText(intent.getStringExtra("DAY_OF_WEEK") + " (" + mDayName + ")");
+                getReportTimeDay();
+            } else {
+                mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));
+                mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
+                mDayName = intent.getStringExtra("YEAR_NAME") + "-" + intent.getStringExtra("MONTH_NAME");
+                tvTime.setText("Tháng " + intent.getStringExtra("MONTH_NAME") + " (01/" +
+                        intent.getStringExtra("MONTH_NAME") + "/" + intent.getStringExtra("YEAR_NAME") + " - " +
+                        "29/" + intent.getStringExtra("MONTH_NAME") + "/" + intent.getStringExtra("YEAR_NAME") + ")");
+                getReportTimeYear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void getReportTimeDay() {
-        mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
-        mActivityReportWithDayPresenter.getReportTimeDay(this,mDayName);
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý thống kê theo năm
+     *
+     * @created_by cvmanh on 01/30/2021
+     */
+    private void getReportTimeYear() {
+        try {
+            mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
+            mActivityReportWithDayPresenter.getReportTimeYear(this, mDayName + "-01", mDayName + "-29");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý thống kê theo ngày
+     *
+     * @created_by cvmanh on 01/30/2021
+     */
+    private void getReportTimeDay() {
+        try {
+            mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
+            mActivityReportWithDayPresenter.getReportTimeDay(this, mDayName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Mục đích method thực hiện việc gọi presenter xử lý lấy danh sách thống kê theo sản phẩm
@@ -131,8 +170,12 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void getListProductReportLastDay() {
-        mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
-        mActivityReportWithDayPresenter.getListProductReportLastDay(this);
+        try {
+            mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
+            mActivityReportWithDayPresenter.getListProductReportLastDay(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -141,8 +184,12 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void initActionBar() {
-        tbReportFood = findViewById(R.id.tbReportFood);
-        setSupportActionBar(tbReportFood);
+        try {
+            tbReportFood = findViewById(R.id.tbReportFood);
+            setSupportActionBar(tbReportFood);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -151,10 +198,14 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void initView() {
-        pcReportFood = findViewById(R.id.pcReportFood);
-        rcvFoodReport = findViewById(R.id.rcvFoodReport);
-        tvBack = findViewById(R.id.tvBack);
-        tvTime=findViewById(R.id.tvTime);
+        try {
+            pcReportFood = findViewById(R.id.pcReportFood);
+            rcvFoodReport = findViewById(R.id.rcvFoodReport);
+            tvBack = findViewById(R.id.tvBack);
+            tvTime = findViewById(R.id.tvTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -164,34 +215,38 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void showPieChart() {
-        int[] colorPie = new int[]{getResources().getColor(R.color.light_bluee), getResources().getColor(R.color.green_light),
-                getResources().getColor(R.color.red), getResources().getColor(R.color.orange),
-                getResources().getColor(R.color.dark_blue), getResources().getColor(R.color.dark_blue_face),
-                getResources().getColor(R.color.light_grey)};
-        PieDataSet pieDataSet = new PieDataSet(dataValues(), "");
-        pieDataSet.setColors(colorPie);
-        pieDataSet.setSliceSpace(1f); // set khoảng trắng phân cách giữa các vùng
-        pieDataSet.setValueLinePart1Length(0.1f); // set độ dài thanh sổ chỉ data
-        pieDataSet.setValueLinePart2Length(0.6f);
+        try {
+            int[] colorPie = new int[]{getResources().getColor(R.color.light_bluee), getResources().getColor(R.color.green_light),
+                    getResources().getColor(R.color.red), getResources().getColor(R.color.orange),
+                    getResources().getColor(R.color.dark_blue), getResources().getColor(R.color.dark_blue_face),
+                    getResources().getColor(R.color.light_grey)};
+            PieDataSet pieDataSet = new PieDataSet(dataValues(), "");
+            pieDataSet.setColors(colorPie);
+            pieDataSet.setSliceSpace(1f); // set khoảng trắng phân cách giữa các vùng
+            pieDataSet.setValueLinePart1Length(0.1f); // set độ dài thanh sổ chỉ data
+            pieDataSet.setValueLinePart2Length(0.6f);
 
-        // đặt giá trị ra bên ngoài
-        pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        PieData pieData = new PieData(pieDataSet);
-        pieDataSet.setValueFormatter(new PercentFormatter(pcReportFood)); // set % cho data
-        pieData.setValueTextSize(14);
-        pieData.setValueTextColor(Color.GRAY);
-        pcReportFood.setData(pieData);
-        pcReportFood.invalidate();
-        pcReportFood.setCenterTextSize(18);
-        pcReportFood.setCenterText("Tổng \n doanh thu \n" + mAmount);
-        pcReportFood.setHoleRadius(75);
-        pcReportFood.getDescription().setEnabled(false);// set gone label
-        pcReportFood.setUsePercentValues(true); // set % cho data
-        // enable rotation of the chart by touch
-        pcReportFood.setRotationEnabled(false);
-        pcReportFood.getLegend().setEnabled(false); // ẩn ghi chú
-        pcReportFood.animateXY(1400, 1400); // set animation
+            // đặt giá trị ra bên ngoài
+            pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+            pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+            PieData pieData = new PieData(pieDataSet);
+            pieDataSet.setValueFormatter(new PercentFormatter(pcReportFood)); // set % cho data
+            pieData.setValueTextSize(14);
+            pieData.setValueTextColor(Color.GRAY);
+            pcReportFood.setData(pieData);
+            pcReportFood.invalidate();
+            pcReportFood.setCenterTextSize(18);
+            pcReportFood.setCenterText("Tổng \n doanh thu \n" + mAmount);
+            pcReportFood.setHoleRadius(75);
+            pcReportFood.getDescription().setEnabled(false);// set gone label
+            pcReportFood.setUsePercentValues(true); // set % cho data
+            // enable rotation of the chart by touch
+            pcReportFood.setRotationEnabled(false);
+            pcReportFood.getLegend().setEnabled(false); // ẩn ghi chú
+            pcReportFood.animateXY(1400, 1400); // set animation
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -202,15 +257,20 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private ArrayList<PieEntry> dataValues() {
-        ArrayList<PieEntry> daVal = new ArrayList<>();
-        for (int i = 0; i < mListProductReport.size(); i++) {
-            if (i < 7) {
-                daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
-                float a = (mListProductReport.get(i).getmProductPriceOut());
-                Log.d("aaaaa", a + "");
+        try {
+            ArrayList<PieEntry> daVal = new ArrayList<>();
+            for (int i = 0; i < mListProductReport.size(); i++) {
+                if (i < 7) {
+                    daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
+                    float a = (mListProductReport.get(i).getmProductPriceOut());
+                    Log.d("aaaaa", a + "");
+                }
             }
+            return daVal;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return daVal;
+        return null;
     }
 
     /**
@@ -219,8 +279,12 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      * @created_by cvmanh on 01/28/2021
      */
     private void getListProductReport() {
-        mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
-        mActivityReportWithDayPresenter.getListProductThisDay(this);
+        try {
+            mActivityReportWithDayPresenter = new ActivityReportWithDayPresenter(this);
+            mActivityReportWithDayPresenter.getListProductThisDay(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -232,12 +296,16 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      */
     @Override
     public void getListProductThisDaySuccess(List<OrderDetail> listOrderDetail) {
-        mListProductReport = listOrderDetail;
-        mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, listOrderDetail);
-        rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        rcvFoodReport.setAdapter(mReportWithDayAdapter);
-        mReportWithDayAdapter.notifyDataSetChanged();
-        showPieChart();
+        try {
+            mListProductReport = listOrderDetail;
+            mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, listOrderDetail);
+            rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+            rcvFoodReport.setAdapter(mReportWithDayAdapter);
+            mReportWithDayAdapter.notifyDataSetChanged();
+            showPieChart();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -249,12 +317,38 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      */
     @Override
     public void getListProductReportLastDaySuccess(List<OrderDetail> listProductReport) {
-        mListProductReport = listProductReport;
-        mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, mListProductReport);
-        rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        rcvFoodReport.setAdapter(mReportWithDayAdapter);
-        mReportWithDayAdapter.notifyDataSetChanged();
-        showPieChart();
+        try {
+            mListProductReport = listProductReport;
+            mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, mListProductReport);
+            rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+            rcvFoodReport.setAdapter(mReportWithDayAdapter);
+            mReportWithDayAdapter.notifyDataSetChanged();
+            showPieChart();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện nhận kết quả xử lý thống kê theo năm thành công
+     * Hiển thị danh sách thống kê lên view
+     * Hiển thị biểu đồ thống kê
+     *
+     * @param listReportYear danh sách thống kê theo năm
+     * @created_by cvmanh on 01/30/2021
+     */
+    @Override
+    public void getReportYearSuccess(List<OrderDetail> listReportYear) {
+        try {
+            mListProductReport = listReportYear;
+            mReportWithDayAdapter = new ReportWithDayAdapter(this, R.layout.item_report_with_day, mListProductReport);
+            rcvFoodReport.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+            rcvFoodReport.setAdapter(mReportWithDayAdapter);
+            mReportWithDayAdapter.notifyDataSetChanged();
+            showPieChart();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -264,6 +358,10 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
      */
     @Override
     public void onFailed() {
-        Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+        try {
+            Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

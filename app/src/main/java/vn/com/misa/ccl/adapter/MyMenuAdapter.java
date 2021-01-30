@@ -23,6 +23,12 @@ import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate;
 
+/**
+ * ‐ Mục đích Class thực hiện việc khởi tạo, quy định dữ liệu và cách hiển thị lên view
+ * <p>
+ * ‐ @created_by cvmanh on 01/30/2021
+ */
+
 public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder> {
 
     private Activity mContext;
@@ -59,7 +65,7 @@ public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityFoodUpdate.class);
                     Product product = mListProduct.get(position);
-                    intent.putExtra("TypeIntent","Menu");
+                    intent.putExtra("TypeIntent", "Menu");
                     intent.putExtra("Object", product);
                     mContext.startActivity(intent);
                 }

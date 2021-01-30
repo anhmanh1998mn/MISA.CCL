@@ -34,7 +34,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
 
     private TextView tvTimeThisYear, tvTimeThisMonth, tvTimeThisWeek, tvTimeThisDay, tvTimeLastDay;
 
-    private float mTotalMoneyThisDay,mTotalMoneyLastDay;
+    private float mTotalMoneyThisDay, mTotalMoneyLastDay;
 
     @Nullable
     @Override
@@ -57,16 +57,20 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      * @created_by cvmanh on 01/28/2021
      */
     private void initView(View view) {
-        llLastDay = view.findViewById(R.id.llLastDay);
-        llThisWeek = view.findViewById(R.id.llThisWeek);
-        llThisDay = view.findViewById(R.id.llThisDay);
-        llThisMonth = view.findViewById(R.id.llThisMonth);
-        llThisYear = view.findViewById(R.id.llThisYear);
-        tvTimeThisYear = view.findViewById(R.id.tvTimeThisYear);
-        tvTimeThisMonth = view.findViewById(R.id.tvTimeThisMonth);
-        tvTimeThisWeek = view.findViewById(R.id.tvTimeThisWeek);
-        tvTimeThisDay = view.findViewById(R.id.tvTimeThisDay);
-        tvTimeLastDay = view.findViewById(R.id.tvTimeLastDay);
+        try {
+            llLastDay = view.findViewById(R.id.llLastDay);
+            llThisWeek = view.findViewById(R.id.llThisWeek);
+            llThisDay = view.findViewById(R.id.llThisDay);
+            llThisMonth = view.findViewById(R.id.llThisMonth);
+            llThisYear = view.findViewById(R.id.llThisYear);
+            tvTimeThisYear = view.findViewById(R.id.tvTimeThisYear);
+            tvTimeThisMonth = view.findViewById(R.id.tvTimeThisMonth);
+            tvTimeThisWeek = view.findViewById(R.id.tvTimeThisWeek);
+            tvTimeThisDay = view.findViewById(R.id.tvTimeThisDay);
+            tvTimeLastDay = view.findViewById(R.id.tvTimeLastDay);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -75,8 +79,12 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      * @created_by cvmanh on 01/28/2021
      */
     private void processReport() {
-        mReportTimeRecently = new FragmentReportTimeRecentlyPresenter(this);
-        mReportTimeRecently.processReport(getActivity());
+        try {
+            mReportTimeRecently = new FragmentReportTimeRecentlyPresenter(this);
+            mReportTimeRecently.processReport(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -91,14 +99,18 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      */
     @Override
     public void processReportTImeRecentlySuccess(String amountYear, String amountMonth, String amountThisDay, String amountLastDay, String amountThisWeek,
-                                                 float totalMoneyThisDay,float totalMoneyLastDay) {
-        tvTimeThisYear.setText(amountYear);
-        tvTimeThisMonth.setText(amountMonth);
-        tvTimeThisDay.setText(amountThisDay);
-        tvTimeLastDay.setText(amountLastDay);
-        tvTimeThisWeek.setText(amountThisWeek);
-        mTotalMoneyThisDay=totalMoneyThisDay;
-        mTotalMoneyLastDay=totalMoneyLastDay;
+                                                 float totalMoneyThisDay, float totalMoneyLastDay) {
+        try {
+            tvTimeThisYear.setText(amountYear);
+            tvTimeThisMonth.setText(amountMonth);
+            tvTimeThisDay.setText(amountThisDay);
+            tvTimeLastDay.setText(amountLastDay);
+            tvTimeThisWeek.setText(amountThisWeek);
+            mTotalMoneyThisDay = totalMoneyThisDay;
+            mTotalMoneyLastDay = totalMoneyLastDay;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -107,8 +119,12 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      * @created_by cvmanh on 01/28/2021
      */
     private void onViewClickListener() {
-        llThisDay.setOnClickListener(this);
-        llLastDay.setOnClickListener(this);
+        try {
+            llThisDay.setOnClickListener(this);
+            llLastDay.setOnClickListener(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -119,23 +135,27 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.llThisDay: {
-                Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
-                intent.putExtra("AMOUNT", tvTimeThisDay.getText().toString());
-                intent.putExtra("AMOUNT_FLOAT", mTotalMoneyThisDay);
-                intent.putExtra("REPORT_TYPE", 2);
-                startActivity(intent);
-                break;
+        try {
+            switch (view.getId()) {
+                case R.id.llThisDay: {
+                    Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
+                    intent.putExtra("AMOUNT", tvTimeThisDay.getText().toString());
+                    intent.putExtra("AMOUNT_FLOAT", mTotalMoneyThisDay);
+                    intent.putExtra("REPORT_TYPE", 2);
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.llLastDay: {
+                    Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
+                    intent.putExtra("AMOUNT", tvTimeLastDay.getText().toString());
+                    intent.putExtra("AMOUNT_FLOAT", mTotalMoneyLastDay);
+                    intent.putExtra("REPORT_TYPE", 1);
+                    startActivity(intent);
+                    break;
+                }
             }
-            case R.id.llLastDay: {
-                Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
-                intent.putExtra("AMOUNT", tvTimeLastDay.getText().toString());
-                intent.putExtra("AMOUNT_FLOAT", mTotalMoneyLastDay);
-                intent.putExtra("REPORT_TYPE", 1);
-                startActivity(intent);
-                break;
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

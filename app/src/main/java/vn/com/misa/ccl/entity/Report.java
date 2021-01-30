@@ -1,5 +1,13 @@
 package vn.com.misa.ccl.entity;
 
+import android.app.Activity;
+
+/**
+ * ‐ Mục đích Class thực hiện khai báo Report
+ * <p>
+ * ‐ @created_by cvmanh on 01/30/2021
+ */
+
 public class Report {
 
     private int reportID;
