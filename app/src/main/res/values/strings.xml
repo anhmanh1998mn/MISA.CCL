@@ -123,4 +123,7 @@
     và thay thế bằng dữ liệu trên máy chủ</string>
     <string name="sync_now">ĐỒNG BỘ NGAY</string>
     <string name="sync_end">Đồng bộ lần cuối: <b>02/02/2021 08:23 CH</b></string>
+    <string name="register_account_error">Tài khoản, mật khẩu không được bỏ trống.\n Tài khoản
+    , mật khẩu có độ dài trên 6 ký tự</string>
+    <string name="login_failed">Tài khoản hoặc mật khẩu không đúng</string>
 </resources>

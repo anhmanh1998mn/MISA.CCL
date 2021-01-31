@@ -6,9 +6,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.security.NoSuchAlgorithmException;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.presenter.ActivityAccountPresenter;
 
 /**
  * ‐ Mục đích Class thực hiện những việc đăng ký tài khoản mới
@@ -17,11 +23,17 @@ import vn.com.misa.ccl.R;
  * ‐ @created_by cvmanh on 01/07/2021
  */
 
-public class ActivityAccountRegister extends AppCompatActivity implements View.OnClickListener {
+public class ActivityAccountRegister extends AppCompatActivity implements View.OnClickListener, IActivityAccountRegister.IActivityAccountRegisterView {
 
     private TextView tvTermOfService;
 
-    private TextView tvBack;
+    private TextView tvBack, tvNext;
+
+    private EditText etUserName, etPassword;
+
+    private Button btnRegister;
+
+    private ActivityAccountPresenter mActivityAccountPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,10 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
         try {
             tvTermOfService = findViewById(R.id.tvTermOfService);
             tvBack = findViewById(R.id.tvBack);
+            etPassword = findViewById(R.id.etPassword);
+            etUserName = findViewById(R.id.etUserName);
+            btnRegister = findViewById(R.id.btnRegister);
+            tvNext = findViewById(R.id.tvNext);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,6 +72,8 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
         try {
             tvTermOfService.setOnClickListener(this);
             tvBack.setOnClickListener(this);
+            btnRegister.setOnClickListener(this);
+            tvNext.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,9 +98,50 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
                     finish();
                     break;
                 }
+                case R.id.btnRegister: {
+                    doRegisterUser();
+                    break;
+                }
+                case R.id.tvNext: {
+                    doRegisterUser();
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý đăng ký tài khoản người dùng
+     *
+     * @created_by cvmanh on 01/31/2021
+     */
+    private void doRegisterUser() throws NoSuchAlgorithmException {
+        mActivityAccountPresenter = new ActivityAccountPresenter(this);
+        mActivityAccountPresenter.doRegisterAccount(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
+
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả đăng ký thành công từ presenter và hiện thông báo
+     *
+     * @created_by cvmanh on 01/31/2021
+     */
+    @Override
+    public void registerAccountSuccess() {
+        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả đăng ký thất bại từ presenter và hiện thông báo
+     *
+     * @created_by cvmanh on 01/31/2021
+     */
+    @Override
+    public void onFailed() {
+        Toast.makeText(this, getResources().getString(R.string.register_account_error), Toast.LENGTH_LONG).show();
+        etUserName.requestFocus();
     }
 }

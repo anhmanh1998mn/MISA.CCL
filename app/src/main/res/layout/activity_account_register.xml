@@ -51,6 +51,8 @@
         android:text="@string/phone_email_account" />
 
     <EditText
+        android:inputType="textEmailAddress"
+        android:id="@+id/etUserName"
         style="@style/Theme.FontText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +66,8 @@
         android:text="@string/password" />
 
     <EditText
+        android:inputType="textPassword"
+        android:id="@+id/etPassword"
         style="@style/Theme.FontText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,6 +80,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btnRegister"
             style="@style/Theme.FontText"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_next"

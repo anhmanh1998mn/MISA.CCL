@@ -213,6 +213,10 @@ public class ActivityBillModel {
                 }
                 case "ĐỒNG Ý": {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                    if (Float.parseFloat(numberEnter) < amount) {
+                        mIActivityBillModel.onFailed();
+                        return;
+                    }
                     mIActivityBillModel.resultSuccess(decimalFormat.format(Float.parseFloat(numberEnter) - amount));
                     break;
                 }

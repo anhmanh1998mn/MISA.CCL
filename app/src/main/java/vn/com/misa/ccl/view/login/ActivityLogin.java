@@ -7,13 +7,19 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.security.NoSuchAlgorithmException;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.presenter.ActivityLoginPresenter;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
 
 /**
  * ‐ Mục đích Class thực hiện việc đăng nhập bằng tài khoản đã được đăng ký
@@ -21,7 +27,7 @@ import vn.com.misa.ccl.util.AndroidDeviceHelper;
  * ‐ @created_by cvmanh on 01/07/2021
  */
 
-public class ActivityLogin extends AppCompatActivity implements View.OnClickListener {
+public class ActivityLogin extends AppCompatActivity implements View.OnClickListener, IActivityLogin.IActivityLoginView {
 
     private EditText etUserName, etPassword;
 
@@ -32,6 +38,10 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     private ImageView ivTextClearUserName, ivTextClearPassword, ivBack, ivClose;
 
     private Dialog mDialogForgotPassword;
+
+    private Button btnLogin;
+
+    private ActivityLoginPresenter mActivityLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             ivTextClearUserName = findViewById(R.id.ivTextClearUserName);
             ivTextClearPassword = findViewById(R.id.ivTextClearPassword);
             ivBack = findViewById(R.id.ivBack);
+            btnLogin = findViewById(R.id.btnLogin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,6 +85,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             ivAppInformation.setOnClickListener(this);
             tvForgotPassword.setOnClickListener(this);
             ivBack.setOnClickListener(this);
+            btnLogin.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,10 +117,19 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                     mDialogForgotPassword.dismiss();
                     break;
                 }
+                case R.id.btnLogin: {
+                    doLoginApp();
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void doLoginApp() throws NoSuchAlgorithmException {
+        mActivityLoginPresenter = new ActivityLoginPresenter(this);
+        mActivityLoginPresenter.doLoginApp(etUserName.getText().toString(), etPassword.getText().toString());
     }
 
     /**
@@ -157,5 +178,28 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả đăng nhập thành công từ presenter và hiện thông báo
+     *
+     * @created_by cvmanh on 01/31/2021
+     */
+    @Override
+    public void loginSuccess() {
+        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, ActivityRestaurantType.class));
+        finish();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả đăng nhập thất bại từ presenter và hiện thông báo
+     *
+     * @created_by cvmanh on 01/31/2021
+     */
+    @Override
+    public void onFailed() {
+        etUserName.requestFocus();
+        Toast.makeText(this, getResources().getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
     }
 }
