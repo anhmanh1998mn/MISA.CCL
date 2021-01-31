@@ -43,6 +43,8 @@ public class ActivityBillModel {
 
     private String resultNumberEnter = "0";
 
+    private int ORDER_STATUS_SUCCESS=2;
+
     /**
      * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
      *
@@ -261,7 +263,7 @@ public class ActivityBillModel {
         try {
             mSqLiteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             ContentValues contentValues = new ContentValues();
-            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS, 2); // 2: trạng thái order là đã thu tiền
+            contentValues.put(DatabaseInfomation.COLUMN_ORDER_STATUS, ORDER_STATUS_SUCCESS); // 2: trạng thái order là đã thu tiền
             long result = mSqLiteDatabase.update(DatabaseInfomation.TABLE_ORDERS, contentValues,
                     DatabaseInfomation.COLUMN_ORDER_ID + "=?", new String[]{String.valueOf(orderID)});
             if (result > 0) {

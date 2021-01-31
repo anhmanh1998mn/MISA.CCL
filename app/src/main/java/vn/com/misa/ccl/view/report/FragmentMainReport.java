@@ -29,6 +29,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -102,6 +105,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
     private LineChart lcReportFoodLineChart;
 
     private ReportWithYearAdapter mReportWithYearAdapter;
+
+    private int numberOfDay = 7;
 
     @Nullable
     @Override
@@ -827,7 +832,6 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 if (i < 7) {
                     daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
                     float a = (mListProductReport.get(i).getmProductPriceOut());
-                    Log.d("aaaaa", a + "");
                 }
             }
             return daVal;
@@ -850,6 +854,15 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             LineData lineData = new LineData(dataSets);
             lcReportFoodLineChart.setData(lineData);
 
+            lineDataSet.setDrawValues(false); // ẩn dữ liệu hiển thị
+            //remove value bên phải biểu đồ
+            YAxis rightAxis = lcReportFoodLineChart.getAxisRight();
+            rightAxis.setEnabled(false);
+
+            // remove đường kẻ dọc trong biểu đồ
+            XAxis xAxis = lcReportFoodLineChart.getXAxis();
+//            xAxis.setEnabled(false);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);// đặt trục ox dưới cùng
             // set đường vẽ và hình tròn màu xanh
             lineDataSet.setColor(getResources().getColor(R.color.green_light));
             lineDataSet.setCircleColor(getResources().getColor(R.color.green_light));
@@ -873,7 +886,13 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         try {
             ArrayList<Entry> dataValue = new ArrayList<>();
             for (int i = 0; i < mListReport.size(); i++) {
-                dataValue.add(new Entry(i + 1, mListReport.get(i).getTotalMoney() / 1000));
+                if (mListReport.size() > numberOfDay) {
+                    dataValue.add(new Entry(i + 1, mListReport.get(i).getTotalMoney() / 1000));
+
+                } else {
+                    dataValue.add(new Entry(i + 2, mListReport.get(i).getTotalMoney() / 1000));
+                }
+
             }
             return dataValue;
         } catch (Exception e) {
@@ -898,17 +917,17 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                 mFragmentMainReportPresenter.getReportLineChart(getActivity(), "ThisWeek");
                 llReportLine.setVisibility(View.VISIBLE);
                 frmMainReportContent.setVisibility(View.GONE);
-                tvOptionReport.setText("Tuần này");
+                tvOptionReport.setText(getResources().getString(R.string.time_this_week));
             } else if (typeClick.equals("ThisMonth")) {
                 mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(), "ThisMonth");
                 llReportLine.setVisibility(View.VISIBLE);
                 frmMainReportContent.setVisibility(View.GONE);
-                tvOptionReport.setText("Tháng này");
+                tvOptionReport.setText(getResources().getString(R.string.time_this_month));
             } else {
                 mFragmentMainReportPresenter.getReportLineChartWithYear(getActivity(), "ThisYear");
                 llReportLine.setVisibility(View.VISIBLE);
                 frmMainReportContent.setVisibility(View.GONE);
-                tvOptionReport.setText("Năm nay");
+                tvOptionReport.setText(getResources().getString(R.string.time_this_year));
             }
         } catch (Exception e) {
             e.printStackTrace();

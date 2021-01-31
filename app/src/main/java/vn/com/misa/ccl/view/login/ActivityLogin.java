@@ -187,7 +187,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void loginSuccess() {
-        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, ActivityRestaurantType.class));
         finish();
     }

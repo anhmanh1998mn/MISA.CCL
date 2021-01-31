@@ -294,7 +294,7 @@ public class ActivitySelectionOptionLogin extends AppCompatActivity implements V
      */
     @Override
     public void signInFail() {
-        Toast.makeText(this, "Sign-in Failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
     }
 
     /**

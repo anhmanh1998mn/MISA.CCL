@@ -275,7 +275,6 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
                 if (i < 7) {
                     daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
                     float a = (mListProductReport.get(i).getmProductPriceOut());
-                    Log.d("aaaaa", a + "");
                 }
             }
             return daVal;

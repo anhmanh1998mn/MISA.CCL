@@ -112,9 +112,9 @@ public class ActivityAccountRegisterModel {
     private String encodeMD5(String password) throws NoSuchAlgorithmException {
         try {
             String result = "";
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            BigInteger bigInteger = new BigInteger(1, md.digest());
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(password.getBytes());
+            BigInteger bigInteger = new BigInteger(1, messageDigest.digest());
             result = bigInteger.toString(16);
             return result;
         } catch (Exception e) {

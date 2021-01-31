@@ -130,7 +130,7 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      */
     @Override
     public void registerAccountSuccess() {
-        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.register_success), Toast.LENGTH_SHORT).show();
         finish();
     }
 

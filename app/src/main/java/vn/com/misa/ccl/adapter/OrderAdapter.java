@@ -41,6 +41,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     private String ORDER_ID = "ORDER_ID";
 
+    private String TABLE_NAME="TABLE_NAME";
+
+    private String TOTAL_NUMBER="TOTAL_NUMBER";
+
+    private String AMOUNT="AMOUNT";
+
     private ICLickButtonRemove mICLickButtonRemove;
 
     public ICLickButtonRemove getmICLickButtonRemove() {
@@ -106,9 +112,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityOrder.class);
                     intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getmOrder().getOrderId());
-                    intent.putExtra("TABLE_NAME", mListOrderDetail.get(position).getmOrder().getTableName());
-                    intent.putExtra("TOTAL_NUMBER", mListOrderDetail.get(position).getmOrder().getTotalPeople());
-                    intent.putExtra("AMOUNT", mListOrderDetail.get(position).getmOrder().getTotalMoney());
+                    intent.putExtra(TABLE_NAME, mListOrderDetail.get(position).getmOrder().getTableName());
+                    intent.putExtra(TOTAL_NUMBER, mListOrderDetail.get(position).getmOrder().getTotalPeople());
+                    intent.putExtra(AMOUNT, mListOrderDetail.get(position).getmOrder().getTotalMoney());
                     Common.ORDER_ID = mListOrderDetail.get(position).getmOrder().getOrderId();
                     mContext.startActivity(intent);
                 }

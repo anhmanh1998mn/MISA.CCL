@@ -44,6 +44,12 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
     private List<ProductCategory> mListProductCategory;
 
+    private String TYPE_INTENT="TypeIntent";
+
+    private String OBJECT_INTENT="Object";
+
+    private String TYPE_INTENT_DATA="Setup";
+
     public ProductCategoryAdapter(Activity mContext, int mLayout, List<ProductCategory> mListProductCategory) {
         this.mContext = mContext;
         this.mLayout = mLayout;
@@ -72,8 +78,8 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityFoodUpdate.class);
                     ProductCategory productCategory = mListProductCategory.get(position);
-                    intent.putExtra("TypeIntent", "Setup");
-                    intent.putExtra("Object", productCategory);
+                    intent.putExtra(TYPE_INTENT, TYPE_INTENT_DATA);
+                    intent.putExtra(OBJECT_INTENT, productCategory);
                     mContext.startActivity(intent);
                 }
             });

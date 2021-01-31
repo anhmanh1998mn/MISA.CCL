@@ -46,6 +46,8 @@ public class ActivityFoodUpdateModel {
 
     private List<Float> mListNumber;
 
+    private int TEXT_MAX_LENGHT=17;
+
     /**
      * Mục đích method thực hiện việc xử lý lấy danh sách màu và gửi tới presenter
      *
@@ -294,7 +296,7 @@ public class ActivityFoodUpdateModel {
             if (numberEnter.contains("+") || numberEnter.contains("-")) {
                 resultNumberEnter = numberEnter + (nameItemClick);
                 mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
-            } else if (numberEnter.length() < 17) {
+            } else if (numberEnter.length() < TEXT_MAX_LENGHT) { //17: độ ài của chuỗi
                 resultNumberEnter = numberEnter + (nameItemClick);
                 mIResultActivityFoodUpdate.resultTextEnter(resultNumberEnter);
                 return;

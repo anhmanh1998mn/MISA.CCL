@@ -90,7 +90,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
     private void receiveCategoryID() {
         try {
             Intent intent = getIntent();
-            mCategoryID = intent.getIntExtra("ab", -1);
+            mCategoryID = intent.getIntExtra("CATEGORY_ID", -1);
             Common.CATEGORY_ID = mCategoryID;
         } catch (Exception e) {
             e.printStackTrace();

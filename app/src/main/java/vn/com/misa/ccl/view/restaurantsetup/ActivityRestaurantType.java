@@ -45,7 +45,7 @@ public class ActivityRestaurantType extends AppCompatActivity implements View.On
 
     private int CATEGORY_ID = 1;
 
-    private String CATEGORY_INTENT = "ab";
+    private String CATEGORY_INTENT = "CATEGORY_ID";
 
     private String PRODUCT_ID = "PRODUCT_ID";
 

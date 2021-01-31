@@ -37,6 +37,12 @@ public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder
 
     private List<Product> mListProduct;
 
+    private String INTENT_TYPE="TypeIntent";
+
+    private String INTENT_DATA_OBJECT="Object";
+
+    private String INTENT_MENU="Menu";
+
     public MyMenuAdapter(Activity mContext, int mLayout, List<Product> mListProduct) {
         this.mContext = mContext;
         this.mLayout = mLayout;
@@ -65,8 +71,8 @@ public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityFoodUpdate.class);
                     Product product = mListProduct.get(position);
-                    intent.putExtra("TypeIntent", "Menu");
-                    intent.putExtra("Object", product);
+                    intent.putExtra(INTENT_TYPE, INTENT_MENU);
+                    intent.putExtra(INTENT_DATA_OBJECT, product);
                     mContext.startActivity(intent);
                 }
             });
