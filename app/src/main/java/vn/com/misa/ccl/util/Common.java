@@ -14,4 +14,18 @@ public class Common {
     public static int CATEGORY_ID = 0;
 
     public static int PRODUCT_UNIT_ID = 0;
+
+    public static String MONDAY="Thứ 2";
+
+    public static String TUESDAY="Thứ 3";
+
+    public static String WEDNESDAY="Thứ 4";
+
+    public static String THURSDAY="Thứ 5";
+
+    public static String FRIDAY="Thứ 6";
+
+    public static String SATURDAY="Thứ 7";
+
+    public static String SUNDAY="Chủ nhật";
 }

@@ -16,6 +16,7 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.Report;
 import vn.com.misa.ccl.entity.Unit;
+import vn.com.misa.ccl.util.Common;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
@@ -44,6 +45,10 @@ public class FragmentMainReportModel {
     private List<OrderDetail> mListProductWithDay;
 
     private Cursor cursor4, cursor1, cursorYear;
+
+    private String dayOfMonth = "1";
+
+    private int endDayOffMonth = 0;
 
     /**
      * Mục đích method thực hiện việc xử lý lấy dữ liệu thống kê theo khoảng thời gian và gửi kết quả
@@ -168,13 +173,13 @@ public class FragmentMainReportModel {
     private void insertDataListReport() {
         try {
             mListReportDayOfWeek = new ArrayList<>();
-            mListReportDayOfWeek.add(new Report(1, "Thứ 2", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Thứ 3", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Thứ 4", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Thứ 5", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Thứ 6", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Thứ 7", "1", 0));
-            mListReportDayOfWeek.add(new Report(1, "Chủ nhật", "1", 0));
+            mListReportDayOfWeek.add(new Report(1, Common.MONDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.TUESDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.WEDNESDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.THURSDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.FRIDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.SATURDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.SUNDAY, dayOfMonth, 0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -193,6 +198,9 @@ public class FragmentMainReportModel {
             splitDateTime();
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             if (typeClick.equals("ThisMonth")) {
+
+                //lấy ngày cuối cùng của tháng hiện tại
+                getEndDayOfThisMonth();
                 cursor1 = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
                         "strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thang" +
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
@@ -210,11 +218,13 @@ public class FragmentMainReportModel {
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
                         DatabaseInfomation.COLUMN_ORDER_CREATED_AT + " FROM " + DatabaseInfomation.TABLE_ORDERS + " " +
-                        "WHERE strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")='" + lastMonth + "' AND " +
+                        "WHERE strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")=strftime('%m','now','-20 days') AND " +
                         "strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")='" + mListDateTimeSplit[0] + "' AND " +
                         DatabaseInfomation.COLUMN_ORDER_STATUS + "=2" +
 
                         " GROUP BY strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
+                //lấy ngày cuối cùng của tháng trước
+                getEndDayOfLastMonth();
             }
             insertDatatoListReport();
             for (int i = 0; i < cursor1.getCount(); i++) {
@@ -243,6 +253,27 @@ public class FragmentMainReportModel {
     }
 
     /**
+     * Mục đích method thực hiện việc xử lý lấy ngàu cuối cùng của tháng hiện tại -1 tháng ( tháng trước)
+     *
+     * @created_by cvmanh on 02/01/2021
+     */
+    private void getEndDayOfLastMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        endDayOffMonth = calendar.getActualMaximum(Calendar.DATE);
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý lấy ngàu cuối cùng của tháng hiện tại
+     *
+     * @created_by cvmanh on 02/01/2021
+     */
+    private void getEndDayOfThisMonth() {
+        Calendar calendar = Calendar.getInstance();
+        endDayOffMonth = calendar.getActualMaximum(Calendar.DATE);
+    }
+
+    /**
      * Mục đích method thực hiện việc khởi tạo danh sách thống kê ban đầu theo các ngày trong tháng
      *
      * @created_by cvmanh on 01/30/2021
@@ -250,7 +281,7 @@ public class FragmentMainReportModel {
     private void insertDatatoListReport() {
         try {
             mListReportDayOfWeek = new ArrayList<>();
-            for (int i = 1; i < 31; i++) {
+            for (int i = 1; i <= endDayOffMonth; i++) {
                 if (i < 10) {
                     mListReportDayOfWeek.add(new Report(i, "Ngày 0" + i, "0", 0));
                 } else {
