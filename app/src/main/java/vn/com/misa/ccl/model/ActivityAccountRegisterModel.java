@@ -25,7 +25,7 @@ public class ActivityAccountRegisterModel {
 
     private IActivityRegisterModel mIActivityRegisterModel;
 
-    private int MAX_LENGHT_TEXT = 6;
+    private final int MAX_LENGHT_TEXT = 6;
 
     public ActivityAccountRegisterModel(IActivityRegisterModel mIActivityRegisterModel) {
         this.mIActivityRegisterModel = mIActivityRegisterModel;

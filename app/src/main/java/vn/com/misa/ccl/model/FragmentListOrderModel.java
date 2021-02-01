@@ -35,7 +35,7 @@ public class FragmentListOrderModel {
 
     private List<OrderDetail> mListOrderDetail;
 
-    private int ORDER_UN_SUCCESS = 1;
+    private final int ORDER_UN_SUCCESS = 1;
 
     /**
      * Mục đích method thực hiện việc lấy danh sách Order từ database rồi gửi kết quả về presenter

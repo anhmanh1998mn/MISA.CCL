@@ -44,11 +44,11 @@ public class FragmentMainReportModel {
 
     private List<OrderDetail> mListProductWithDay;
 
-    private Cursor cursor4, cursor1, cursorYear;
+    private Cursor mCursorWithWeek, mCursorWithMonth, mCursorWithYear;
 
-    private String dayOfMonth = "1";
+    private String mDayOfMonth = "1";
 
-    private int endDayOffMonth = 0;
+    private int mEndDayOfMonth = 0;
 
     /**
      * Mục đích method thực hiện việc xử lý lấy dữ liệu thống kê theo khoảng thời gian và gửi kết quả
@@ -118,7 +118,7 @@ public class FragmentMainReportModel {
             splitDateTime();
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             if (typeClick.equals("ThisWeek")) {
-                cursor4 = mSqliteDatabase.rawQuery("SELECT strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Tuan, " +
+                mCursorWithWeek = mSqliteDatabase.rawQuery("SELECT strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Tuan, " +
                         "SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
                         "strftime('%w'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thu," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
@@ -129,7 +129,7 @@ public class FragmentMainReportModel {
                         "GROUP BY strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
                 insertDataListReport();
             } else {
-                cursor4 = mSqliteDatabase.rawQuery("SELECT strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Tuan, " +
+                mCursorWithWeek = mSqliteDatabase.rawQuery("SELECT strftime('%W'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Tuan, " +
                         "SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
                         "strftime('%w'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thu," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
@@ -140,13 +140,13 @@ public class FragmentMainReportModel {
                         "GROUP BY strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
                 insertDataListReport();
             }
-            for (int i = 0; i < cursor4.getCount(); i++) {
-                cursor4.moveToPosition(i);
-                float amount = cursor4.getFloat(cursor4.getColumnIndex("Tong"));
+            for (int i = 0; i < mCursorWithWeek.getCount(); i++) {
+                mCursorWithWeek.moveToPosition(i);
+                float amount = mCursorWithWeek.getFloat(mCursorWithWeek.getColumnIndex("Tong"));
                 for (int j = 0; j < mListReportDayOfWeek.size(); j++) {
-                    if (("Thứ " + (Integer.parseInt(cursor4.getString(cursor4.getColumnIndex("Thu"))) + 1)).equals(mListReportDayOfWeek.get(j).getDayOfWeek()) ||
-                            ((Integer.parseInt(cursor4.getString(cursor4.getColumnIndex("Thu"))) + 1)) == 8) {
-                        mListReportDayOfWeek.get(j).setDayOfMonth(cursor4.getString(cursor4.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)));
+                    if (("Thứ " + (Integer.parseInt(mCursorWithWeek.getString(mCursorWithWeek.getColumnIndex("Thu"))) + 1)).equals(mListReportDayOfWeek.get(j).getDayOfWeek()) ||
+                            ((Integer.parseInt(mCursorWithWeek.getString(mCursorWithWeek.getColumnIndex("Thu"))) + 1)) == 8) {
+                        mListReportDayOfWeek.get(j).setDayOfMonth(mCursorWithWeek.getString(mCursorWithWeek.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)));
                         mListReportDayOfWeek.get(j).setTotalMoney(amount);
                     }
                 }
@@ -173,13 +173,13 @@ public class FragmentMainReportModel {
     private void insertDataListReport() {
         try {
             mListReportDayOfWeek = new ArrayList<>();
-            mListReportDayOfWeek.add(new Report(1, Common.MONDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.TUESDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.WEDNESDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.THURSDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.FRIDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.SATURDAY, dayOfMonth, 0));
-            mListReportDayOfWeek.add(new Report(1, Common.SUNDAY, dayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.MONDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.TUESDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.WEDNESDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.THURSDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.FRIDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.SATURDAY, mDayOfMonth, 0));
+            mListReportDayOfWeek.add(new Report(1, Common.SUNDAY, mDayOfMonth, 0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,7 +201,7 @@ public class FragmentMainReportModel {
 
                 //lấy ngày cuối cùng của tháng hiện tại
                 getEndDayOfThisMonth();
-                cursor1 = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
+                mCursorWithMonth = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
                         "strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thang" +
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
@@ -213,7 +213,7 @@ public class FragmentMainReportModel {
                         " GROUP BY strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
             } else {
                 int lastMonth = Integer.parseInt(mListDateTimeSplit[1]) - 1;
-                cursor1 = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
+                mCursorWithMonth = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
                         "strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thang" +
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong," +
                         "strftime('%d'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Ngay," +
@@ -227,13 +227,13 @@ public class FragmentMainReportModel {
                 getEndDayOfLastMonth();
             }
             insertDatatoListReport();
-            for (int i = 0; i < cursor1.getCount(); i++) {
-                cursor1.moveToPosition(i);
-                float amount = cursor1.getFloat(cursor1.getColumnIndex("Tong"));
+            for (int i = 0; i < mCursorWithMonth.getCount(); i++) {
+                mCursorWithMonth.moveToPosition(i);
+                float amount = mCursorWithMonth.getFloat(mCursorWithMonth.getColumnIndex("Tong"));
                 Log.d("TongThang", amount + "");
                 for (int j = 0; j < mListReportDayOfWeek.size(); j++) {
-                    if (("Ngày " + (cursor1.getString(cursor1.getColumnIndex("Ngay")))).equals(mListReportDayOfWeek.get(j).getDayOfWeek())) {
-                        mListReportDayOfWeek.get(j).setDayOfMonth(cursor1.getString(cursor1.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)));
+                    if (("Ngày " + (mCursorWithMonth.getString(mCursorWithMonth.getColumnIndex("Ngay")))).equals(mListReportDayOfWeek.get(j).getDayOfWeek())) {
+                        mListReportDayOfWeek.get(j).setDayOfMonth(mCursorWithMonth.getString(mCursorWithMonth.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)));
                         mListReportDayOfWeek.get(j).setTotalMoney(amount);
                     }
                 }
@@ -260,7 +260,7 @@ public class FragmentMainReportModel {
     private void getEndDayOfLastMonth() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
-        endDayOffMonth = calendar.getActualMaximum(Calendar.DATE);
+        mEndDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
     }
 
     /**
@@ -270,7 +270,7 @@ public class FragmentMainReportModel {
      */
     private void getEndDayOfThisMonth() {
         Calendar calendar = Calendar.getInstance();
-        endDayOffMonth = calendar.getActualMaximum(Calendar.DATE);
+        mEndDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
     }
 
     /**
@@ -281,7 +281,7 @@ public class FragmentMainReportModel {
     private void insertDatatoListReport() {
         try {
             mListReportDayOfWeek = new ArrayList<>();
-            for (int i = 1; i <= endDayOffMonth; i++) {
+            for (int i = 1; i <= mEndDayOfMonth; i++) {
                 if (i < 10) {
                     mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_ONE + i, "0", Common.sTotalMoney));
                 } else {
@@ -307,7 +307,7 @@ public class FragmentMainReportModel {
             mListReportDayOfWeek = new ArrayList<>();
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             if (typeClick.equals("ThisYear")) {
-                cursorYear = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
+                mCursorWithYear = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
                         "strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thang" +
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong FROM " + DatabaseInfomation.TABLE_ORDERS + " " +
                         "WHERE strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")='" + mListDateTimeSplit[0] + "' AND " +
@@ -316,7 +316,7 @@ public class FragmentMainReportModel {
                         " GROUP BY strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
             } else {
                 int lastYear = Integer.parseInt(mListDateTimeSplit[0]) - 1;
-                cursorYear = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
+                mCursorWithYear = mSqliteDatabase.rawQuery("SELECT strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Nam," +
                         "strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ") as Thang" +
                         ",SUM(" + DatabaseInfomation.COLUM_ORDER_AMOUNT + ") as Tong FROM " + DatabaseInfomation.TABLE_ORDERS + " " +
                         "WHERE strftime('%Y'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")='" + lastYear + "' AND " +
@@ -324,12 +324,12 @@ public class FragmentMainReportModel {
 
                         " GROUP BY strftime('%m'," + DatabaseInfomation.COLUMN_ORDER_CREATED_AT + ")", null);
             }
-            for (int i = 0; i < cursorYear.getCount(); i++) {
-                cursorYear.moveToPosition(i);
+            for (int i = 0; i < mCursorWithYear.getCount(); i++) {
+                mCursorWithYear.moveToPosition(i);
 //            Log.d("year",cursorYear.getFloat(cursorYear.getColumnIndex("Tong"))+"");
-                mListReportDayOfWeek.add(new Report(i + 1, cursorYear.getString(cursorYear.getColumnIndex("Thang")),
-                        cursorYear.getString(cursorYear.getColumnIndex("Nam")),
-                        cursorYear.getFloat(cursorYear.getColumnIndex("Tong"))));
+                mListReportDayOfWeek.add(new Report(i + 1, mCursorWithYear.getString(mCursorWithYear.getColumnIndex("Thang")),
+                        mCursorWithYear.getString(mCursorWithYear.getColumnIndex("Nam")),
+                        mCursorWithYear.getFloat(mCursorWithYear.getColumnIndex("Tong"))));
             }
             if (mListReportDayOfWeek.size() == 0) {
                 mIFragmentMainReportModel.getReportDataNull();

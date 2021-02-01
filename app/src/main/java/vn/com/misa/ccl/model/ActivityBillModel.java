@@ -43,7 +43,7 @@ public class ActivityBillModel {
 
     private String resultNumberEnter = "0";
 
-    private int ORDER_STATUS_SUCCESS=2;
+    private final int ORDER_STATUS_SUCCESS=2;
 
     /**
      * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
