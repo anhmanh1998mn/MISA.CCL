@@ -1,6 +1,4 @@
-package vn.com.misa.ccl.Service;
-
-import android.app.Activity;
+package vn.com.misa.ccl.service;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

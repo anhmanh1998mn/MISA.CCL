@@ -1,7 +1,5 @@
 package vn.com.misa.ccl.model;
 
-import android.app.Activity;
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,8 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.com.misa.ccl.Service.APIService;
-import vn.com.misa.ccl.Service.IDataService;
+import vn.com.misa.ccl.service.APIService;
+import vn.com.misa.ccl.service.IDataService;
 
 /**
  * ‐ Mục đích Class thực hiện việc xử lý các yêu cầu từ ActivityLoginPresenter truyền sang

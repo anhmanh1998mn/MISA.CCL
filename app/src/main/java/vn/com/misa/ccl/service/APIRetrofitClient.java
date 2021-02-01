@@ -1,4 +1,4 @@
-package vn.com.misa.ccl.Service;
+package vn.com.misa.ccl.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

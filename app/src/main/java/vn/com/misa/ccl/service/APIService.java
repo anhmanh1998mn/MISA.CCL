@@ -1,4 +1,4 @@
-package vn.com.misa.ccl.Service;
+package vn.com.misa.ccl.service;
 
 /**
  * ‐ Mục đích Class thực hiện việc kết nối retrofit với server
