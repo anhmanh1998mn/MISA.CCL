@@ -47,7 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
-                    android:drawableTop="@drawable/ic_plus"
+                    android:drawableTop="@drawable/ic_menu_plus"
                     android:paddingTop="@dimen/margin" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.8"
-                    android:drawableTop="@drawable/ic_plus"
+                    android:drawableTop="@drawable/ic_menu_plus"
                     android:paddingTop="@dimen/margin"
                     android:visibility="gone" />
 

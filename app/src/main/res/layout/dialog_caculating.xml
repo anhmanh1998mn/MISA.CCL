@@ -28,7 +28,7 @@
             android:layout_height="@dimen/margin"
             android:layout_gravity="right|center"
             android:layout_marginRight="@dimen/height_largee"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_dialog_close" />
     </FrameLayout>
 
     <TextView

@@ -28,7 +28,7 @@
             android:layout_height="@dimen/notification"
             android:layout_gravity="right|center"
             android:layout_marginRight="@dimen/margin_right_small"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_dialog_close" />
     </FrameLayout>
 
     <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_width="@dimen/height_largee"
                 android:layout_height="@dimen/size_larg"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_back_keyboard" />
+                android:src="@drawable/ic_dialog_back_keyboard" />
         </FrameLayout>
 
     </LinearLayout>

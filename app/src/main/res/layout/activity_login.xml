@@ -12,7 +12,7 @@
         style="@style/Theme.IconMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_menu_back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
@@ -45,7 +45,7 @@
                 android:id="@+id/ivTextClearUserName"
                 style="@style/Theme.Icon"
                 android:layout_gravity="center|right"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_dialog_close"
                 android:visibility="gone"
                 app:tint="@color/grey" />
         </FrameLayout>
@@ -71,7 +71,7 @@
             <ImageView
                 android:id="@+id/ivTextClearPassword"
                 style="@style/Theme.Icon"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_dialog_close"
                 android:visibility="gone"
                 app:tint="@color/grey" />
         </FrameLayout>
