@@ -66,12 +66,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            holder.tvCategoryName.setText(mListCategory.get(position).getmCategoryName());
+            holder.tvCategoryName.setText(mListCategory.get(position).getCategoryName());
             holder.clRestaurantType.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mIItemClickListener != null) {
-                        mIItemClickListener.onClickListener(mListCategory.get(position).getmCategoryID());
+                        mIItemClickListener.onClickListener(mListCategory.get(position).getCategoryID());
                     }
                     if (clCheck != null && ivCheck != null) {
                         ivCheck.setVisibility(View.GONE);

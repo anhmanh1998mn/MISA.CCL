@@ -3,7 +3,6 @@ package vn.com.misa.ccl.view.restaurantsetup;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,12 +33,8 @@ import vn.com.misa.ccl.adapter.ProductImageAdapter;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.ProductImage;
-import vn.com.misa.ccl.model.ActivityRestaurantMenuModel;
 import vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
-import vn.com.misa.ccl.util.Common;
-import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
-import vn.com.misa.ccl.view.rmenu.FragmentMenu;
 
 /**
  * ‐ Mục đích Class thực hiện các công việc trong ActivityFoodUpdate
@@ -70,7 +65,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private ColorAdapter mColorAdapter;
 
-    private Dialog mDialogColor, mDialogImage, mDialogCaculate;
+    private Dialog dlgColor, dlgImage, dlgCaculate;
 
     private ProductImageAdapter mProductImageAdapter;
 
@@ -119,48 +114,48 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             mTypeIntent = intent.getStringExtra("TypeIntent");
             if (mTypeIntent.equals("Setup")) {
                 mProductCategory = (ProductCategory) intent.getSerializableExtra("Object");
-                mProductID = mProductCategory.getmProduct().getmProductID();
-                mImageID = mProductCategory.getmProduct().getmProductImage().getmProductImageID();
-                mColorID = mProductCategory.getmProduct().getmColor().getColorID();
-                mUnitID = mProductCategory.getmProduct().getmUnit().getmUnitID();
-                mPriceOut = mProductCategory.getmProduct().getmProductPrice();
-                etFoodName.setText(mProductCategory.getmProduct().getmProductName());
+                mProductID = mProductCategory.getProduct().getProductID();
+                mImageID = mProductCategory.getProduct().getProductImage().getProductImageID();
+                mColorID = mProductCategory.getProduct().getColor().getColorID();
+                mUnitID = mProductCategory.getProduct().getUnit().getUnitID();
+                mPriceOut = mProductCategory.getProduct().getProductPrice();
+                etFoodName.setText(mProductCategory.getProduct().getProductName());
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProductCategory.getmProduct().getmProductPrice())));
-                tvFoodUnit.setText(mProductCategory.getmProduct().getmUnit().getmUnitName());
-                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProductCategory.getmProduct().getmProductImage().getmImage(),
-                        0, mProductCategory.getmProduct().getmProductImage().getmImage().length));
-                cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
-                cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getmProduct().getmColor().getColorName()));
+                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProductCategory.getProduct().getProductPrice())));
+                tvFoodUnit.setText(mProductCategory.getProduct().getUnit().getUnitName());
+                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProductCategory.getProduct().getProductImage().getImage(),
+                        0, mProductCategory.getProduct().getProductImage().getImage().length));
+                cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getProduct().getColor().getColorName()));
+                cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getProduct().getColor().getColorName()));
                 cbStopSell.setVisibility(View.GONE);
-                mProductImage = mProductCategory.getmProduct().getmProductImage().getmImage();
-                mKeyColor = mProductCategory.getmProduct().getmColor().getColorName();
+                mProductImage = mProductCategory.getProduct().getProductImage().getImage();
+                mKeyColor = mProductCategory.getProduct().getColor().getColorName();
 
             } else if (mTypeIntent.equals("Menu")) {
                 mProduct = (Product) intent.getSerializableExtra("Object");
-                mProductID = mProduct.getmProductID();
-                etFoodName.setText(mProduct.getmProductName());
-                mProductName = mProduct.getmProductName();
+                mProductID = mProduct.getProductID();
+                etFoodName.setText(mProduct.getProductName());
+                mProductName = mProduct.getProductName();
                 etFoodName.setTag(mProductName);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProduct.getmProductPrice())));
-                mPriceOut = mProduct.getmProductPrice();
+                tvFoodPrice.setText(String.valueOf(decimalFormat.format(mProduct.getProductPrice())));
+                mPriceOut = mProduct.getProductPrice();
                 tvFoodPrice.setTag(mPriceOut);
-                mImageID = mProduct.getmProductImage().getmProductImageID();
-                mColorID = mProduct.getmColor().getColorID();
-                mProductImage = mProduct.getmProductImage().getmImage();
-                mKeyColor = mProduct.getmColor().getColorName();
-                mUnitID = mProduct.getmUnit().getmUnitID();
-                if (mProduct.getmProductStatus() == 2) {
+                mImageID = mProduct.getProductImage().getProductImageID();
+                mColorID = mProduct.getColor().getColorID();
+                mProductImage = mProduct.getProductImage().getImage();
+                mKeyColor = mProduct.getColor().getColorName();
+                mUnitID = mProduct.getUnit().getUnitID();
+                if (mProduct.getProductStatus() == 2) {
                     cbStopSell.setChecked(true);
                 } else {
                     cbStopSell.setChecked(false);
                 }
-                tvFoodUnit.setText(mProduct.getmUnit().getmUnitName());
-                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProduct.getmProductImage().getmImage(),
-                        0, mProduct.getmProductImage().getmImage().length));
-                cvImage.getBackground().setTint(Color.parseColor(mProduct.getmColor().getColorName()));
-                cvColor.getBackground().setTint(Color.parseColor(mProduct.getmColor().getColorName()));
+                tvFoodUnit.setText(mProduct.getUnit().getUnitName());
+                ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(mProduct.getProductImage().getImage(),
+                        0, mProduct.getProductImage().getImage().length));
+                cvImage.getBackground().setTint(Color.parseColor(mProduct.getColor().getColorName()));
+                cvColor.getBackground().setTint(Color.parseColor(mProduct.getColor().getColorName()));
             } else {
                 btnDelete.setVisibility(View.GONE);
                 btnSave.setVisibility(View.GONE);
@@ -285,15 +280,15 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     break;
                 }
                 case R.id.ivClose: {
-                    mDialogCaculate.dismiss();
+                    dlgCaculate.dismiss();
                     break;
                 }
                 case R.id.tvCloseFoodImage: {
-                    mDialogImage.dismiss();
+                    dlgImage.dismiss();
                     break;
                 }
                 case R.id.tvColorClose: {
-                    mDialogColor.dismiss();
+                    dlgColor.dismiss();
                     break;
                 }
                 case R.id.tvNext: {
@@ -366,21 +361,21 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     private void showDialogCaculating() {
         try {
-            mDialogCaculate = new Dialog(this);
-            mDialogCaculate.setContentView(R.layout.dialog_caculating);
-            mDialogCaculate.setCanceledOnTouchOutside(false);
-            mDialogCaculate.show();
-            FrameLayout frmPrice = mDialogCaculate.findViewById(R.id.frmPrice);
+            dlgCaculate = new Dialog(this);
+            dlgCaculate.setContentView(R.layout.dialog_caculating);
+            dlgCaculate.setCanceledOnTouchOutside(false);
+            dlgCaculate.show();
+            FrameLayout frmPrice = dlgCaculate.findViewById(R.id.frmPrice);
             frmPrice.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 10;
             frmPrice.requestLayout();
-            rcvCaculating = mDialogCaculate.findViewById(R.id.rcvCaculating);
+            rcvCaculating = dlgCaculate.findViewById(R.id.rcvCaculating);
             rcvCaculating.getLayoutParams().height = AndroidDeviceHelper.getHeightScreen(this) * 10 / 25;
             rcvCaculating.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 150;
             rcvCaculating.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadCaculating(this);
-            tvPriceEnter = mDialogCaculate.findViewById(R.id.tvPriceEnter);
-            ivClose = mDialogCaculate.findViewById(R.id.ivClose);
+            tvPriceEnter = dlgCaculate.findViewById(R.id.tvPriceEnter);
+            ivClose = dlgCaculate.findViewById(R.id.ivClose);
             ivClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -394,17 +389,17 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     private void showDialogListColor() {
         try {
-            mDialogColor = new Dialog(this);
-            mDialogColor.setContentView(R.layout.dialog_list_color);
-            mDialogColor.setCanceledOnTouchOutside(false);
-            mDialogColor.show();
-            rcvListColor = mDialogColor.findViewById(R.id.rcvListColor);
-            LinearLayout llListColor = mDialogColor.findViewById(R.id.llListColor);
+            dlgColor = new Dialog(this);
+            dlgColor.setContentView(R.layout.dialog_list_color);
+            dlgColor.setCanceledOnTouchOutside(false);
+            dlgColor.show();
+            rcvListColor = dlgColor.findViewById(R.id.rcvListColor);
+            LinearLayout llListColor = dlgColor.findViewById(R.id.llListColor);
             llListColor.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 10;
             llListColor.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadListColor(this);
-            tvColorClose = mDialogColor.findViewById(R.id.tvColorClose);
+            tvColorClose = dlgColor.findViewById(R.id.tvColorClose);
             tvColorClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -498,7 +493,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             mPriceOut = Float.parseFloat(resultText);
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             tvFoodPrice.setText(decimalFormat.format(Integer.parseInt(resultText)));
-            mDialogCaculate.dismiss();
+            dlgCaculate.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -589,7 +584,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         try {
             mColorID = colorID;
             mKeyColor = keyColor;
-            mDialogColor.dismiss();
+            dlgColor.dismiss();
             cvImage.getBackground().setTint(Color.parseColor(keyColor));
             cvColor.getBackground().setTint(Color.parseColor(keyColor));
         } catch (Exception e) {
@@ -605,17 +600,17 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     private void showDialogImage() {
         try {
-            mDialogImage = new Dialog(this);
-            mDialogImage.setContentView(R.layout.dialog_product_image);
-            mDialogImage.setCanceledOnTouchOutside(false);
-            mDialogImage.show();
-            rcvListImage = mDialogImage.findViewById(R.id.rcvListImage);
-            LinearLayout llListImage = mDialogImage.findViewById(R.id.llListImage);
+            dlgImage = new Dialog(this);
+            dlgImage.setContentView(R.layout.dialog_product_image);
+            dlgImage.setCanceledOnTouchOutside(false);
+            dlgImage.show();
+            rcvListImage = dlgImage.findViewById(R.id.rcvListImage);
+            LinearLayout llListImage = dlgImage.findViewById(R.id.llListImage);
             llListImage.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 10;
             llListImage.requestLayout();
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
             mActivityFoodUpdatePresenter.loadProductImage(this);
-            tvCloseFoodImage = mDialogImage.findViewById(R.id.tvCloseFoodImage);
+            tvCloseFoodImage = dlgImage.findViewById(R.id.tvCloseFoodImage);
             tvCloseFoodImage.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -633,7 +628,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
         try {
             mImageID = imageID;
             mProductImage = productImage;
-            mDialogImage.dismiss();
+            dlgImage.dismiss();
             ivFoodImage.setImageBitmap(BitmapFactory.decodeByteArray(productImage,
                     0, productImage.length));
         } catch (Exception e) {

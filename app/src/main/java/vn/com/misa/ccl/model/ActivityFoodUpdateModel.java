@@ -441,7 +441,7 @@ public class ActivityFoodUpdateModel {
     public void removeItemProduct(int productID) {
         try {
             for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
-                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID() == productID) {
+                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getProductID() == productID) {
                     ActivityRestaurantMenuModel.mListProductCategory.remove(i);
                 }
             }
@@ -465,14 +465,14 @@ public class ActivityFoodUpdateModel {
     public void updateItemProduct(int productId, String productName, float productPrice, int imageID, int unitID, int colorID, byte[] imageSelect, String keyColor) {
         try {
             for (int i = 0; i < ActivityRestaurantMenuModel.mListProductCategory.size(); i++) {
-                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductID() == productId) {
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductName(productName);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().setmProductPrice(productPrice);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductImage().setmProductImageID(imageID);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmUnit().setmUnitID(unitID);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmColor().setColorID(colorID);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmProductImage().setmImage(imageSelect);
-                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getmProduct().getmColor().setColorName(keyColor);
+                if (ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getProductID() == productId) {
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().setProductName(productName);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().setProductPrice(productPrice);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getProductImage().setProductImageID(imageID);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getUnit().setUnitID(unitID);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getColor().setColorID(colorID);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getProductImage().setImage(imageSelect);
+                    ActivityRestaurantMenuModel.mListProductCategory.get(i).getProduct().getColor().setColorName(keyColor);
                 }
             }
             mIResultActivityFoodUpdate.updateItemProductSuccess();

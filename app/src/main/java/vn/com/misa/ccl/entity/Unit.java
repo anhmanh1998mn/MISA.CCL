@@ -12,28 +12,28 @@ import java.io.Serializable;
 
 public class Unit implements Serializable {
 
-    private int mUnitID;
+    private int unitID;
 
-    private String mUnitName;
+    private String unitName;
 
-    public int getmUnitID() {
-        return mUnitID;
+    public int getUnitID() {
+        return unitID;
     }
 
-    public void setmUnitID(int mUnitID) {
-        this.mUnitID = mUnitID;
+    public void setUnitID(int unitID) {
+        this.unitID = unitID;
     }
 
-    public String getmUnitName() {
-        return mUnitName;
+    public String getUnitName() {
+        return unitName;
     }
 
-    public void setmUnitName(String mUnitName) {
-        this.mUnitName = mUnitName;
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
     }
 
     public Unit(int mUnitID, String mUnitName) {
-        this.mUnitID = mUnitID;
-        this.mUnitName = mUnitName;
+        this.unitID = mUnitID;
+        this.unitName = mUnitName;
     }
 }

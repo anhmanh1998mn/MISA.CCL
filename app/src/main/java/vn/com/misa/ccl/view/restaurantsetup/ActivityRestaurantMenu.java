@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,7 +47,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
 
     private Button btnSuccess;
 
-    private Dialog dialogSetupSuccess;
+    private Dialog dlgSetupSuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +89,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
         try {
             Intent intent = getIntent();
             mCategoryID = intent.getIntExtra("CATEGORY_ID", -1);
-            Common.CATEGORY_ID = mCategoryID;
+            Common.sCategoryID = mCategoryID;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,7 +103,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
     private void loadListProduct() {
         try {
             mRestaurantMenuPresenter = new ActivityRestaurantMenuPresenter(this);
-            mRestaurantMenuPresenter.loadListProduct(this, Common.CATEGORY_ID);
+            mRestaurantMenuPresenter.loadListProduct(this, Common.sCategoryID);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -138,7 +136,7 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
     @Override
     public void initMenuSuccess() {
         try {
-            dialogSetupSuccess.dismiss();
+            dlgSetupSuccess.dismiss();
             startActivity(new Intent(this, ActivityRestaurantManage.class));
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,12 +208,12 @@ public class ActivityRestaurantMenu extends AppCompatActivity implements IActivi
      */
     private void showDialogSetupSuccess() {
         try {
-            dialogSetupSuccess = new Dialog(this);
-            dialogSetupSuccess.setContentView(R.layout.dialog_setup_success);
-            dialogSetupSuccess.setCanceledOnTouchOutside(false);
-            dialogSetupSuccess.show();
-            tvSuccessNext = dialogSetupSuccess.findViewById(R.id.tvSuccessNext);
-            ConstraintLayout clSuccess = dialogSetupSuccess.findViewById(R.id.clSuccess);
+            dlgSetupSuccess = new Dialog(this);
+            dlgSetupSuccess.setContentView(R.layout.dialog_setup_success);
+            dlgSetupSuccess.setCanceledOnTouchOutside(false);
+            dlgSetupSuccess.show();
+            tvSuccessNext = dlgSetupSuccess.findViewById(R.id.tvSuccessNext);
+            ConstraintLayout clSuccess = dlgSetupSuccess.findViewById(R.id.clSuccess);
             clSuccess.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
             clSuccess.requestLayout();
             tvSuccessNext.setOnClickListener(this);

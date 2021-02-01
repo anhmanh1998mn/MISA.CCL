@@ -106,12 +106,12 @@ public class ActivityRestaurantMenuModel {
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             ContentValues contentValues = new ContentValues();
             for (int i = 0; i < listMenu.size(); i++) {
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, listMenu.get(i).getmProduct().getmProductName());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, listMenu.get(i).getmProduct().getmProductPrice());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, listMenu.get(i).getmProduct().getmProductStatus());
-                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, listMenu.get(i).getmProduct().getmProductImage().getmProductImageID());
-                contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, listMenu.get(i).getmProduct().getmUnit().getmUnitID());
-                contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, listMenu.get(i).getmProduct().getmColor().getColorID());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, listMenu.get(i).getProduct().getProductName());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_PRICE, listMenu.get(i).getProduct().getProductPrice());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_STATUS, listMenu.get(i).getProduct().getProductStatus());
+                contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_IMAGE_ID, listMenu.get(i).getProduct().getProductImage().getProductImageID());
+                contentValues.put(DatabaseInfomation.COLUMN_UNIT_ID, listMenu.get(i).getProduct().getUnit().getUnitID());
+                contentValues.put(DatabaseInfomation.COLUMN_COLOR_ID, listMenu.get(i).getProduct().getColor().getColorID());
                 result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
             }
 

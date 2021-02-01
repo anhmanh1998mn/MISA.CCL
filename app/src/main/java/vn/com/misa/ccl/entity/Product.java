@@ -12,33 +12,33 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
 
-    private int mProductID;
+    private int productID;
 
-    private String mProductName;
+    private String productName;
 
-    private float mProductPrice;
+    private float productPrice;
 
-    private int mProductStatus;
+    private int productStatus;
 
-    private ProductImage mProductImage;
+    private ProductImage productImage;
 
-    private Unit mUnit;
+    private Unit unit;
 
-    private Color mColor;
+    private Color color;
 
     private int quantity;
 
     public Product(int mProductID, String mProductName, Unit mUnit) {
-        this.mProductID = mProductID;
-        this.mProductName = mProductName;
-        this.mUnit = mUnit;
+        this.productID = mProductID;
+        this.productName = mProductName;
+        this.unit = mUnit;
     }
 
     public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus) {
-        this.mProductID = mProductID;
-        this.mProductName = mProductName;
-        this.mProductPrice = mProductPrice;
-        this.mProductStatus = mProductStatus;
+        this.productID = mProductID;
+        this.productName = mProductName;
+        this.productPrice = mProductPrice;
+        this.productStatus = mProductStatus;
     }
 
     public int getQuantity() {
@@ -50,79 +50,79 @@ public class Product implements Serializable {
     }
 
     public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus, ProductImage mProductImage, Unit mUnit, Color mColor, int quantity) {
-        this.mProductID = mProductID;
-        this.mProductName = mProductName;
-        this.mProductPrice = mProductPrice;
-        this.mProductStatus = mProductStatus;
-        this.mProductImage = mProductImage;
-        this.mUnit = mUnit;
-        this.mColor = mColor;
+        this.productID = mProductID;
+        this.productName = mProductName;
+        this.productPrice = mProductPrice;
+        this.productStatus = mProductStatus;
+        this.productImage = mProductImage;
+        this.unit = mUnit;
+        this.color = mColor;
         this.quantity = quantity;
     }
 
-    public int getmProductID() {
-        return mProductID;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setmProductID(int mProductID) {
-        this.mProductID = mProductID;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
-    public String getmProductName() {
-        return mProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setmProductName(String mProductName) {
-        this.mProductName = mProductName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public float getmProductPrice() {
-        return mProductPrice;
+    public float getProductPrice() {
+        return productPrice;
     }
 
-    public void setmProductPrice(float mProductPrice) {
-        this.mProductPrice = mProductPrice;
+    public void setProductPrice(float productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public int getmProductStatus() {
-        return mProductStatus;
+    public int getProductStatus() {
+        return productStatus;
     }
 
-    public void setmProductStatus(int mProductStatus) {
-        this.mProductStatus = mProductStatus;
+    public void setProductStatus(int productStatus) {
+        this.productStatus = productStatus;
     }
 
-    public ProductImage getmProductImage() {
-        return mProductImage;
+    public ProductImage getProductImage() {
+        return productImage;
     }
 
-    public void setmProductImage(ProductImage mProductImage) {
-        this.mProductImage = mProductImage;
+    public void setProductImage(ProductImage productImage) {
+        this.productImage = productImage;
     }
 
-    public Unit getmUnit() {
-        return mUnit;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setmUnit(Unit mUnit) {
-        this.mUnit = mUnit;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
-    public Color getmColor() {
-        return mColor;
+    public Color getColor() {
+        return color;
     }
 
-    public void setmColor(Color mColor) {
-        this.mColor = mColor;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public Product(int mProductID, String mProductName, float mProductPrice, int mProductStatus, ProductImage mProductImage, Unit mUnit, Color mColor) {
-        this.mProductID = mProductID;
-        this.mProductName = mProductName;
-        this.mProductPrice = mProductPrice;
-        this.mProductStatus = mProductStatus;
-        this.mProductImage = mProductImage;
-        this.mUnit = mUnit;
-        this.mColor = mColor;
+        this.productID = mProductID;
+        this.productName = mProductName;
+        this.productPrice = mProductPrice;
+        this.productStatus = mProductStatus;
+        this.productImage = mProductImage;
+        this.unit = mUnit;
+        this.color = mColor;
     }
 }

@@ -37,7 +37,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     private ImageView ivTextClearUserName, ivTextClearPassword, ivBack, ivClose;
 
-    private Dialog mDialogForgotPassword;
+    private Dialog dlgForgotPassword;
 
     private Button btnLogin;
 
@@ -114,7 +114,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                     break;
                 }
                 case R.id.ivClose: {
-                    mDialogForgotPassword.dismiss();
+                    dlgForgotPassword.dismiss();
                     break;
                 }
                 case R.id.btnLogin: {
@@ -165,15 +165,15 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     private void showDialogForgotPassword() {
         try {
-            mDialogForgotPassword = new Dialog(this);
-            mDialogForgotPassword.setContentView(R.layout.dialog_forgot_password);
-            mDialogForgotPassword.closeOptionsMenu();
-            mDialogForgotPassword.setCanceledOnTouchOutside(false);
-            ConstraintLayout clForgotPassword = mDialogForgotPassword.findViewById(R.id.clForgotPassword);
+            dlgForgotPassword = new Dialog(this);
+            dlgForgotPassword.setContentView(R.layout.dialog_forgot_password);
+            dlgForgotPassword.closeOptionsMenu();
+            dlgForgotPassword.setCanceledOnTouchOutside(false);
+            ConstraintLayout clForgotPassword = dlgForgotPassword.findViewById(R.id.clForgotPassword);
             clForgotPassword.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 80;
             clForgotPassword.requestLayout();
-            mDialogForgotPassword.show();
-            ivClose = mDialogForgotPassword.findViewById(R.id.ivClose);
+            dlgForgotPassword.show();
+            ivClose = dlgForgotPassword.findViewById(R.id.ivClose);
             ivClose.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();

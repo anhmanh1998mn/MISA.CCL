@@ -5,17 +5,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.Time;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -46,7 +42,9 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
 
     private RecyclerView rcvFoodReport;
 
-    private String mAmount = "", mStartDay, mEndDay, mDayName;
+    private String mAmount = "";
+
+    private String mStartDay, mEndDay, mDayName;
 
     private ActivityReportWithDayPresenter mActivityReportWithDayPresenter;
 
@@ -273,8 +271,8 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
             ArrayList<PieEntry> daVal = new ArrayList<>();
             for (int i = 0; i < mListProductReport.size(); i++) {
                 if (i < 7) {
-                    daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
-                    float a = (mListProductReport.get(i).getmProductPriceOut());
+                    daVal.add(new PieEntry((mListProductReport.get(i).getProductPriceOut() / mTotalMoneyDay) * 100, "%"));
+                    float a = (mListProductReport.get(i).getProductPriceOut());
                 }
             }
             return daVal;

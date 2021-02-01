@@ -1,7 +1,6 @@
 package vn.com.misa.ccl.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,10 +79,10 @@ public class ReportWithDayAdapter extends RecyclerView.Adapter<ReportWithDayAdap
 
             holder.tvImage.setText(String.valueOf(position + 1));
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvFootName.setText(mListReportWithDay.get(position).getmProduct().getmProductName());
-            holder.tvFootQuantity.setText(String.valueOf(mListReportWithDay.get(position).getmQuantity()));
-            holder.tvFootPrice.setText(decimalFormat.format(mListReportWithDay.get(position).getmProductPriceOut()));
-            holder.tvFootUnit.setText(mListReportWithDay.get(position).getmProduct().getmUnit().getmUnitName());
+            holder.tvFootName.setText(mListReportWithDay.get(position).getProduct().getProductName());
+            holder.tvFootQuantity.setText(String.valueOf(mListReportWithDay.get(position).getQuantity()));
+            holder.tvFootPrice.setText(decimalFormat.format(mListReportWithDay.get(position).getProductPriceOut()));
+            holder.tvFootUnit.setText(mListReportWithDay.get(position).getProduct().getUnit().getUnitName());
         } catch (Exception e) {
             e.printStackTrace();
         }

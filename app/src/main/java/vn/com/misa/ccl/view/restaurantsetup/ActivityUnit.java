@@ -5,8 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -171,7 +169,7 @@ public class ActivityUnit extends AppCompatActivity implements IActivityUnit.IAc
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("UNIT_NAME", mUnitName);
                     editor.putInt("UNIT_ID", mUnitID);
-                    Common.PRODUCT_UNIT_ID = mUnitID;
+                    Common.sProductUnitID = mUnitID;
                     editor.commit();
                     finish();
                     break;

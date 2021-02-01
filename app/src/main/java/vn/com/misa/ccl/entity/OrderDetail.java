@@ -1,7 +1,5 @@
 package vn.com.misa.ccl.entity;
 
-import android.app.Activity;
-
 /**
  * ‐ Mục đích Class thực hiện việc khai báo OrderDetail
  * <p>
@@ -12,68 +10,68 @@ import android.app.Activity;
  */
 
 public class OrderDetail {
-    private int mOrderDetailID;
+    private int orderDetailID;
 
-    private Order mOrder;
+    private Order order;
 
-    private Product mProduct;
+    private Product product;
 
-    private int mQuantity;
+    private int quantity;
 
-    private float mProductPriceOut;
+    private float productPriceOut;
 
-    public float getmProductPriceOut() {
-        return mProductPriceOut;
+    public float getProductPriceOut() {
+        return productPriceOut;
     }
 
-    public void setmProductPriceOut(float mProductPriceOut) {
-        this.mProductPriceOut = mProductPriceOut;
+    public void setProductPriceOut(float productPriceOut) {
+        this.productPriceOut = productPriceOut;
     }
 
     public OrderDetail(int mOrderDetailID, Order mOrder, Product mProduct, int mQuantity, float mProductPriceOut) {
-        this.mOrderDetailID = mOrderDetailID;
-        this.mOrder = mOrder;
-        this.mProduct = mProduct;
-        this.mQuantity = mQuantity;
-        this.mProductPriceOut = mProductPriceOut;
+        this.orderDetailID = mOrderDetailID;
+        this.order = mOrder;
+        this.product = mProduct;
+        this.quantity = mQuantity;
+        this.productPriceOut = mProductPriceOut;
     }
 
-    public int getmOrderDetailID() {
-        return mOrderDetailID;
+    public int getOrderDetailID() {
+        return orderDetailID;
     }
 
-    public void setmOrderDetailID(int mOrderDetailID) {
-        this.mOrderDetailID = mOrderDetailID;
+    public void setOrderDetailID(int orderDetailID) {
+        this.orderDetailID = orderDetailID;
     }
 
-    public Order getmOrder() {
-        return mOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setmOrder(Order mOrder) {
-        this.mOrder = mOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Product getmProduct() {
-        return mProduct;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setmProduct(Product mProduct) {
-        this.mProduct = mProduct;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public int getmQuantity() {
-        return mQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setmQuantity(int mQuantity) {
-        this.mQuantity = mQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public OrderDetail(int mOrderDetailID, Order mOrder, Product mProduct, int mQuantity) {
-        this.mOrderDetailID = mOrderDetailID;
-        this.mOrder = mOrder;
-        this.mProduct = mProduct;
-        this.mQuantity = mQuantity;
+        this.orderDetailID = mOrderDetailID;
+        this.order = mOrder;
+        this.product = mProduct;
+        this.quantity = mQuantity;
     }
 }

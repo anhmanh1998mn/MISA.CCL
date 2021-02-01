@@ -37,7 +37,7 @@
         android:layout_width="@dimen/with_text_large"
         android:layout_height="@dimen/height_largee"
         android:layout_marginLeft="@dimen/margin_small"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="@string/product_name"
         android:maxLines="1"
         android:ellipsize="end"

@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,15 +46,15 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
 
     private List<Product> mListProduct;
 
-    private Dialog mOrderDialog;
+    private Dialog dlgOrderDialog;
 
     private String mResultSelect;
 
     private Button btnMoney;
 
-    private int MCLICK_BUTTON_SAVE = 1;
+    private int mClickButtonSave = 1;
 
-    private int MCLICK_BUTTON_MONEY = 2;
+    private int mClickButtonMoney = 2;
 
     private String ORDER_ID = "ORDER_ID";
 
@@ -357,20 +356,20 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                 case R.id.tvSave: {
                     mActivityOrderPresenter = new ActivityOrderPresenter(this);
                     if (mOrderID == -1) {
-                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, MCLICK_BUTTON_SAVE);
+                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonSave);
                         return;
                     }
-                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, MCLICK_BUTTON_SAVE, tvSelectTable.getText().toString(),
+                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, mClickButtonSave, tvSelectTable.getText().toString(),
                             tvPeopeNumber.getText().toString(), mAmount);
                     break;
                 }
                 case R.id.btnMoney: {
                     if (mOrderID == -1) {
                         mActivityOrderPresenter = new ActivityOrderPresenter(this);
-                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, MCLICK_BUTTON_MONEY);
+                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonMoney);
                         return;
                     }
-                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, MCLICK_BUTTON_MONEY
+                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, mClickButtonMoney
                             , tvSelectTable.getText().toString(),
                             tvPeopeNumber.getText().toString(), mAmount);
                     break;
@@ -443,12 +442,12 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                     break;
                 }
                 case R.id.tvSuccess: {
-                    mOrderDialog.dismiss();
+                    dlgOrderDialog.dismiss();
                     tvSelectTable.setText(mResultSelect);
                     break;
                 }
                 case R.id.tvSuccesss: {
-                    mOrderDialog.dismiss();
+                    dlgOrderDialog.dismiss();
                     tvPeopeNumber.setText(mResultSelect);
                     break;
                 }
@@ -459,10 +458,10 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                 case R.id.tvNext: {
                     if (mOrderID == -1) {
                         mActivityOrderPresenter = new ActivityOrderPresenter(this);
-                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, MCLICK_BUTTON_MONEY);
+                        mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonMoney);
                         return;
                     }
-                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, MCLICK_BUTTON_MONEY
+                    mActivityOrderPresenter.updateOrder(this, mOrderID, mListProduct, mClickButtonMoney
                             , tvSelectTable.getText().toString(),
                             tvPeopeNumber.getText().toString(), mAmount);
                 }
@@ -479,31 +478,31 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
      */
     private void showDialogOrderInfomation() {
         try {
-            mOrderDialog = new Dialog(this);
-            mOrderDialog.setContentView(R.layout.dialog_order_infomation);
-            mOrderDialog.show();
-            ConstraintLayout clDialogOrder = mOrderDialog.findViewById(R.id.clDialogOrder);
+            dlgOrderDialog = new Dialog(this);
+            dlgOrderDialog.setContentView(R.layout.dialog_order_infomation);
+            dlgOrderDialog.show();
+            ConstraintLayout clDialogOrder = dlgOrderDialog.findViewById(R.id.clDialogOrder);
             clDialogOrder.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
             clDialogOrder.getLayoutParams().height = AndroidDeviceHelper.getHeightScreen(this) * 8 / 15;
             clDialogOrder.requestLayout();
-            tvSuccess = mOrderDialog.findViewById(R.id.tvSuccess);
-            tvDialogTittle = mOrderDialog.findViewById(R.id.tvResultCaculate);
-            tvResult = mOrderDialog.findViewById(R.id.tvResult);
-            ivBackKeyboard = mOrderDialog.findViewById(R.id.ivBackKeyboard);
-            tvItemDown = mOrderDialog.findViewById(R.id.tvItemDown);
-            tvItemUp = mOrderDialog.findViewById(R.id.tvItemUp);
-            tvItemClear = mOrderDialog.findViewById(R.id.tvItemClear);
-            tvItemSeven = mOrderDialog.findViewById(R.id.tvItemSeven);
-            tvItemEight = mOrderDialog.findViewById(R.id.tvItemEight);
-            tvItemNine = mOrderDialog.findViewById(R.id.tvItemNine);
-            tvItemFour = mOrderDialog.findViewById(R.id.tvItemFour);
-            tvItemFive = mOrderDialog.findViewById(R.id.tvItemFive);
-            tvItemSix = mOrderDialog.findViewById(R.id.tvItemSix);
-            tvItemOne = mOrderDialog.findViewById(R.id.tvItemOne);
-            tvItemTwo = mOrderDialog.findViewById(R.id.tvItemTwo);
-            tvItemThree = mOrderDialog.findViewById(R.id.tvItemThree);
-            tvItemZero = mOrderDialog.findViewById(R.id.tvItemZero);
-            tvSuccesss = mOrderDialog.findViewById(R.id.tvSuccesss);
+            tvSuccess = dlgOrderDialog.findViewById(R.id.tvSuccess);
+            tvDialogTittle = dlgOrderDialog.findViewById(R.id.tvResultCaculate);
+            tvResult = dlgOrderDialog.findViewById(R.id.tvResult);
+            ivBackKeyboard = dlgOrderDialog.findViewById(R.id.ivBackKeyboard);
+            tvItemDown = dlgOrderDialog.findViewById(R.id.tvItemDown);
+            tvItemUp = dlgOrderDialog.findViewById(R.id.tvItemUp);
+            tvItemClear = dlgOrderDialog.findViewById(R.id.tvItemClear);
+            tvItemSeven = dlgOrderDialog.findViewById(R.id.tvItemSeven);
+            tvItemEight = dlgOrderDialog.findViewById(R.id.tvItemEight);
+            tvItemNine = dlgOrderDialog.findViewById(R.id.tvItemNine);
+            tvItemFour = dlgOrderDialog.findViewById(R.id.tvItemFour);
+            tvItemFive = dlgOrderDialog.findViewById(R.id.tvItemFive);
+            tvItemSix = dlgOrderDialog.findViewById(R.id.tvItemSix);
+            tvItemOne = dlgOrderDialog.findViewById(R.id.tvItemOne);
+            tvItemTwo = dlgOrderDialog.findViewById(R.id.tvItemTwo);
+            tvItemThree = dlgOrderDialog.findViewById(R.id.tvItemThree);
+            tvItemZero = dlgOrderDialog.findViewById(R.id.tvItemZero);
+            tvSuccesss = dlgOrderDialog.findViewById(R.id.tvSuccesss);
             mActivityOrderPresenter = new ActivityOrderPresenter(this);
             onViewDialogClickListener();
         } catch (Exception e) {

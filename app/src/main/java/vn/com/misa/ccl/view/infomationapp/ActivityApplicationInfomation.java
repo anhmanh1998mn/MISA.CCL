@@ -2,7 +2,6 @@ package vn.com.misa.ccl.view.infomationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +26,7 @@ public class ActivityApplicationInfomation extends AppCompatActivity implements 
 
     private ImageView ivBack;
 
-    private LinearLayout llWbsite, llSupport;
+    private LinearLayout llWebsite, llSupport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class ActivityApplicationInfomation extends AppCompatActivity implements 
         try {
             tvViewMISA = findViewById(R.id.tvViewMISA);
             ivBack = findViewById(R.id.ivBack);
-            llWbsite = findViewById(R.id.llWbsite);
+            llWebsite = findViewById(R.id.llWbsite);
             llSupport = findViewById(R.id.llSupport);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +63,7 @@ public class ActivityApplicationInfomation extends AppCompatActivity implements 
         try {
             tvViewMISA.setOnClickListener(this);
             ivBack.setOnClickListener(this);
-            llWbsite.setOnClickListener(this);
+            llWebsite.setOnClickListener(this);
             llSupport.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();

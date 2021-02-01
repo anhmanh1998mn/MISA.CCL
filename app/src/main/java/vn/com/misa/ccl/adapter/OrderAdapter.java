@@ -73,28 +73,28 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            holder.tvListProduct.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
+            holder.tvListProduct.setText(mListOrderDetail.get(position).getProduct().getProductName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvTotalAmount.setText(decimalFormat.format((mListOrderDetail.get(position).getmOrder().getTotalMoney())));
-            if (mListOrderDetail.get(position).getmOrder().getTableName().equals("0")) {
+            holder.tvTotalAmount.setText(decimalFormat.format((mListOrderDetail.get(position).getOrder().getTotalMoney())));
+            if (mListOrderDetail.get(position).getOrder().getTableName().equals("0")) {
                 holder.tvImage.getBackground().setTint(mContext.getResources().getColor(R.color.light_grey));
                 holder.tvImage.setText("");
             } else {
-                holder.tvImage.getBackground().setTint(Color.parseColor(mListOrderDetail.get(position).getmProduct().getmColor().getColorName()));
-                holder.tvImage.setText(mListOrderDetail.get(position).getmOrder().getTableName());
+                holder.tvImage.getBackground().setTint(Color.parseColor(mListOrderDetail.get(position).getProduct().getColor().getColorName()));
+                holder.tvImage.setText(mListOrderDetail.get(position).getOrder().getTableName());
             }
 
-            if (mListOrderDetail.get(position).getmOrder().getTotalPeople() == 0) {
+            if (mListOrderDetail.get(position).getOrder().getTotalPeople() == 0) {
                 holder.tvPeople.setVisibility(View.GONE);
                 holder.ivPerson.setVisibility(View.GONE);
             } else {
-                holder.tvPeople.setText(String.valueOf(mListOrderDetail.get(position).getmOrder().getTotalPeople()));
+                holder.tvPeople.setText(String.valueOf(mListOrderDetail.get(position).getOrder().getTotalPeople()));
             }
 
             holder.tvCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mICLickButtonRemove.setOnClickButtoRemove(mListOrderDetail.get(position).getmOrder().getOrderId());
+                    mICLickButtonRemove.setOnClickButtoRemove(mListOrderDetail.get(position).getOrder().getOrderId());
                 }
             });
 
@@ -102,7 +102,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityBill.class);
-                    intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getmOrder().getOrderId());
+                    intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getOrder().getOrderId());
                     mContext.startActivity(intent);
                 }
             });
@@ -111,11 +111,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ActivityOrder.class);
-                    intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getmOrder().getOrderId());
-                    intent.putExtra(TABLE_NAME, mListOrderDetail.get(position).getmOrder().getTableName());
-                    intent.putExtra(TOTAL_NUMBER, mListOrderDetail.get(position).getmOrder().getTotalPeople());
-                    intent.putExtra(AMOUNT, mListOrderDetail.get(position).getmOrder().getTotalMoney());
-                    Common.ORDER_ID = mListOrderDetail.get(position).getmOrder().getOrderId();
+                    intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getOrder().getOrderId());
+                    intent.putExtra(TABLE_NAME, mListOrderDetail.get(position).getOrder().getTableName());
+                    intent.putExtra(TOTAL_NUMBER, mListOrderDetail.get(position).getOrder().getTotalPeople());
+                    intent.putExtra(AMOUNT, mListOrderDetail.get(position).getOrder().getTotalMoney());
+                    Common.sOrderID = mListOrderDetail.get(position).getOrder().getOrderId();
                     mContext.startActivity(intent);
                 }
             });

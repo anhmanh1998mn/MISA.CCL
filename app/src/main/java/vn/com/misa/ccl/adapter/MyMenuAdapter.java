@@ -20,7 +20,6 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Product;
-import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityFoodUpdate;
 
 /**
@@ -59,13 +58,13 @@ public class MyMenuAdapter extends RecyclerView.Adapter<MyMenuAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(), 0,
-                    mListProduct.get(position).getmProductImage().getmImage().length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getProductImage().getImage(), 0,
+                    mListProduct.get(position).getProductImage().getImage().length);
             holder.ivItemMenu.setImageBitmap(bitmap);
-            holder.tvFootName.setText(mListProduct.get(position).getmProductName());
+            holder.tvFootName.setText(mListProduct.get(position).getProductName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProduct.get(position).getmProductPrice())));
-            holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getmColor().getColorName()));
+            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProduct.get(position).getProductPrice())));
+            holder.cvImage.getBackground().setTint(Color.parseColor(mListProduct.get(position).getColor().getColorName()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

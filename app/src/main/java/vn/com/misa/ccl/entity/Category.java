@@ -12,28 +12,28 @@ import java.io.Serializable;
 
 public class Category implements Serializable {
 
-    private int mCategoryID;
+    private int categoryID;
 
-    private String mCategoryName;
+    private String categoryName;
 
-    public int getmCategoryID() {
-        return mCategoryID;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setmCategoryID(int mCategoryID) {
-        this.mCategoryID = mCategoryID;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
-    public String getmCategoryName() {
-        return mCategoryName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setmCategoryName(String mCategoryName) {
-        this.mCategoryName = mCategoryName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Category(int mCategoryID, String mCategoryName) {
-        this.mCategoryID = mCategoryID;
-        this.mCategoryName = mCategoryName;
+        this.categoryID = mCategoryID;
+        this.categoryName = mCategoryName;
     }
 }

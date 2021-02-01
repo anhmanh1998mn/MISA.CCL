@@ -50,14 +50,14 @@ public class ProductImageAdapter extends RecyclerView.Adapter<ProductImageAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProductImage.get(position).getmImage(), 0,
-                    mListProductImage.get(position).getmImage().length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProductImage.get(position).getImage(), 0,
+                    mListProductImage.get(position).getImage().length);
             holder.ivProductImage.setImageBitmap(bitmap);
             holder.ivProductImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mClickItemListener != null) {
-                        mClickItemListener.selectionItem(mListProductImage.get(position).getmImage(), mListProductImage.get(position).getmProductImageID());
+                        mClickItemListener.selectionItem(mListProductImage.get(position).getImage(), mListProductImage.get(position).getProductImageID());
                     }
                 }
             });

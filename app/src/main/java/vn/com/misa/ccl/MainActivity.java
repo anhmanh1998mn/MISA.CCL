@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView tvAppOverviewNext, tvCloseAppOverview;
 
-    private int TOTAL_FRAGMENT_OVERVIEW = 4;
+    private final int TOTAL_FRAGMENT_OVERVIEW = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

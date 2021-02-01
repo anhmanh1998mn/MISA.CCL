@@ -12,39 +12,39 @@ import java.io.Serializable;
 
 public class ProductCategory implements Serializable {
 
-    private int mProductCategoryID;
+    private int productCategoryID;
 
-    private Product mProduct;
+    private Product product;
 
-    private Category mCategory;
+    private Category category;
 
-    public int getmProductCategoryID() {
-        return mProductCategoryID;
+    public int getProductCategoryID() {
+        return productCategoryID;
     }
 
-    public void setmProductCategoryID(int mProductCategoryID) {
-        this.mProductCategoryID = mProductCategoryID;
+    public void setProductCategoryID(int productCategoryID) {
+        this.productCategoryID = productCategoryID;
     }
 
-    public Product getmProduct() {
-        return mProduct;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setmProduct(Product mProduct) {
-        this.mProduct = mProduct;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Category getmCategory() {
-        return mCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setmCategory(Category mCategory) {
-        this.mCategory = mCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public ProductCategory(int mProductCategoryID, Product mProduct, Category mCategory) {
-        this.mProductCategoryID = mProductCategoryID;
-        this.mProduct = mProduct;
-        this.mCategory = mCategory;
+        this.productCategoryID = mProductCategoryID;
+        this.product = mProduct;
+        this.category = mCategory;
     }
 }

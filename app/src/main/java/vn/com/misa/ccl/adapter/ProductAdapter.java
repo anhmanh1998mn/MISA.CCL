@@ -49,11 +49,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getmProductImage().getmImage(), 0,
-                    mListProduct.get(position).getmProductImage().getmImage().length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProduct.get(position).getProductImage().getImage(), 0,
+                    mListProduct.get(position).getProductImage().getImage().length);
             holder.ivItemMenu.setImageBitmap(bitmap);
-            holder.tvFootName.setText(mListProduct.get(position).getmProductName());
-            holder.tvFootPrice.setText(String.valueOf(mListProduct.get(position).getmProductPrice()));
+            holder.tvFootName.setText(mListProduct.get(position).getProductName());
+            holder.tvFootPrice.setText(String.valueOf(mListProduct.get(position).getProductPrice()));
         } catch (Exception e) {
             e.printStackTrace();
         }

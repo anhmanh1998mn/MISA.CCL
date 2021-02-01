@@ -1,6 +1,5 @@
 package vn.com.misa.ccl.view.order;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -26,7 +25,6 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.OrderAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.FragmentListOrderPresenter;
-import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**
  * ‐ Mục đích Class thực hiện những công việc hiển thị danh sách các order chưa thu tiền
@@ -53,7 +51,7 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
 
     private LinearLayout llListOrder;
 
-    private Dialog mDialogConfirmRemove;
+    private Dialog dlgConfirmRemove;
 
     @Nullable
     @Override
@@ -205,7 +203,7 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
     public void removeOrderSuccess() {
         try {
             getListOrder();
-            mDialogConfirmRemove.dismiss();
+            dlgConfirmRemove.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -245,8 +243,8 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
                     mFragmentListOrderPresenter.removeItemOrder(getActivity(), orderID);
                 }
             });
-            mDialogConfirmRemove = builder.create();
-            mDialogConfirmRemove.show();
+            dlgConfirmRemove = builder.create();
+            dlgConfirmRemove.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

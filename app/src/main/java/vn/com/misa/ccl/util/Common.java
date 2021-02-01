@@ -9,29 +9,29 @@ import android.app.Activity;
  */
 
 public class Common {
-    public static int ORDER_ID = 0;
+    public static int sOrderID = 0;
 
-    public static int CATEGORY_ID = 0;
+    public static int sCategoryID = 0;
 
-    public static int PRODUCT_UNIT_ID = 0;
+    public static int sProductUnitID = 0;
 
-    public static String MONDAY="Thứ 2";
+    public static final String MONDAY="Thứ 2";
 
-    public static String TUESDAY="Thứ 3";
+    public static final String TUESDAY="Thứ 3";
 
-    public static String WEDNESDAY="Thứ 4";
+    public static final String WEDNESDAY="Thứ 4";
 
-    public static String THURSDAY="Thứ 5";
+    public static final String THURSDAY="Thứ 5";
 
-    public static String FRIDAY="Thứ 6";
+    public static final String FRIDAY="Thứ 6";
 
-    public static String SATURDAY="Thứ 7";
+    public static final String SATURDAY="Thứ 7";
 
-    public static String SUNDAY="Chủ nhật";
+    public static final String SUNDAY="Chủ nhật";
 
-    public static float TOTAL_MONEY=0;
+    public static float sTotalMoney =0;
 
-    public static String DAY_NAME_ONE="Ngày 0";
+    public static final String DAY_NAME_ONE="Ngày 0";
 
-    public static String DAY_NAME_TWO="Ngày ";
+    public static final String DAY_NAME_TWO="Ngày ";
 }

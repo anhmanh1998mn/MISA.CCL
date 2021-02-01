@@ -94,7 +94,7 @@ public class FragmentMainReportModel {
             }
             float sumAllMoney = 0;
             for (int i = 0; i < mListProductWithDay.size(); i++) {
-                sumAllMoney = sumAllMoney + mListProductWithDay.get(i).getmProductPriceOut();
+                sumAllMoney = sumAllMoney + mListProductWithDay.get(i).getProductPriceOut();
             }
             if (cursor.getCount() > 0) {
                 mIFragmentMainReportModel.getListReportWithPeroid(mListProductWithDay, sumAllMoney);
@@ -283,9 +283,9 @@ public class FragmentMainReportModel {
             mListReportDayOfWeek = new ArrayList<>();
             for (int i = 1; i <= endDayOffMonth; i++) {
                 if (i < 10) {
-                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_ONE + i, "0", Common.TOTAL_MONEY));
+                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_ONE + i, "0", Common.sTotalMoney));
                 } else {
-                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_TWO + i, "0", Common.TOTAL_MONEY));
+                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_TWO + i, "0", Common.sTotalMoney));
                 }
             }
         } catch (Exception e) {

@@ -1,7 +1,5 @@
 package vn.com.misa.ccl.Service;
 
-import android.app.Activity;
-
 /**
  * ‐ Mục đích Class thực hiện việc kết nối retrofit với server
  * <p>
@@ -13,7 +11,7 @@ import android.app.Activity;
 
 public class APIService {
 
-    private static String baseURL = "http://192.168.1.188:8080/MISATestUser/";
+    private static String sBaseURL = "http://192.168.1.188:8080/MISATestUser/";
 
     /**
      * Mục đích method thực hiện việc kết nối retrofit với server
@@ -22,6 +20,6 @@ public class APIService {
      * @created_by cvmanh on 01/31/2021
      */
     public static IDataService getService() {
-        return APIRetrofitClient.getClient(baseURL).create(IDataService.class);
+        return APIRetrofitClient.getClient(sBaseURL).create(IDataService.class);
     }
 }

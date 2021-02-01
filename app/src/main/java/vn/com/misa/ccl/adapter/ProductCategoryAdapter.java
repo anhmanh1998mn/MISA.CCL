@@ -2,13 +2,9 @@ package vn.com.misa.ccl.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Random;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.ProductCategory;
@@ -66,13 +59,13 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProductCategory.get(position).getmProduct().getmProductImage().getmImage(), 0,
-                    mListProductCategory.get(position).getmProduct().getmProductImage().getmImage().length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(mListProductCategory.get(position).getProduct().getProductImage().getImage(), 0,
+                    mListProductCategory.get(position).getProduct().getProductImage().getImage().length);
             holder.ivItemMenu.setImageBitmap(bitmap);
-            holder.tvFootName.setText(mListProductCategory.get(position).getmProduct().getmProductName());
+            holder.tvFootName.setText(mListProductCategory.get(position).getProduct().getProductName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getmProduct().getmProductPrice())));
-            holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getmProduct().getmColor().getColorName()));
+            holder.tvFootPrice.setText(String.valueOf(decimalFormat.format(mListProductCategory.get(position).getProduct().getProductPrice())));
+            holder.cvImage.getBackground().setTint(Color.parseColor(mListProductCategory.get(position).getProduct().getColor().getColorName()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

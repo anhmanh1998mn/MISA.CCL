@@ -25,7 +25,7 @@ import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private int TIME_SHOW = 2000;
+    private final int TIME_SHOW = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,9 +1,7 @@
 package vn.com.misa.ccl.view.report;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,10 +23,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -54,7 +49,6 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Report;
 import vn.com.misa.ccl.presenter.FragmentMainReportPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
-import vn.com.misa.ccl.view.report.day.ActivityReportWithDay;
 
 /**
  * ‐ Mục đích Class thực hiện việc chứa các fragment thống kê và hiển thị biểu đồ thống kê
@@ -67,7 +61,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     private LinearLayout llReportHeader;
 
-    private Dialog mDialogTimeOption, mDialogReportTimeOrther;
+    private Dialog dlgTimeOption, dlgReportTimeOrther;
 
     private ConstraintLayout clDialogMainReport, clReportTimeOrther;
 
@@ -106,7 +100,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
 
     private ReportWithYearAdapter mReportWithYearAdapter;
 
-    private int numberOfDay = 7;
+    private int mNumberOfDay = 7;
 
     @Nullable
     @Override
@@ -216,8 +210,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
                     break;
                 }
                 case R.id.tvCancel: {
-                    mDialogReportTimeOrther.dismiss();
-                    mDialogTimeOption.show();
+                    dlgReportTimeOrther.dismiss();
+                    dlgTimeOption.show();
                     break;
                 }
                 case R.id.tvAccept: {
@@ -248,7 +242,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSix.setVisibility(View.GONE);
             ivTickSeven.setVisibility(View.GONE);
             ivTickEight.setVisibility(View.VISIBLE);
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             showDialogTimeOrther();
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,7 +269,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSeven.setVisibility(View.VISIBLE);
             ivTickEight.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_last_year));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChartWithYear(getActivity(), "LastYear");
         } catch (Exception e) {
@@ -303,7 +297,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSeven.setVisibility(View.GONE);
             ivTickEight.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_this_year));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChartWithYear(getActivity(), "ThisYear");
         } catch (Exception e) {
@@ -331,7 +325,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSeven.setVisibility(View.GONE);
             ivTickEight.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_last_mont));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(), "LastMonth");
         } catch (Exception e) {
@@ -359,7 +353,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSeven.setVisibility(View.GONE);
             ivTickEight.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_this_month));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChartWithMonth(getActivity(), "ThisMonth");
         } catch (Exception e) {
@@ -387,7 +381,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ivTickSeven.setVisibility(View.GONE);
             ivTickEight.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_last_week));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChart(getActivity(), "LastWeek");
         } catch (Exception e) {
@@ -415,7 +409,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             tvOptionReport.setText(getResources().getString(R.string.time_this_week));
             rcvFoodReport.setVisibility(View.GONE);
             frmMainReportContent.setVisibility(View.GONE);
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
             replaceFragment(new FragmentReportTimeRecently());
             mFragmentMainReportPresenter = new FragmentMainReportPresenter(this);
             mFragmentMainReportPresenter.getReportLineChart(getActivity(), "ThisWeek");
@@ -445,7 +439,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             llReportNull.setVisibility(View.GONE);
             llReportLine.setVisibility(View.GONE);
             tvOptionReport.setText(getResources().getString(R.string.time_new));
-            mDialogTimeOption.dismiss();
+            dlgTimeOption.dismiss();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -458,10 +452,10 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
      */
     private void showDialogTimeOrther() {
         try {
-            mDialogReportTimeOrther = new Dialog(getContext());
-            mDialogReportTimeOrther.setContentView(R.layout.dialog_report_time_orther);
-            mDialogReportTimeOrther.show();
-            mDialogReportTimeOrther.setCanceledOnTouchOutside(false);
+            dlgReportTimeOrther = new Dialog(getContext());
+            dlgReportTimeOrther.setContentView(R.layout.dialog_report_time_orther);
+            dlgReportTimeOrther.show();
+            dlgReportTimeOrther.setCanceledOnTouchOutside(false);
             initViewDialogTimeOrther();
             onClickViewDialogTimeOrther();
         } catch (Exception e) {
@@ -476,13 +470,13 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
      */
     private void initViewDialogTimeOrther() {
         try {
-            clReportTimeOrther = mDialogReportTimeOrther.findViewById(R.id.clReportTimeOrther);
+            clReportTimeOrther = dlgReportTimeOrther.findViewById(R.id.clReportTimeOrther);
             clReportTimeOrther.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
             clReportTimeOrther.requestLayout();
-            tvStartDay = mDialogReportTimeOrther.findViewById(R.id.tvStartDay);
-            tvEndDay = mDialogReportTimeOrther.findViewById(R.id.tvEndDay);
-            tvCancel = mDialogReportTimeOrther.findViewById(R.id.tvCancel);
-            tvAccept = mDialogReportTimeOrther.findViewById(R.id.tvAccept);
+            tvStartDay = dlgReportTimeOrther.findViewById(R.id.tvStartDay);
+            tvEndDay = dlgReportTimeOrther.findViewById(R.id.tvEndDay);
+            tvCancel = dlgReportTimeOrther.findViewById(R.id.tvCancel);
+            tvAccept = dlgReportTimeOrther.findViewById(R.id.tvAccept);
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
@@ -550,9 +544,9 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
      */
     private void showDialogTimeOption() {
         try {
-            mDialogTimeOption = new Dialog(getContext());
-            mDialogTimeOption.setContentView(R.layout.dialog_main_report);
-            mDialogTimeOption.show();
+            dlgTimeOption = new Dialog(getContext());
+            dlgTimeOption.setContentView(R.layout.dialog_main_report);
+            dlgTimeOption.show();
             initViewDialog();
             onCLickViewDialogListener();
         } catch (Exception e) {
@@ -567,25 +561,25 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
      */
     private void initViewDialog() {
         try {
-            clDialogMainReport = mDialogTimeOption.findViewById(R.id.clDialogMainReport);
+            clDialogMainReport = dlgTimeOption.findViewById(R.id.clDialogMainReport);
             clDialogMainReport.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
             clDialogMainReport.requestLayout();
-            tvTimeNew = mDialogTimeOption.findViewById(R.id.tvTimeNew);
-            ivTick = mDialogTimeOption.findViewById(R.id.ivTick);
-            tvTimeThisWeek = mDialogTimeOption.findViewById(R.id.tvTimeThisWeek);
-            ivTickTwo = mDialogTimeOption.findViewById(R.id.ivTickTwo);
-            tvTimeLastWeek = mDialogTimeOption.findViewById(R.id.tvTimeLastWeek);
-            ivTickThree = mDialogTimeOption.findViewById(R.id.ivTickThree);
-            tvTimeThisMonth = mDialogTimeOption.findViewById(R.id.tvTimeThisMonth);
-            ivTickFour = mDialogTimeOption.findViewById(R.id.ivTickFour);
-            tvTimeLastMonth = mDialogTimeOption.findViewById(R.id.tvTimeLastMonth);
-            ivTickFive = mDialogTimeOption.findViewById(R.id.ivTickFive);
-            tvTimeThisYear = mDialogTimeOption.findViewById(R.id.tvTimeThisYear);
-            ivTickSix = mDialogTimeOption.findViewById(R.id.ivTickSix);
-            tvTimeLastYear = mDialogTimeOption.findViewById(R.id.tvTimeLastYear);
-            ivTickSeven = mDialogTimeOption.findViewById(R.id.ivTickSeven);
-            tvTimeOther = mDialogTimeOption.findViewById(R.id.tvTimeOther);
-            ivTickEight = mDialogTimeOption.findViewById(R.id.ivTickEight);
+            tvTimeNew = dlgTimeOption.findViewById(R.id.tvTimeNew);
+            ivTick = dlgTimeOption.findViewById(R.id.ivTick);
+            tvTimeThisWeek = dlgTimeOption.findViewById(R.id.tvTimeThisWeek);
+            ivTickTwo = dlgTimeOption.findViewById(R.id.ivTickTwo);
+            tvTimeLastWeek = dlgTimeOption.findViewById(R.id.tvTimeLastWeek);
+            ivTickThree = dlgTimeOption.findViewById(R.id.ivTickThree);
+            tvTimeThisMonth = dlgTimeOption.findViewById(R.id.tvTimeThisMonth);
+            ivTickFour = dlgTimeOption.findViewById(R.id.ivTickFour);
+            tvTimeLastMonth = dlgTimeOption.findViewById(R.id.tvTimeLastMonth);
+            ivTickFive = dlgTimeOption.findViewById(R.id.ivTickFive);
+            tvTimeThisYear = dlgTimeOption.findViewById(R.id.tvTimeThisYear);
+            ivTickSix = dlgTimeOption.findViewById(R.id.ivTickSix);
+            tvTimeLastYear = dlgTimeOption.findViewById(R.id.tvTimeLastYear);
+            ivTickSeven = dlgTimeOption.findViewById(R.id.ivTickSeven);
+            tvTimeOther = dlgTimeOption.findViewById(R.id.tvTimeOther);
+            ivTickEight = dlgTimeOption.findViewById(R.id.ivTickEight);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -639,8 +633,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
     public void getListProductReportWithPeroid(List<OrderDetail> listProductReport, float sumAllMoney) {
         try {
             Log.d("mmmm", sumAllMoney + "");
-            mDialogReportTimeOrther.dismiss();
-            mDialogTimeOption.dismiss();
+            dlgReportTimeOrther.dismiss();
+            dlgTimeOption.dismiss();
             rcvFoodReport.setVisibility(View.VISIBLE);
             cvChart.setVisibility(View.VISIBLE);
             frmMainReportContent.setVisibility(View.GONE);
@@ -768,7 +762,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
     @Override
     public void onFailed() {
         try {
-            mDialogReportTimeOrther.dismiss();
+            dlgReportTimeOrther.dismiss();
             llReportNull.setVisibility(View.VISIBLE);
             rcvFoodReport.setVisibility(View.GONE);
             cvChart.setVisibility(View.GONE);
@@ -830,8 +824,8 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
             ArrayList<PieEntry> daVal = new ArrayList<>();
             for (int i = 0; i < mListProductReport.size(); i++) {
                 if (i < 7) {
-                    daVal.add(new PieEntry((mListProductReport.get(i).getmProductPriceOut() / mTotalMoneyDay) * 100, "%"));
-                    float a = (mListProductReport.get(i).getmProductPriceOut());
+                    daVal.add(new PieEntry((mListProductReport.get(i).getProductPriceOut() / mTotalMoneyDay) * 100, "%"));
+                    float a = (mListProductReport.get(i).getProductPriceOut());
                 }
             }
             return daVal;
@@ -886,7 +880,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
         try {
             ArrayList<Entry> dataValue = new ArrayList<>();
             for (int i = 0; i < mListReport.size(); i++) {
-                if (mListReport.size() > numberOfDay) {
+                if (mListReport.size() > mNumberOfDay) {
                     dataValue.add(new Entry(i + 1, mListReport.get(i).getTotalMoney() / 1000));
 
                 } else {

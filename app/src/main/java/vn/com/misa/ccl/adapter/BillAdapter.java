@@ -48,10 +48,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.Viewholder> {
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         try {
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            holder.tvProductName.setText(mListOrderDetail.get(position).getmProduct().getmProductName());
-            holder.tvAmount.setText(String.valueOf(mListOrderDetail.get(position).getmQuantity()));
-            holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getmProductPriceOut()));
-            holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getmQuantity() * mListOrderDetail.get(position).getmProductPriceOut()));
+            holder.tvProductName.setText(mListOrderDetail.get(position).getProduct().getProductName());
+            holder.tvAmount.setText(String.valueOf(mListOrderDetail.get(position).getQuantity()));
+            holder.tvUnitPrice.setText(decimalFormat.format(mListOrderDetail.get(position).getProductPriceOut()));
+            holder.tvTotalMoney.setText(decimalFormat.format(mListOrderDetail.get(position).getQuantity() * mListOrderDetail.get(position).getProductPriceOut()));
         } catch (Exception e) {
             e.printStackTrace();
         }

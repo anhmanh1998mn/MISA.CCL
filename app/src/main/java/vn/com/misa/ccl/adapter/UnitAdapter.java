@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,14 +62,14 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-            holder.tvUnitName.setText(mListUnit.get(position).getmUnitName());
+            holder.tvUnitName.setText(mListUnit.get(position).getUnitName());
 //            holder.frmIconUpdate.getBackground().setTint(mContext.getResources().getColor(R.color.white));
             holder.clUnit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mIItemClickListener != null) {
-                        mIItemClickListener.getUnitNameItemClick(mListUnit.get(position).getmUnitName(),
-                                mListUnit.get(position).getmUnitID());
+                        mIItemClickListener.getUnitNameItemClick(mListUnit.get(position).getUnitName(),
+                                mListUnit.get(position).getUnitID());
                     }
 
                     if (clUnit != null && ivCheck != null) {

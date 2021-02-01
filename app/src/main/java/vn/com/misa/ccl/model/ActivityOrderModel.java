@@ -257,9 +257,9 @@ public class ActivityOrderModel {
                     for (int i = 0; i < listProduct.size(); i++) {
                         if (listProduct.get(i).getQuantity() > 0) {
                             contentOrderDetail.put(DatabaseInfomation.COLUMN_ORDER_ID, resultInsertOrder);
-                            contentOrderDetail.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID, listProduct.get(i).getmProductID());
+                            contentOrderDetail.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID, listProduct.get(i).getProductID());
                             contentOrderDetail.put(DatabaseInfomation.COLUMN_QUANTITY, listProduct.get(i).getQuantity());
-                            contentOrderDetail.put(DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT, listProduct.get(i).getmProductPrice());
+                            contentOrderDetail.put(DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT, listProduct.get(i).getProductPrice());
                             mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDER_DETAIL, null, contentOrderDetail);
                         }
                     }
@@ -411,9 +411,9 @@ public class ActivityOrderModel {
                     for (int i = 0; i < listProdcut.size(); i++) {
                         if (listProdcut.get(i).getQuantity() > 0) {
                             contentValues.put(DatabaseInfomation.COLUMN_ORDER_ID, orderID);
-                            contentValues.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID, listProdcut.get(i).getmProductID());
+                            contentValues.put(DatabaseInfomation.COLUMN_MYPRODUCT_ID, listProdcut.get(i).getProductID());
                             contentValues.put(DatabaseInfomation.COLUMN_QUANTITY, listProdcut.get(i).getQuantity());
-                            contentValues.put(DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT, listProdcut.get(i).getmProductPrice());
+                            contentValues.put(DatabaseInfomation.COLUM_PRODUCT_PRICE_OUT, listProdcut.get(i).getProductPrice());
                             long resultInsertOrderDetail = mSqliteDatabase.insert(DatabaseInfomation.TABLE_ORDER_DETAIL, null, contentValues);
 
                         }
@@ -445,8 +445,8 @@ public class ActivityOrderModel {
         try {
             for (int i = 0; i < listProduct.size(); i++) {
                 for (int j = 0; j < listOrder.size(); j++) {
-                    if (listProduct.get(i).getmProductID() == listOrder.get(j).getmProduct().getmProductID()) {
-                        listProduct.get(i).setQuantity(listProduct.get(i).getQuantity() + listOrder.get(j).getmQuantity());
+                    if (listProduct.get(i).getProductID() == listOrder.get(j).getProduct().getProductID()) {
+                        listProduct.get(i).setQuantity(listProduct.get(i).getQuantity() + listOrder.get(j).getQuantity());
                     }
                 }
             }

@@ -261,7 +261,7 @@ public class ActivityReportWithDayModel {
             }
             float sumAllMoney = 0;
             for (int i = 0; i < mListProductWithDay.size(); i++) {
-                sumAllMoney = sumAllMoney + mListProductWithDay.get(i).getmProductPriceOut();
+                sumAllMoney = sumAllMoney + mListProductWithDay.get(i).getProductPriceOut();
             }
             if (cursor.getCount() > 0) {
                 mIActivityReportWithDayModel.getListReportWithPeroidSuccess(mListProductWithDay);

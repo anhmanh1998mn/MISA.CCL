@@ -10,28 +10,28 @@ import java.io.Serializable;
 
 public class ProductImage implements Serializable {
 
-    private int mProductImageID;
+    private int productImageID;
 
-    private byte[] mImage;
+    private byte[] image;
 
-    public int getmProductImageID() {
-        return mProductImageID;
+    public int getProductImageID() {
+        return productImageID;
     }
 
-    public void setmProductImageID(int mProductImageID) {
-        this.mProductImageID = mProductImageID;
+    public void setProductImageID(int productImageID) {
+        this.productImageID = productImageID;
     }
 
-    public byte[] getmImage() {
-        return mImage;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setmImage(byte[] mImage) {
-        this.mImage = mImage;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public ProductImage(int mProductImageID, byte[] mImage) {
-        this.mProductImageID = mProductImageID;
-        this.mImage = mImage;
+        this.productImageID = mProductImageID;
+        this.image = mImage;
     }
 }

@@ -1,7 +1,5 @@
 package vn.com.misa.ccl.Service;
 
-import android.app.Activity;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIRetrofitClient {
 
-    public static Retrofit retrofit = null;
+    public static Retrofit sRetrofit = null;
 
     /**
      * Mục đích method thực hiện việc cài đặt retrofit
@@ -42,11 +40,11 @@ public class APIRetrofitClient {
                 .protocols(Arrays.asList(Protocol.HTTP_1_1))
                 .build();
         Gson gson = new GsonBuilder().setLenient().create();
-        retrofit = new Retrofit.Builder()
+        sRetrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        return retrofit;
+        return sRetrofit;
     }
 }
