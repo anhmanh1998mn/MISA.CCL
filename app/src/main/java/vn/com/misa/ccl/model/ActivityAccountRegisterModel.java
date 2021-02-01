@@ -23,7 +23,10 @@ import vn.com.misa.ccl.Service.IDataService;
  */
 
 public class ActivityAccountRegisterModel {
+
     private IActivityRegisterModel mIActivityRegisterModel;
+
+    private int MAX_LENGHT_TEXT = 6;
 
     public ActivityAccountRegisterModel(IActivityRegisterModel mIActivityRegisterModel) {
         this.mIActivityRegisterModel = mIActivityRegisterModel;
@@ -39,7 +42,7 @@ public class ActivityAccountRegisterModel {
      */
     public void doRegisterAccount(String userName, String passWord) {
         try {
-            if (userName.equals("") || passWord.equals("") || userName.length() < 6 || passWord.length() < 6) {
+            if (userName.equals("") || passWord.equals("") || userName.length() < MAX_LENGHT_TEXT || passWord.length() < MAX_LENGHT_TEXT) {
                 mIActivityRegisterModel.onFailed();
                 return;
             }

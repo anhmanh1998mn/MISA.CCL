@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.presenter.ActivityAccountPresenter;
+import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
 
 /**
  * ‐ Mục đích Class thực hiện những việc đăng ký tài khoản mới
@@ -131,6 +132,7 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
     @Override
     public void registerAccountSuccess() {
         Toast.makeText(this, getResources().getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, ActivityRestaurantType.class));
         finish();
     }
 

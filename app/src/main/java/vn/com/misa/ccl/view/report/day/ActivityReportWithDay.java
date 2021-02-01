@@ -107,13 +107,13 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
             if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
                 mAmount = intent.getStringExtra("AMOUNT");
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
-                tvTime.setText("Hôm nay");
+                tvTime.setText(getResources().getString(R.string.time_this_day));
                 getListProductReport();
 
             } else if (intent.getIntExtra("REPORT_TYPE", -1) == 1) {
                 mAmount = intent.getStringExtra("AMOUNT");
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
-                tvTime.setText("Hôm qua");
+                tvTime.setText(getResources().getString(R.string.time_last_day));
                 getListProductReportLastDay();
             } else if (intent.getIntExtra("REPORT_TYPE", -1) == 3) {
                 mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));

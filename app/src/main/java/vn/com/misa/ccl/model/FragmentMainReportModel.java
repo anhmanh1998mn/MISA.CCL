@@ -283,9 +283,9 @@ public class FragmentMainReportModel {
             mListReportDayOfWeek = new ArrayList<>();
             for (int i = 1; i <= endDayOffMonth; i++) {
                 if (i < 10) {
-                    mListReportDayOfWeek.add(new Report(i, "Ngày 0" + i, "0", 0));
+                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_ONE + i, "0", Common.TOTAL_MONEY));
                 } else {
-                    mListReportDayOfWeek.add(new Report(i, "Ngày " + i, "0", 0));
+                    mListReportDayOfWeek.add(new Report(i, Common.DAY_NAME_TWO + i, "0", Common.TOTAL_MONEY));
                 }
             }
         } catch (Exception e) {

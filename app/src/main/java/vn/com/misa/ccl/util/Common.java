@@ -28,4 +28,10 @@ public class Common {
     public static String SATURDAY="Thứ 7";
 
     public static String SUNDAY="Chủ nhật";
+
+    public static float TOTAL_MONEY=0;
+
+    public static String DAY_NAME_ONE="Ngày 0";
+
+    public static String DAY_NAME_TWO="Ngày ";
 }
