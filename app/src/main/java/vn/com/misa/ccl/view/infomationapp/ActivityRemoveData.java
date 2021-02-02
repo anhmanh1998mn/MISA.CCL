@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import vn.com.misa.ccl.R;
+import vn.com.misa.ccl.util.NetworkConnection;
 
 /**
  * ‐ Mục đích Class thực hiện việc xóa dữ liệu trên máy và lấy dữ liệu mới nhất từ server
@@ -20,7 +22,7 @@ import vn.com.misa.ccl.R;
  * ‐ @created_by cvmanh on 01/31/2021
  */
 
-public class ActivityRemoveData extends AppCompatActivity {
+public class ActivityRemoveData extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvBack, tvSettingName, tvComfirmRemove, tvSyncDate;
 
@@ -37,16 +39,20 @@ public class ActivityRemoveData extends AppCompatActivity {
 
         receiveIntent();
 
-        try {
-            tvBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        onViewClickListener();
+
+    }
+
+    /**
+     * Mục đích method thực hiện việc lắng nghe xự kiện click từ ngừi dùng
+     *
+     * @return giải thích hàm này trả về
+     * @created_by cvmanh on 02/02/2021
+     */
+    private void onViewClickListener() {
+        tvComfirmRemove.setOnClickListener(this);
+        tvBack.setOnClickListener(this);
+        btnSyncNow.setOnClickListener(this);
     }
 
     /**
@@ -90,6 +96,36 @@ public class ActivityRemoveData extends AppCompatActivity {
             tvSyncDate.setVisibility(View.VISIBLE);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý các công việc theo view click
+     *
+     * @param view view
+     * @created_by cvmanh on 02/02/2021
+     */
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvBack: {
+                finish();
+                break;
+            }
+            case R.id.tvComfirmRemove: {
+                if (NetworkConnection.checkNetworkConnection(this)) {
+                    return;
+                }
+                Toast.makeText(this, getResources().getString(R.string.error_network_disconnected), Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.btnSyncNow: {
+                if (NetworkConnection.checkNetworkConnection(this)) {
+                    return;
+                }
+                Toast.makeText(this, getResources().getString(R.string.error_network_disconnected), Toast.LENGTH_SHORT).show();
+                break;
+            }
         }
     }
 }

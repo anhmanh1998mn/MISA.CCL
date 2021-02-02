@@ -108,6 +108,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvUserInformation"
+                    style="@style/Theme.FontTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_large"
+                    android:text="@string/login"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/tvRegister"
+                    app:layout_constraintTop_toBottomOf="@+id/ivUser" />
+
+                <TextView
                     android:id="@+id/tvLogin"
                     style="@style/Theme.FontTextUser"
                     android:background="@drawable/view_login_button"
@@ -138,6 +149,41 @@
                 style="@style/Theme.VerticalLine"
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@+id/rcvMenu" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clAccountLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/line">
+
+                <TextView
+                    android:id="@+id/tvAccount"
+                    style="@style/Theme.FontText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_text_normal"
+                    android:drawablePadding="@dimen/padding_small"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:text="@string/account_name"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_text_size"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvLogoutAccount"
+                    style="@style/Theme.FontText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_text_normal"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_logout"
+                    android:drawablePadding="@dimen/padding_small"
+                    android:focusable="true"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:text="@string/logout"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.navigation.NavigationView>

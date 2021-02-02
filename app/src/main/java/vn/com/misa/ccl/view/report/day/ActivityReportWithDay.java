@@ -19,6 +19,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import vn.com.misa.ccl.R;
@@ -125,12 +128,26 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
                 mDayName = intent.getStringExtra("YEAR_NAME") + "-" + intent.getStringExtra("MONTH_NAME");
                 tvTime.setText("Tháng " + intent.getStringExtra("MONTH_NAME") + " (01/" +
                         intent.getStringExtra("MONTH_NAME") + "/" + intent.getStringExtra("YEAR_NAME") + " - " +
-                        "29/" + intent.getStringExtra("MONTH_NAME") + "/" + intent.getStringExtra("YEAR_NAME") + ")");
+                        getEndDayWithMonth(Integer.parseInt(intent.getStringExtra("YEAR_NAME")),
+                                Integer.parseInt(intent.getStringExtra("MONTH_NAME"))) + "/" + intent.getStringExtra("MONTH_NAME") + "/" + intent.getStringExtra("YEAR_NAME") + ")");
                 getReportTimeYear();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc lấy ngày cuối cùng của tháng năm được truyền vào
+     *
+     * @param year  Năm
+     * @param month Tháng
+     * @return trả về ngày cuối cùng của tháng năm được truyền vào
+     * @created_by cvmanh on 02/01/2021
+     */
+    private int getEndDayWithMonth(int year, int month) {
+        Calendar calendar = new GregorianCalendar(year, month, 1);
+        return calendar.getActualMaximum(Calendar.DATE);
     }
 
     /**

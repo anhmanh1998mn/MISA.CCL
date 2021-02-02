@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,8 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.presenter.ActivityOrderPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.view.login.ActivityLogin;
+import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 
 /**
@@ -354,6 +357,15 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
         try {
             switch (view.getId()) {
                 case R.id.tvSave: {
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
+
                     mActivityOrderPresenter = new ActivityOrderPresenter(this);
                     if (mOrderID == -1) {
                         mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonSave);
@@ -364,6 +376,13 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                     break;
                 }
                 case R.id.btnMoney: {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     if (mOrderID == -1) {
                         mActivityOrderPresenter = new ActivityOrderPresenter(this);
                         mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonMoney);
@@ -456,6 +475,13 @@ public class ActivityOrder extends AppCompatActivity implements IActivityOrder.I
                     break;
                 }
                 case R.id.tvNext: {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     if (mOrderID == -1) {
                         mActivityOrderPresenter = new ActivityOrderPresenter(this);
                         mActivityOrderPresenter.addNewOrder(this, mListProduct, tvSelectTable.getText().toString(), tvPeopeNumber.getText().toString(), mAmount, mClickButtonMoney);

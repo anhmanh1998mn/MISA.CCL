@@ -3,8 +3,10 @@ package vn.com.misa.ccl.view.login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import java.security.NoSuchAlgorithmException;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.presenter.ActivityLoginPresenter;
+import vn.com.misa.ccl.util.Common;
+import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityRestaurantType;
@@ -186,9 +190,15 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      * @created_by cvmanh on 01/31/2021
      */
     @Override
-    public void loginSuccess() {
+    public void loginSuccess(int shopID) {
         Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ActivityRestaurantType.class));
+//        startActivity(new Intent(this, ActivityRestaurantType.class));
+        startActivity(new Intent(this, ActivityRestaurantManage.class));
+        SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("SHOP_ID", String.valueOf(shopID));
+        editor.putString("SHOP_NAME", etUserName.getText().toString());
+        editor.commit();
         finish();
     }
 

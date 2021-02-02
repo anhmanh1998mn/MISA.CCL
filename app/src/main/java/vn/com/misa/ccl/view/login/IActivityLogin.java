@@ -9,7 +9,7 @@ public interface IActivityLogin {
     }
 
     public interface IActivityLoginView{
-        public void loginSuccess();
+        public void loginSuccess(int shopID);
 
         public void onFailed();
     }

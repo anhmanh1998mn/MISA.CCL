@@ -61,6 +61,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
+
             if (position == 3 || position == 6) { //3: Item là Thiết lập, 6: Item là trợ giúp
                 holder.tvSettingName.setText(mListSetting.get(position).getSettingName());
                 holder.line.setVisibility(View.VISIBLE);
@@ -78,6 +79,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
                     mIOnCLickViewListener.onCLickListener(mListSetting.get(position).getSettingName());
                 }
             });
+
         } catch (Exception e) {
             e.printStackTrace();
         }

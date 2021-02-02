@@ -2,6 +2,7 @@ package vn.com.misa.ccl.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,11 @@ import java.util.List;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.util.Common;
+import vn.com.misa.ccl.view.login.ActivitySelectionOptionLogin;
 import vn.com.misa.ccl.view.order.ActivityBill;
 import vn.com.misa.ccl.view.order.ActivityOrder;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * ‐ Mục đích Class thực hiện việc quy định dữ liệu và cách hiển thị lên view
@@ -41,11 +45,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     private String ORDER_ID = "ORDER_ID";
 
-    private String TABLE_NAME="TABLE_NAME";
+    private String TABLE_NAME = "TABLE_NAME";
 
-    private String TOTAL_NUMBER="TOTAL_NUMBER";
+    private String TOTAL_NUMBER = "TOTAL_NUMBER";
 
-    private String AMOUNT="AMOUNT";
+    private String AMOUNT = "AMOUNT";
 
     private ICLickButtonRemove mICLickButtonRemove;
 
@@ -101,6 +105,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             holder.tvSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sharedPreferences = mContext.getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(mContext, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        mContext.startActivity(intent);
+                        return;
+                    }
                     Intent intent = new Intent(mContext, ActivityBill.class);
                     intent.putExtra(ORDER_ID, mListOrderDetail.get(position).getOrder().getOrderId());
                     mContext.startActivity(intent);

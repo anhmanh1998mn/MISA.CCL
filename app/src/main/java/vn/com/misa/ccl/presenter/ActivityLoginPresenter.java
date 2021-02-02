@@ -44,8 +44,8 @@ public class ActivityLoginPresenter implements IActivityLogin.IActivityLoginPres
      * @created_by cvmanh on 01/31/2021
      */
     @Override
-    public void loginSuccess() {
-        mIActivityLoginView.loginSuccess();
+    public void loginSuccess(int shopID) {
+        mIActivityLoginView.loginSuccess(shopID);
     }
 
     /**

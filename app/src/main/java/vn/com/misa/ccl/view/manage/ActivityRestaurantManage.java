@@ -2,6 +2,7 @@ package vn.com.misa.ccl.view.manage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +52,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
     private DrawerLayout dlRestaurantManage;
 
-    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu, tvVisible, tvLogin, tvRegister;
+    private TextView tvMenu, tvAdd, tvSetupName, tvAddMenu, tvVisible, tvLogin, tvRegister, tvUserInformation, tvLogoutAccount;
 
     private ImageView ivUser;
 
@@ -59,6 +61,10 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
     private ActivityRestaurantManagePresenter mActivityManage;
 
     private SettingAdapter mSettingAdapter;
+
+    private List<Setting> mListSetting;
+
+    private ConstraintLayout clAccountLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,8 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         addFragment(new FragmentListOrder());
 
         loadListSetting();
+
+        checkUserLoginSuccess();
     }
 
     /**
@@ -94,6 +102,9 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvVisible = findViewById(R.id.tvVisible);
             tvLogin = findViewById(R.id.tvLogin);
             tvRegister = findViewById(R.id.tvRegister);
+            tvUserInformation = findViewById(R.id.tvUserInformation);
+            tvLogoutAccount = findViewById(R.id.tvLogoutAccount);
+            clAccountLogout = findViewById(R.id.clAccountLogout);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,6 +136,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
             tvAddMenu.setOnClickListener(this);
             tvLogin.setOnClickListener(this);
             tvRegister.setOnClickListener(this);
+            tvLogoutAccount.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,6 +176,16 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                 }
                 case R.id.tvRegister: {
                     startActivity(new Intent(this, ActivityAccountRegister.class));
+                    break;
+                }
+                case R.id.tvLogoutAccount: {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("SHOP_ID", "");
+                    editor.commit();
+
+                    checkUserLoginSuccess();
+                    dlRestaurantManage.closeDrawer(GravityCompat.START);
                     break;
                 }
             }
@@ -213,6 +235,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
     @Override
     public void getListSettingSuccess(List<Setting> listSetting) {
         try {
+            mListSetting = listSetting;
             mSettingAdapter = new SettingAdapter(this, R.layout.item_setting, listSetting);
             rcvMenu.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
             rcvMenu.setAdapter(mSettingAdapter);
@@ -297,5 +320,21 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void checkUserLoginSuccess() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+        if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+            tvUserInformation.setVisibility(View.GONE);
+            tvLogin.setVisibility(View.VISIBLE);
+            tvRegister.setVisibility(View.VISIBLE);
+            clAccountLogout.setVisibility(View.GONE);
+            return;
+        }
+        tvUserInformation.setVisibility(View.VISIBLE);
+        tvLogin.setVisibility(View.GONE);
+        tvRegister.setVisibility(View.GONE);
+        tvUserInformation.setText(sharedPreferences.getString("SHOP_NAME", ""));
+        clAccountLogout.setVisibility(View.VISIBLE);
     }
 }

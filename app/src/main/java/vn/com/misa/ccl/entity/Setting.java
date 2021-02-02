@@ -15,6 +15,22 @@ public class Setting {
 
     private Integer iconSetting;
 
+    private boolean checkLogout;
+
+    public boolean isCheckLogout() {
+        return checkLogout;
+    }
+
+    public void setCheckLogout(boolean checkLogout) {
+        this.checkLogout = checkLogout;
+    }
+
+    public Setting(String settingName, Integer iconSetting, boolean checkLogout) {
+        this.settingName = settingName;
+        this.iconSetting = iconSetting;
+        this.checkLogout = checkLogout;
+    }
+
     public String getSettingName() {
         return settingName;
     }

@@ -1,5 +1,7 @@
 package vn.com.misa.ccl.model;
 
+import android.util.Log;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -45,11 +47,13 @@ public class ActivityLoginModel {
             callback.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.body().toString().trim().equals("Success")) {
-                        mIActivityLoginModel.loginSuccess();
+                    if (response.body().toString().trim().equals("onFailed")) {
+                        mIActivityLoginModel.onFailed();
                         return;
                     }
-                    mIActivityLoginModel.onFailed();
+                    int shopID = Integer.parseInt(response.body().toString().trim());
+                    mIActivityLoginModel.loginSuccess(shopID);
+                    Log.d("ShopID", shopID + "");
                 }
 
                 @Override
@@ -84,7 +88,7 @@ public class ActivityLoginModel {
     }
 
     public interface IActivityLoginModel {
-        public void loginSuccess();
+        public void loginSuccess(int shopID);
 
         public void onFailed();
     }
