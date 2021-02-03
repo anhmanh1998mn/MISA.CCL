@@ -19,10 +19,10 @@ import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
  * ‐ Mục đích Class thực hiện việc xử lý các yêu cầu từ ActivityLoginPresenter truyền sang
- * <p>
+ *
  * ‐ {@link vn.com.misa.ccl.presenter.ActivityLoginPresenter}
  * ‐ {@link APIService}
- * <p>
+ *
  * ‐ @created_by cvmanh on 01/31/2021
  */
 
