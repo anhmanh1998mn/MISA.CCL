@@ -1,9 +1,13 @@
 package vn.com.misa.ccl.service;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import vn.com.misa.ccl.entity.Order;
+import vn.com.misa.ccl.entity.Product;
 
 /**
  * ‐ Mục đích Class thực hiện việc định nghĩa các phương thức thao tác với server
@@ -115,4 +119,5 @@ public interface IDataService {
                                              @Field("ProductPriceOut") float productPriceOut,
                                              @Field("ProductLocalID") int productLocalID,
                                              @Field("OrderServerID") float orderServerID);
+
 }

@@ -43,12 +43,11 @@ public class ActivityLoginPresenter implements IActivityLogin.IActivityLoginPres
      * đăng nhập
      *
      * @param shopID mã cửa hàng đăng nhập
-     *
      * @created_by cvmanh on 02/03/2021
      */
     @Override
-    public void checkSyncData(int shopID,Activity activity) {
-        mActivityLoginModel.checkSyncData(shopID,activity);
+    public void checkSyncData(int shopID, Activity activity) {
+        mActivityLoginModel.checkSyncData(shopID, activity);
     }
 
     /**
