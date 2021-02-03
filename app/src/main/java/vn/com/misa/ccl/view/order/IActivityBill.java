@@ -14,6 +14,8 @@ public interface IActivityBill {
         public void processCaculator(Activity activity, String resultProcess, String nameClick, float amount);
 
         public void updateOrderStatus(Activity activity, int orderID);
+
+        public void doInsertOrderDataToServer(int shopID,List<OrderDetail> listOrderDetail);
     }
 
     public interface IActivityBillView {

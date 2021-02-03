@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.presenter.ActivityLoginPresenter;
 import vn.com.misa.ccl.util.Common;
+import vn.com.misa.ccl.util.NetworkConnection;
 import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
 import vn.com.misa.ccl.view.restaurantsetup.ActivityAppInformation;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
@@ -199,7 +200,30 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         editor.putString("SHOP_ID", String.valueOf(shopID));
         editor.putString("SHOP_NAME", etUserName.getText().toString());
         editor.commit();
+
+        checkSyncData(shopID);
+
         finish();
+    }
+
+    /**
+     * Mục đích method thực hiện việc kiểm tra trến server đã tồn tại dữ liệu với id của tài khoản đăng nhập
+     *
+     * @param shopID mã cửa hàng đăng nhập
+     *
+     * @created_by cvmanh on 02/03/2021
+     */
+    private void checkSyncData(int shopID) {
+        if(NetworkConnection.checkNetworkConnection(this)){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mActivityLoginPresenter=new ActivityLoginPresenter(ActivityLogin.this);
+                    mActivityLoginPresenter.checkSyncData(shopID,ActivityLogin.this);
+                }
+            }).start();
+            return;
+        }
     }
 
     /**

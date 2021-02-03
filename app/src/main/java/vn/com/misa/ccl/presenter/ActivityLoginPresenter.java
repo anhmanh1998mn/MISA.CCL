@@ -39,6 +39,19 @@ public class ActivityLoginPresenter implements IActivityLogin.IActivityLoginPres
     }
 
     /**
+     * Mục đích method thực hiện việc gọi model xử lý kiểm tra đã tồn tại dữ liệu trên server với mã id của cửa hàng
+     * đăng nhập
+     *
+     * @param shopID mã cửa hàng đăng nhập
+     *
+     * @created_by cvmanh on 02/03/2021
+     */
+    @Override
+    public void checkSyncData(int shopID,Activity activity) {
+        mActivityLoginModel.checkSyncData(shopID,activity);
+    }
+
+    /**
      * Mục đích method thực hiện việc nhận kết quả đăng nhập thành công và trả kết quả về view
      *
      * @created_by cvmanh on 01/31/2021

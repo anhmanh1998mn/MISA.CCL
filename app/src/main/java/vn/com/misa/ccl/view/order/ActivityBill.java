@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import vn.com.misa.ccl.adapter.BillAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.ActivityBillPresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.util.NetworkConnection;
 
 /**
  * ‐ Mục đích Class thực hiện những công việc hiển thị chi tiết hóa đơn
@@ -331,6 +333,18 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
                 }
                 case R.id.btnSuccess: {
                     mActivityBillPresenter = new ActivityBillPresenter(this);
+                    if (NetworkConnection.checkNetworkConnection(this)) {
+                        mActivityBillPresenter.updateOrderStatus(this, mOrderID);
+                        SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                        int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mActivityBillPresenter.doInsertOrderDataToServer(shopID, mListOrderDetail);
+                            }
+                        }).start();
+                        return;
+                    }
                     mActivityBillPresenter.updateOrderStatus(this, mOrderID);
                     break;
                 }

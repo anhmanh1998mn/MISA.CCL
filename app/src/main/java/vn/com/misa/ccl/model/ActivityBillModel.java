@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Color;
 import vn.com.misa.ccl.entity.Order;
@@ -19,6 +22,8 @@ import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.entity.Unit;
+import vn.com.misa.ccl.service.APIService;
+import vn.com.misa.ccl.service.IDataService;
 import vn.com.misa.ccl.util.DatabaseInfomation;
 
 /**
@@ -43,7 +48,7 @@ public class ActivityBillModel {
 
     private String resultNumberEnter = "0";
 
-    private final int ORDER_STATUS_SUCCESS=2;
+    private final int ORDER_STATUS_SUCCESS = 2;
 
     /**
      * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
@@ -273,6 +278,74 @@ public class ActivityBillModel {
             mIActivityBillModel.onFailed();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc thêm dữ liệu order lên server
+     *
+     * @param shopID          mã cửa hàng
+     * @param listOrderDetail thông tin order
+     * @created_by cvmanh on 02/03/2021
+     */
+    public void doInsertOrderDataToServer(int shopID, List<OrderDetail> listOrderDetail) {
+        IDataService dataService = APIService.getService();
+        Call<String> callbackInsertOrder = dataService.doInsertOrderDataToServer(
+                2,
+                listOrderDetail.get(0).getOrder().getCreatedAt(),
+                listOrderDetail.get(0).getOrder().getTableName(),
+                listOrderDetail.get(0).getOrder().getTotalPeople(),
+                listOrderDetail.get(0).getOrder().getTotalMoney(),
+                listOrderDetail.get(0).getOrder().getOrderId(),
+                shopID
+        );
+        callbackInsertOrder.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.body().toString().trim().equals("Failed")) {
+                    return;
+                }
+                doInsertOrderDetailToServer(Integer.parseInt(response.body().toString().trim()), shopID, listOrderDetail);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý thêm thông tin chi tiết order lên server
+     *
+     * @param orderServerID Mã order trên server
+     * @param shopID        mã cửa hàng
+     * @param listDetail    danh sách sản phẩm
+     * @created_by cvmanh on 02/03/2021
+     */
+    private void doInsertOrderDetailToServer(int orderServerID, int shopID, List<OrderDetail> listDetail) {
+        IDataService dataService = APIService.getService();
+        for (int i = 0; i < listDetail.size(); i++) {
+            Call<String> callbackInsertDetail = dataService.doInsertOrderDetailToServer(
+                    listDetail.get(i).getOrder().getOrderId(),
+                    shopID, listDetail.get(i).getQuantity(), listDetail.get(i).getProductPriceOut(),
+                    listDetail.get(i).getProduct().getProductID(),
+                    orderServerID
+            );
+            callbackInsertDetail.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.body().toString().trim().equals("Success")) {
+                        Log.d("Success", "Success");
+                        return;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("Failed", t.toString());
+                }
+            });
         }
     }
 

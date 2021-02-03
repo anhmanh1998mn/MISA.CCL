@@ -65,6 +65,18 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
     }
 
     /**
+     * Mục đích method thực hiện việc gọi model xử lý thêm dữ liệu order lên server
+     *
+     * @param shopID          mã cửa hàng
+     * @param listOrderDetail thông tin order
+     * @created_by cvmanh on 02/03/2021
+     */
+    @Override
+    public void doInsertOrderDataToServer(int shopID, List<OrderDetail> listOrderDetail) {
+        mActivityBillModel.doInsertOrderDataToServer(shopID, listOrderDetail);
+    }
+
+    /**
      * Mục đích method thực hiện việc nhận dữ liệu xử lý lấy orderDetail và gửi kết quả về view
      *
      * @param listOrderDetail Danh sách orderDetail

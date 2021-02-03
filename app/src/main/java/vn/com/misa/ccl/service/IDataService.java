@@ -47,4 +47,72 @@ public interface IDataService {
     @FormUrlEncoded
     @POST("loginApp.php")
     Call<String> doLoginApp(@Field("UserName") String userName, @Field("Password") String password);
+
+    /**
+     * Mục đích method thực hiện việc gọi api kiểm tra dữ liệu của cửa hàng theo mã cửa hàng trên server
+     *
+     * @param shopID mã cửa hàng
+     * @created_by cvmanh on 02/03/2021
+     */
+    @FormUrlEncoded
+    @POST("checkSyncData.php")
+    Call<String> checkSyncData(@Field("ShopID") int shopID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api đồng bộ dữ liệu menu cửa hàng lên server
+     *
+     * @param shopID mã cửa hàng
+     * @created_by cvmanh on 02/03/2021
+     */
+    @FormUrlEncoded
+    @POST("doInsertDataProduct.php")
+    Call<String> doInsertDataProduct(@Field("ProductName") String productName,
+                                     @Field("ProductPrice") float productPrice, @Field("ProductStatus") int productStatus,
+                                     @Field("ProductImageID") int imageID, @Field("UnitID") int unitID,
+                                     @Field("ColorID") int colorID, @Field("ShopID") int shopID,
+                                     @Field("ProductLocalID") int productLocalID);
+
+    /**
+     * Mục đích method thực hiện gọi api thêm dữ liệu order lên server
+     *
+     * @param orderStatus  trạng thái order: 2: trạng thái order đã thu tiền
+     * @param createdAt    ngày lập đơn hàng
+     * @param tableName    tên bàn ngồi
+     * @param totalPeople  số người đến
+     * @param amount       tổng tiền đơn hàng
+     * @param orderIDLocal mã order local
+     * @param shopID       mã cửa hàng
+     * @return giải thích hàm này trả về
+     * @created_by cvmanh on 02/03/2021
+     */
+    @FormUrlEncoded
+    @POST("doInsertDataOrder.php")
+    Call<String> doInsertOrderDataToServer(@Field("OrderStatus") int orderStatus,
+                                           @Field("CreatedAt") String createdAt,
+                                           @Field("TableName") String tableName,
+                                           @Field("TotalPeople") int totalPeople,
+                                           @Field("Amount") float amount,
+                                           @Field("OrderIDLocal") int orderIDLocal,
+                                           @Field("ShopID") int shopID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api thêm dữ liệu chi tiết order
+     *
+     * @param orderIDLocal    mã order local
+     * @param shopID          mã cửa hàng
+     * @param quantity        số lượng sản phẩm
+     * @param productPriceOut Giá bán của sản phẩm
+     * @param productLocalID  mã sản phẩm local
+     * @param orderServerID   mã order server
+     * @return giải thích hàm này trả về
+     * @created_by cvmanh on 02/03/2021
+     */
+    @FormUrlEncoded
+    @POST("doInsertOrderDetailToServer.php")
+    Call<String> doInsertOrderDetailToServer(@Field("OrderIDLocal") int orderIDLocal,
+                                             @Field("ShopID") int shopID,
+                                             @Field("Quantity") int quantity,
+                                             @Field("ProductPriceOut") float productPriceOut,
+                                             @Field("ProductLocalID") int productLocalID,
+                                             @Field("OrderServerID") float orderServerID);
 }
