@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +24,6 @@ import java.util.List;
 
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.SettingAdapter;
-import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.Setting;
 import vn.com.misa.ccl.presenter.ActivityRestaurantManagePresenter;
 import vn.com.misa.ccl.view.infomationapp.ActivityApplicationInfomation;
@@ -82,6 +81,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
         loadListSetting();
 
         checkUserLoginSuccess();
+
     }
 
     /**

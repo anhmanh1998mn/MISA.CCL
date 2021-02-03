@@ -3,6 +3,7 @@ package vn.com.misa.ccl.view.login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Intent;
@@ -210,16 +211,15 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      * Mục đích method thực hiện việc kiểm tra trến server đã tồn tại dữ liệu với id của tài khoản đăng nhập
      *
      * @param shopID mã cửa hàng đăng nhập
-     *
      * @created_by cvmanh on 02/03/2021
      */
     private void checkSyncData(int shopID) {
-        if(NetworkConnection.checkNetworkConnection(this)){
+        if (NetworkConnection.checkNetworkConnection(this)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    mActivityLoginPresenter=new ActivityLoginPresenter(ActivityLogin.this);
-                    mActivityLoginPresenter.checkSyncData(shopID,ActivityLogin.this);
+                    mActivityLoginPresenter = new ActivityLoginPresenter(ActivityLogin.this);
+                    mActivityLoginPresenter.checkSyncData(shopID, ActivityLogin.this);
                 }
             }).start();
             return;

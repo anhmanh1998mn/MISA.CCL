@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.model;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -8,11 +9,15 @@ import android.util.Log;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.com.misa.ccl.database.DatabaseHelper;
+import vn.com.misa.ccl.entity.Order;
+import vn.com.misa.ccl.entity.Product;
 import vn.com.misa.ccl.service.APIService;
 import vn.com.misa.ccl.service.IDataService;
 import vn.com.misa.ccl.util.DatabaseInfomation;
@@ -27,6 +32,10 @@ import vn.com.misa.ccl.util.DatabaseInfomation;
  */
 
 public class ActivityLoginModel {
+
+    private List<Product> mListMenu;
+
+    private List<Order> mListOrderServer;
 
     private IActivityLoginModel mIActivityLoginModel;
 
@@ -123,6 +132,7 @@ public class ActivityLoginModel {
                 Log.d("ErrorCheckSyncData",t.toString());
             }
         });
+
     }
 
     /**
