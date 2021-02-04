@@ -46,7 +46,7 @@ public class ActivityFoodUpdateModel {
 
     private List<Float> mListNumber;
 
-    private final int TEXT_MAX_LENGHT=17;
+    private final int TEXT_MAX_LENGHT = 17;
 
     /**
      * Mục đích method thực hiện việc xử lý lấy danh sách màu và gửi tới presenter

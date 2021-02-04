@@ -49,7 +49,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     private EditText etFoodName;
 
     private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName, tvCloseFoodImage,
-            tvColorClose, tvNext;
+            tvColorClose, tvNext, tvUpdate;
 
     private ImageView ivFoodImage, ivColor, ivClose;
 
@@ -75,7 +75,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private CaculateAdapter mCacucateAdapter;
 
-    private Button btnDelete, btnSave, btnAddnewProduct;
+    private Button btnDelete, btnSave, btnAddnewProduct, btnUpdate;
 
     private int mProductID, mColorID = 1, mImageID = 1, mUnitID = 1;
 
@@ -128,6 +128,10 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 cvImage.getBackground().setTint(Color.parseColor(mProductCategory.getProduct().getColor().getColorName()));
                 cvColor.getBackground().setTint(Color.parseColor(mProductCategory.getProduct().getColor().getColorName()));
                 cbStopSell.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.GONE);
+                tvUpdate.setVisibility(View.GONE);
+                tvNext.setVisibility(View.VISIBLE);
+                btnSave.setVisibility(View.VISIBLE);
                 mProductImage = mProductCategory.getProduct().getProductImage().getImage();
                 mKeyColor = mProductCategory.getProduct().getColor().getColorName();
 
@@ -146,6 +150,10 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 mProductImage = mProduct.getProductImage().getImage();
                 mKeyColor = mProduct.getColor().getColorName();
                 mUnitID = mProduct.getUnit().getUnitID();
+                btnUpdate.setVisibility(View.VISIBLE);
+                btnSave.setVisibility(View.GONE);
+                tvUpdate.setVisibility(View.VISIBLE);
+                tvNext.setVisibility(View.GONE);
                 if (mProduct.getProductStatus() == 2) {
                     cbStopSell.setChecked(true);
                 } else {
@@ -161,6 +169,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 btnSave.setVisibility(View.GONE);
                 btnAddnewProduct.setVisibility(View.VISIBLE);
                 tvSetupName.setText(getResources().getString(R.string.add_new_product));
+                btnUpdate.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,6 +215,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             btnAddnewProduct = findViewById(R.id.btnAddnewProduct);
             tvNext = findViewById(R.id.tvNext);
             cbStopSell = findViewById(R.id.cbStopSell);
+            btnUpdate = findViewById(R.id.btnUpdate);
+            tvUpdate = findViewById(R.id.tvUpdate);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -227,6 +238,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             btnSave.setOnClickListener(this);
             btnAddnewProduct.setOnClickListener(this);
             tvNext.setOnClickListener(this);
+            btnUpdate.setOnClickListener(this);
+            tvUpdate.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,10 +308,33 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     updateProductInfomation();
                     break;
                 }
+                case R.id.btnUpdate: {
+                    updateMenu();
+                    break;
+                }
+                case R.id.tvUpdate: {
+                    updateMenu();
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện gọi presenter xử lý cập nhật thông tin sản phẩm trong menu đã setup
+     *
+     * @created_by cvmanh on 01/28/2021
+     */
+    private void updateMenu() {
+        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+        if (cbStopSell.isChecked()) {
+            mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
+            return;
+        }
+        mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
+                mPriceOut, mImageID, mUnitID, mColorID);
     }
 
     /**
@@ -323,7 +359,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     }
 
     /**
-     * Mục đích method thực hiện gọi presenter xử lý cập nhật thông tin sản phẩm
+     * Mục đích method thực hiện gọi presenter xử lý cập nhật thông tin sản phẩm setup menu
      *
      * @created_by cvmanh on 01/28/2021
      */
@@ -334,21 +370,20 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                 mUnitID = (sharedPreferences.getInt("UNIT_ID", -1));
             }
             mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-            if (cbStopSell.isChecked()) {
-                mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
-                return;
+//            if (cbStopSell.isChecked()) {
+//                mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
+//                return;
+//            }
+            switch (mTypeIntent) {
+                case "Setup": {
+                    mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
+                            mPriceOut, mImageID, mUnitID, mColorID, mProductImage, mKeyColor);
+                    break;
+                }
+                default: {
+                    addNewProductInfomation();
+                }
             }
-            if (mTypeIntent.equals("Setup")) {
-                mActivityFoodUpdatePresenter.updateItemProduct(mProductID, etFoodName.getText().toString().trim(),
-                        mPriceOut, mImageID, mUnitID, mColorID, mProductImage, mKeyColor);
-
-            } else if (mTypeIntent.equals("Menu")) {
-                mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-                        mPriceOut, mImageID, mUnitID, mColorID);
-            } else {
-                addNewProductInfomation();
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
