@@ -7,7 +7,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import vn.com.misa.ccl.entity.Order;
+import vn.com.misa.ccl.entity.OrderDetailServer;
+import vn.com.misa.ccl.entity.OrderServer;
 import vn.com.misa.ccl.entity.Product;
+import vn.com.misa.ccl.entity.ProductServer;
 
 /**
  * ‐ Mục đích Class thực hiện việc định nghĩa các phương thức thao tác với server
@@ -118,7 +121,8 @@ public interface IDataService {
                                              @Field("Quantity") int quantity,
                                              @Field("ProductPriceOut") float productPriceOut,
                                              @Field("ProductLocalID") int productLocalID,
-                                             @Field("OrderServerID") float orderServerID);
+                                             @Field("OrderServerID") float orderServerID,
+                                             @Field("OrderDetailIDLocal") int orderDetailLocalID);
 
     /**
      * Mục đích method thực hiện việc gọi api xử lý việc xóa sản phẩm trên server
@@ -149,4 +153,34 @@ public interface IDataService {
                                        @Field("ProductImageID") int productImageID,
                                        @Field("UnitID") int unitID, @Field("ColorID") int colorID,
                                        @Field("ShopID") int shopID, @Field("ProductLocalID") int productLocalID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api lấy dữ liệu sản phẩm của cửa hàng từ server
+     *
+     * @param shopID mã cửa hàng
+     * @created_by cvmanh on 02/05/2021
+     */
+    @FormUrlEncoded
+    @POST("product/getListProduct.php")
+    Call<List<ProductServer>> getListProductServer(@Field("ShopID") int shopID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api lấy dữ liệu order của cửa hàng từ server
+     *
+     * @param shopID mã cửa hàng
+     * @created_by cvmanh on 02/05/2021
+     */
+    @FormUrlEncoded
+    @POST("getListOrder.php")
+    Call<List<OrderServer>> getListOrderOnServer(@Field("ShopID") int shopID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api lấy dữ liệu orderDetail của cửa hàng từ server
+     *
+     * @param shopID mã cửa hàng
+     * @created_by cvmanh on 02/05/2021
+     */
+    @FormUrlEncoded
+    @POST("product/getOrderDetail.php")
+    Call<List<OrderDetailServer>> getListOrderDetailOnServer(@Field("ShopID") int shopID);
 }

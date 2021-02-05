@@ -133,9 +133,20 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý đăng nhập bằng tài khoản đã đăng ký
+     *
+     * @created_by cvmanh on 02/06/2021
+     */
     private void doLoginApp() throws NoSuchAlgorithmException {
-        mActivityLoginPresenter = new ActivityLoginPresenter(this);
-        mActivityLoginPresenter.doLoginApp(etUserName.getText().toString(), etPassword.getText().toString());
+        try {
+            if (NetworkConnection.checkNetworkConnection(this)) {
+                mActivityLoginPresenter = new ActivityLoginPresenter(this);
+                mActivityLoginPresenter.doLoginApp(etUserName.getText().toString(), etPassword.getText().toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -193,18 +204,22 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void loginSuccess(int shopID) {
-        Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+        try {
+            Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
 //        startActivity(new Intent(this, ActivityRestaurantType.class));
-        startActivity(new Intent(this, ActivityRestaurantManage.class));
-        SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("SHOP_ID", String.valueOf(shopID));
-        editor.putString("SHOP_NAME", etUserName.getText().toString());
-        editor.commit();
+            startActivity(new Intent(this, ActivityRestaurantManage.class));
+            SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("SHOP_ID", String.valueOf(shopID));
+            editor.putString("SHOP_NAME", etUserName.getText().toString());
+            editor.commit();
 
-        checkSyncData(shopID);
+            checkSyncData(shopID);
 
-        finish();
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -214,15 +229,19 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
      * @created_by cvmanh on 02/03/2021
      */
     private void checkSyncData(int shopID) {
-        if (NetworkConnection.checkNetworkConnection(this)) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mActivityLoginPresenter = new ActivityLoginPresenter(ActivityLogin.this);
-                    mActivityLoginPresenter.checkSyncData(shopID, ActivityLogin.this);
-                }
-            }).start();
-            return;
+        try {
+            if (NetworkConnection.checkNetworkConnection(this)) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mActivityLoginPresenter = new ActivityLoginPresenter(ActivityLogin.this);
+                        mActivityLoginPresenter.checkSyncData(shopID, ActivityLogin.this);
+                    }
+                }).start();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -289,30 +289,34 @@ public class ActivityBillModel {
      * @created_by cvmanh on 02/03/2021
      */
     public void doInsertOrderDataToServer(int shopID, List<OrderDetail> listOrderDetail) {
-        IDataService dataService = APIService.getService();
-        Call<String> callbackInsertOrder = dataService.doInsertOrderDataToServer(
-                2,
-                listOrderDetail.get(0).getOrder().getCreatedAt(),
-                listOrderDetail.get(0).getOrder().getTableName(),
-                listOrderDetail.get(0).getOrder().getTotalPeople(),
-                listOrderDetail.get(0).getOrder().getTotalMoney(),
-                listOrderDetail.get(0).getOrder().getOrderId(),
-                shopID
-        );
-        callbackInsertOrder.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.body().toString().trim().equals("Failed")) {
-                    return;
+        try {
+            IDataService dataService = APIService.getService();
+            Call<String> callbackInsertOrder = dataService.doInsertOrderDataToServer(
+                    2,
+                    listOrderDetail.get(0).getOrder().getCreatedAt(),
+                    listOrderDetail.get(0).getOrder().getTableName(),
+                    listOrderDetail.get(0).getOrder().getTotalPeople(),
+                    listOrderDetail.get(0).getOrder().getTotalMoney(),
+                    listOrderDetail.get(0).getOrder().getOrderId(),
+                    shopID
+            );
+            callbackInsertOrder.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.body().toString().trim().equals("Failed")) {
+                        return;
+                    }
+                    doInsertOrderDetailToServer(Integer.parseInt(response.body().toString().trim()), shopID, listOrderDetail);
                 }
-                doInsertOrderDetailToServer(Integer.parseInt(response.body().toString().trim()), shopID, listOrderDetail);
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -324,28 +328,32 @@ public class ActivityBillModel {
      * @created_by cvmanh on 02/03/2021
      */
     private void doInsertOrderDetailToServer(int orderServerID, int shopID, List<OrderDetail> listDetail) {
-        IDataService dataService = APIService.getService();
-        for (int i = 0; i < listDetail.size(); i++) {
-            Call<String> callbackInsertDetail = dataService.doInsertOrderDetailToServer(
-                    listDetail.get(i).getOrder().getOrderId(),
-                    shopID, listDetail.get(i).getQuantity(), listDetail.get(i).getProductPriceOut(),
-                    listDetail.get(i).getProduct().getProductID(),
-                    orderServerID
-            );
-            callbackInsertDetail.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.body().toString().trim().equals("Success")) {
-                        Log.d("Success", "Success");
-                        return;
+        try {
+            IDataService dataService = APIService.getService();
+            for (int i = 0; i < listDetail.size(); i++) {
+                Call<String> callbackInsertDetail = dataService.doInsertOrderDetailToServer(
+                        listDetail.get(i).getOrder().getOrderId(),
+                        shopID, listDetail.get(i).getQuantity(), listDetail.get(i).getProductPriceOut(),
+                        listDetail.get(i).getProduct().getProductID(),
+                        orderServerID, listDetail.get(i).getOrderDetailID()
+                );
+                callbackInsertDetail.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.body().toString().trim().equals("Success")) {
+                            Log.d("Success", "Success");
+                            return;
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Log.d("Failed", t.toString());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("Failed", t.toString());
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

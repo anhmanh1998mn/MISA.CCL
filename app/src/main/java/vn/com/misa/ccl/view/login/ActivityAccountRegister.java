@@ -119,9 +119,12 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
      * @created_by cvmanh on 01/31/2021
      */
     private void doRegisterUser() throws NoSuchAlgorithmException {
-        mActivityAccountPresenter = new ActivityAccountPresenter(this);
-        mActivityAccountPresenter.doRegisterAccount(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
-
+        try {
+            mActivityAccountPresenter = new ActivityAccountPresenter(this);
+            mActivityAccountPresenter.doRegisterAccount(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -132,7 +135,7 @@ public class ActivityAccountRegister extends AppCompatActivity implements View.O
     @Override
     public void registerAccountSuccess() {
         Toast.makeText(this, getResources().getString(R.string.register_success), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ActivityRestaurantType.class));
+        startActivity(new Intent(this, ActivityLogin.class));
         finish();
     }
 
