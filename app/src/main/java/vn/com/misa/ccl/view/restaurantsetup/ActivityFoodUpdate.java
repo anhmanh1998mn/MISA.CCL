@@ -35,6 +35,7 @@ import vn.com.misa.ccl.entity.ProductCategory;
 import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.presenter.ActivityFoodUpdatePresenter;
 import vn.com.misa.ccl.util.AndroidDeviceHelper;
+import vn.com.misa.ccl.util.NetworkConnection;
 
 /**
  * ‐ Mục đích Class thực hiện các công việc trong ActivityFoodUpdate
@@ -562,10 +563,30 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     @Override
     public void deleteItemProductMenuSuccess() {
         try {
+            deleteItemProductMenuOnServer();
             finish();
             Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý xóa sản phẩm menu trên server
+     *
+     * @created_by cvmanh on 02/05/2021
+     */
+    private void deleteItemProductMenuOnServer() {
+        if (NetworkConnection.checkNetworkConnection(this)) {
+            mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+            SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+            int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mActivityFoodUpdatePresenter.deleteItemProductMenuOnServer(mProductID, shopID);
+                }
+            }).start();
         }
     }
 
@@ -577,10 +598,40 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     @Override
     public void updateItemProductMenuSuccess() {
         try {
+            SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+            int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
+            updateItemProductOnServer(etFoodName.getText().toString(), mPriceOut, mImageID, mUnitID, mColorID, shopID, mProductID);
             finish();
             Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc gọi presenter xử lý việc cập nhật thông tin sản phẩm trên server
+     *
+     * @param productName tên sản phẩm
+     * @param priceOut    giá sản phẩm
+     * @param imageID     mã ảnh
+     * @param unitID      mã đơn vị
+     * @param colorID     mã màu
+     * @param shopID      mã cửa hàng
+     * @param productID   mã sản phẩm
+     * @created_by cvmanh on 02/05/2021
+     */
+    private void updateItemProductOnServer(String productName, float priceOut, int imageID, int unitID, int colorID, int shopID, int productID) {
+
+        if (NetworkConnection.checkNetworkConnection(this)) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(ActivityFoodUpdate.this);
+                    mActivityFoodUpdatePresenter.updateItemProductOnServer(productName, priceOut, imageID,
+                            unitID, colorID, shopID, productID);
+                }
+            }).start();
         }
     }
 

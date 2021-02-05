@@ -159,6 +159,23 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
     }
 
     /**
+     * Mục đích method thực hiện việc gọi model xử lý xóa sản phẩm của menu trên máy chủ
+     *
+     * @param productIDLocal mã sản phẩm phía local
+     * @param shopID         mã cửa hàng
+     * @created_by cvmanh on 02/05/2021
+     */
+    @Override
+    public void deleteItemProductMenuOnServer(int productIDLocal, int shopID) {
+        mActivityFoodUpdateModel.deleteItemProductMenuOnServer(productIDLocal, shopID);
+    }
+
+    @Override
+    public void updateItemProductOnServer(String productName, float productPrice, int imageID, int unitID, int colorID, int shopID, int productId) {
+        mActivityFoodUpdateModel.updateItemProductOnServer(productName, productPrice, imageID, unitID, colorID, shopID, productId);
+    }
+
+    /**
      * Mục đích method thực hiện việc nhận danh sách màu từ ActivityFoodUpdateModel và gửi danh sách tới view
      *
      * @param listColor Danh sách màu

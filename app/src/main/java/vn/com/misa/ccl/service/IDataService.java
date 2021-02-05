@@ -120,4 +120,33 @@ public interface IDataService {
                                              @Field("ProductLocalID") int productLocalID,
                                              @Field("OrderServerID") float orderServerID);
 
+    /**
+     * Mục đích method thực hiện việc gọi api xử lý việc xóa sản phẩm trên server
+     *
+     * @param shopID         mã cửa hàng
+     * @param productLocalID mã sản phẩm phía local
+     * @created_by cvmanh on 02/05/2021
+     */
+    @FormUrlEncoded
+    @POST("product/deleteProduct.php")
+    Call<String> deleteProductOnServer(@Field("ShopID") int shopID, @Field("ProductLocalID") int productLocalID);
+
+    /**
+     * Mục đích method thực hiện việc gọi api xử lý việc cập nhật thông tin sản phẩm trên server
+     *
+     * @param productName    tên sản phẩm
+     * @param productPrice   giá sản phẩm
+     * @param productImageID mã ảnh sản phẩm
+     * @param unitID         mã đơn vị
+     * @param colorID        mã màu
+     * @param shopID         mã cửa hàng
+     * @param productLocalID mã sản phẩm phía local
+     * @created_by cvmanh on 02/05/2021
+     */
+    @FormUrlEncoded
+    @POST("product/updateProduct.php")
+    Call<String> updateProductOnServer(@Field("ProductName") String productName, @Field("ProductPrice") float productPrice,
+                                       @Field("ProductImageID") int productImageID,
+                                       @Field("UnitID") int unitID, @Field("ColorID") int colorID,
+                                       @Field("ShopID") int shopID, @Field("ProductLocalID") int productLocalID);
 }

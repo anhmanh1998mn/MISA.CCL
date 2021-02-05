@@ -2,19 +2,28 @@ package vn.com.misa.ccl.model;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.database.DatabaseHelper;
 import vn.com.misa.ccl.entity.Color;
 import vn.com.misa.ccl.entity.ProductImage;
+import vn.com.misa.ccl.service.APIService;
+import vn.com.misa.ccl.service.IDataService;
 import vn.com.misa.ccl.util.DatabaseInfomation;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * ‐ Mục đích Class thực hiện việc xử lý các công việc của ActivityFoodUpdate
@@ -500,6 +509,7 @@ public class ActivityFoodUpdateModel {
                         new String[]{String.valueOf(productID)});
                 if (result > 0) {
                     mIResultActivityFoodUpdate.deleteItemProductMenuSuccess();
+
                     return;
                 }
                 mIResultActivityFoodUpdate.onFailed();
@@ -538,6 +548,8 @@ public class ActivityFoodUpdateModel {
                     contentValues, DatabaseInfomation.COLUMN_MYPRODUCT_ID + "=?",
                     new String[]{String.valueOf(productId)});
             if (result > 0) {
+                SharedPreferences sharedPreferences = activity.getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
                 mIResultActivityFoodUpdate.updateItemProducrMenuSuccess();
                 return;
             }
@@ -545,6 +557,34 @@ public class ActivityFoodUpdateModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc việc xử lý cập nhật thông tin sản phẩm trên server
+     *
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã đơn vị
+     * @param colorID      mã màu
+     * @param shopID       mã cửa hàng
+     * @param productId    mã sản phẩm local
+     * @created_by cvmanh on 02/05/2021
+     */
+    public void updateItemProductOnServer(String productName, float productPrice, int imageID, int unitID, int colorID, int shopID, int productId) {
+        IDataService dataService = APIService.getService();
+        Call<String> callback = dataService.updateProductOnServer(productName, productPrice, imageID, unitID, colorID, shopID, productId);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("UpdateProduct", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("UpdateProduct", t.toString());
+            }
+        });
     }
 
     /**
@@ -564,7 +604,6 @@ public class ActivityFoodUpdateModel {
                 mIResultActivityFoodUpdate.onFailed();
                 return;
             }
-
             mSqliteDatabase = DatabaseHelper.initDatabase(activity, DatabaseInfomation.DATABASE_NAME);
             ContentValues contentValues = new ContentValues();
             contentValues.put(DatabaseInfomation.COLUMN_PRODUCT_NAME, productName);
@@ -606,6 +645,31 @@ public class ActivityFoodUpdateModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý xóa sản phẩm của menu trên server
+     *
+     * @param productIDLocal mã sản phẩm local
+     * @param shopID         mã cửa hàng
+     * @created_by cvmanh on 02/05/2021
+     */
+    public void deleteItemProductMenuOnServer(int productIDLocal, int shopID) {
+        IDataService dataService = APIService.getService();
+        Log.d("abc", productIDLocal + "-" + shopID);
+        Call<String> callback = dataService.deleteProductOnServer(shopID, productIDLocal);
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("Response", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("Response", t.toString());
+            }
+        });
+
     }
 
     public interface IResultActivityFoodUpdate {
