@@ -22,6 +22,7 @@ import vn.com.misa.ccl.entity.ProductImage;
 import vn.com.misa.ccl.service.APIService;
 import vn.com.misa.ccl.service.IDataService;
 import vn.com.misa.ccl.util.DatabaseInfomation;
+import vn.com.misa.ccl.util.NetworkConnection;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -589,6 +590,8 @@ public class ActivityFoodUpdateModel {
 
     /**
      * Mục đích method thực hiện việc xử lý thêm mới một sản phẩm vào menu và gửi kết quả về presenter
+     * Nếu thêm thành công sản phẩm mới ở local thì kiểm tra, nếu có kết nối mạng thì đổng bộ dữ liệu sản phẩm vừa
+     * thêm lên server, ngược lại, thì không đồng bộ
      *
      * @param activity     instance activity
      * @param productName  tên sản phẩm
@@ -615,12 +618,55 @@ public class ActivityFoodUpdateModel {
             long result = mSqliteDatabase.insert(DatabaseInfomation.TABLE_MYPRODUCTS, null, contentValues);
             if (result > 0) {
                 mIResultActivityFoodUpdate.addNewFoodMenuSuccess();
+                if (NetworkConnection.checkNetworkConnection(activity)) {
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
+                    insertProductToServer(productName, productPrice, 1, imageID,
+                            unitID, colorID, shopID, Integer.parseInt(String.valueOf(result)));
+                }
                 return;
             }
             mIResultActivityFoodUpdate.onFailed();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc xử lý thêm thông tin sản phẩm lên server
+     *
+     * @param productName    tên sản phẩm
+     * @param productPrice   giá sản phẩm
+     * @param productStatus  trạng thái sản phẩm: 1: đang bán, 2: ngừng bán
+     * @param imageID        mã ảnh sản phẩm
+     * @param unitID         mã đươn vị
+     * @param colorID        mã màu
+     * @param shopID         mã cửa hàng
+     * @param productLocalID mã sản phẩm local
+     * @return giải thích hàm này trả về
+     * @created_by cvmanh on 02/05/2021
+     */
+    private void insertProductToServer(String productName, float productPrice, int productStatus, int imageID,
+                                       int unitID, int colorID, int shopID, int productLocalID) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IDataService dataService = APIService.getService();
+                Call<String> callback = dataService.doInsertDataProduct(productName, productPrice, 1, imageID,
+                        unitID, colorID, shopID, productLocalID);
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Log.d("InsertProduct", response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        }).start();
     }
 
     /**

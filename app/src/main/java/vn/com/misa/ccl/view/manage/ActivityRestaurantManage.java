@@ -186,6 +186,7 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
 
                     checkUserLoginSuccess();
                     dlRestaurantManage.closeDrawer(GravityCompat.START);
+                    addFragment(new FragmentListOrder());
                     break;
                 }
             }
@@ -276,6 +277,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     break;
                 }
                 case "Thực đơn": {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     addFragment(new FragmentMenu());
                     dlRestaurantManage.closeDrawer(GravityCompat.START);
                     tvSetupName.setText(getResources().getString(R.string.menu));
