@@ -230,7 +230,7 @@
             android:textSize="@dimen/font_size_large" />
 
         <TextView
-            android:id="@+id/tvMonetTwo"
+            android:id="@+id/tvMoneyTwo"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -263,7 +263,7 @@
             android:textSize="@dimen/font_size_large" />
 
         <TextView
-            android:id="@+id/tvMonetFive"
+            android:id="@+id/tvMoneyFive"
             style="@style/Theme.FontTextColor"
             android:layout_width="0dp"
             android:layout_height="match_parent"

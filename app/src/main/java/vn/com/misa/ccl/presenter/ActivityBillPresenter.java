@@ -77,6 +77,17 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
     }
 
     /**
+     * Mục đích method thực hiện việc xử lý gợi ý tiền khách đưa
+     *
+     * @param inputtedMoney tiền phải trả
+     * @created_by cvmanh on 02/08/2021
+     */
+    @Override
+    public void suggestMoney(int inputtedMoney) {
+        mActivityBillModel.suggestMoney(inputtedMoney);
+    }
+
+    /**
      * Mục đích method thực hiện việc nhận dữ liệu xử lý lấy orderDetail và gửi kết quả về view
      *
      * @param listOrderDetail Danh sách orderDetail
@@ -117,6 +128,18 @@ public class ActivityBillPresenter implements IActivityBill.IActivityBillPresent
     @Override
     public void updateOrderStatusSuccess() {
         mIActivityBillView.updateOrderStatusSuccess();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận danh sách tiền gợi ý khi xử lý thành công và gửi kết quả
+     * về view
+     *
+     * @param listSuggestedMoney Danh sách tiền gợi ý
+     * @created_by cvmanh on 02/08/2021
+     */
+    @Override
+    public void resultSuggestedMoneySuccess(List<Integer> listSuggestedMoney) {
+        mIActivityBillView.resultSuggestedMoneySuccess(listSuggestedMoney);
     }
 
     /**

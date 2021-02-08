@@ -15,7 +15,9 @@ public interface IActivityBill {
 
         public void updateOrderStatus(Activity activity, int orderID);
 
-        public void doInsertOrderDataToServer(int shopID,List<OrderDetail> listOrderDetail);
+        public void doInsertOrderDataToServer(int shopID, List<OrderDetail> listOrderDetail);
+
+        public void suggestMoney(int inputtedMoney);
     }
 
     public interface IActivityBillView {
@@ -26,6 +28,8 @@ public interface IActivityBill {
         public void resultMoneyOutSuccess(String moneyOut);
 
         public void updateOrderStatusSuccess();
+
+        public void resultSuggestedMoneySuccess(List<Integer> listSuggestedMoney);
 
         public void onFailed();
     }

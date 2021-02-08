@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,6 +64,8 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
 
     private TextView tvResultCaculate, tvItemSeven, tvItemEight, tvItemNine, tvItemFour, tvItemFive, tvItemSix, tvItemClear,
             tvItemOne, tvItemTwo, tvItemThree, tvItemDot, tvItemZero, tvItemZeroo, tvSuccess, tvBack, tvNext;
+
+    private int mSuggestedMoneyOne, mSuggestedMoneyTwo, mSuggestedMoneyThree, mSuggestedMoneyFour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,29 +248,29 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
                 }
                 case R.id.tvMoneyOne: {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 10000));
-                    tvMoneyOut.setText(decimalFormat.format(10000));
+                    tvMoneyIn.setText(decimalFormat.format(mSuggestedMoneyOne));
+                    tvMoneyOut.setText(decimalFormat.format(mSuggestedMoneyOne - mListOrderDetail.get(0).getOrder().getTotalMoney()));
                     dlgBillCaculate.dismiss();
                     break;
                 }
-                case R.id.tvMonetTwo: {
+                case R.id.tvMoneyTwo: {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 30000));
-                    tvMoneyOut.setText(decimalFormat.format(30000));
+                    tvMoneyIn.setText(decimalFormat.format(mSuggestedMoneyTwo));
+                    tvMoneyOut.setText(decimalFormat.format(mSuggestedMoneyTwo - mListOrderDetail.get(0).getOrder().getTotalMoney()));
                     dlgBillCaculate.dismiss();
                     break;
                 }
                 case R.id.tvMoneyFour: {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 40000));
-                    tvMoneyOut.setText(decimalFormat.format(40000));
+                    tvMoneyIn.setText(decimalFormat.format(mSuggestedMoneyThree));
+                    tvMoneyOut.setText(decimalFormat.format(mSuggestedMoneyThree - mListOrderDetail.get(0).getOrder().getTotalMoney()));
                     dlgBillCaculate.dismiss();
                     break;
                 }
-                case R.id.tvMonetFive: {
+                case R.id.tvMoneyFive: {
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                    tvMoneyIn.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 50000));
-                    tvMoneyOut.setText(decimalFormat.format(50000));
+                    tvMoneyIn.setText(decimalFormat.format(mSuggestedMoneyFour));
+                    tvMoneyOut.setText(decimalFormat.format(mSuggestedMoneyFour - mListOrderDetail.get(0).getOrder().getTotalMoney()));
                     dlgBillCaculate.dismiss();
                     break;
                 }
@@ -408,9 +411,9 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
             tvDialogTittle = dlgBillCaculate.findViewById(R.id.tvResultCaculate);
             clBill = dlgBillCaculate.findViewById(R.id.clBill);
             tvMoneyOne = dlgBillCaculate.findViewById(R.id.tvMoneyOne);
-            tvMonetTwo = dlgBillCaculate.findViewById(R.id.tvMonetTwo);
+            tvMonetTwo = dlgBillCaculate.findViewById(R.id.tvMoneyTwo);
             tvMoneyFour = dlgBillCaculate.findViewById(R.id.tvMoneyFour);
-            tvMonetFive = dlgBillCaculate.findViewById(R.id.tvMonetFive);
+            tvMonetFive = dlgBillCaculate.findViewById(R.id.tvMoneyFive);
             tvResultCaculate = dlgBillCaculate.findViewById(R.id.tvResultCaculate);
             tvItemSeven = dlgBillCaculate.findViewById(R.id.tvItemSeven);
             tvItemEight = dlgBillCaculate.findViewById(R.id.tvItemEight);
@@ -465,19 +468,43 @@ public class ActivityBill extends AppCompatActivity implements IActivityBill.IAc
     }
 
     /**
-     * Mục đích method thực hiện việc hiển thị số tiền gợi ý
+     * Mục đích method thực hiện việc gọi presenter xử lý lấy danh sách tiền gợi ý
      *
      * @created_by cvmanh on 01/25/2021
      */
     private void showSuggestMoney() {
         try {
-            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            tvMoneyOne.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 10000));
-            tvMonetTwo.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 30000));
-            tvMoneyFour.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 40000));
-            tvMonetFive.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 50000));
+            float totalMoney = mListOrderDetail.get(0).getOrder().getTotalMoney();
+            mActivityBillPresenter = new ActivityBillPresenter(this);
+            int roundMoney = Math.round(totalMoney);
+            mActivityBillPresenter.suggestMoney(roundMoney / 1000);
+
+//            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+//            tvMoneyOne.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 10000));
+//            tvMonetTwo.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 30000));
+//            tvMoneyFour.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 40000));
+//            tvMonetFive.setText(decimalFormat.format(mListOrderDetail.get(0).getOrder().getTotalMoney() + 50000));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận kết quả lấy danh sách tiền gợi ý từ presenter và hiển thị lên view
+     *
+     * @param listSuggestedMoney Danh sách tiền gợi ý
+     * @created_by cvmanh on 02/08/2021
+     */
+    @Override
+    public void resultSuggestedMoneySuccess(List<Integer> listSuggestedMoney) {
+        mSuggestedMoneyOne = (listSuggestedMoney.get(0)) * 1000;
+        mSuggestedMoneyTwo = (listSuggestedMoney.get(1)) * 1000;
+        mSuggestedMoneyThree = (listSuggestedMoney.get(2)) * 1000;
+        mSuggestedMoneyFour = (listSuggestedMoney.get(3)) * 1000;
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        tvMoneyOne.setText(decimalFormat.format((listSuggestedMoney.get(0)) * 1000));
+        tvMonetTwo.setText(decimalFormat.format((listSuggestedMoney.get(1)) * 1000));
+        tvMoneyFour.setText(decimalFormat.format((listSuggestedMoney.get(2)) * 1000));
+        tvMonetFive.setText(decimalFormat.format((listSuggestedMoney.get(3)) * 1000));
     }
 }
