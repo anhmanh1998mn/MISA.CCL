@@ -12,8 +12,9 @@
     <color name="light_green">#27FB43</color>
     <color name="grey">#919191</color>
     <color name="dark_blue">#005081</color>
-    <color name="light_grey">#D6D6D6</color>
-    <color name="red">#FF0000</color>
+    <color name="light_grey">#d1d6dc</color>
+    <color name="red_light">#ff3b2f</color>
+    <color name="red">#F30E00</color>
     <color name="dark_blue_face">#013453</color>
     <color name="light_bluee">#55B6F1</color>
     <color name="greenn">#059f56</color>
@@ -22,4 +23,11 @@
     <color name="grey_bill">#cac9cf</color>
     <color name="orange">#fd9804</color>
     <color name="green_light">#50aa52</color>
+    <color name="grey_button">#ededed</color>
+    <color name="grey_light_icon">#dbdbdb</color>
+    <color name="green_more">#68bd60</color>
+    <color name="green_tick">#53d769</color>
+    <color name="blue_state_click">#9ec7e3</color>
+    <color name="grey_back">#f1f4f9</color>
+    <color name="green_normal">#09ba6a</color>
 </resources>

@@ -780,7 +780,7 @@ public class FragmentMainReport extends Fragment implements View.OnClickListener
     private void showPieChart() {
         try {
             int[] colorPie = new int[]{getResources().getColor(R.color.light_bluee), getResources().getColor(R.color.green_light),
-                    getResources().getColor(R.color.red), getResources().getColor(R.color.orange),
+                    getResources().getColor(R.color.red_light), getResources().getColor(R.color.orange),
                     getResources().getColor(R.color.dark_blue), getResources().getColor(R.color.dark_blue_face),
                     getResources().getColor(R.color.light_grey)};
             PieDataSet pieDataSet = new PieDataSet(dataValues(), "");

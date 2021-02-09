@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/light_grey"
+            android:background="@color/grey_button"
             android:orientation="horizontal"
             android:weightSum="8">
 
@@ -78,7 +78,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_smalll"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:background="@drawable/view_order_table_people"
                 android:gravity="center" />
 
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/margin"
                 android:layout_gravity="center"
-                android:layout_weight="0.6"
+                android:layout_weight="0.4"
                 android:src="@drawable/ic_user"
                 app:tint="@color/purple_500" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:background="@drawable/view_order_table_people"
                 android:gravity="center" />
 
@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/margin_small"
-                android:layout_weight="3.4"
+                android:layout_weight="3.2"
                 android:gravity="right|center"
                 android:text="@string/caculator_0" />
         </LinearLayout>
@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.2"
-            android:background="@color/greyy"
+            android:background="@color/light_grey"
             android:orientation="horizontal"
             android:weightSum="6">
 
@@ -154,12 +154,13 @@
 
             <Button
                 android:id="@+id/btnMoney"
-                style="@style/Theme.FontButton"
+                style="@style/Theme.TextWhiteSmall"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_small"
                 android:layout_weight="3.5"
-                android:text="@string/bill" />
+                android:text="@string/bill"
+                android:textAllCaps="true" />
         </LinearLayout>
     </LinearLayout>
 

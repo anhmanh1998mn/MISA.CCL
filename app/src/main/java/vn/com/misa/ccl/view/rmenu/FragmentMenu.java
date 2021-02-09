@@ -1,6 +1,7 @@
 package vn.com.misa.ccl.view.rmenu;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

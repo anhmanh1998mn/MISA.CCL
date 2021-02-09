@@ -49,4 +49,5 @@
     <dimen name="sizee_max">520dp</dimen>
     <dimen name="logo_sỉze">220dp</dimen>
     <dimen name="font_text_size">13sp</dimen>
+    <dimen name="width_max">180dp</dimen>
 </resources>

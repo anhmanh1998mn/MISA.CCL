@@ -3,20 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/grey_lighh"
     android:layout_height="match_parent"
+    android:background="@color/grey_back"
     tools:context=".view.infomationapp.ActivityApplicationInfomation">
+
     <FrameLayout
         android:id="@+id/frmLogoApp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_app_infomation"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/logo_sỉze"/>
+            android:layout_height="@dimen/logo_sỉze"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_app_infomation" />
+
         <ImageView
             android:id="@+id/ivBack"
             style="@style/Theme.IconMargin"
@@ -25,23 +28,24 @@
             android:src="@drawable/ic_menu_back"
             app:tint="@color/white" />
     </FrameLayout>
+
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@+id/frmLogoApp"
         android:id="@+id/llWbsite"
         style="@style/Theme.EffectClick"
         android:layout_width="match_parent"
         android:layout_height="@dimen/width_height_large"
         android:orientation="horizontal"
-        android:weightSum="9">
+        android:weightSum="9"
+        app:layout_constraintTop_toBottomOf="@+id/frmLogoApp">
 
         <ImageView
             android:id="@+id/cvImageThisMonth"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_largee"
             android:layout_gravity="center"
-            android:src="@drawable/ic_about_browser"
             android:layout_marginLeft="@dimen/margin_smalll"
             android:layout_weight="1.1"
+            android:src="@drawable/ic_about_browser"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/vLineThree">
@@ -72,23 +76,24 @@
         android:layout_marginLeft="@dimen/left_small"
         app:layout_constraintLeft_toRightOf="@+id/glOne"
         app:layout_constraintTop_toBottomOf="@+id/llWbsite" />
+
     <LinearLayout
 
-        app:layout_constraintTop_toBottomOf="@+id/lLineOne"
         android:id="@+id/llSupport"
         style="@style/Theme.EffectClick"
         android:layout_width="match_parent"
         android:layout_height="@dimen/width_height_large"
         android:orientation="horizontal"
-        android:weightSum="9">
+        android:weightSum="9"
+        app:layout_constraintTop_toBottomOf="@+id/lLineOne">
 
         <ImageView
-            android:src="@drawable/ic_help_blue"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_largee"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin_smalll"
             android:layout_weight="1.1"
+            android:src="@drawable/ic_help_blue"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/glOne"
             app:layout_constraintTop_toBottomOf="@+id/vLineThree">
@@ -97,13 +102,13 @@
         </ImageView>
 
         <TextView
-            android:textStyle="bold"
             style="@style/Theme.FontTextTime"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="@string/support"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <TextView
             style="@style/Theme.FontTextMoney"
@@ -118,14 +123,15 @@
         android:layout_marginLeft="@dimen/left_small"
         app:layout_constraintLeft_toRightOf="@+id/glOne"
         app:layout_constraintTop_toBottomOf="@+id/llSupport" />
+
     <TextView
         android:id="@+id/tvViewMISA"
-        android:textSize="@dimen/text_size_small"
         style="@style/Theme.TextColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_normal"
+        android:background="@color/white"
         android:gravity="center"
         android:text="@string/copyright"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_normal"/>
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

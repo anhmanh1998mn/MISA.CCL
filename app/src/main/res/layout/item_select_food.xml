@@ -142,7 +142,7 @@
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
                 android:src="@drawable/ic_menu_plus"
-                app:tint="@color/greenn" />
+                app:tint="@color/green_more" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

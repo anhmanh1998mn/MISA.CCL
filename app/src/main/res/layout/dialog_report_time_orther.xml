@@ -87,7 +87,7 @@
             android:background="@color/white"
             android:text="@string/cancle"
             android:textAllCaps="true"
-            android:textColor="@color/red"
+            android:textColor="@color/red_light"
             app:layout_constraintRight_toLeftOf="@+id/tvAccept"
             app:layout_constraintTop_toTopOf="parent" />
 

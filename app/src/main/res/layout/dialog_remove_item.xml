@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clConfirmRemove"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frmHeaderRemove"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_lare"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/Theme.TextWhiteSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_smalll"
+            android:gravity="left|center"
+            android:text="@string/app"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/ivCloseDialogConfirmRemoveItem"
+            style="@style/Theme.EffectClick"
+            android:layout_width="@dimen/notification"
+            android:layout_height="@dimen/notification"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:src="@drawable/ic_dialog_close" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvNotifiRemove"
+        style="@style/Theme.FontText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_max"
+        android:gravity="left|center"
+        android:text="@string/remove_confirm"
+        app:layout_constraintTop_toBottomOf="@+id/frmHeaderRemove" />
+
+    <LinearLayout
+        android:id="@+id/llRemoveItemMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_smal"
+        android:background="@color/grey_button"
+        android:gravity="center|right"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifiRemove">
+
+        <TextView
+            android:id="@+id/tvNoConfirmRemove"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="@dimen/max_width"
+            android:layout_height="@dimen/size_large"
+            android:layout_marginRight="@dimen/margin_right_small"
+            android:background="@drawable/view_no_confirm_remove"
+            android:text="@string/no"
+            android:textColor="@color/red_light" />
+
+        <TextView
+            android:id="@+id/tvRemoveConfirm"
+            style="@style/Theme.FontTextColor"
+            android:layout_width="@dimen/max_width"
+            android:layout_height="@dimen/size_large"
+            android:layout_marginRight="@dimen/margin"
+            android:background="@drawable/view_confirm_remove"
+            android:text="@string/yes" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

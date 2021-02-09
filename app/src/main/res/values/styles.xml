@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.Splash" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/view_splash</item>
+        <item name="android:windowBackground">@drawable/view_splash_screen</item>
     </style>
 
     <style name="Theme.TextWhiteLarge" parent="Widget.AppCompat.TextView">
@@ -28,7 +28,7 @@
         <item name="android:layout_gravity">center|left</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:background">@drawable/view_item_caculate</item>
+        <item name="android:background">@drawable/view_button_list_order</item>
         <item name="android:drawablePadding">@dimen/margin_smalll</item>
         <item name="android:paddingLeft">@dimen/size_larg</item>
     </style>
@@ -82,7 +82,7 @@
     <style name="Theme.FontTextMoney" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/dark_blue</item>
         <item name="android:gravity">center|right</item>
-        <item name="drawableTint">@color/grey</item>
+        <item name="drawableTint">@color/grey_light_icon</item>
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:layout_marginRight">@dimen/margin_smalll</item>
         <item name="android:drawablePadding">@dimen/margin_smalll</item>

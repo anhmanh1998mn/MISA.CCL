@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,7 @@ import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.adapter.OrderAdapter;
 import vn.com.misa.ccl.entity.OrderDetail;
 import vn.com.misa.ccl.presenter.FragmentListOrderPresenter;
+import vn.com.misa.ccl.util.AndroidDeviceHelper;
 
 /**
  * ‐ Mục đích Class thực hiện những công việc hiển thị danh sách các order chưa thu tiền
@@ -37,9 +39,9 @@ import vn.com.misa.ccl.presenter.FragmentListOrderPresenter;
 public class FragmentListOrder extends Fragment implements View.OnClickListener, IFragmentListOrder.IFragmentListOrderView,
         OrderAdapter.ICLickButtonRemove {
 
-    private ImageView ivLogo;
+    private ImageView ivLogo, ivCloseDialogConfirmRemoveItem;
 
-    private TextView tvAddFood, tvNoOrder;
+    private TextView tvAddFood, tvNoOrder, tvAppName, tvNotifiRemove, tvNoConfirmRemove, tvRemoveConfirm;
 
     private RecyclerView rcvOrder;
 
@@ -49,9 +51,13 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
 
     private OrderAdapter mOrderAdapter;
 
-    private LinearLayout llListOrder;
+    private LinearLayout llListOrder, llRemoveItemMenu;
 
     private Dialog dlgConfirmRemove;
+
+    private ConstraintLayout clConfirmRemove;
+
+    private int mOrderId;
 
     @Nullable
     @Override
@@ -167,6 +173,19 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
                     startActivity(intent);
                     break;
                 }
+                case R.id.tvNoConfirmRemove: {
+                    dlgConfirmRemove.dismiss();
+                    break;
+                }
+                case R.id.ivCloseDialogConfirmRemoveItem: {
+                    dlgConfirmRemove.dismiss();
+                    break;
+                }
+                case R.id.tvRemoveConfirm: {
+                    mFragmentListOrderPresenter = new FragmentListOrderPresenter(this);
+                    mFragmentListOrderPresenter.removeItemOrder(getActivity(), mOrderId);
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,7 +239,7 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
     }
 
     /**
-     * Mục đích method thực hiện việc nhân mà order từ adapter và gọi presenter xóa order
+     * Mục đích method thực hiện việc nhân mã order từ adapter và hiển thị dialog xác nhận xóa
      *
      * @param orderID Mã order
      * @created_by cvmanh on 01/26/2021
@@ -228,23 +247,84 @@ public class FragmentListOrder extends Fragment implements View.OnClickListener,
     @Override
     public void setOnClickButtoRemove(int orderID) {
         try {
-            mFragmentListOrderPresenter = new FragmentListOrderPresenter(this);
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle(getResources().getString(R.string.app));
-            builder.setMessage(getResources().getString(R.string.remove_confirm));
-            builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mFragmentListOrderPresenter.removeItemOrder(getActivity(), orderID);
-                }
-            });
-            dlgConfirmRemove = builder.create();
+            mOrderId = orderID;
+//            mFragmentListOrderPresenter = new FragmentListOrderPresenter(this);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setTitle(getResources().getString(R.string.app));
+//            builder.setMessage(getResources().getString(R.string.remove_confirm));
+//            builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                }
+//            });
+//            builder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    mFragmentListOrderPresenter.removeItemOrder(getActivity(), orderID);
+//                }
+//            });
+//            dlgConfirmRemove = builder.create();
+//            dlgConfirmRemove.show();
+            dlgConfirmRemove = new Dialog(getContext());
+            dlgConfirmRemove.setCanceledOnTouchOutside(true);
+            dlgConfirmRemove.setContentView(R.layout.dialog_remove_item);
             dlgConfirmRemove.show();
+            initDialogViewRemoveItemMenu();
+            setWidthForDialogRemoveItem();
+            onViewDialogRemoveItemMenuListener();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc khởi tạo view trong dialog xác nhận xóa
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void initDialogViewRemoveItemMenu() {
+        try {
+            clConfirmRemove = dlgConfirmRemove.findViewById(R.id.clConfirmRemove);
+            tvRemoveConfirm = dlgConfirmRemove.findViewById(R.id.tvRemoveConfirm);
+            tvNotifiRemove = dlgConfirmRemove.findViewById(R.id.tvNotifiRemove);
+            tvNoConfirmRemove = dlgConfirmRemove.findViewById(R.id.tvNoConfirmRemove);
+            ivCloseDialogConfirmRemoveItem = dlgConfirmRemove.findViewById(R.id.ivCloseDialogConfirmRemoveItem);
+            tvAppName = dlgConfirmRemove.findViewById(R.id.tvAppName);
+            llRemoveItemMenu = dlgConfirmRemove.findViewById(R.id.llRemoveItemMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc cài đặt chiều đài cho dialog xác nhận xóa
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void setWidthForDialogRemoveItem() {
+        try {
+            llRemoveItemMenu.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
+            llRemoveItemMenu.requestLayout();
+            clConfirmRemove.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
+            clConfirmRemove.requestLayout();
+            tvAppName.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(getContext()) - 100;
+            tvAppName.requestLayout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc lắng nghe xự kiên click view dialog xác nhận xóa từ người dùng
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void onViewDialogRemoveItemMenuListener() {
+        try {
+            tvRemoveConfirm.setOnClickListener(this);
+            tvNoConfirmRemove.setOnClickListener(this);
+            ivCloseDialogConfirmRemoveItem.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,6 +3,7 @@ package vn.com.misa.ccl.view.restaurantsetup;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +53,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName, tvCloseFoodImage,
             tvColorClose, tvNext, tvUpdate;
 
-    private ImageView ivFoodImage, ivColor, ivClose;
+    private ImageView ivFoodImage, ivColor, ivClose, ivCloseDialogConfirmRemoveItem;
 
     private ProductCategory mProductCategory;
 
@@ -89,6 +90,14 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     private CheckBox cbStopSell;
 
     private byte[] mProductImage;
+
+    private Dialog dlgConfirmRemoveItemMenu;
+
+    private TextView tvRemoveConfirm, tvNoConfirmRemove, tvAppName, tvNotifiRemove;
+
+    private LinearLayout llRemoveItemMenu;
+
+    private ConstraintLayout clConfirmRemove;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -282,7 +291,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                         mActivityFoodUpdatePresenter.removeItemProduct(mProductID);
                         return;
                     }
-                    mActivityFoodUpdatePresenter.deleteItemProductMenu(this, mProductID);
+                    showDialogConfirmRemoveIntemMenu();
+//                    mActivityFoodUpdatePresenter.deleteItemProductMenu(this, mProductID);
                     break;
                 }
                 case R.id.btnSave: {
@@ -317,7 +327,92 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     updateMenu();
                     break;
                 }
+                case R.id.tvRemoveConfirm: {
+                    mActivityFoodUpdatePresenter.deleteItemProductMenu(this, mProductID);
+                    break;
+                }
+                case R.id.tvNoConfirmRemove: {
+                    dlgConfirmRemoveItemMenu.dismiss();
+                    break;
+                }
+                case R.id.ivCloseDialogConfirmRemoveItem: {
+                    dlgConfirmRemoveItemMenu.dismiss();
+                    break;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện hiển thị dialog xác nhận xóa món ăn trong thực đơn
+     * Xử lý theo view click: có, không
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void showDialogConfirmRemoveIntemMenu() {
+        try {
+            dlgConfirmRemoveItemMenu = new Dialog(this);
+            dlgConfirmRemoveItemMenu.setCanceledOnTouchOutside(true);
+            dlgConfirmRemoveItemMenu.setContentView(R.layout.dialog_remove_item);
+            dlgConfirmRemoveItemMenu.show();
+            initDialogViewRemoveItemMenu();
+            setWidthForDialogRemoveItem();
+            onViewDialogRemoveItemMenuListener();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc khởi tạo view trong dialog xác nhận xóa
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void initDialogViewRemoveItemMenu() {
+        try {
+            clConfirmRemove = dlgConfirmRemoveItemMenu.findViewById(R.id.clConfirmRemove);
+            tvRemoveConfirm = dlgConfirmRemoveItemMenu.findViewById(R.id.tvRemoveConfirm);
+            tvNotifiRemove = dlgConfirmRemoveItemMenu.findViewById(R.id.tvNotifiRemove);
+            tvNotifiRemove.setText(getResources().getString(R.string.remove_confirm_menu) + " " + mProductName + " không?");
+            tvNoConfirmRemove = dlgConfirmRemoveItemMenu.findViewById(R.id.tvNoConfirmRemove);
+            ivCloseDialogConfirmRemoveItem = dlgConfirmRemoveItemMenu.findViewById(R.id.ivCloseDialogConfirmRemoveItem);
+            tvAppName = dlgConfirmRemoveItemMenu.findViewById(R.id.tvAppName);
+            llRemoveItemMenu = dlgConfirmRemoveItemMenu.findViewById(R.id.llRemoveItemMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc cài đặt chiều dai cho dialog xác nhận xóa
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void setWidthForDialogRemoveItem() {
+        try {
+            llRemoveItemMenu.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
+            llRemoveItemMenu.requestLayout();
+            clConfirmRemove.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
+            clConfirmRemove.requestLayout();
+            tvAppName.getLayoutParams().width = AndroidDeviceHelper.getWitdhScreen(this) - 100;
+            tvAppName.requestLayout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Mục đích method thực hiện việc lắng nghe xự kiên click view dialog xác nhận xóa từ người dùng
+     *
+     * @created_by cvmanh on 02/09/2021
+     */
+    private void onViewDialogRemoveItemMenuListener() {
+        try {
+            tvRemoveConfirm.setOnClickListener(this);
+            tvNoConfirmRemove.setOnClickListener(this);
+            ivCloseDialogConfirmRemoveItem.setOnClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -329,13 +424,17 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      * @created_by cvmanh on 01/28/2021
      */
     private void updateMenu() {
-        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-        if (cbStopSell.isChecked()) {
-            mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
-            return;
+        try {
+            mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+            if (cbStopSell.isChecked()) {
+                mActivityFoodUpdatePresenter.stopSellProduct(this, mProductID);
+                return;
+            }
+            mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
+                    mPriceOut, mImageID, mUnitID, mColorID);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mActivityFoodUpdatePresenter.updateItemProductMenu(this, mProductID, etFoodName.getText().toString(),
-                mPriceOut, mImageID, mUnitID, mColorID);
     }
 
     /**
@@ -564,6 +663,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     public void deleteItemProductMenuSuccess() {
         try {
             deleteItemProductMenuOnServer();
+            dlgConfirmRemoveItemMenu.dismiss();
             finish();
             Toast.makeText(this, getResources().getString(R.string.process_success), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
@@ -577,16 +677,20 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      * @created_by cvmanh on 02/05/2021
      */
     private void deleteItemProductMenuOnServer() {
-        if (NetworkConnection.checkNetworkConnection(this)) {
-            mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
-            SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
-            int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mActivityFoodUpdatePresenter.deleteItemProductMenuOnServer(mProductID, shopID);
-                }
-            }).start();
+        try {
+            if (NetworkConnection.checkNetworkConnection(this)) {
+                mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(this);
+                SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                int shopID = Integer.parseInt(sharedPreferences.getString("SHOP_ID", ""));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mActivityFoodUpdatePresenter.deleteItemProductMenuOnServer(mProductID, shopID);
+                    }
+                }).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -623,15 +727,19 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     private void updateItemProductOnServer(String productName, float priceOut, int imageID, int unitID, int colorID, int shopID, int productID) {
 
-        if (NetworkConnection.checkNetworkConnection(this)) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(ActivityFoodUpdate.this);
-                    mActivityFoodUpdatePresenter.updateItemProductOnServer(productName, priceOut, imageID,
-                            unitID, colorID, shopID, productID);
-                }
-            }).start();
+        try {
+            if (NetworkConnection.checkNetworkConnection(this)) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mActivityFoodUpdatePresenter = new ActivityFoodUpdatePresenter(ActivityFoodUpdate.this);
+                        mActivityFoodUpdatePresenter.updateItemProductOnServer(productName, priceOut, imageID,
+                                unitID, colorID, shopID, productID);
+                    }
+                }).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

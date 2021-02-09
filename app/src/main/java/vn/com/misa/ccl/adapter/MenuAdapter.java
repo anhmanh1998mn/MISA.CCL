@@ -60,8 +60,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         try {
-
-            mWidthImgae = holder.ivItemMenu.getLayoutParams().width;
+            mWidthImgae = 155;
             holder.tvFootName.setText(mListProduct.get(position).getProductName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             holder.tvFootPrice.setText(decimalFormat.format(mListProduct.get(position).getProductPrice()));
@@ -72,14 +71,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             final int[] quantity = {0};
 
             if (mListProduct.get(position).getQuantity() > 0) {
-                holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.greenn));
+                holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.green_tick));
                 holder.ivItemMenu.setImageResource(R.drawable.ic_tick);
                 holder.ivItemMenu.setColorFilter(Color.WHITE);
                 holder.ivItemMenu.getLayoutParams().width = 50;
                 holder.tvQuantity.setVisibility(View.VISIBLE);
                 holder.cvAdd.setVisibility(View.VISIBLE);
                 holder.cvRemove.setVisibility(View.VISIBLE);
-                holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
+                holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.grey_button));
                 quantity[0] = mListProduct.get(position).getQuantity();
                 mListProduct.get(position).setQuantity(quantity[0]);
                 total[0] = total[0] + (mListProduct.get(position).getQuantity() * mListProduct.get(position).getProductPrice());
@@ -90,7 +89,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Log.e("Tag", "onClick: parent");
-                    holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.greenn));
+                    holder.cvImage.getBackground().setTint(mContext.getResources().getColor(R.color.green_tick));
                     holder.ivItemMenu.setImageResource(R.drawable.ic_tick);
                     holder.ivItemMenu.setColorFilter(Color.WHITE);
                     holder.ivItemMenu.getLayoutParams().width = 50;
@@ -101,7 +100,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     holder.tvQuantity.setVisibility(View.VISIBLE);
                     holder.cvAdd.setVisibility(View.VISIBLE);
                     holder.cvRemove.setVisibility(View.VISIBLE);
-                    holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.light_grey));
+                    holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.grey_button));
                     total[0] = total[0] + mListProduct.get(position).getProductPrice();
                     mITotalAmount.processTotalAmount(formatMoney(total[0]), total[0]);
                 }
@@ -131,6 +130,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                         holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.white));
                         holder.ivItemMenu.setColorFilter(null);
                         holder.tvQuantity.setVisibility(View.GONE);
+//                        holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
                         holder.ivItemMenu.getLayoutParams().width = mWidthImgae;
                         total[0] = total[0] - mListProduct.get(position).getProductPrice();
                         mITotalAmount.processTotalAmount(formatMoney(total[0]), total[0]);

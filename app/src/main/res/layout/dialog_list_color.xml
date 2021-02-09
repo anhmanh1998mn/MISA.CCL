@@ -13,13 +13,13 @@
         android:layout_margin="@dimen/margin_login" />
 
     <TextView
-        android:layout_marginBottom="16dp"
         android:id="@+id/tvColorClose"
         style="@style/Theme.FontText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/height_smal"
+        android:layout_marginBottom="@dimen/margin"
         android:text="@string/cancle" />
 
 </LinearLayout>

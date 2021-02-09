@@ -75,6 +75,7 @@
     <string name="enter_people_name">Nhập số người</string>
     <string name="app">CUKCUK LITE</string>
     <string name="remove_confirm">Bạn có chắc chắn muốn hủy các món đã chọn không?</string>
+    <string name="remove_confirm_menu">Bạn có chắc chắn muốn xóa món </string>
     <string name="yes">CÓ</string>
     <string name="no">KHÔNG</string>
     <string name="bill_order">HÓA ĐƠN</string>
@@ -115,12 +116,12 @@
      miễn phí dành cho các quán nhỏ và quầy di động tại địa chỉ:\n <a>https://mily.vn/mxmwo8A</a>\n
     Xem thông tin chi tiết tại website:\nwww.cukcuk.vn</string>
     <string name="website"><b>Website</b>\nwww.cukcuk.vn</string>
-    <string name="copyright">Copyright © 2016 - 2021 <font color="#0072bb">MISA JSC</font></string>
+    <string name="copyright"><font color="#919191">Copyright © 2016 - 2021 </font><font color="#0072bb">MISA JSC</font></string>
     <string name="view_misa">https://www.misa.vn/</string>
     <string name="view_website_cukcuk">https://www.cukcuk.vn/</string>
     <string name="view_support">https://help.cukcuk.vn/vi/ac/cukcuk-vn-lite</string>
-    <string name="setting_data"><font size="20">LẤY LẠI TOÀN BỘ DỮ LIỆU</font>\nChức năng này sẽ tiến hành <font color="red">xóa dữ liệu trên thiết bị của bạn</font>
-    và thay thế bằng dữ liệu trên máy chủ</string>
+    <string name="setting_data"><font size="20"></font><font color="black">LẤY LẠI TOÀN BỘ DỮ LIỆU\nChức năng này sẽ tiến hành </font><font color="red">xóa dữ liệu trên thiết bị của bạn</font>
+        <font color="black">và thay thế bằng dữ liệu trên máy chủ</font></string>
     <string name="sync_now">ĐỒNG BỘ NGAY</string>
     <string name="sync_end">Đồng bộ lần cuối: <b>02/02/2021 08:23 CH</b></string>
     <string name="register_account_error">Tài khoản, mật khẩu không được bỏ trống.\n Tài khoản

@@ -293,6 +293,13 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     break;
                 }
                 case "Báo cáo": {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     addFragment(new FragmentMainReport());
                     dlRestaurantManage.closeDrawer(GravityCompat.START);
                     tvSetupName.setText(getResources().getString(R.string.main_report));
@@ -313,12 +320,26 @@ public class ActivityRestaurantManage extends AppCompatActivity implements View.
                     break;
                 }
                 case "Thiết lập": {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     Intent intent = new Intent(this, ActivityRemoveData.class);
                     intent.putExtra("SETTING_INTENT", 1);//2: thiết lập
                     startActivity(intent);
                     break;
                 }
                 case "Đồng bộ dữ liệu": {
+                    SharedPreferences sharedPreferences = getSharedPreferences("SHOPINFOMATION", MODE_PRIVATE);
+                    if (sharedPreferences.getString("SHOP_ID", "").equals("")) {
+                        Intent intent = new Intent(this, ActivitySelectionOptionLogin.class);
+                        intent.putExtra("TypeIntent", "ActivityManage");
+                        startActivity(intent);
+                        return;
+                    }
                     Intent intent = new Intent(this, ActivityRemoveData.class);
                     intent.putExtra("SETTING_INTENT", 2);//2: đồng bộ dữ liệu
                     startActivity(intent);

@@ -58,7 +58,7 @@ public class ReportWithDayAdapter extends RecyclerView.Adapter<ReportWithDayAdap
                     break;
                 }
                 case 2: {
-                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.red)));
+                    holder.tvImage.getBackground().setTint((mContext.getResources().getColor(R.color.red_light)));
                     break;
                 }
                 case 3: {

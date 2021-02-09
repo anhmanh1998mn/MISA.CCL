@@ -217,7 +217,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/margin_smalll"
                 android:layout_weight="1.1"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/red_light"
                 app:cardCornerRadius="@dimen/size_maxx"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/glOne"
