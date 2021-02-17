@@ -55,7 +55,7 @@ public class ReportMoreAdapter extends RecyclerView.Adapter<ReportMoreAdapter.Vi
                 public void onClick(View v) {
                     if (mListReport.get(position).getTotalMoney() > 0) {
                         Intent intent = new Intent(mContext, ActivityReportWithDay.class);
-                        intent.putExtra("REPORT_TYPE", 3);
+                        intent.putExtra("REPORT_TYPE", 3);// thống kê theo tuần
                         intent.putExtra("AMOUNT_FLOAT", mListReport.get(position).getTotalMoney());
                         intent.putExtra("DAY_NAME", mListReport.get(position).getDayOfMonth());
                         intent.putExtra("DAY_OF_WEEK", mListReport.get(position).getDayOfWeek());

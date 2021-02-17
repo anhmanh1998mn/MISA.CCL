@@ -158,7 +158,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
                     Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
                     intent.putExtra("AMOUNT", tvTimeThisDay.getText().toString());
                     intent.putExtra("AMOUNT_FLOAT", mTotalMoneyThisDay);
-                    intent.putExtra("REPORT_TYPE", 2);
+                    intent.putExtra("REPORT_TYPE", 2);//2: thống kê theo ngày hiện tại
                     startActivity(intent);
                     break;
                 }
@@ -166,7 +166,7 @@ public class FragmentReportTimeRecently extends Fragment implements IFragmentRep
                     Intent intent = new Intent(getContext(), ActivityReportWithDay.class);
                     intent.putExtra("AMOUNT", tvTimeLastDay.getText().toString());
                     intent.putExtra("AMOUNT_FLOAT", mTotalMoneyLastDay);
-                    intent.putExtra("REPORT_TYPE", 1);
+                    intent.putExtra("REPORT_TYPE", 1);//1: thống kê theo ngày hiện tại -1 ngày
                     startActivity(intent);
                     break;
                 }

@@ -60,6 +60,8 @@ public class ActivityBillModel {
 
     private List<Integer> mArraySuggestedMoney;
 
+    private int MAX_SIZE_LIST_SUGGESTED_MONEY = 4;
+
     /**
      * Mục đích method thực hiện việc lấy danh sánh OrderDetail từ database và gửi dữ liệu về presenter
      *
@@ -375,143 +377,164 @@ public class ActivityBillModel {
      * @created_by cvmanh on 02/08/2021
      */
     public void suggestMoney(int inputtedMoney) {
-        mArraySuggestedMoney = new ArrayList<>();
-        int roundedMoneyOne = (inputtedMoney / 10) * 10;
-        int roundedMoneyTwo = (inputtedMoney / 100) * 100;
-        int roundedMoneyThree = (inputtedMoney / 1000) * 1000;
-        int tempOne = inputtedMoney % 10;
-        if (tempOne == 0 && roundedMoneyTwo == 0 && !mArraySuggestedMoney.contains(roundedMoneyOne)) {
-            mArraySuggestedMoney.add(roundedMoneyOne);
-            for (int i = 0; i < mParValuesOne.length; i++) {
-                if (mParValuesOne[i] > roundedMoneyOne && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
-                    mArraySuggestedMoney.add(mParValuesOne[i]);
-                }
-            }
-            for (int i = 0; i < mAnotherParValuesOne.length; i++) {
-                if (mAnotherParValuesOne[i] == (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(roundedMoneyOne + 10)) {
-                    mArraySuggestedMoney.add(roundedMoneyOne + 10);
-                }
-            }
-        }
-        if (tempOne == 0 && roundedMoneyTwo != 0) {
-        } else if (tempOne != 0) {
-            if (inputtedMoney == 2) {
-                if ((roundedMoneyOne + 5) > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyOne + 5)) {
-                    mArraySuggestedMoney.add(roundedMoneyOne + 5);
-                }
-                mArraySuggestedMoney.add(roundedMoneyOne + 10);
+        try {
+            mArraySuggestedMoney = new ArrayList<>();
+            int roundedMoneyOne = (inputtedMoney / 10) * 10;
+            int roundedMoneyTwo = (inputtedMoney / 100) * 100;
+            int roundedMoneyThree = (inputtedMoney / 1000) * 1000;
+            int tempOne = inputtedMoney % 10;
+            if (tempOne == 0 && roundedMoneyTwo == 0 && !mArraySuggestedMoney.contains(roundedMoneyOne)) {
+                mArraySuggestedMoney.add(roundedMoneyOne);
                 for (int i = 0; i < mParValuesOne.length; i++) {
-                    if (mParValuesOne[i] > (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
+                    if (mParValuesOne[i] > roundedMoneyOne && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
                         mArraySuggestedMoney.add(mParValuesOne[i]);
                     }
                 }
                 for (int i = 0; i < mAnotherParValuesOne.length; i++) {
-                    if (mAnotherParValuesOne[i] == (roundedMoneyOne + 20) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
-                        mArraySuggestedMoney.add(roundedMoneyOne + 20);
+                    if (mAnotherParValuesOne[i] == (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(roundedMoneyOne + 10)) {
+                        mArraySuggestedMoney.add(roundedMoneyOne + 10);
                     }
                 }
-            } else {
-                if ((inputtedMoney + 1) % 10 != 0 && !mArraySuggestedMoney.contains(inputtedMoney + 1)) {
-                    mArraySuggestedMoney.add(inputtedMoney + 1);
-                }
-                if ((roundedMoneyOne + 5) > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyOne + 5)) {
-                    mArraySuggestedMoney.add(roundedMoneyOne + 5);
-                }
-                mArraySuggestedMoney.add(roundedMoneyOne + 10);
-                for (int i = 0; i < mParValuesOne.length; i++) {
-                    if (mParValuesOne[i] > (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
-                        mArraySuggestedMoney.add(mParValuesOne[i]);
-                    }
-                }
-                for (int i = 0; i < mAnotherParValuesOne.length; i++) {
-                    if (mAnotherParValuesOne[i] == (roundedMoneyOne + 20) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
-                        mArraySuggestedMoney.add(roundedMoneyOne + 20);
-                    }
-                }
-            }
-        }
-        if (inputtedMoney >= 100) {
-            int tempTwo = inputtedMoney % 100;
-            if (tempTwo == 0) {
-                if (!mArraySuggestedMoney.contains(inputtedMoney)) {
+                if ((roundedMoneyOne + 10) == 100) {
+                    mArraySuggestedMoney.add(roundedMoneyOne + 20);
                     mArraySuggestedMoney.add(inputtedMoney);
                 }
-                for (int i = 0; i < mParValuesTwo.length; i++) {
-                    if (mParValuesTwo[i] > inputtedMoney && !mArraySuggestedMoney.contains(mParValuesTwo[i])) {
-                        mArraySuggestedMoney.add(mParValuesTwo[i]);
+                mArraySuggestedMoney.add(inputtedMoney);
+            }
+            if (tempOne == 0 && roundedMoneyTwo != 0) {
+            } else if (tempOne != 0) {
+                if (inputtedMoney == 2) {
+                    if ((roundedMoneyOne + 5) > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyOne + 5)) {
+                        mArraySuggestedMoney.add(roundedMoneyOne + 5);
                     }
-                }
-                for (int i = 0; i < mAnotherParValuesOne.length; i++) {
-                    if (mAnotherParValuesOne[i] == (inputtedMoney + 100) && !mArraySuggestedMoney.contains(inputtedMoney + 100)) {
-                        mArraySuggestedMoney.add(inputtedMoney + 100);
+                    mArraySuggestedMoney.add(roundedMoneyOne + 10);
+                    for (int i = 0; i < mParValuesOne.length; i++) {
+                        if (mParValuesOne[i] > (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
+                            mArraySuggestedMoney.add(mParValuesOne[i]);
+                        }
                     }
-                }
-                mArraySuggestedMoney.add(inputtedMoney + 1);
-                mArraySuggestedMoney.add(inputtedMoney + 10);
-            } else {
-                int tempThree = (tempTwo / 10) * 10;
-                for (int i = 0; i < mAnotherParValuesTwo.length; i++) {
-                    if (mAnotherParValuesTwo[i] == (tempThree + 10) && !mArraySuggestedMoney.contains(mAnotherParValuesTwo[i])) {
-                        mArraySuggestedMoney.add(roundedMoneyTwo + mAnotherParValuesTwo[i]);
+                    for (int i = 0; i < mAnotherParValuesOne.length; i++) {
+                        if (mAnotherParValuesOne[i] == (roundedMoneyOne + 20) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
+                            mArraySuggestedMoney.add(roundedMoneyOne + 20);
+                        }
                     }
-                }
-                if ((roundedMoneyTwo + 20) >= inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyTwo + 20)) {
-                    mArraySuggestedMoney.add(roundedMoneyTwo + 20);
-                }
-                if ((roundedMoneyTwo + 50) >= inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyTwo + 50)) {
-                    mArraySuggestedMoney.add(roundedMoneyTwo + 50);
-                }
-                if (!mArraySuggestedMoney.contains(roundedMoneyTwo + 100)) {
-                    mArraySuggestedMoney.add(roundedMoneyTwo + 100);
-                }
-                for (int i = 0; i < mParValuesOne.length; i++) {
-                    if (mParValuesOne[i] > (roundedMoneyTwo + 100) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
-                        mArraySuggestedMoney.add(mParValuesOne[i]);
+                    mArraySuggestedMoney.add(inputtedMoney);
+                } else {
+                    if ((inputtedMoney + 1) % 10 != 0 && !mArraySuggestedMoney.contains(inputtedMoney + 1)) {
+                        mArraySuggestedMoney.add(inputtedMoney + 1);
                     }
-                }
-                for (int i = 0; i < mAnotherParValuesOne.length; i++) {
-                    if (mAnotherParValuesOne[i] == (roundedMoneyTwo + 200) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
-                        mArraySuggestedMoney.add(mAnotherParValuesOne[i]);
+                    if ((roundedMoneyOne + 5) > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyOne + 5)) {
+                        mArraySuggestedMoney.add(roundedMoneyOne + 5);
                     }
+                    mArraySuggestedMoney.add(roundedMoneyOne + 10);
+                    for (int i = 0; i < mParValuesOne.length; i++) {
+                        if (mParValuesOne[i] > (roundedMoneyOne + 10) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
+                            mArraySuggestedMoney.add(mParValuesOne[i]);
+                        }
+                    }
+                    for (int i = 0; i < mAnotherParValuesOne.length; i++) {
+                        if (mAnotherParValuesOne[i] == (roundedMoneyOne + 20) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
+                            mArraySuggestedMoney.add(roundedMoneyOne + 20);
+                        }
+                    }
+                    mArraySuggestedMoney.add(inputtedMoney);
                 }
             }
-        }
-        if (inputtedMoney >= 1000) {
-            int tempSix = inputtedMoney % 1000;
-            if (tempSix != 0) {
-                int tempFive = (inputtedMoney % 100);
-                if (tempFive == 0) {
-                    if (!mArraySuggestedMoney.contains(inputtedMoney + 100)) {
-                        mArraySuggestedMoney.add(inputtedMoney + 100);
+            if (inputtedMoney >= 100) {
+                int tempTwo = inputtedMoney % 100;
+                if (tempTwo == 0) {
+                    if (!mArraySuggestedMoney.contains(inputtedMoney)) {
+                        mArraySuggestedMoney.add(inputtedMoney);
                     }
-                    if (roundedMoneyThree + 500 > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyThree + 500)) {
-                        mArraySuggestedMoney.add(roundedMoneyThree + 500);
+                    for (int i = 0; i < mParValuesTwo.length; i++) {
+                        if (mParValuesTwo[i] > inputtedMoney && !mArraySuggestedMoney.contains(mParValuesTwo[i])) {
+                            mArraySuggestedMoney.add(mParValuesTwo[i]);
+                        }
                     }
-                    mArraySuggestedMoney.add(roundedMoneyThree + 1000);
+                    for (int i = 0; i < mAnotherParValuesOne.length; i++) {
+                        if (mAnotherParValuesOne[i] == (inputtedMoney + 100) && !mArraySuggestedMoney.contains(inputtedMoney + 100)) {
+                            mArraySuggestedMoney.add(inputtedMoney + 100);
+                        }
+                    }
+                    mArraySuggestedMoney.add(inputtedMoney + 1);
+                    mArraySuggestedMoney.add(inputtedMoney + 10);
+                } else {
+                    int tempThree = (tempTwo / 10) * 10;
+                    for (int i = 0; i < mAnotherParValuesTwo.length; i++) {
+                        if (mAnotherParValuesTwo[i] == (tempThree + 10) && !mArraySuggestedMoney.contains(mAnotherParValuesTwo[i])) {
+                            mArraySuggestedMoney.add(roundedMoneyTwo + mAnotherParValuesTwo[i]);
+                        }
+                    }
+                    if ((roundedMoneyTwo + 20) >= inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyTwo + 20)) {
+                        mArraySuggestedMoney.add(roundedMoneyTwo + 20);
+                    }
+                    if ((roundedMoneyTwo + 50) >= inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyTwo + 50)) {
+                        mArraySuggestedMoney.add(roundedMoneyTwo + 50);
+                    }
+                    if (!mArraySuggestedMoney.contains(roundedMoneyTwo + 100)) {
+                        mArraySuggestedMoney.add(roundedMoneyTwo + 100);
+                    }
+                    for (int i = 0; i < mParValuesOne.length; i++) {
+                        if (mParValuesOne[i] > (roundedMoneyTwo + 100) && !mArraySuggestedMoney.contains(mParValuesOne[i])) {
+                            mArraySuggestedMoney.add(mParValuesOne[i]);
+                        }
+                    }
+                    for (int i = 0; i < mAnotherParValuesOne.length; i++) {
+                        if (mAnotherParValuesOne[i] == (roundedMoneyTwo + 200) && !mArraySuggestedMoney.contains(mAnotherParValuesOne[i])) {
+                            mArraySuggestedMoney.add(mAnotherParValuesOne[i]);
+                        }
+                    }
+                    mArraySuggestedMoney.add(inputtedMoney);
                 }
-            } else {
-                mArraySuggestedMoney.add(inputtedMoney + 100);
-                mArraySuggestedMoney.add(inputtedMoney + 500);
             }
+            if (inputtedMoney >= 1000) {
+                int tempSix = inputtedMoney % 1000;
+                if (tempSix != 0) {
+                    int tempFive = (inputtedMoney % 100);
+                    if (tempFive == 0) {
+                        if (!mArraySuggestedMoney.contains(inputtedMoney + 100)) {
+                            mArraySuggestedMoney.add(inputtedMoney + 100);
+                        }
+                        if (roundedMoneyThree + 500 > inputtedMoney && !mArraySuggestedMoney.contains(roundedMoneyThree + 500)) {
+                            mArraySuggestedMoney.add(roundedMoneyThree + 500);
+                        }
+                        mArraySuggestedMoney.add(roundedMoneyThree + 1000);
+                    }
+                } else {
+                    mArraySuggestedMoney.add(inputtedMoney + 100);
+                    mArraySuggestedMoney.add(inputtedMoney + 500);
+                    mArraySuggestedMoney.add(inputtedMoney);
+                }
 
+            }
+            removeSuggestedMoneyDuplicateInputtedMoney(mArraySuggestedMoney, inputtedMoney);
+            sortListSuggestedMoney(mArraySuggestedMoney);
+            mIActivityBillModel.resultSuggestedMoneySuccess(mArraySuggestedMoney);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        removeSuggestedMoneyDuplicateInputtedMoney(mArraySuggestedMoney, inputtedMoney);
-        sortListSuggestedMoney(mArraySuggestedMoney);
-        mIActivityBillModel.resultSuggestedMoneySuccess(mArraySuggestedMoney);
     }
 
     /**
-     * Mục đích method thực hiện việc xóa tiền trùng với tiền phải trả trong danh sách gợi ý tiền
+     * Mục đích method thực hiện việc xóa tiền trùng với tiền phải trả trong danh sách gợi ý tiền nếu số lượng
+     * gợi ý tiền lớn hơn 4. Ngược lại, không xóa
      *
      * @param listSuggestedMoney Danh sách tiền gợi ý
      * @param inputtedMoney      tiền phải trả
      * @created_by cvmanh on 02/08/2021
      */
     private void removeSuggestedMoneyDuplicateInputtedMoney(List<Integer> listSuggestedMoney, int inputtedMoney) {
-        for (int i = 0; i < mArraySuggestedMoney.size(); i++) {
-            if (mArraySuggestedMoney.get(i) == inputtedMoney) {
-                mArraySuggestedMoney.remove(mArraySuggestedMoney.get(i));
+        try {
+            if (mArraySuggestedMoney.size() > MAX_SIZE_LIST_SUGGESTED_MONEY) {
+                for (int i = 0; i < mArraySuggestedMoney.size(); i++) {
+                    if (mArraySuggestedMoney.get(i) == inputtedMoney) {
+                        mArraySuggestedMoney.remove(mArraySuggestedMoney.get(i));
+                    }
+                }
+                return;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -522,15 +545,19 @@ public class ActivityBillModel {
      * @created_by cvmanh on 02/08/2021
      */
     private void sortListSuggestedMoney(List<Integer> listSuggestedMoney) {
-        Collections.sort(listSuggestedMoney, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                if (o1 < o2) {
-                    return -1;
+        try {
+            Collections.sort(listSuggestedMoney, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    if (o1 < o2) {
+                        return -1;
+                    }
+                    return 0;
                 }
-                return 0;
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public interface IActivityBillModel {

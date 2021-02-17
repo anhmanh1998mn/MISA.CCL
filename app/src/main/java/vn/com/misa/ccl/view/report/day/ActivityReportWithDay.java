@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -104,18 +105,18 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
     private void receiveAmount() {
         try {
             Intent intent = getIntent();
-            if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {
+            if (intent.getIntExtra("REPORT_TYPE", -1) == 2) {//2: thống kê theo ngày hiện tại
                 mAmount = intent.getStringExtra("AMOUNT");
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
                 tvTime.setText(getResources().getString(R.string.time_this_day));
                 getListProductReport();
 
-            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 1) {
+            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 1) {//1: thống kê theo ngày hiện tại -1 ngày
                 mAmount = intent.getStringExtra("AMOUNT");
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
                 tvTime.setText(getResources().getString(R.string.time_last_day));
                 getListProductReportLastDay();
-            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 3) {
+            } else if (intent.getIntExtra("REPORT_TYPE", -1) == 3) {//1: thống kê theo tuần
                 mAmount = String.valueOf(intent.getFloatExtra("AMOUNT_FLOAT", -1));
                 mTotalMoneyDay = intent.getFloatExtra("AMOUNT_FLOAT", -1);
                 mDayName = intent.getStringExtra("DAY_NAME");
@@ -262,6 +263,7 @@ public class ActivityReportWithDay extends AppCompatActivity implements IActivit
             pcReportFood.setData(pieData);
             pcReportFood.invalidate();
             pcReportFood.setCenterTextSize(18);
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             pcReportFood.setCenterText("Tổng \n doanh thu \n" + mAmount);
             pcReportFood.setHoleRadius(75);
             pcReportFood.getDescription().setEnabled(false);// set gone label

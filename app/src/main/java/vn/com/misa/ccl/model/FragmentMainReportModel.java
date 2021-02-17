@@ -230,7 +230,6 @@ public class FragmentMainReportModel {
             for (int i = 0; i < mCursorWithMonth.getCount(); i++) {
                 mCursorWithMonth.moveToPosition(i);
                 float amount = mCursorWithMonth.getFloat(mCursorWithMonth.getColumnIndex("Tong"));
-                Log.d("TongThang", amount + "");
                 for (int j = 0; j < mListReportDayOfWeek.size(); j++) {
                     if (("Ngày " + (mCursorWithMonth.getString(mCursorWithMonth.getColumnIndex("Ngay")))).equals(mListReportDayOfWeek.get(j).getDayOfWeek())) {
                         mListReportDayOfWeek.get(j).setDayOfMonth(mCursorWithMonth.getString(mCursorWithMonth.getColumnIndex(DatabaseInfomation.COLUMN_ORDER_CREATED_AT)));
