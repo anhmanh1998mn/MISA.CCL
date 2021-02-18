@@ -769,6 +769,20 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     }
 
     /**
+     * Mục đích method thực hiện việc nhận thông báo xóa sản phẩm thất bại nếu sản phẩm đó đã tồn tại trong đơn hàng
+     *
+     * @created_by cvmanh on 02/18/2021
+     */
+    @Override
+    public void onDeleteProductFailed() {
+        try {
+            Toast.makeText(this, "Món <" + etFoodName.getText().toString() + "> " + getResources().getString(R.string.exists_product), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Mục đích method thực hiện việc nhận mã màu khi chọn màu từ dialog
      *
      * @created_by cvmanh on 01/19/2021

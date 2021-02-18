@@ -516,7 +516,7 @@ public class ActivityFoodUpdateModel {
                 mIResultActivityFoodUpdate.onFailed();
                 return;
             }
-            mIResultActivityFoodUpdate.onFailed();
+            mIResultActivityFoodUpdate.onDeleteProductFailed();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -740,5 +740,7 @@ public class ActivityFoodUpdateModel {
         public void addNewFoodMenuSuccess();
 
         public void onFailed();
+
+        public void onDeleteProductFailed();
     }
 }

@@ -63,5 +63,7 @@ public interface IActivityFoodUpdate {
         public void addNewFoodMenuSuccess();
 
         public void onFailed();
+
+        public void onDeleteProductFailed();
     }
 }

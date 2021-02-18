@@ -170,6 +170,18 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
         mActivityFoodUpdateModel.deleteItemProductMenuOnServer(productIDLocal, shopID);
     }
 
+    /**
+     * Mục đích method thực hiện việc gọi model xử lý cập nhật thông tin sản phẩm trên server
+     *
+     * @param productName  tên sản phẩm
+     * @param productPrice giá sản phẩm
+     * @param imageID      mã ảnh
+     * @param unitID       mã đơn vị
+     * @param colorID      mã màu
+     * @param shopID       mã cửa hàng
+     * @param productId    mã sản phẩm
+     * @created_by cvmanh on 02/18/2021
+     */
     @Override
     public void updateItemProductOnServer(String productName, float productPrice, int imageID, int unitID, int colorID, int shopID, int productId) {
         mActivityFoodUpdateModel.updateItemProductOnServer(productName, productPrice, imageID, unitID, colorID, shopID, productId);
@@ -288,5 +300,15 @@ public class ActivityFoodUpdatePresenter implements IActivityFoodUpdate.IActivit
     @Override
     public void onFailed() {
         mIActivityFoodUpdateView.onFailed();
+    }
+
+    /**
+     * Mục đích method thực hiện việc nhận thông báo xóa thất bại khi tồn tại sản phẩm xóa trong đơn hàng
+     *
+     * @created_by cvmanh on 02/18/2021
+     */
+    @Override
+    public void onDeleteProductFailed() {
+        mIActivityFoodUpdateView.onDeleteProductFailed();
     }
 }
