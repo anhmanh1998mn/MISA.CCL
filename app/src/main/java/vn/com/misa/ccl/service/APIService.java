@@ -12,7 +12,8 @@ package vn.com.misa.ccl.service;
 public class APIService {
 
     //    private static String sBaseURL = "http://192.168.1.188:8080/MISATestUser/";
-    private static String sBaseURL = "http://192.168.1.102:8080/MISATestUser/";
+//    private static String sBaseURL = "http://192.168.1.102:8080/MISATestUser/";
+    private static String sBaseURL = "http://192.168.43.91:8080/MISATestUser/";
 
     /**
      * Mục đích method thực hiện việc kết nối retrofit với server
