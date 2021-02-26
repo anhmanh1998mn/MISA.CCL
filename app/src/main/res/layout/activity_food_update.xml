@@ -261,7 +261,8 @@
             style="@style/Theme.FontButton"
             android:layout_width="@dimen/width_max"
             android:layout_height="@dimen/height_next"
-            android:text="@string/delete" />
+            android:text="@string/delete"
+            app:backgroundTint="@color/red_light" />
 
         <Button
             android:id="@+id/btnSave"

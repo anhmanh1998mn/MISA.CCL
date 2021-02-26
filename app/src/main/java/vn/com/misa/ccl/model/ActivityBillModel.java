@@ -561,6 +561,7 @@ public class ActivityBillModel {
     }
 
     public interface IActivityBillModel {
+
         public void getOrderDetail(List<OrderDetail> listOrderDetail);
 
         public void resultTextEnter(String moneyIn);

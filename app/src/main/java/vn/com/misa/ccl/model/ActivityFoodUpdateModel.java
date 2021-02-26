@@ -573,19 +573,23 @@ public class ActivityFoodUpdateModel {
      * @created_by cvmanh on 02/05/2021
      */
     public void updateItemProductOnServer(String productName, float productPrice, int imageID, int unitID, int colorID, int shopID, int productId) {
-        IDataService dataService = APIService.getService();
-        Call<String> callback = dataService.updateProductOnServer(productName, productPrice, imageID, unitID, colorID, shopID, productId);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("UpdateProduct", response.body().toString());
-            }
+        try {
+            IDataService dataService = APIService.getService();
+            Call<String> callback = dataService.updateProductOnServer(productName, productPrice, imageID, unitID, colorID, shopID, productId);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Log.d("UpdateProduct", response.body().toString());
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("UpdateProduct", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("UpdateProduct", t.toString());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -648,25 +652,29 @@ public class ActivityFoodUpdateModel {
      */
     private void insertProductToServer(String productName, float productPrice, int productStatus, int imageID,
                                        int unitID, int colorID, int shopID, int productLocalID) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                IDataService dataService = APIService.getService();
-                Call<String> callback = dataService.doInsertDataProduct(productName, productPrice, 1, imageID,
-                        unitID, colorID, shopID, productLocalID);
-                callback.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Log.d("InsertProduct", response.body().toString());
-                    }
+        try {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    IDataService dataService = APIService.getService();
+                    Call<String> callback = dataService.doInsertDataProduct(productName, productPrice, 1, imageID,
+                            unitID, colorID, shopID, productLocalID);
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.d("InsertProduct", response.body().toString());
+                        }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
 
-                    }
-                });
-            }
-        }).start();
+                        }
+                    });
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -701,20 +709,24 @@ public class ActivityFoodUpdateModel {
      * @created_by cvmanh on 02/05/2021
      */
     public void deleteItemProductMenuOnServer(int productIDLocal, int shopID) {
-        IDataService dataService = APIService.getService();
-        Log.d("abc", productIDLocal + "-" + shopID);
-        Call<String> callback = dataService.deleteProductOnServer(shopID, productIDLocal);
-        callback.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("Response", response.body().toString());
-            }
+        try {
+            IDataService dataService = APIService.getService();
+            Log.d("abc", productIDLocal + "-" + shopID);
+            Call<String> callback = dataService.deleteProductOnServer(shopID, productIDLocal);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Log.d("Response", response.body().toString());
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("Response", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("Response", t.toString());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
