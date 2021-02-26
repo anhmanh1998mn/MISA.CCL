@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -776,7 +777,10 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     @Override
     public void onDeleteProductFailed() {
         try {
-            Toast.makeText(this, "Món <" + etFoodName.getText().toString() + "> " + getResources().getString(R.string.exists_product), Toast.LENGTH_SHORT).show();
+            dlgConfirmRemoveItemMenu.dismiss();
+            Toast toast=Toast.makeText(this, "Món <" + etFoodName.getText().toString() + "> " + getResources().getString(R.string.exists_product), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER,0,166);
+            toast.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
