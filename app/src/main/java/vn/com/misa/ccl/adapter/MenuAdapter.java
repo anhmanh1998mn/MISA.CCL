@@ -35,6 +35,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     private Activity mContext;
 
+    private int mDemo = 2;
+
     private int mLayout;
 
     private List<Product> mListProduct;
