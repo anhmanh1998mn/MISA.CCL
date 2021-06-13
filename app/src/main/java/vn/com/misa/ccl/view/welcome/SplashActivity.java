@@ -21,6 +21,7 @@ import vn.com.misa.ccl.view.manage.ActivityRestaurantManage;
  * ‐ Mục đích Class thực hiện việc show splash Screen
  * <p>
  * ‐ @created_by cvmanh on 01/06/2021
+ * - cvmanh
  */
 
 public class SplashActivity extends AppCompatActivity {
