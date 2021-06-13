@@ -1,12 +1,5 @@
 package vn.com.misa.ccl.view.restaurantsetup;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +17,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -53,6 +53,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
 
     private TextView tvFoodPrice, tvFoodUnit, tvBack, tvPriceEnter, tvSetupName, tvCloseFoodImage,
             tvColorClose, tvNext, tvUpdate;
+
+    private LinearLayout llFoodPrice;
 
     private ImageView ivFoodImage, ivColor, ivClose, ivCloseDialogConfirmRemoveItem;
 
@@ -212,6 +214,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
      */
     private void initView() {
         try {
+            llFoodPrice = findViewById(R.id.llFoodPrice);
             etFoodName = findViewById(R.id.etFoodName);
             tvFoodPrice = findViewById(R.id.tvPrice);
             tvFoodUnit = findViewById(R.id.tvUnit);
@@ -251,6 +254,9 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
             tvNext.setOnClickListener(this);
             btnUpdate.setOnClickListener(this);
             tvUpdate.setOnClickListener(this);
+            llFoodPrice.setOnClickListener(v -> {
+                Toast.makeText(this, "CLICKED", Toast.LENGTH_SHORT).show();
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,7 +288,7 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
                     startActivity(new Intent(this, ActivityUnit.class));
                     break;
                 }
-                case R.id.tvPrice: {
+                case R.id.llFoodPrice: {
                     showDialogCaculating();
                     break;
                 }
@@ -778,8 +784,8 @@ public class ActivityFoodUpdate extends AppCompatActivity implements View.OnClic
     public void onDeleteProductFailed() {
         try {
             dlgConfirmRemoveItemMenu.dismiss();
-            Toast toast=Toast.makeText(this, "Món <" + etFoodName.getText().toString() + "> " + getResources().getString(R.string.exists_product), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP|Gravity.CENTER,0,166);
+            Toast toast = Toast.makeText(this, "Món <" + etFoodName.getText().toString() + "> " + getResources().getString(R.string.exists_product), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 166);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();

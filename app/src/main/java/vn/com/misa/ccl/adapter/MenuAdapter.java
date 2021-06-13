@@ -22,6 +22,15 @@ import java.util.List;
 import vn.com.misa.ccl.R;
 import vn.com.misa.ccl.entity.Product;
 
+/**
+ * Mục đích method thực hiện những công việc gì + Ngữ cảnh sử dụng khi nào
+ *
+ *
+ * @return giải thích hàm này trả về
+ *
+ * @created_by cvmanh on 06/13/2021
+ */
+
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
     private Activity mContext;
