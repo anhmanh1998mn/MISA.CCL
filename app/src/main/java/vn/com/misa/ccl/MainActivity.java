@@ -15,6 +15,7 @@ import vn.com.misa.ccl.adapter.PagerAdapter;
 /**
  * ‐ Mục đích Class thực hiện việc chứa các màn hình giới thiệu ứng dụng
  * <p> 123
+ * kk
  * ‐ @created_by cvmanh on 01/10/2021
  */
 
